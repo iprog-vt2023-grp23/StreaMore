@@ -20,10 +20,10 @@ const SearchList = () => {
     }
 
     return(
-        <div>
+        <section>
             <h2>Results</h2>
             {content}
-        </div>
+        </section>
     )
 }
 

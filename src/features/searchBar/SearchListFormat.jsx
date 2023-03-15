@@ -18,14 +18,15 @@ const SearchListFormat = ({result}) => {
             console.log("Movie not available in country",err)
         }
     });
-    
+    console.log(result)
   return (
     <div>
         <h3>{result.title}</h3>
         <div>{result.body}</div>
         <img src={result.posterURLs[154]}></img>
-        {streamingInfo}
-        
+        <div>
+            {streamingInfo}
+        </div>
     </div>
   )
 }
