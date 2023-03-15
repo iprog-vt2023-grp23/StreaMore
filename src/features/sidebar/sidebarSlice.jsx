@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const sidebarSlice = createSlice({
-    name: 'searchResulst',
+    name: 'sidebar',
     initialState,
     reducers: {
         toggleSidebar: (state) => {

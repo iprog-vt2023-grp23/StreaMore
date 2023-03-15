@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import SearchList from './features/searchBar/SearchList'
 import SearchBar from './features/searchBar/SearchBar'
-import UserPage from './features/userPage/UserPage'
+import UserPage from './features/user/UserPage'
 import MovieList from './features/movieList/MovieList'
 
 import { Route, Routes,BrowserRouter } from 'react-router-dom'
