@@ -29,7 +29,7 @@ export const fetchCountries = createAsyncThunk('searchBar/fetchCountries', async
 	.then(res => res.json())
 	.then(json => {return json})
 	.catch(err => console.error('error:' + err));
-    console.log("response", response);
+    console.log("response1", response);
     return response;
 })
 
