@@ -3,6 +3,7 @@ import searchReducer from "../features/searchBar/searchSlice";
 import sidebarReducer from "../features/sidebar/sidebarSlice"
 import userPageReducer from "../features/userPage/userPageSlice"
 import movieListReducer from "../features/movieList/movieListSlice"
+import selectedMovieReducer from "../features/inspectMovie/inspectMovieSlice"
 
 export const store = configureStore({
     reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
         sidebar: sidebarReducer,
         movieList: movieListReducer,
         userPage: userPageReducer,
+        selectedMovie: selectedMovieReducer,
     }
 })

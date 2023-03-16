@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getStreamingServices, getUserName } from "./userPageSlice";
-import { addStreamingService, removeStreamingService } from "./userPageSlice";
-import { getCountries } from "../searchBar/searchSlice";
+import { getStreamingServices, getUserName, addStreamingService, removeStreamingService, getAvailableServices } from "./userPageSlice";
 import iconMapping from "./StreamingButtons";
 
 const UserPage = () => {
@@ -10,9 +8,7 @@ const UserPage = () => {
     const userName = useSelector(getUserName);
     const [streamingServices, setStreamingServices] = useState(useSelector(getStreamingServices));
 
-    const bannedServices = ["all4", "britbox"];
-
-    const services = Object.keys(useSelector(getCountries)).filter((service) => bannedServices.every((item) => item!=service));
+    const services = useSelector(getAvailableServices);
 
     const removeServiceButton = (e) => {
         setStreamingServices(streamingServices.filter((service) => service != e.currentTarget.value));

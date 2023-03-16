@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, current } from "@reduxjs/toolkit"
 
 const initialState = {
     movieList: [],
@@ -13,10 +13,10 @@ const movieListSlice = createSlice({
     initialState,
     reducers: {
         addMovieToList(state, action){
-            state.movieList.unshifts(action.payload);
+            state.movieList.push(action.payload);
         },
         removeMovieFromList(state, action){
-            state.movieList = state.movieList.filter((movie) => movie != action.payload);
+            state.movieList = state.movieList.filter((movie) => movie.title != action.payload.title);
         }
     }
 })

@@ -4,17 +4,18 @@ import {GiMarsCuriosity} from 'react-icons/gi'
 import {TbBrandDisney} from 'react-icons/tb'
 
 const iconMapping = (serviceName) => {
+    const size = '40';
     const iconMap = {
-        "netflix" : <RiNetflixFill />,
-        "prime" : <SiPrime />,
-        "apple" : <SiAppletv />,
-        "curiosity" : <GiMarsCuriosity />,
-        "disney" : <TbBrandDisney />,
-        "hbo" : <SiHbo />,
-        "iplayer" : <SiBbciplayer />,
-        "now" : <SiNow />,
-        "showtime" : <SiShowtime />,
-        "starz" : <SiStarz />,
+        "netflix" : <RiNetflixFill size={size}/>,
+        "prime" : <SiPrime size={size}/>,
+        "apple" : <SiAppletv size={size}/>,
+        "curiosity" : <GiMarsCuriosity size={size}/>,
+        "disney" : <TbBrandDisney size={size}/>,
+        "hbo" : <SiHbo size={size}/>,
+        "iplayer" : <SiBbciplayer size={size}/>,
+        "now" : <SiNow size={size}/>,
+        "showtime" : <SiShowtime size={size}/>,
+        "starz" : <SiStarz size={size}/>,
     }
     try{return iconMap[serviceName];}
     catch(err) {return serviceName}
