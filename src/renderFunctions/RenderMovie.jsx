@@ -7,7 +7,7 @@ import { addMovieToList, getMovieList, removeMovieFromList } from '../features/m
 import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai'
 import renderStreamingServices from './RenderStreamingServices';
 
-const RenderMovieList = ({result}) => {
+const RenderMovie = ({result}) => {
     const dispatch = useDispatch();
     const movieList = useSelector(getMovieList);
 
@@ -44,4 +44,4 @@ const RenderMovieList = ({result}) => {
   )
 }
 
-export default RenderMovieList
+export default RenderMovie

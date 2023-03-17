@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getMovieList } from "./movieListSlice";
-import RenderMovieList from "../../renderFunctions/RenderMovieList";
+import RenderMovie from "../../renderFunctions/RenderMovie";
 
 
 const MovieList = () => {
     const movieList = useSelector(getMovieList);
 
-    //Uses same render as the search list
-    const content = movieList.map(result => <RenderMovieList key={result.imdbId} result={result} />);
+    //Render all movies in movieList using map and the rendermovie function and with imdbId as key for each rendered object
+    const content = movieList.map(result => <RenderMovie key={result.imdbId} result={result} />);
 
     return(
         <div>

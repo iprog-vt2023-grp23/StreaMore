@@ -1,3 +1,8 @@
+/*
+Maybe rename these in the future with lower case to remove the need for touppercase in some operations
+And also remove the long names to make the country options bar a bit smaller :P
+*/
+
 const country_codes_array = {
     "AF": "Afghanistan",
     "AL": "Albania",
@@ -41,7 +46,6 @@ const country_codes_array = {
     "CL": "Chile",
     "CN": "China",
     "CX": "Christmas Island",
-    "CC": "Cocos (Keeling) Islands (the)",
     "CO": "Colombia",
     "KM": "Comoros (the)",
     "CG": "Congo (the)",
@@ -179,7 +183,6 @@ const country_codes_array = {
     "SC": "Seychelles",
     "SL": "Sierra Leone",
     "SG": "Singapore",
-    "SX": "Sint Maarten (Dutch part)",
     "SK": "Slovakia",
     "SI": "Slovenia",
     "SB": "Solomon Islands",
@@ -196,7 +199,7 @@ const country_codes_array = {
     "SY": "Syrian Arab Republic",
     "TW": "Taiwan",
     "TJ": "Tajikistan",
-    "TZ": "Tanzania, United Republic of",
+    "TZ": "Tanzania",
     "TH": "Thailand",
     "TL": "Timor-Leste",
     "TG": "Togo",
@@ -206,21 +209,17 @@ const country_codes_array = {
     "TN": "Tunisia",
     "TR": "Turkey",
     "TM": "Turkmenistan",
-    "TC": "Turks and Caicos Islands (the)",
     "TV": "Tuvalu",
     "UG": "Uganda",
     "UA": "Ukraine",
-    "AE": "United Arab Emirates (the)",
+    "AE": "United Arab Emirates",
     "GB": "United Kingdom",
-    "UM": "United States Minor Outlying Islands (the)",
-    "US": "United States of America (the)",
+    "US": "United States of America",
     "UY": "Uruguay",
     "UZ": "Uzbekistan",
     "VU": "Vanuatu",
-    "VE": "Venezuela (Bolivarian Republic of)",
+    "VE": "Venezuela",
     "VN": "Viet Nam",
-    "VG": "Virgin Islands (British)",
-    "VI": "Virgin Islands (U.S.)",
     "WF": "Wallis and Futuna",
     "EH": "Western Sahara",
     "YE": "Yemen",

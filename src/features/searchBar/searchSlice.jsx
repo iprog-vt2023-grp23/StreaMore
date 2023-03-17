@@ -4,14 +4,17 @@ import {options, sourceUrl} from "../../ApiKey";
 
 const initialState = {
     results: [],
-    //countries: Object.values(country_codes_array).map((country) => country.toLowerCase()),
-    //countries: Object.values(country_codes_array),
     country: 'se',
     keyword: '',
     status: 'idle',
     error: null
 }
 
+/**
+ * Function to search for films
+ * Uses createAsyncThunk to handle the fetch ?asyncronically?
+ * Returns the response which is picked up by the extraReducer below
+ */
 export const searchFilms = createAsyncThunk('searchBar/searchFilms', async (params) => {
     const url = sourceUrl.concat('v2/search/title?', params.join('&'))
 
@@ -37,21 +40,14 @@ const searchSlice = createSlice({
         setStateKeyword(state, action){
             state.keyword = action.payload;
         },
-        prepare(title, content){
-            return{
-                payload: {
-                    id: nanoid(),
-                    title,
-                    content,
-                }
-            }
-        }
     },
+    //Additional reducers to handle the promise of searchFilms
     extraReducers(builder){
         builder
             .addCase(searchFilms.pending, (state, action) => {
                 state.status = 'loading';
             })
+            //When the promise is fullfilled, add the films to state.results and sort them
             .addCase(searchFilms.fulfilled, (state, action) => {
                 console.log("succeeded", action.payload.result)
 
@@ -70,12 +66,13 @@ const searchSlice = createSlice({
 
 })
 
+//exports for getting the values in state
 export const selectAllResults = (state) => state.results.results;
 export const getResultsStatus = (state) => state.results.status;
 export const getResultsError = (state) => state.results.error;
-//export const getCountries = (state) => state.results.countries;
 export const getCountry = (state) => state.results.country;
 export const getKeyword = (state) => state.results.keyword;
 
+//exports for getting the actions in the slice reducer
 export const {setStateCountry, setStateKeyword} = searchSlice.actions;
 export default searchSlice.reducer;

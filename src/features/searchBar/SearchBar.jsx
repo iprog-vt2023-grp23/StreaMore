@@ -10,18 +10,26 @@ const SearchBar = () => {
     const [country, setCountry] = useState(useSelector(getCountry));
     const [searchRequestStatus, setSearchRequestStatus] = useState('idle');
 
+    //Functions for changing the current sate as well as setting the store state
     const onKeywordChanged = e => setKeyword(e.target.value);
     const onCountryChanged = (e) => {
+        //Finds the two letter country code from the full country name (looks more wack than it is)
         const toAdd = Object.keys(country_codes_array).find(key => country_codes_array[key] === e.target.value).toLowerCase()
         console.log(toAdd)
         setCountry(toAdd);
+        //Dispatches the selected country to the store state
         dispatch(setStateCountry(toAdd));
     };
 
+    //Function for the search button
     const search = () => {
+        //Don't allow user to spam search button faster than a response can be received
         if(searchRequestStatus === 'idle'){
             try {
                 setSearchRequestStatus('pending')
+                /* 
+                    Change parameters for the search here! Parameters can be found on https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability
+                */
                 dispatch(searchFilms(['title=' + keyword, 'services=netflix', 'country=' + country])).unwrap();
                 dispatch(setStateKeyword(keyword));
                 setKeyword('');
@@ -32,13 +40,17 @@ const SearchBar = () => {
             }
         }
     }
-    function keyDown(e){ //to search using enter key
+
+    //Function for searching when the enter key is pressed down
+    function keyDown(e){ 
         if (e.key === 'Enter') {
             console.log('clicked enter button');
-            e.preventDefault();
+            e.preventDefault(); //Dont reload the page
             search();
         }
     }
+
+    //Function that gets all possible country names from CountryCodes
     const countryOptions = Object.values(country_codes_array).map(country => (
         <option key={country} value={country}>
             {country}

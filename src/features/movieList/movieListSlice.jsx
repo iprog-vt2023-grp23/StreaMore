@@ -20,8 +20,11 @@ const movieListSlice = createSlice({
         }
     }
 })
+
+//exports for getting the values in state
 export const getMovieList = (state) => state.movieList.movieList;
 
+//exports for getting the actions in the slice reducer
 export const {addMovieToList, removeMovieFromList} = movieListSlice.actions;
 
 export default movieListSlice.reducer;

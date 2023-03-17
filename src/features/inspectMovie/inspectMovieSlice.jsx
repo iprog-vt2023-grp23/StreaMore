@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     selectedMovie: '',
+    aboutFilmField: false,
 }
 
 /*
@@ -15,10 +16,17 @@ const inspectMovieSlice = createSlice({
         selectMovieToInspect(state, action){
             state.selectedMovie = action.payload;
         },
+        toggleAboutFilmField(state, action){
+            state.aboutFilmField = !state.aboutFilmField;
+        },
     }
 })
-export const getSelectedMovie = (state) => state.selectedMovie.selectedMovie;
 
-export const {selectMovieToInspect} = inspectMovieSlice.actions;
+//exports for getting the values in state
+export const getSelectedMovie = (state) => state.selectedMovie.selectedMovie;
+export const getAboutFilmField = (state) => state.selectedMovie.aboutFilmField;
+
+//exports for getting the actions in the slice reducer
+export const {selectMovieToInspect, toggleAboutFilmField} = inspectMovieSlice.actions;
 
 export default inspectMovieSlice.reducer;
