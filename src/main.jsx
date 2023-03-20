@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 //import { fetchCountries } from './features/searchBar/searchSlice';
 import { getServices } from './features/userPage/userPageSlice';
 
-//store.dispatch(fetchCountries());
+//Uses getServices from userPageSlice to fetch all streaming services from the API once during page load
 store.dispatch(getServices());
 
 ReactDOM.createRoot(document.getElementById('root')).render(

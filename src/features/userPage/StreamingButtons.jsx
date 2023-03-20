@@ -3,6 +3,7 @@ import {SiPrime, SiAppletv, SiHbo, SiBbciplayer, SiNow, SiShowtime, SiStarz} fro
 import {GiMarsCuriosity} from 'react-icons/gi'
 import {TbBrandDisney} from 'react-icons/tb'
 
+//returns an icon by matching a streaming service name (iconMapping("netflix") gives the netflix button)
 const iconMapping = (serviceName) => {
     const size = '40';
     const iconMap = {

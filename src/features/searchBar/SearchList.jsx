@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import RenderMovie from "../../renderFunctions/RenderMovie";
 import { selectAllResults, getResultsStatus, getResultsError, getKeyword } from "./searchSlice";
