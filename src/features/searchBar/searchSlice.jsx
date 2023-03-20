@@ -1,30 +1,24 @@
 import { createSlice, nanoid, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
-import options from "../../ApiKey";
-
-const sourceUrl = 'https://streaming-availability.p.rapidapi.com/';
+import country_codes_array from "./CountryCodes";
+import {options, sourceUrl} from "../../ApiKey";
 
 const initialState = {
     results: [],
-    countries: [],
     country: 'se',
+    keyword: '',
     status: 'idle',
     error: null
 }
 
+/**
+ * Function to search for films
+ * Uses createAsyncThunk to handle the fetch ?asyncronically?
+ * Returns the response which is picked up by the extraReducer below
+ */
 export const searchFilms = createAsyncThunk('searchBar/searchFilms', async (params) => {
-    const url = sourceUrl.concat('search/basic?', params.join('&'))
+    const url = sourceUrl.concat('v2/search/title?', params.join('&'))
 
     console.log("url",url);
-    const response = await fetch(url, options)
-	.then(res => res.json())
-	.then(json => {return json})
-	.catch(err => console.error('error:' + err));
-    console.log("response", response);
-    return response;
-})
-
-export const fetchCountries = createAsyncThunk('searchBar/fetchCountries', async () => {
-    const url = sourceUrl.concat('countries')
     const response = await fetch(url, options)
 	.then(res => res.json())
 	.then(json => {return json})
@@ -43,24 +37,22 @@ const searchSlice = createSlice({
         setStateCountry(state, action){
             state.country = action.payload;
         },
-        prepare(title, content){
-            return{
-                payload: {
-                    id: nanoid(),
-                    title,
-                    content,
-                }
-            }
-        }
+        setStateKeyword(state, action){
+            state.keyword = action.payload;
+        },
     },
+    //Additional reducers to handle the promise of searchFilms
     extraReducers(builder){
         builder
             .addCase(searchFilms.pending, (state, action) => {
                 state.status = 'loading';
             })
+            //When the promise is fullfilled, add the films to state.results and sort them
             .addCase(searchFilms.fulfilled, (state, action) => {
+                console.log("succeeded", action.payload.result)
+
                 state.status = 'succeeded';
-                state.results = action.payload.results;
+                state.results = action.payload.result;
                 state.results.sort()
                 console.log("succeeded", state.results)
 
@@ -70,19 +62,17 @@ const searchSlice = createSlice({
                 state.error = action.error.message;
                 console.log("error", state.error);
             })
-            .addCase(fetchCountries.fulfilled, (state, action) => {
-                console.log("countries",action.payload);
-                state.countries = action.payload;
-            })
     }
 
 })
 
+//exports for getting the values in state
 export const selectAllResults = (state) => state.results.results;
 export const getResultsStatus = (state) => state.results.status;
 export const getResultsError = (state) => state.results.error;
-export const getCountries = (state) => state.results.countries;
-export const getStateCountry = (state) => state.results.country;
+export const getCountry = (state) => state.results.country;
+export const getKeyword = (state) => state.results.keyword;
 
-export const {setStateCountry} = searchSlice.actions;
+//exports for getting the actions in the slice reducer
+export const {setStateCountry, setStateKeyword} = searchSlice.actions;
 export default searchSlice.reducer;

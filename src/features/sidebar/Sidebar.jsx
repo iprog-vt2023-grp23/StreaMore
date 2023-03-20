@@ -28,10 +28,10 @@ const Sidebar = () => {
     return (sidebarButton() ||
         <div className='SidebarButtons'>
             <button onClick={sidebarButtonClick}>Close</button>
-            <NavLink to="/search">Search</NavLink>
+            <NavLink to="/">Search</NavLink>
             <NavLink to="/movieList">List</NavLink>
             <NavLink to="/userPage">User</NavLink>
-            <NavLink to="/search">Search</NavLink>
+            <NavLink to="/">Search</NavLink>
         </div>
     )
 }
