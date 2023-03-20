@@ -1,0 +1,29 @@
+.searchList {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchList > h2 {
+    margin-block: 0;
+    margin-inline: 0;
+    padding-block: 0;
+}
+
+.movieCard {
+    background-color: red;
+}
+
+.loadingCircle {
+    margin-top: 30px;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchFilms, setStateCountry, getCountry, setStateKeyword} from "./searchSlice";
 import country_codes_array from "./CountryCodes";
 import {BsSearch} from 'react-icons/bs'
+import './SearchBar.css'
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -58,23 +59,27 @@ const SearchBar = () => {
     ))
 
     return(
-        <section>
-            <h2>Search</h2>
+        <section className="searchBar">
+            {/* <h2>Search</h2> */}
             <form>
-                <label>Movie Title</label>
-                <input 
+                {/* <label>Movie Title</label> */}
+                <input
+                    className="searchBarInput"
                     type="text"
                     id="movieTitle"
                     name="movieName"
+                    placeholder="Search for a film..."
                     value={keyword}
                     onChange={onKeywordChanged}
                     onKeyDown={keyDown}/>
-                <label htmlFor="country">Country</label>
+                {/* <label htmlFor="country">Country</label> */}
+                <div>
                 <select id="country"  value={country_codes_array[country.toUpperCase()]} onChange={onCountryChanged}>
                     <option value=""></option>
                     {countryOptions}
                 </select>
-                <button type="button" onClick={search}><BsSearch /></button>
+                <button type="button" onClick={search}>Search</button>
+                </div>
             </form>
         </section>
     )
