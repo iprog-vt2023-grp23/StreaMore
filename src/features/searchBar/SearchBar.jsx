@@ -7,17 +7,14 @@ import {BsSearch} from 'react-icons/bs'
 const SearchBar = () => {
     const dispatch = useDispatch();
     const [keyword, setKeyword] = useState('');
-    const [country, setCountry] = useState(useSelector(getCountry));
     const [searchRequestStatus, setSearchRequestStatus] = useState('idle');
+    const country = useSelector(getCountry);
 
     //Functions for changing the current sate as well as setting the store state
     const onKeywordChanged = e => setKeyword(e.target.value);
     const onCountryChanged = (e) => {
         //Finds the two letter country code from the full country name (looks more wack than it is)
         const toAdd = Object.keys(country_codes_array).find(key => country_codes_array[key] === e.target.value).toLowerCase()
-        console.log(toAdd)
-        setCountry(toAdd);
-        //Dispatches the selected country to the store state
         dispatch(setStateCountry(toAdd));
     };
 

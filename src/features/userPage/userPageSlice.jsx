@@ -11,6 +11,10 @@ const initialState = {
 Implement a function that fetches streamingServices and username from server at login
 */
 
+/*
+*Fetches all available streaming services that the api can handle.
+*Might be better to simply have a predetermined list to avoid extra api call.
+*/
 export const getServices = createAsyncThunk('userPage/getServices', async () => {
     const url = sourceUrl.concat('v2/services')
 
@@ -37,6 +41,7 @@ const userPageSlice = createSlice({
             state.streamingServices = state.streamingServices.filter((service) => service != action.payload);
         }
     },
+    //Extrareducer for when the services are fetched
     extraReducers(builder){
         builder
             .addCase(getServices.fulfilled, (state, action) => {
