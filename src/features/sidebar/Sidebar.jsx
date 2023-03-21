@@ -1,5 +1,6 @@
 import '../../App.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { getSidebarState, toggleSidebar } from './sidebarSlice';
 import { NavLink } from 'react-router-dom';
 import {FiAlignJustify} from 'react-icons/fi'
@@ -7,7 +8,7 @@ import './Sidebar.css'
 
 const Sidebar = () => {
     const dispatch = useDispatch();
-    const[sidebarState, setSidebarState] = useState(useSelector(getSidebarState));
+    const sidebarState = useSelector(getSidebarState);
 
     //Inverts the sidebar state to toggle it
     const sidebarButtonClick = () => {
