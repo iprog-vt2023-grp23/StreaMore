@@ -36,25 +36,26 @@ const RenderMovie = ({result}) => {
     const addToListButton = () => {
         if(movieList.includes(result)){
             return( <button onClick={removeFromMovieList}>
-                <AiOutlineMinus />
+                -
             </button>)
         }
         return(<button onClick={addToMovieList}>
-            <AiOutlinePlus />
+            +
         </button>)
     }
-    //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
-    return (
-        <div className='Search'>
-            <NavLink onClick={selectMovie} to="/inspectMovie">
-                <h3>{result.title}</h3>
-                <div>{result.body}</div>
-                <img src={result.posterURLs[154]}></img>
-            </NavLink>
-            {renderStreamingServices(result)}
-            {addToListButton()}
-        </div>
-    )
+  //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
+  return (
+    <div>
+        {/*Stylas i SearchList.css*/}
+         <NavLink onClick={selectMovie} to="/inspectMovie">
+            <h3>{result.title}</h3>
+            <div>{result.body}</div>
+            <img src={result.posterURLs[154]}></img>
+        </NavLink>
+        {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
+        {addToListButton()}
+    </div>
+  )
 }
 
 export default RenderMovie

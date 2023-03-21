@@ -1,33 +1,46 @@
 #root {
-  display: flex;
 }
+
+body {
+  /* Här håller vi våra globala CSS variabler! Body är mainparent till allt som renderas så alla komponenter kommer kunna nå dessa */
+  --background-color-main: #191A1B;
+  --background-color-secondary: #080808;
+  --imdb-gold: #D1AD28;
+  --light-grey: #414141;
+  --white: #ffffff;
+  --shadow-color: rgba(0,0,0,0.75);
+  /* Se till att kalla på dessa ^ när ni stylar. Ni kan också ändra/lägga till nya variabler här */
+
+  color-scheme: light dark;
+
+  /* Såhär kallar vi på variabler */
+  color: var(--white);
+  background-color: var(--background-color-main);
+}
+
 .App {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: baseline;
   flex-direction: row;
 
 }
-.Search{
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+
+
+/* Ta bort ful Windows98-feel styling på knappar och inputs */
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
 
-.Sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.SidebarButtons {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-}
 .OwnedService{
   border-radius: 50%;
   border: 2px solid red;

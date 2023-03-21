@@ -1,0 +1,90 @@
+.sidebar{
+    /* display:block gör att denna visas ovanför alla andra komponenter vad som än händer under den (notera därför att problem kan uppstå om man har 
+    flera komponenter med display:block) */
+    display: block;
+    /* position: fixed gör att den har en fixad position på skärmen, jämfört med position relaterat till dess siblingkomponenter som är default*/
+    position: fixed;
+    /* right: 0 sätter den pang på högra kanten*/
+    right: 0;
+    /*Lokala variabler för denna komponent*/
+    --sidebar-button-top: 15px;
+    --sidebar-button-right: 15px;
+    --sidebar-width: 200px;
+}
+
+.sidebarButton, .sidebarButtonRotated {
+    font-size: 1.5rem;
+    position: fixed;
+    top: var(--sidebar-button-top);
+    cursor: pointer;
+}
+
+.sidebarButton {
+    right: var(--sidebar-button-right);
+}
+
+/*Hover effekter bara för datorer, aka breda skärmar*/
+@media (min-width: 800px) {
+.sidebarButton:hover, .sidebarButtonRotated:hover {
+    color: var(--imdb-gold);
+    transition: color 50ms linear;
+}
+}
+
+.sidebarButtonRotated {
+    transform: rotate(90deg);
+    /*Dessa variabler gör så att den keyframe jag gjort kommer animeras första gången komponenten renderas*/
+    animation-name: rotate90;
+    /*Dom flesta animationer behöver inte vara längre än typ 100ms, 50-80 funkar fint*/
+    animation-duration: 80ms;
+    animation-timing-function: ease-in;
+}
+
+.sidebarLinks {
+    padding-top: 50px;
+    min-width: var(--sidebar-width);
+    padding-left: var(--sidebar-button-right);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: top;
+    background-color: var(--background-color-secondary);
+    animation-name: fade-in-slide-in;
+    animation-duration: 80ms;
+    animation-timing-function: ease-in;
+}
+
+/*Såhär kan man göra animationer i CSS*/
+@keyframes fade-in-slide-in {
+    from {
+    opacity: 0;
+    transform: translateX(var(--sidebar-width));
+    }
+    to {
+    opacity: 1;
+    transform: translateX(0px);
+    }
+  }
+
+@keyframes rotate90 {
+    from {
+    transform: rotate(0deg);
+    }
+    to {transform: rotate(90deg);
+    }
+  }
+
+
+.nav-link {
+    text-decoration: none;
+    color: var(--white);
+    margin-top: 3px;
+  }
+
+@media (min-width: 800px) {
+.nav-link:hover {
+    color: var(--imdb-gold);
+    transition: color 50ms linear;
+}
+}
