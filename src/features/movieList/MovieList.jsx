@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getMovieList } from "./movieListSlice";
 import RenderMovie from "../../renderFunctions/RenderMovie";

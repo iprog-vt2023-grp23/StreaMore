@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { getSelectedMovie, toggleAboutFilmField, getAboutFilmField } from "./inspectMovieSlice";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RenderMovie from "../../renderFunctions/RenderMovie";
 
 const InspectMovie = () => {
