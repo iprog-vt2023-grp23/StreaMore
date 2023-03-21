@@ -24,21 +24,22 @@ const RenderMovie = ({result}) => {
     const addToListButton = () => {
         if(movieList.includes(result)){
             return( <button onClick={removeFromMovieList}>
-                <AiOutlineMinus />
+                -
             </button>)
         }
         return(<button onClick={addToMovieList}>
-            <AiOutlinePlus />
+            +
         </button>)
     }
   return (
-    <div className='Search'>
+    <div>
+        {/*Stylas i SearchList.css*/}
          <NavLink onClick={selectMovie} to="/inspectMovie">
             <h3>{result.title}</h3>
             <div>{result.body}</div>
             <img src={result.posterURLs[154]}></img>
         </NavLink>
-        {renderStreamingServices(result)}
+        {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
         {addToListButton()}
     </div>
   )

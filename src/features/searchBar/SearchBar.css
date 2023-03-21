@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px;
-    padding: 10px;
+    padding: 5px;
 }
 
 .searchBar > form {
@@ -12,11 +11,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 300px;
     height: 100%;
 }
 
-.searchBar > div {
+.searchBar > form > div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -29,11 +28,12 @@
 .searchBar > form > div > button {
     margin-top: 10px;
     background-color: var(--light-grey);
+    margin-left: 10px;
     padding-inline: 30px;
-    margin-inline: 10px;
     padding-block: 0.4rem;
     border-radius: 30px;
     font-size: 1rem;
+
 }
 
 .searchBar > form > div > select {
@@ -41,7 +41,6 @@
     padding-inline: 0px;
     padding-block: 10px;
     font-size: 0.8rem;
-
     border: none;
     background-color: var(--light-grey);
     text-indent: 10px;

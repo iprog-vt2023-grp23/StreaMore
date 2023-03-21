@@ -2,23 +2,96 @@
     display:flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .searchList > h2 {
     margin-block: 0;
     margin-inline: 0;
+    margin-bottom: 10px;
     padding-block: 0;
 }
 
+.searchResults {
+    --card-width: 154px;
+    width: 95vw;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 2fr));
+    grid-gap: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
 .movieCard {
-    background-color: red;
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: var(--card-width);
+    height: 300px;
+    padding: 0px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 0px var(--shadow-color);
+    overflow: hidden;
+
+
+}
+
+.movieCard > div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.movieCard h3 {
+    width: calc(var(--card-width) - 10px);
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 228px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 400;
+    height: 100%;
+}
+.movieCard img {
+    position: absolute;
+    top: 0;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 15px 15px 0px 0px;
+    z-index: 0;
+}
+
+.movieCard button {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 195px;
+    left: 10px;
+    text-align: center;
+    color: var(--white);
+    background-color: var(--background-color-main);
+    width: 30px;
+    height: 30px;
+    vertical-align:middle;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 0px var(--shadow-color);
 }
 
 .loadingCircle {
+    position: absolute;
     margin-top: 30px;
     width: 30px;
     height: 30px;
+    left: 50%;
+    top: 30%;
+    /* Snurra tills sökresultat */
     -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
 }
@@ -26,4 +99,9 @@
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -2,8 +2,9 @@
     /* display:block gör att denna visas ovanför alla andra komponenter vad som än händer under den (notera därför att problem kan uppstå om man har 
     flera komponenter med display:block) */
     display: block;
-    /* position: fixed gör att den har en fixad position på skärmen, jämfört med relaterat till dess siblingkomponenter som är default*/
+    /* position: fixed gör att den har en fixad position på skärmen, jämfört med position relaterat till dess siblingkomponenter som är default*/
     position: fixed;
+    /* right: 0 sätter den pang på högra kanten*/
     right: 0;
     /*Lokala variabler för denna komponent*/
     --sidebar-button-top: 15px;
@@ -26,7 +27,7 @@
 @media (min-width: 800px) {
 .sidebarButton:hover, .sidebarButtonRotated:hover {
     color: var(--imdb-gold);
-    transition: 50ms linear;
+    transition: color 50ms linear;
 }
 }
 
@@ -39,7 +40,7 @@
     animation-timing-function: ease-in;
 }
 
-.sidebarLinks{
+.sidebarLinks {
     padding-top: 50px;
     min-width: var(--sidebar-width);
     padding-left: var(--sidebar-button-right);
@@ -84,6 +85,6 @@
 @media (min-width: 800px) {
 .nav-link:hover {
     color: var(--imdb-gold);
-    transition: 100ms linear;
+    transition: color 50ms linear;
 }
 }

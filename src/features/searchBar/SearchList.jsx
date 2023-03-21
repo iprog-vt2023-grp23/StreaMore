@@ -23,15 +23,15 @@ const SearchList = () => {
         //Spreads the results array and sorts it by imdb rating
         const sortedResults = [...results].sort((a, b) => {return b.imdbRating - a.imdbRating});
         //Render all movies in sortedResults using map and the rendermovie function and with imdbId as key for each rendered object
-        content = sortedResults.map(result => <RenderMovie className="movieCard" key={result.imdbId} result={result} />);
+        content = sortedResults.map(result => <div className="movieCard"><RenderMovie  key={result.imdbId} result={result} /></div>);
     } else if(status === 'failed'){
         content = <div>{error}</div>;
     }
 
     return(
         <section className="searchList">
-            {content ? <h2>Results for {keyword}</h2> : ""}
-            {content}
+            <h2>Search for "{keyword}"</h2>
+            <div className="searchResults">{content}</div>
         </section>
     )
 }
