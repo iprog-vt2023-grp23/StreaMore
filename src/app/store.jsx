@@ -12,5 +12,12 @@ export const store = configureStore({
         movieList: movieListReducer,
         userPage: userPageReducer,
         selectedMovie: selectedMovieReducer,
-    }
+        firebase: firebaseReducer,
+        firestore: firestoreReducer
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [actionTypes.LOGIN, actionTypes.AUTH_LINK_ERROR]
+        }
+    }),
 })
