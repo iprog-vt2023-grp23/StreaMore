@@ -20,9 +20,11 @@ const SearchList = () => {
         content = <BiLoaderCircle className="loadingCircle"/>;
     } else if(status === 'succeeded'){
         //Spreads the results array and sorts it by imdb rating
-        const sortedResults = [...results].sort((a, b) => {return b.imdbRating - a.imdbRating});
+        //const sortedResults = [...results].sort((a, b) => {return b.imdbVoteCount - a.imdbVoteCount});
         //Render all movies in sortedResults using map and the rendermovie function and with imdbId as key for each rendered object
+
         content = sortedResults.map(result => <div className="movieCard"><RenderMovie  key={result.imdbId} result={result} /></div>);
+
     } else if(status === 'failed'){
         content = <div>{error}</div>;
     }
