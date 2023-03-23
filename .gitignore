@@ -25,3 +25,6 @@ dist-ssr
 
 #Api Key
 src/ApiKey.jsx
+
+#Firebase config
+src/FirebaseConfig.jsx
