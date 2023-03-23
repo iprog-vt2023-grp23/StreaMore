@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { selectMovieToInspect } from '../features/inspectMovie/inspectMovieSlice';
-import { addMovieToList, getMovieList, removeMovieFromList } from '../features/movieList/movieListSlice';
+import { selectMovieToInspect } from '../model/inspectMovieSlice';
+import { addMovieToList, getMovieList, removeMovieFromList } from '../model/movieListSlice';
 import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai'
 import renderStreamingServices from './RenderStreamingServices';
 

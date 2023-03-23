@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getStreamingServices, getUserName, addStreamingService, removeStreamingService, getAvailableServices } from "./userPageSlice";
-import iconMapping from "./StreamingButtons";
+import { getStreamingServices, getUserName, addStreamingService, removeStreamingService, getAvailableServices } from "../../model/userPageSlice";
+import iconMapping from "../../view/StreamingButtons";
 
 const UserPage = () => {
     const dispatch = useDispatch();

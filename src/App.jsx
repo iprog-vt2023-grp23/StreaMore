@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import SearchList from './features/searchBar/SearchList'
 import SearchBar from './features/searchBar/SearchBar'
-import Search from './features/searchBar/Search'
+import Search from './view/SearchView'
 import UserPage from './features/userPage/UserPage'
-import MovieList from './features/movieList/MovieList'
-import InspectMovie from './features/inspectMovie/InspectMovie'
+import MovieList from './presenter/MovieList'
+import InspectMovie from './presenter/InspectMovie'
 
 import { Route, Routes,BrowserRouter } from 'react-router-dom'
 import './App.css'
-import Sidebar from './features/sidebar/Sidebar'
+import Sidebar from './presenter/Sidebar'
 
 
 

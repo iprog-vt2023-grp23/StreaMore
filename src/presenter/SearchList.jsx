@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import RenderMovie from "../../renderFunctions/RenderMovie";
-import { selectAllResults, getResultsStatus, getResultsError, getKeyword } from "./searchSlice";
+import RenderMovie from "../../view/RenderMovie";
+import { selectAllResults, getResultsStatus, getResultsError, getKeyword } from "../../model/searchSlice";
 import "./SearchList.css"
 import {BiLoaderCircle} from 'react-icons/bi'
 

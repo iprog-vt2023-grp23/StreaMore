@@ -1,6 +1,6 @@
 import { createSlice, nanoid, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
-import country_codes_array from "./CountryCodes";
-import {options, sourceUrl} from "../../ApiKey";
+import country_codes_array from "../features/searchBar/CountryCodes";
+import {options, sourceUrl} from "../ApiKey";
 
 const initialState = {
     results: [],

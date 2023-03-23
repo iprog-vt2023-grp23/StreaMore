@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { sourceUrl, options } from "../../ApiKey"
+import { sourceUrl, options } from "../ApiKey"
 
 const initialState = {
     userName: 'Gabriel',

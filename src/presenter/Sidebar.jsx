@@ -1,7 +1,7 @@
 import '../../App.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { getSidebarState, toggleSidebar } from './sidebarSlice';
+import { getSidebarState, toggleSidebar } from '../model/sidebarSlice';
 import { NavLink } from 'react-router-dom';
 import {FiAlignJustify} from 'react-icons/fi'
 import './Sidebar.css'

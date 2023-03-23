@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { getMovieList } from "./movieListSlice";
-import RenderMovie from "../../renderFunctions/RenderMovie";
+import { getMovieList } from "../model/movieListSlice";
+import RenderMovie from "../view/RenderMovie";
 
 
 const MovieList = () => {

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { getCountry } from '../features/searchBar/searchSlice';
-import iconMapping from '../features/userPage/StreamingButtons';
+import { getCountry } from '../model/searchSlice';
+import iconMapping from './StreamingButtons';
 
 /*
 *A reusable function that renders all streaming services from the input result

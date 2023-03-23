@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchFilms, setStateCountry, getCountry, setStateKeyword} from "./searchSlice";
+import { searchFilms, setStateCountry, getCountry, setStateKeyword} from "../../model/searchSlice";
 import country_codes_array from "./CountryCodes";
 import {BsSearch} from 'react-icons/bs'
 import './SearchBar.css'
