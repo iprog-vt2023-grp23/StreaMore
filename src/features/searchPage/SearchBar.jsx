@@ -69,6 +69,9 @@ const SearchBar = () => {
     </option>
   ));
 
+  
+  
+
   return (
     <SearchBarView
       country_codes_array={country_codes_array}

@@ -1,5 +1,16 @@
 import "./SearchBar.css";
 
+
+import { InputText } from 'primereact/inputtext';
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css";
+
+//icons
+import "primeicons/primeicons.css";
+
 const SearchBarView = (props) => {
   const keyDown = (e) => {
     props.onKeyDown(e);
@@ -13,7 +24,7 @@ const SearchBarView = (props) => {
       {/* <h2>Search</h2> */}
       <form>
         {/* <label>Movie Title</label> */}
-        <input
+        {/* <input
           className="searchBarInput"
           type="text"
           id="movieTitle"
@@ -22,7 +33,11 @@ const SearchBarView = (props) => {
           value={props.keyword}
           onChange={keywordChanged}
           onKeyDown={keyDown}
-        />
+        /> */}
+        <span className="p-float-label">
+          <InputText id="username" value={props.keyword} onChange={keywordChanged} />
+          <label htmlFor="username">Search for a film</label>
+        </span>
         {/* <label htmlFor="country">Country</label> */}
         <div>
           <select
