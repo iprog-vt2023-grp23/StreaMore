@@ -3,13 +3,12 @@ import { sourceUrl, options } from "../../ApiKey";
 
 const initialState = {
   userName: "Gabriel",
+  getUserTest: null, //added getUser to try and find email data
   streamingServices: ["netflix"],
   services: [],
 };
 
-/*
-Implement a function that fetches streamingServices and username from server at login
-*/
+// TODO: Implement a function that fetches streamingServices and username from server at login
 
 /*
  *Fetches all available streaming services that the api can handle.
@@ -39,6 +38,10 @@ const userPageSlice = createSlice({
     setUserName(state, action) {
       state.userName = action.payload;
     },
+    setUserEmailAdress(state, action) {
+      //TODO: I currently have no idea how to obtain any email adress, maybe needs to be added to database first /Michael
+      state.userName = action.payload;
+    },
     addStreamingService(state, action) {
       state.streamingServices.push(action.payload);
     },
@@ -55,7 +58,9 @@ const userPageSlice = createSlice({
     });
   },
 });
+
 export const getUserName = (state) => state.userPage.userName;
+export const getUserEmailAdress = (state) => state.userPage.userName; //TODO: edit here to something like userPage.email once it exists
 export const getStreamingServices = (state) => state.userPage.streamingServices;
 export const getAvailableServices = (state) => state.userPage.services;
 

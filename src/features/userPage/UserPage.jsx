@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getStreamingServices,
   getUserName,
+  getUserEmailAdress,
   addStreamingService,
   removeStreamingService,
   getAvailableServices,
@@ -11,6 +12,7 @@ import UserPageView from "./UserPageView";
 const UserPage = () => {
   const dispatch = useDispatch();
   const userName = useSelector(getUserName);
+  const userEmail = useSelector(getUserEmailAdress);
   const streamingServices = useSelector(getStreamingServices);
 
   const services = useSelector(getAvailableServices);
@@ -30,6 +32,7 @@ const UserPage = () => {
       streamingServices={streamingServices}
       services={services}
       userName={userName}
+      userEmail={userEmail}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
     />
