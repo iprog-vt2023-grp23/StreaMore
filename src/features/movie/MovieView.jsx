@@ -59,12 +59,13 @@ const MovieView = (props) => {
     },
     {
       label: "Remove",
-      icon: "pi pi-minus",
+      icon: "pi pi-bell",
       command: () => {
         removeFromMovieList();
       }
     }
   ]
+  const maskStyle = {'background-color':'red', 'z-index':'1000'}
   //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
   return (
     <div>
@@ -72,11 +73,10 @@ const MovieView = (props) => {
       <NavLink onClick={selectMovie} to="/inspectMovie">
         <h3>{props.movie.title}</h3>
         <div>{props.movie.body}</div>
-        <img src={props.movie.posterURLs[154]}></img>
+        <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
       </NavLink>
-      <div style={{ position: 'absolute', height: '30px' }}>
-      <SpeedDial model={items} direction="right" className="speed-dial-container" maskClassName="speed-dial"/>
-      </div>
+      <SpeedDial model={items} direction="right" /> 
+      {/* style={{'position':'absolute', 'bottom':'0px', 'left': '0px', 'background-color':'pink'}} buttonStyle={{'height': '10px', 'width':'25px', 'position':'absolute', 'bottom':'0px', 'left': '0px'}} maskStyle={maskStyle} */}
       {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
     </div>
   );
