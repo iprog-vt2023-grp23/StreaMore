@@ -5,7 +5,8 @@ Welcome to the github page of the StreaMore project, where you can search less t
 - The Firebase pyrotechnician @GabbeLandin
 - The React ranger @Lindefor
 - The Scrum caster @Taumich
-- The CSS lancer @tobiasljunggren97 
+- The CSS lancer @tobiasljunggren97
+
 Note: we are all working omni-role despite the meaning of the titles.
 
 ## API
