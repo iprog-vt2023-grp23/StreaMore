@@ -88,9 +88,17 @@
   box-shadow: 0px 0px 10px 0px var(--shadow-color);
 }
 
-.movieCard button:hover {
+/* .movieCard button:hover {
   transform: scale(1.1);
   transition: transform .5s;
+} */
+.speed-dial-container {
+  width: 190px;
+  height: 540px;
+}
+.speed-dial {
+  width: 1px;
+  height: 10px;
 }
 
 .loadingCircle {
