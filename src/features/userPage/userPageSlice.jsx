@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { sourceUrl, options } from "../../ApiKey";
 
 const initialState = {
-  userName: "Gabriel",
+  userName: null,
   streamingServices: [],
   services: [],
 };
@@ -34,7 +34,10 @@ const userPageSlice = createSlice({
   initialState,
   reducers: {
     setUserName(state, action) {
+      console.log(current(state).userName)
       state.userName = action.payload;
+      console.log(current(state).userName)
+
     },
     addStreamingService(state, action) {
       state.streamingServices.push(action.payload);

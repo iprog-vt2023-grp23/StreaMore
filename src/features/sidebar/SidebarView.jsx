@@ -20,8 +20,8 @@ const SidebarView = (props) => {
       <NavLink className="nav-link" to="/userPage">
         User
       </NavLink>
-      <NavLink className="nav-link" to="/">
-        Search
+      <NavLink className="nav-link" to="/signIn">
+        Sign In
       </NavLink>
     </div>
   );
