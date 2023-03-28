@@ -16,7 +16,6 @@ const RenderMovies = (props) => {
   const movieList = useSelector(getMovieList);
 
   const selectMovie = (movie) => {
-    console.log(movie);
     dispatch(selectMovieToInspect(movie));
   };
   const addMovie = (movie) => {
@@ -29,7 +28,6 @@ const RenderMovies = (props) => {
     api.removeMovie(movie);
   };
 
-  console.log("list",movieList)
   return props.movies.map((movie) => (
     <div className="movieCard" key={movie.imdbId}>
       <MovieView

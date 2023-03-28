@@ -32,7 +32,6 @@ export const searchFilms = createAsyncThunk(
         return json;
       })
       .catch((err) => console.error("error:" + err));
-    console.log("response", response);
     return response;
   }
 );
@@ -59,12 +58,10 @@ const searchSlice = createSlice({
       })
       //When the promise is fullfilled, add the films to state.results and sort them
       .addCase(searchFilms.fulfilled, (state, action) => {
-        console.log("succeeded", action.payload.result);
 
         state.status = "succeeded";
         state.results = action.payload.result;
         state.results.sort();
-        console.log("succeeded", state.results);
       })
       .addCase(searchFilms.rejected, (state, action) => {
         state.status = "failed";

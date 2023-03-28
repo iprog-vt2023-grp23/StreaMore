@@ -16,8 +16,12 @@ function App() {
   const { app, api } = useContext(FirebaseContext);
   const movieList = useSelector(state => state.movieList.movieList);
 
+  /*
+  *Gets the movie list and streaming services from firebase
+  */
   useEffect(( ) => {
       api.getMovieList();
+      api.getServices();
   }, [])
 
   return (

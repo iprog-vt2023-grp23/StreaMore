@@ -3,7 +3,7 @@ import { sourceUrl, options } from "../../ApiKey";
 
 const initialState = {
   userName: "Gabriel",
-  streamingServices: ["netflix"],
+  streamingServices: [],
   services: [],
 };
 
@@ -19,15 +19,12 @@ export const getServices = createAsyncThunk(
   "userPage/getServices",
   async () => {
     const url = sourceUrl.concat("v2/services");
-
-    console.log("url", url);
     const response = await fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
         return json;
       })
       .catch((err) => console.error("error:" + err));
-    console.log("getServices", response);
     return response;
   }
 );
@@ -41,6 +38,9 @@ const userPageSlice = createSlice({
     },
     addStreamingService(state, action) {
       state.streamingServices.push(action.payload);
+    },
+    updateStreamingServices(state, action) {
+      state.streamingServices = action.payload;
     },
     removeStreamingService(state, action) {
       state.streamingServices = state.streamingServices.filter(
@@ -59,7 +59,7 @@ export const getUserName = (state) => state.userPage.userName;
 export const getStreamingServices = (state) => state.userPage.streamingServices;
 export const getAvailableServices = (state) => state.userPage.services;
 
-export const { setUserName, addStreamingService, removeStreamingService } =
+export const { setUserName, addStreamingService, removeStreamingService, updateStreamingServices } =
   userPageSlice.actions;
 
 export default userPageSlice.reducer;
