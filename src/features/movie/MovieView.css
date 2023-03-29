@@ -52,11 +52,15 @@
   .movieCard img {
     position: absolute;
     top: 0;
-    height: auto;
+    /* height: auto; */
     overflow: hidden;
-    max-width: 100%;
-    max-height: var(--img-height);
+    /* max-width: 100%;
+    max-height: var(--img-height); */
     border-radius: 15px 15px 0px 0px;
+    /* +1 för att dölja nån konstig visuell border bugg */
+    width: calc(var(--card-width)+1);
+    height: var(--img-height);
+    object-fit: cover;
     z-index: 0;
   }
   
@@ -86,8 +90,8 @@
   
   .p-speeddial {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: calc(var(--img-height) - 35px);
+    left: 5px;
   }
   
   .p-speeddial-item{

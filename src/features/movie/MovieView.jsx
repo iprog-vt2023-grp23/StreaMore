@@ -87,7 +87,6 @@ const MovieView = (props) => {
   return (
     <div className="movieCard" key={props.key}>
       <Toast ref={toast}/>
-      {/*Stylas i SearchList.css*/}
       <NavLink onClick={selectMovie} to="/inspectMovie">
         <div className="titleWrapper"><h3>{props.movie.title}</h3></div>
         <div>{props.movie.body}</div>
