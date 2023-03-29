@@ -1,11 +1,9 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "@firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
+import {getAuth} from '@firebase/auth'
 import SignInView from "./SignInView";
 import SignOutView from "./SignOutView";
-import { getUserId } from "../userPage/userPageSlice";
 import { useState, useEffect, useContext } from "react";
-import { FirebaseContext } from '/src/firebase/Firebase';
-
+import { signIn, register, signOutEvent, getUserId } from "../../firebase/firebaseSlice";
 
 /*
 *Kanske måste kopplas till kontexten i Firebase.jsx med useContext, vi får la se
@@ -17,8 +15,7 @@ const SignIn = () => {
     const [username, setUsername] = useState("");
     const userId = useSelector(getUserId);
 
-    const { api } = useContext(FirebaseContext);
-
+    const dispatch = useDispatch();
     const emailChanged = (e) => setEmail(e.target.value);
     const passwordChanged = (e) => setPassword(e.target.value);
     const usernameChanged = (e) => setUsername(e.target.value);
@@ -33,15 +30,15 @@ const SignIn = () => {
 
     const signInButton = () => {
         console.log("signedIn")
-        api.signIn(email, password);
+        dispatch(signIn({email, password}));
     }
     const registerButton = () => {
         console.log("Registered")
-        api.register(email, password, username);
+        dispatch(register({email, password, username}));
     }
     const signOutButton = () => {
         console.log("signedOut")
-        api.signOutEvent();
+        dispatch(signOutEvent());
     }
     const isSignedIn = () => {
         if(userId)

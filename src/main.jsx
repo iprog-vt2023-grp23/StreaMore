@@ -6,8 +6,7 @@ import { store } from "./model/store";
 import { Provider } from "react-redux";
 //import { fetchCountries } from './features/searchBar/searchSlice';
 import Firebase from "./firebase/Firebase";
-import { getServices } from "./features/userPage/userPageSlice"; 
-import FirebaseProvider from './firebase/Firebase'
+import { getServices } from "./features/userPage/userPageSlice";
 
 
 //Uses getServices from userPageSlice to fetch all streaming services from the API once during page load
@@ -17,9 +16,8 @@ store.dispatch(getServices());
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <FirebaseProvider>
-        <App />
-      </FirebaseProvider>
+      <Firebase />
+      <App />
     </Provider>
   </React.StrictMode>
 );

@@ -8,11 +8,9 @@ import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../searchPage/SearchList.css";
 import MovieView from "./MovieView";
-import { FirebaseContext } from '/src/firebase/Firebase';
-import { getUserId } from "../userPage/userPageSlice";
+import { getUserId, addMovie, removeMovie } from "../../firebase/firebaseSlice";
 
 const RenderMovies = (props) => {
-  const { api } = useContext(FirebaseContext);
   const dispatch = useDispatch();
   const movieList = useSelector(getMovieList);
   const userId = useSelector(getUserId)
@@ -20,19 +18,19 @@ const RenderMovies = (props) => {
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
   };
-  const addMovie = (movie) => {
-    api.addMovie(movie, userId);
+  const addMovieButton = (movie) => {
+    dispatch(addMovie(movie, userId));
   };
-  const removeMovie = (movie) => {
-    api.removeMovie(movie, userId);
+  const removeMovieButton = (movie) => {
+    dispatch(removeMovie(movie, userId));
   };
 
   return props.movies.map((movie) => (
     <div className="movieCard" key={movie.imdbId}>
       <MovieView
         onSelectMovie={selectMovie}
-        onAddToMovieList={addMovie}
-        onRemoveToMovieList={removeMovie}
+        onAddToMovieList={addMovieButton}
+        onRemoveToMovieList={removeMovieButton}
         id={movie.imdbId}
         movie={movie}
         movieList={movieList}
