@@ -95,9 +95,9 @@
 } */
 
 .p-speeddial {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
+  bottom: 5px;
+  left: 5px;
 }
 
 .p-speeddial-item{
@@ -105,9 +105,16 @@
 }
 
 .p-speeddial-item > a{
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   background-color: none;
+}
+
+.p-toast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 /* .p-speeddial-button {
