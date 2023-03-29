@@ -16,11 +16,26 @@ const SignInView = (props) => {
   const register = () => {
     props.onRegister();
   }
+  const usernameChanged = (e) => {
+    props.onUsernameChanged(e);
+  }
 
   return (
     <div>
       <h1>Sign In Or Register</h1>
       <form>
+      <label>Username</label>
+      <input
+          className="signUpUsername"
+          type="text"
+          id="username"
+          name="username"
+          value={props.username}
+          onChange={usernameChanged}
+          onKeyDown={keyDown}
+        >
+        </input>
+        <label>E-mail</label>
         <input
           className="signInEmail"
           type="text"
@@ -31,6 +46,7 @@ const SignInView = (props) => {
           onKeyDown={keyDown}
         >
         </input>
+        <label>Password</label>
         <input
           className="signInPassword"
           type="text"

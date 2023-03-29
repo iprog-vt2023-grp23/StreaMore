@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   getStreamingServices,
-  getUserName,
+  getUsername,
+  getUserId,
   addStreamingService,
   removeStreamingService,
   getAvailableServices,
@@ -12,7 +13,8 @@ import { useContext } from "react";
 
 const UserPage = () => {
   const dispatch = useDispatch();
-  const userName = useSelector(getUserName);
+  const username = useSelector(getUsername);
+  const userId = useSelector(getUserId);
   const streamingServices = useSelector(getStreamingServices);
 
   const services = useSelector(getAvailableServices);
@@ -23,18 +25,18 @@ const UserPage = () => {
    */
   const removeService = (e) => {
     dispatch(removeStreamingService(e.currentTarget.value));
-    api.removeService(e.currentTarget.value);
+    api.removeService(e.currentTarget.value, userId);
   };
   const addService = (e) => {
     dispatch(addStreamingService(e.currentTarget.value));
-    api.addService(e.currentTarget.value);
+    api.addService(e.currentTarget.value, userId);
   };
 
   return (
     <UserPageView
       streamingServices={streamingServices}
       services={services}
-      userName={userName}
+      username={username}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
     />

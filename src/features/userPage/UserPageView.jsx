@@ -34,7 +34,7 @@ const UserPageView = (props) => {
 
   return (
     <div>
-      I am a user :) and my name is {props.userName}
+      I am a user :) and my name is {props.username}
       <div>
         I have these services:
         {renderStreamingServices}

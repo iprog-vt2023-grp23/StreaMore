@@ -9,23 +9,22 @@ import { useDispatch, useSelector } from "react-redux";
 import "../searchPage/SearchList.css";
 import MovieView from "./MovieView";
 import { FirebaseContext } from '/src/firebase/Firebase';
+import { getUserId } from "../userPage/userPageSlice";
 
 const RenderMovies = (props) => {
   const { api } = useContext(FirebaseContext);
   const dispatch = useDispatch();
   const movieList = useSelector(getMovieList);
+  const userId = useSelector(getUserId)
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
   };
   const addMovie = (movie) => {
-    dispatch(addMovieToList(movie));
-    api.addMovie(movie);
-
+    api.addMovie(movie, userId);
   };
   const removeMovie = (movie) => {
-    dispatch(removeMovieFromList(movie));
-    api.removeMovie(movie);
+    api.removeMovie(movie, userId);
   };
 
   return props.movies.map((movie) => (

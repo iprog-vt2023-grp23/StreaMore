@@ -19,7 +19,7 @@ const movieListSlice = createSlice({
     },
     removeMovieFromList(state, action) {
       state.movieList = state.movieList.filter(
-        (movie) => movie.title != action.payload.title
+        (movie) => movie.imdbId != action.payload.imdbId
       );
     },
     updateMovieList(state, action) {
