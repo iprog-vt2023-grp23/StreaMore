@@ -24,8 +24,8 @@ const RenderMovies = (props) => {
   };
 
   return props.movies.map((movie) => (
-    <div className="movieCard" key={movie.imdbId}>
       <MovieView
+        key={movie.imdbId}
         onSelectMovie={selectMovie}
         onAddToMovieList={addMovie}
         onRemoveToMovieList={removeMovie}
@@ -33,7 +33,6 @@ const RenderMovies = (props) => {
         movie={movie}
         movieList={movieList}
       />
-    </div>
   ));
 };
 

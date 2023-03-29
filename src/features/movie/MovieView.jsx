@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { SpeedDial } from 'primereact/speeddial';
 import PrimeReact from 'primereact/api';
+import "./MovieView.css";
 
 PrimeReact.appendTo = 'self';
 //theme
@@ -68,10 +69,10 @@ const MovieView = (props) => {
   const maskStyle = {'background-color':'red', 'z-index':'1000'}
   //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
   return (
-    <div>
+    <div className="movieCard" key={props.key}>
       {/*Stylas i SearchList.css*/}
       <NavLink onClick={selectMovie} to="/inspectMovie">
-        <h3>{props.movie.title}</h3>
+        <div className="titleWrapper"><h3>{props.movie.title}</h3></div>
         <div>{props.movie.body}</div>
         <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
       </NavLink>
