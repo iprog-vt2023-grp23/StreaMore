@@ -58,3 +58,19 @@
   border: none;
   font-size: 1rem;
 }
+
+.p-inputtext {
+  background-color: rgb(44, 43, 43);
+  -webkit-text-fill-color: white;
+}
+
+.jaj {
+  background-color: rgb(44, 43, 43);
+  border: white;
+  top: 4px;
+  height: 38px;
+}
+
+
+
+

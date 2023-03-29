@@ -2,6 +2,7 @@ import "./SearchBar.css";
 
 
 import { InputText } from 'primereact/inputtext';
+import { SplitButton } from 'primereact/splitbutton';
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
     
@@ -19,21 +20,17 @@ const SearchBarView = (props) => {
     props.onKeywordChanged(e);
   };
 
+  const items = [
+    {
+      label: "Filter",
+      icon: "pi pi-filter",
+    },
+  ];
+
   return (
     <section className="searchBar">
       {/* <h2>Search</h2> */}
       <form>
-        {/* <label>Movie Title</label> */}
-        {/* <input
-          className="searchBarInput"
-          type="text"
-          id="movieTitle"
-          name="movieName"
-          placeholder="Search for a film..."
-          value={props.keyword}
-          onChange={keywordChanged}
-          onKeyDown={keyDown}
-        /> */}
         <span className="p-float-label">
           <InputText id="username" value={props.keyword} onChange={keywordChanged} />
           <label htmlFor="username">Search for a film</label>
@@ -48,9 +45,7 @@ const SearchBarView = (props) => {
             <option value=""></option>
             {props.countryOptions}
           </select>
-          <button type="button" onClick={props.onSearch}>
-            Search
-          </button>
+          <SplitButton menuButtonClassName="jaj" buttonClassName="jaj" label="Search" disabled={!props.keyword} icon="pi pi-search" onClick={props.onSearch} model={items}></SplitButton>
         </div>
       </form>
     </section>
