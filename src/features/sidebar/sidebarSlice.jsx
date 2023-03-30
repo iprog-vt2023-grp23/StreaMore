@@ -14,7 +14,6 @@ const sidebarSlice = createSlice({
     },
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
-      console.log("currentPage", state.currentPage);
     },
   },
 });

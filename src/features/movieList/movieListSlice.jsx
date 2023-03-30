@@ -1,6 +1,8 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
+  status: "idle",
+  error: null,
   movieList: [],
 };
 
@@ -20,6 +22,9 @@ const movieListSlice = createSlice({
         (movie) => movie.title != action.payload.title
       );
     },
+    updateMovieList(state, action) {
+      state.movieList = action.payload;
+    }
   },
 });
 
@@ -27,6 +32,6 @@ const movieListSlice = createSlice({
 export const getMovieList = (state) => state.movieList.movieList;
 
 //exports for getting the actions in the slice reducer
-export const { addMovieToList, removeMovieFromList } = movieListSlice.actions;
+export const { addMovieToList, removeMovieFromList, updateMovieList } = movieListSlice.actions;
 
 export default movieListSlice.reducer;

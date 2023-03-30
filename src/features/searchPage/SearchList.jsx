@@ -42,7 +42,6 @@ const SearchList = () => {
     //Spreads the results array and sorts it by imdb rating
     //const content = [...results].sort((a, b) => {return b.imdbRating - a.imdbRating});
     const content = <RenderMovies movies={results} />;
-    console.log("content", content);
     return <SearchListView content={content} keyword={keyword} />;
     //Render all movies in sortedResults using map and the rendermovie function and with imdbId as key for each rendered object
     //content = sortedResults.map(movie => <div className="movieCard"><RenderMovie onSelectMovie={dispatch(selectMovieToInspect(movie))} onAddToMovieList={dispatch(addMovieToList(movie))} onRemoveToMovieList={dispatch(removeMovieFromList(movie))} key={movie.imdbId} result={movie} /></div>);

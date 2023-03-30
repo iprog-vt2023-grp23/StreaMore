@@ -46,9 +46,8 @@ const MovieView = (props) => {
    *Or a button that adds the rendered movie to the movie list if it is not in the list
    */
   const addToListButton = () => {
-    if (props.movieList.includes(props.movie)) {
+    if(props.movieList.find(movie => movie.imdbId === props.movie.imdbId))
       return <button onClick={removeFromMovieList}>-</button>;
-    }
     return <button onClick={addToMovieList}>+</button>;
   };
 
