@@ -1,10 +1,14 @@
+import { initializeApp } from "firebase/app";
+
 const firebaseConfig = {
-    apiKey: "AIzaSyByzGBrlFpUXIbh8WrmF6r_WzKX5s6yihY",
-    authDomain: "streamore-36a0e.firebaseapp.com",
-    projectId: "streamore-36a0e",
-    storageBucket: "streamore-36a0e.appspot.com",
-    messagingSenderId: "857461114194",
-    appId: "1:857461114194:web:a14ba9d3bfce77b9c9268b",
-    measurementId: "G-9GW8L8ZENK"
+    apiKey: "AIzaSyDswsKs3EbYQXqnC4-Ms0XwwQDYPhNk6iw",
+    authDomain: "streamore-4f6cd.firebaseapp.com",
+    databaseURL: "https://streamore-4f6cd-default-rtdb.europe-west1.firebasedatabase.app/",
+    projectId: "streamore-4f6cd",
+    storageBucket: "streamore-4f6cd.appspot.com",
+    messagingSenderId: "616250674543",
+    appId: "1:616250674543:web:90de0569f560920e292c9a",
+    measurementId: "G-SBKWRZ0GTF"
   }; 
-export default firebaseConfig;
+const FirebaseApp = initializeApp(firebaseConfig)
+export default FirebaseApp;
