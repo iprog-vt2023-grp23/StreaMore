@@ -1,10 +1,4 @@
-import {
-  createSlice,
-  nanoid,
-  createAsyncThunk,
-  createSelector,
-} from "@reduxjs/toolkit";
-import country_codes_array from "./CountryCodes";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { options, sourceUrl } from "../../ApiKey";
 
 const initialState = {
@@ -58,7 +52,6 @@ const searchSlice = createSlice({
       })
       //When the promise is fullfilled, add the films to state.results and sort them
       .addCase(searchFilms.fulfilled, (state, action) => {
-
         state.status = "succeeded";
         state.results = action.payload.result;
         state.results.sort();

@@ -10,14 +10,14 @@ import { getServices } from "./features/userPage/userPageSlice";
 
 
 //Uses getServices from userPageSlice to fetch all streaming services from the API once during page load
-store.dispatch(getServices());
+//store.dispatch(getServices());
 //fetchFromFirebase();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <Provider store={store}>
       <Firebase />
       <App />
     </Provider>
-  </React.StrictMode>
+  //</React.StrictMode>
 );

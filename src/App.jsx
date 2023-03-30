@@ -4,7 +4,6 @@ import MovieList from "./features/movieList/MovieList";
 import InspectMoviePresenter from "./features/inspectMovie/InspectMoviePresenter";
 import SignIn from "./features/signIn/SignIn";
 
-
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./features/sidebar/Sidebar";
