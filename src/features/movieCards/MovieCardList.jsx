@@ -1,8 +1,7 @@
-import { getMovieList } from "../movieList/movieListSlice";
+import { getMovieList } from "../userLists/movieListSlice";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
-import "../searchPage/SearchList.css";
-import MovieView from "./MovieView";
+import MovieCardListView from "./MovieCardListView";
 import {
   addMovieFirebase,
   removeMovieFirebase,
@@ -21,18 +20,15 @@ const RenderMovies = (props) => {
   const removeMovieButton = (movie) => {
     dispatch(removeMovieFirebase({ movie }));
   };
-
-  return props.movies.map((movie) => (
-      <MovieView
-        key={movie.imdbId}
-        onSelectMovie={selectMovie}
-        onAddToMovieList={addMovieButton}
-        onRemoveToMovieList={removeMovieButton}
-        id={movie.imdbId}
-        movie={movie}
+  return (
+    <MovieCardListView
+        movies={props.movies}
+        selectMovie={selectMovie}
+        addMovieButton={addMovieButton}
+        removeMovieButton={removeMovieButton}
         movieList={movieList}
-      />
-  ));
+    />
+  );
 };
 
 export default RenderMovies;

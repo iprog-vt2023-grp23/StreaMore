@@ -9,7 +9,7 @@ import {
 import {
   addMovieToList,
   removeMovieFromList,
-} from "/src/features/movieList/movieListSlice";
+} from "/src/features/userLists/movieListSlice";
 import {
   addStreamingService,
   removeStreamingService,

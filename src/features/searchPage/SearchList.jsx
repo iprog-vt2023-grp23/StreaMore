@@ -4,7 +4,7 @@ import {
   addMovieToList,
   removeMovieFromList,
   getMovieList,
-} from "../movieList/movieListSlice";
+} from "../userLists/movieListSlice";
 import {
   selectAllResults,
   getResultsStatus,
@@ -13,7 +13,7 @@ import {
 } from "./searchSlice";
 import "./SearchList.css";
 import { BiLoaderCircle } from "react-icons/bi";
-import RenderMovies from "../movie/RenderMovies";
+import RenderMovieCards from "../movieCards/MovieCardList";
 import SearchListView from "./SearchListView";
 
 const SearchList = () => {
@@ -36,15 +36,12 @@ const SearchList = () => {
 
   // Either render a loading gif, the search result or an error depending on the status
   if (status === "loading") {
-    // content = <img src="https://codemyui.com/wp-content/uploads/2017/09/rotate-pulsating-loading-animation.gif"/>
     return <BiLoaderCircle className="loadingCircle" />;
   } else if (status === "succeeded") {
     //Spreads the results array and sorts it by imdb rating
-    //const content = [...results].sort((a, b) => {return b.imdbRating - a.imdbRating});
-    const content = <RenderMovies movies={results} />;
+    const content = <RenderMovieCards movies={results} />;
     return <SearchListView content={content} keyword={keyword} />;
     //Render all movies in sortedResults using map and the rendermovie function and with imdbId as key for each rendered object
-    //content = sortedResults.map(movie => <div className="movieCard"><RenderMovie onSelectMovie={dispatch(selectMovieToInspect(movie))} onAddToMovieList={dispatch(addMovieToList(movie))} onRemoveToMovieList={dispatch(removeMovieFromList(movie))} key={movie.imdbId} result={movie} /></div>);
   } else if (status === "failed") {
     return <div>{error}</div>;
   }

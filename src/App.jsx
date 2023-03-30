@@ -1,6 +1,6 @@
 import Search from "./features/searchPage/SearchView";
 import UserPage from "./features/userPage/UserPage";
-import MovieList from "./features/movieList/MovieList";
+import MovieList from "./features/userLists/MovieList";
 import InspectMoviePresenter from "./features/inspectMovie/InspectMoviePresenter";
 import SignIn from "./features/signIn/SignIn";
 

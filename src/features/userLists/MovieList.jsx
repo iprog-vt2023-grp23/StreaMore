@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import RenderMovies from "../movie/RenderMovies";
+import MovieCardList from "../movieCards/MovieCardList";
 import MovieListView from "./MovieListView";
 import {
   getMovieList,
@@ -10,7 +10,7 @@ const MovieList = () => {
 
   //Render all movies in movieList using map and the rendermovie function and with imdbId as key for each rendered object
   //const content = movieList.map(movie => <RenderMovie onSelectMovie={dispatch(selectMovieToInspect(movie))} onAddToMovieList={dispatch(addMovieToList(movie))} onRemoveToMovieList={dispatch(removeMovieFromList(movie))} key={movie.imdbId} result={movie} />);
-  const content = <RenderMovies movies={movieList} />;
+  const content = <MovieCardList movies={movieList} />;
   return <MovieListView content={content}/>
 };
 
