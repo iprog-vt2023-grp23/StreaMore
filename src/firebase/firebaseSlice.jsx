@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getAuth } from "@firebase/auth"
 import FirebaseApp from "/src/FirebaseConfig.jsx"
-import { getDatabase } from "firebase/database";
+import {getDatabase, onChildAdded, ref, set, onChildRemoved} from "firebase/database";
+
 
 const initialState = {
   username: null,
@@ -9,6 +11,7 @@ const initialState = {
 };
 const auth = getAuth(FirebaseApp)
 const database = getDatabase();
+console.log(database)
 
 export const signIn = createAsyncThunk(
     'firebase/signIn',
@@ -18,18 +21,13 @@ export const signIn = createAsyncThunk(
 )
 export const register = createAsyncThunk(
     'firebase/register',
-    ({email, password, username}) => {
+    async ({email, password, username}) => {
         console.log(email, password, username)
-        createUserWithEmailAndPassword(auth, email, password)
-        console.log("hej")
-            /*.then((userCredential) => {
-                console.log(userCredential)
-                updateProfile(userCredential.user, {
-                    displayName: username,
-                })
-                //return userCredential;
-            })
-            .catch((err) => console.error("error" + err));*/
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+        const response = await updateProfile(userCredential.user, {
+          displayName: username,
+        })
+        return username;
     }
 )
 export const signOutEvent = createAsyncThunk(
@@ -41,8 +39,12 @@ export const signOutEvent = createAsyncThunk(
 export const addMovie = createAsyncThunk(
     'firebase/addMovie',
     async (movie, userId) => {
-      const postListRef = ref(database, 'movieList/' + userId + '/' + movie.imdbId);
+      const realdatabase = getDatabase();
+      console.log("hej", realdatabase)
+      const postListRef = ref(realdatabase, 'movieList/' + userId + '/' + movie.imdbId);
+      console.log("då")
       set(postListRef, movie)
+      console.log("prutt")
       return movie;
     }
   );
@@ -74,7 +76,8 @@ const firebaseSlice = createSlice({
         console.log(action.user.uid, "logged in");
     });
     builder.addCase(register.fulfilled, (state, action) => {
-        const username = action;
+        const username = action.payload;
+        state.username = username;
         console.log(username, "registered");
     });
     builder.addCase(signOutEvent.fulfilled, (state, action) => {

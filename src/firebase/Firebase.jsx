@@ -13,6 +13,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 //export const app = initializeApp(firebaseConfig);
 const auth = getAuth(FirebaseApp);
 const database = getDatabase();
+console.log("fire", database)
 
 //export const FirebaseContext = createContext();
 
@@ -30,8 +31,8 @@ export default function Firebase (){
               const userId = user.uid;
               const username = user.displayName;
               console.log("auth state", userId);
-              console.log(username)
-              dispatch(setUsername(user.displayName));
+              console.log("Username", username)
+              if(username) dispatch(setUsername(username));
               dispatch(setUserId(userId));
               // ...
             } else {
