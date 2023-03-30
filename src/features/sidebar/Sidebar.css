@@ -10,6 +10,7 @@
   --sidebar-button-top: 15px;
   --sidebar-button-right: 15px;
   --sidebar-width: 200px;
+  z-index: 2;
 }
 
 .sidebarButton,
