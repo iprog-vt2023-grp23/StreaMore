@@ -16,10 +16,10 @@ const RenderMovies = (props) => {
     dispatch(selectMovieToInspect(movie));
   };
   const addMovieButton = (movie) => {
-    dispatch(addMovieFirebase({ movie }));
+    dispatch(addMovieFirebase(movie));
   };
   const removeMovieButton = (movie) => {
-    dispatch(removeMovieFirebase({ movie }));
+    dispatch(removeMovieFirebase(movie));
   };
 
   return props.movies.map((movie) => (
