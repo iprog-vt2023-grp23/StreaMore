@@ -84,7 +84,7 @@ const MovieView = (props) => {
   const maskStyle = {'background-color':'red', 'z-index':'1000'}
   //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
   return (
-    <div className="movieCard" key={props.key}>
+    <div className="movieCard" >
       <Toast ref={toast}/>
       <NavLink onClick={selectMovie} to="/inspectMovie">
         <div className="titleWrapper"><h3>{props.movie.title}</h3></div>

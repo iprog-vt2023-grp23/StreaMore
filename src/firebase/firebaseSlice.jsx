@@ -50,7 +50,7 @@ export const signOutEvent = createAsyncThunk(
 );
 export const addMovieFirebase = createAsyncThunk(
   "firebase/addMovie",
-  async ({ movie }, { getState }) => {
+  async (movie , { getState }) => {
     const state = getState();
     set(
       ref(database, "movieList/" + state.firebase.userId + "/" + movie.imdbId),
