@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import MovieCardList from "../movieCards/MovieCardList";
-import MovieListView from "./MovieListView";
+import MovieListView from "./MyListsPageView";
 import {
   getMovieList,
-} from "./movieListSlice";
+} from "./userListsSlice";
 
 const MovieList = () => {
   const movieList = useSelector(getMovieList);

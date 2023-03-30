@@ -1,0 +1,14 @@
+.MyListsPageView {
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.listMenu {
+    background-color: var(--background-color-secondary);
+    width: 200px;
+    height: 100%;
+
+}

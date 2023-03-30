@@ -29,7 +29,7 @@ const SidebarView = (props) => {
     if(props.loggedIn){
       return(
         [<NavLink className="nav-link" to="/movieList" key="0">
-          Lists
+          My Lists
         </NavLink>,
         <NavLink className="nav-link" to="/userPage" key="1">
           User

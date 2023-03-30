@@ -1,4 +1,4 @@
-import { getMovieList } from "../userLists/movieListSlice";
+import { getMovieList } from "../userLists/userListsSlice";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MovieCardListView from "./MovieCardListView";
