@@ -1,0 +1,32 @@
+.signIn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .signIn > form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 100%;
+  }
+  
+  /* Targeta den/de button(s) som är ett direkt child till div som är ett direkt child till form som är ett direkt child till .searchBar */
+  .signIn  > button {
+    margin-top: 10px;
+    background-color: var(--light-grey);
+    margin-left: 10px;
+    padding-inline: 30px;
+    padding-block: 0.4rem;
+    border-radius: 30px;
+    font-size: 1rem;
+  }
+
+  .p-inputtext {
+  background-color: rgb(44, 43, 43);
+  -webkit-text-fill-color: white;
+}

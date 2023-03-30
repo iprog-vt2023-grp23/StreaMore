@@ -1,4 +1,6 @@
 import React from "react";
+import { InputText } from 'primereact/inputtext';
+import "./SignIn.css"
 
 const SignInView = (props) => {
   const keyDown = (e) => {
@@ -21,42 +23,21 @@ const SignInView = (props) => {
   }
 
   return (
-    <div>
+    <div className="signIn">
       <h1>Sign In Or Register</h1>
       <form>
-      <label>Username</label>
-      <input
-          className="signUpUsername"
-          type="text"
-          id="username"
-          name="username"
-          value={props.username}
-          onChange={usernameChanged}
-          onKeyDown={keyDown}
-        >
-        </input>
-        <label>E-mail</label>
-        <input
-          className="signInEmail"
-          type="text"
-          id="e-mail"
-          name="e-mail"
-          value={props.email}
-          onChange={emailChanged}
-          onKeyDown={keyDown}
-        >
-        </input>
-        <label>Password</label>
-        <input
-          className="signInPassword"
-          type="text"
-          id="password"
-          name="password"
-          value={props.password}
-          onChange={passwordChanged}
-          onKeyDown={keyDown}
-        >
-        </input>
+        <span className="p-float-label">
+          <InputText id="username" value={props.username} onChange={usernameChanged} onKeyDown={keyDown}/>
+          <label htmlFor="username">Username</label>
+        </span>
+        <span className="p-float-label">
+          <InputText id="e-mail" value={props.email} onChange={emailChanged} onKeyDown={keyDown}/>
+          <label htmlFor="e-mail">E-mail</label>
+        </span>
+        <span className="p-float-label">
+          <InputText id="password" value={props.password} onChange={passwordChanged} onKeyDown={keyDown}/>
+          <label htmlFor="password">Password</label>
+        </span>
       </form>
       <button
         onClick={(event) => {
