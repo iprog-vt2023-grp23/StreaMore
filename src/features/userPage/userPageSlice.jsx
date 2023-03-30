@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { sourceUrl, options } from "../../ApiKey";
+import streamingServices from "./streamingServices";
 
 const initialState = {
-  userName: "Gabriel",
-  streamingServices: [],
-  services: [],
+  ownedServices: [],
+  services: streamingServices,
 };
 
 /*
@@ -14,6 +14,7 @@ Implement a function that fetches streamingServices and username from server at 
 /*
  *Fetches all available streaming services that the api can handle.
  *Might be better to simply have a predetermined list to avoid extra api call.
+ *EDIT Currently not used, instead streamingServices is used
  */
 export const getServices = createAsyncThunk(
   "userPage/getServices",
@@ -33,17 +34,14 @@ const userPageSlice = createSlice({
   name: "userPage",
   initialState,
   reducers: {
-    setUserName(state, action) {
-      state.userName = action.payload;
-    },
     addStreamingService(state, action) {
-      state.streamingServices.push(action.payload);
+      state.ownedServices.push(action.payload);
     },
     updateStreamingServices(state, action) {
-      state.streamingServices = action.payload;
+      state.ownedServices = action.payload;
     },
     removeStreamingService(state, action) {
-      state.streamingServices = state.streamingServices.filter(
+      state.ownedServices = state.ownedServices.filter(
         (service) => service != action.payload
       );
     },
@@ -55,11 +53,10 @@ const userPageSlice = createSlice({
     });
   },
 });
-export const getUserName = (state) => state.userPage.userName;
-export const getStreamingServices = (state) => state.userPage.streamingServices;
+export const getStreamingServices = (state) => state.userPage.ownedServices;
 export const getAvailableServices = (state) => state.userPage.services;
 
-export const { setUserName, addStreamingService, removeStreamingService, updateStreamingServices } =
+export const { addStreamingService, removeStreamingService, updateStreamingServices } =
   userPageSlice.actions;
 
 export default userPageSlice.reducer;

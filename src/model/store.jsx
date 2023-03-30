@@ -4,6 +4,7 @@ import sidebarReducer from "../features/sidebar/sidebarSlice";
 import userPageReducer from "../features/userPage/userPageSlice";
 import movieListReducer from "../features/movieList/movieListSlice";
 import selectedMovieReducer from "../features/inspectMovie/inspectMovieSlice";
+import firebaseReducer from "../firebase/firebaseSlice"
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     movieList: movieListReducer,
     userPage: userPageReducer,
     selectedMovie: selectedMovieReducer,
+    firebase: firebaseReducer,
   },
 });

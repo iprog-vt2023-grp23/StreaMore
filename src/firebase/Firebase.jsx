@@ -1,66 +1,61 @@
-import { createContext } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { initializeApp } from "firebase/app";
-import {getDatabase, onValue, ref, set} from "firebase/database";
+import {
+  getDatabase,
+  onChildAdded,
+  ref,
+  onChildRemoved,
+} from "firebase/database";
+import {
+  addMovieToList,
+  removeMovieFromList,
+} from "/src/features/movieList/movieListSlice";
+import {
+  addStreamingService,
+  removeStreamingService,
+} from "../features/userPage/userPageSlice";
+import { setUsername, setUserId } from "./firebaseSlice";
+import FirebaseApp from "/src/FirebaseConfig.jsx";
+import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
-import {updateMovieList} from "/src/features/movieList/movieListSlice"
-import { updateStreamingServices } from "../features/userPage/userPageSlice";
-import firebaseConfig from "/src/FirebaseConfig.jsx";
-
-const app = initializeApp(firebaseConfig);
+const auth = getAuth(FirebaseApp);
 const database = getDatabase();
 
-let firebase = {
-    app: null,
-    database: null
-}
+export default function Firebase() {
+  const dispatch = useDispatch();
 
-export const FirebaseContext = createContext(null);
+  useEffect(() => {
+    //Checks wether the authentication state has changed and executes code
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        /*
+         *User is signed in and actions should be taken
+         *Username and userId are set
+         *Firebase listeners are added which listens to changes in the database
+         */
+        const userId = user.uid;
+        const username = user.displayName;
+        console.log("auth state", userId);
+        console.log("Username", username);
+        if (username) dispatch(setUsername(username));
+        dispatch(setUserId(userId));
 
-export default ({children}) => {
-
-    const dispatch = useDispatch();
-    if (!firebase.api) {
-        firebase = {
-            app: app,
-            database: database,
-
-            api: {
-                getMovieList,
-                getServices,
-                addMovie,
-                removeMovie,
-                addService,
-                removeService,
-            }
-        }
-    }
-   
-    function getMovieList(){
-        onValue(ref(database, 'movieList/'), (snapshot) => {
-            const vals = snapshot.val();
-            if(vals)
-                dispatch(updateMovieList(Object.values(vals)));
-        })
-    }
-    function getServices(){
-        onValue(ref(database, 'services/'), (snapshot) => {
-            const vals = snapshot.val();
-            if(vals)
-                dispatch(updateStreamingServices(Object.values(vals)));
-        })
-    }
-
-    function addMovie(movie) {set(ref(database, 'movieList/' + movie.imdbId), movie);}
-    function removeMovie(movie) {set(ref(database, 'movieList/' + movie.imdbId), null);}
-
-    function addService(service) {set(ref(database, 'services/' + service), service);}
-    function removeService(service) {set(ref(database, 'services/' + service), null);}
-
-    return (
-        <FirebaseContext.Provider value={firebase}>
-            {children}
-        </FirebaseContext.Provider>
-    )
-
+        onChildAdded(ref(database, "movieList/" + userId), (data) => {
+          dispatch(addMovieToList(data.val()));
+        });
+        onChildAdded(ref(database, "serviceList/" + userId), (data) => {
+          dispatch(addStreamingService(data.val()));
+        });
+        onChildRemoved(ref(database, "movieList/" + userId), (data) => {
+          dispatch(removeMovieFromList(data.val()));
+        });
+        onChildRemoved(ref(database, "serviceList/" + userId), (data) => {
+          dispatch(removeStreamingService(data.val()));
+        });
+      } else {
+        // User is signed out
+        dispatch(setUserId(null));
+      }
+    });
+  }, []);
 }

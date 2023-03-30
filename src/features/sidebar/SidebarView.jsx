@@ -5,6 +5,41 @@ const SidebarView = (props) => {
   const sidebarButton = () => {
     props.onSidebarButtonClick();
   }
+  const signOut = () => {
+    props.onSignOut();
+  }
+
+  const signInButton = () => {
+    if(props.loggedIn){ 
+      return(
+        <NavLink className="nav-link" to="/" onClick={signOut}>
+            Sign Out
+        </NavLink>
+      )
+    }
+    else {
+      return (
+        <NavLink className="nav-link" to="/signIn">
+          Sign In
+        </NavLink>
+      )
+    }
+  }
+  const navigationButtons = () => {
+    if(props.loggedIn){
+      return(
+        [<NavLink className="nav-link" to="/movieList" key="0">
+          List
+        </NavLink>,
+        <NavLink className="nav-link" to="/userPage" key="1">
+          User
+        </NavLink>]
+      )
+    }
+    else
+      return;
+  }
+
   return (
     <div className="sidebarLinks">
       <FiAlignJustify
@@ -14,15 +49,8 @@ const SidebarView = (props) => {
       <NavLink className="nav-link" to="/">
         Search
       </NavLink>
-      <NavLink className="nav-link" to="/movieList">
-        List
-      </NavLink>
-      <NavLink className="nav-link" to="/userPage">
-        User
-      </NavLink>
-      <NavLink className="nav-link" to="/">
-        Search
-      </NavLink>
+      {navigationButtons()}
+      {signInButton()}
     </div>
   );
 };
