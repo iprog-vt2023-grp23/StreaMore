@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import { SpeedDial } from 'primereact/speeddial';
@@ -16,13 +16,21 @@ import "primereact/resources/primereact.min.css";
 
 //icons
 import "primeicons/primeicons.css";
+import AddToListMenu from "./AddToListMenuView";
 
 /*
  *A reusable function used for rendering a movie, is used in the movie list as well as the searchList and InspectMovie
  */
 const MovieView = (props) => {
-  const [showMovieLists, setShowMovieLists] = useState(false);
-  //const movieList = useSelector(getMovieList);
+  const [showAddToListMenu, setShowAddToListMenu] = useState(false);
+  const [addToListMenuPosition, setAddToListMenuPosition] = useState({ x: 0, y: 0 });
+
+  //Handle add to list menu onclick-based position, UI based logic so don't move into presenter!
+  const handleAddToListMenu = (event) => {
+    event.preventDefault();
+    console.log(event.clientX, event.clientY);
+    setAddToListMenuPosition({ x: event.clientX, y: event.clientY });
+  };
 
   //Selects a clicked movie for inspection
   const selectMovie = () => {
@@ -42,16 +50,6 @@ const MovieView = (props) => {
     //dispatch(removeMovieFromList(result));
   };
 
-  /*
-   *A button that removes the rendered movie from the movie list if it is in the list
-   *Or a button that adds the rendered movie to the movie list if it is not in the list
-   */
-  const addToListButton = () => {
-    if(props.movieList.find(movie => movie.imdbId === props.movie.imdbId))
-      return <button onClick={removeFromMovieList}>-</button>;
-    return <button onClick={addToMovieList}>+</button>;
-  };
-
   const toast = useRef(null);
 
   const items = [
@@ -61,9 +59,7 @@ const MovieView = (props) => {
       icon: "pi pi-plus",
       visible: !props.movieList.includes(props.movie),
       command: () => {
-        // addToMovieList();
-        // toast.current.show({severity:'success', summary: 'Added to list', detail:'Movie added to your list', life: 3000});
-        setShowMovieLists(prevState => !prevState);
+        setShowAddToListMenu(prevState => !prevState);
       }
     },
     {
@@ -91,8 +87,9 @@ const MovieView = (props) => {
       <div className="titleWrapper"><h3>{props.movie.title}</h3></div>
       <div>{props.movie.body}</div>
       <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
+      {/* <div>{renderStreamingServices(result)}</div> */}
     </NavLink> 
-      <SpeedDial model={items} direction="right" buttonStyle={{'background':'none', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> 
+      <SpeedDial onClick={event => handleAddToListMenu(event)} model={items} direction="right" buttonStyle={{'background':'none', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> 
       {/* style={{'position':'absolute', 'bottom':'0px', 'left': '0px', 'background-color':'pink'}} buttonStyle={{'height': '10px', 'width':'25px', 'position':'absolute', 'bottom':'0px', 'left': '0px'}} maskStyle={maskStyle} */}
       {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
       </>
@@ -103,15 +100,20 @@ const MovieView = (props) => {
       return (
         <div className="movieCardBack">
           <h3>Add to list:</h3>
-          <button onClick={() => setShowMovieLists(false)}>Close</button></div> 
+          <button onClick={() => setShowAddToListMenu(false)}>Close</button></div> 
         )
       }
 
 
 
 
+
+
+
   //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
   return (
+    <>
+    {showAddToListMenu ? <AddToListMenu x={addToListMenuPosition.x} y={addToListMenuPosition.y} setVisible={setShowAddToListMenu}/> : null}
     <div className="movieCard">
       <Toast ref={toast}/>
       {/* <NavLink onClick={selectMovie} to="/inspectMovie">
@@ -119,9 +121,10 @@ const MovieView = (props) => {
         <div>{props.movie.body}</div>
         <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
       </NavLink> */}
-      {showMovieLists ?  movieCardBack() : movieCardFront()}
-
+      {/* {showAddToListMenu ?  movieCardBack() : movieCardFront()} */}
+      {movieCardFront()}
     </div>
+    </>
   );
 };
 

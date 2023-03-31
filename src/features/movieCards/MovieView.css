@@ -31,10 +31,11 @@
 
   @media (min-width: 800px) {
   .movieCard:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
     transition: transform .5s;
     transition-delay: 0.3s;
     border: 1px solid rgba(128, 128, 128, 0.5);
+    z-index: 2;
   }
   }
 
@@ -84,6 +85,24 @@
     overflow: hidden;
     /* Om bild saknas eller är för liten kommer detta fylla tomrummet */
     background-color: var(--shadow-color);
+  }
+
+  .addToListMenu {
+    /* display: fixed;*/
+    position: fixed;
+    --menu-width: 200px;
+    --menu-height: 200px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    z-index: 10;
+    background-color: var(--background-color-main);
+    width: var(--menu-width);
+    height: var(--menu-height);
+    border: 1px solid var(--shadow-color);
+    display: fixed;
+    border-radius: 15px;
+
+
   }
   
   /* .movieCard button {
