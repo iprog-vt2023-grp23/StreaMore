@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { SpeedDial } from 'primereact/speeddial';
@@ -21,6 +21,7 @@ import "primeicons/primeicons.css";
  *A reusable function used for rendering a movie, is used in the movie list as well as the searchList and InspectMovie
  */
 const MovieView = (props) => {
+  const [showMovieLists, setShowMovieLists] = useState(false);
   //const movieList = useSelector(getMovieList);
 
   //Selects a clicked movie for inspection
@@ -60,8 +61,9 @@ const MovieView = (props) => {
       icon: "pi pi-plus",
       visible: !props.movieList.includes(props.movie),
       command: () => {
-        addToMovieList();
-        toast.current.show({severity:'success', summary: 'Added to list', detail:'Movie added to your list', life: 3000});
+        // addToMovieList();
+        // toast.current.show({severity:'success', summary: 'Added to list', detail:'Movie added to your list', life: 3000});
+        setShowMovieLists(prevState => !prevState);
       }
     },
     {
@@ -81,19 +83,44 @@ const MovieView = (props) => {
       }
     }
   ]
-  const maskStyle = {'background-color':'red', 'z-index':'1000'}
-  //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
-  return (
-    <div className="movieCard" key={props.key}>
-      <Toast ref={toast}/>
+
+  const movieCardFront = () => {
+    return (
+      <>
       <NavLink onClick={selectMovie} to="/inspectMovie">
-        <div className="titleWrapper"><h3>{props.movie.title}</h3></div>
-        <div>{props.movie.body}</div>
-        <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
-      </NavLink>
+      <div className="titleWrapper"><h3>{props.movie.title}</h3></div>
+      <div>{props.movie.body}</div>
+      <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
+    </NavLink> 
       <SpeedDial model={items} direction="right" buttonStyle={{'background':'none', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> 
       {/* style={{'position':'absolute', 'bottom':'0px', 'left': '0px', 'background-color':'pink'}} buttonStyle={{'height': '10px', 'width':'25px', 'position':'absolute', 'bottom':'0px', 'left': '0px'}} maskStyle={maskStyle} */}
       {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
+      </>
+    ) 
+    }
+
+    const movieCardBack = () => {
+      return (
+        <div className="movieCardBack">
+          <h3>Add to list:</h3>
+          <button onClick={() => setShowMovieLists(false)}>Close</button></div> 
+        )
+      }
+
+
+
+
+  //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
+  return (
+    <div className="movieCard">
+      <Toast ref={toast}/>
+      {/* <NavLink onClick={selectMovie} to="/inspectMovie">
+        <div className="titleWrapper"><h3>{props.movie.title}</h3></div>
+        <div>{props.movie.body}</div>
+        <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
+      </NavLink> */}
+      {showMovieLists ?  movieCardBack() : movieCardFront()}
+
     </div>
   );
 };

@@ -28,7 +28,7 @@ const SidebarView = (props) => {
   const navigationButtons = () => {
     if(props.loggedIn){
       return(
-        [<NavLink className="nav-link" to="/movieList" key="0">
+        [<NavLink className="nav-link" to="/myLists" key="0">
           My Lists
         </NavLink>,
         <NavLink className="nav-link" to="/userPage" key="1">

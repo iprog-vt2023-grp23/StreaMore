@@ -3,7 +3,7 @@ import "./MovieView.css"
 
 const MovieCardListView = (props) => {
   return (
-    <div className="renderCards">
+    <div className="movieCardList">
       {props.movies.map((movie) => (
         <MovieCardView
           key={movie.imdbId}
