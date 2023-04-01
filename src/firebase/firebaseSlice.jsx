@@ -48,6 +48,66 @@ export const signOutEvent = createAsyncThunk(
     signOut(auth);
   }
 );
+//New
+export const addMovieListFirebase = createAsyncThunk(
+  "firebase/addMovieList",
+  async (list, { getState }) => {
+    const state = getState();
+    set(ref(database, "movieLists/" + state.firebase.userId + "/" + list.name), list);
+    return list;
+  }
+);
+//New
+export const removeMovieListFirebase = createAsyncThunk(
+  "firebase/removeMovieList",
+  async (listName, { getState }) => {
+    const state = getState();
+    set(ref(database, "movieLists/" + state.firebase.userId + "/" + listName), null);
+    return listName;
+  }
+);
+//New
+export const addMovieToMovieListFirebase = createAsyncThunk(
+  "firebase/addMovieToMovieList",
+  async ({ listName, movie }, { getState }) => {
+    const state = getState();
+    set(
+      ref(
+        database,
+        "movieLists/" +
+          state.firebase.userId +
+          "/" +
+          listName +
+          "/movies/" +
+          movie.imdbId
+      ),
+      movie
+    );
+    return { listName, movie };
+  }
+);
+//New
+export const removeMovieFromMovieListFirebase = createAsyncThunk(
+  "firebase/removeMovieFromMovieList",
+  async ({ listName, movie }, { getState }) => {
+    const state = getState();
+    set(
+      ref(
+        database,
+        "movieLists/" +
+          state.firebase.userId +
+          "/" +
+          listName +
+          "/movies/" +
+          movie.imdbId
+      ),
+      null
+    );
+    return { listName, movie };
+  }
+);
+
+//Outdated
 export const addMovieFirebase = createAsyncThunk(
   "firebase/addMovie",
   async ({ movie }, { getState }) => {
@@ -59,6 +119,7 @@ export const addMovieFirebase = createAsyncThunk(
     return movie;
   }
 );
+//Outdated
 export const removeMovieFirebase = createAsyncThunk(
   "firebase/removeMovie",
   async (movie, { getState }) => {
@@ -106,6 +167,33 @@ const firebaseSlice = createSlice({
   },
   //Extrareducers for handeling the responses of the above functions
   extraReducers(builder) {
+    //New
+    builder.addCase(addMovieListFirebase.fulfilled, (state, action) => {
+      console.log("Added movie list", action.payload.name);
+    });
+    //New
+    builder.addCase(removeMovieListFirebase.fulfilled, (state, action) => {
+      console.log("Removed movie list", action.payload);
+    });
+    //New
+    builder.addCase(addMovieToMovieListFirebase.fulfilled, (state, action) => {
+      console.log(
+        "Added movie",
+        action.payload.movie.title,
+        "to movie list",
+        action.payload.listName
+      );
+    });
+    //New
+    builder.addCase(removeMovieFromMovieListFirebase.fulfilled, (state, action) => {
+      console.log(
+        "Removed movie",
+        action.payload.movie.title,
+        "from movie list",
+        action.payload.listName
+      );
+    });
+    //Outdated
     builder.addCase(addMovieFirebase.fulfilled, (state, action) => {
       console.log("Added movie", action.payload.title);
     });
@@ -121,6 +209,7 @@ const firebaseSlice = createSlice({
       console.log("Signed out");
       window.location.reload()
     });
+    //Outdated
     builder.addCase(removeMovieFirebase.fulfilled, (state, action) => {
       console.log("Removed movie", action.payload.title);
     });

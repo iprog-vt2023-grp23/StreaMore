@@ -23,14 +23,6 @@ import AddToListMenu from "./AddToListMenuView";
  */
 const MovieView = (props) => {
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
-  const [addToListMenuPosition, setAddToListMenuPosition] = useState({ x: 0, y: 0 });
-
-  //Handle add to list menu onclick-based position, UI based logic so don't move into presenter!
-  const handleAddToListMenu = (event) => {
-    event.preventDefault();
-    console.log(event.clientX, event.clientY);
-    setAddToListMenuPosition({ x: event.clientX, y: event.clientY });
-  };
 
   //Selects a clicked movie for inspection
   const selectMovie = () => {
@@ -89,7 +81,7 @@ const MovieView = (props) => {
       <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
       {/* <div>{renderStreamingServices(result)}</div> */}
     </NavLink> 
-      <SpeedDial onClick={event => handleAddToListMenu(event)} model={items} direction="right" buttonStyle={{'background':'none', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> 
+      <SpeedDial model={items} direction="right" buttonStyle={{'background':'none', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> 
       {/* style={{'position':'absolute', 'bottom':'0px', 'left': '0px', 'background-color':'pink'}} buttonStyle={{'height': '10px', 'width':'25px', 'position':'absolute', 'bottom':'0px', 'left': '0px'}} maskStyle={maskStyle} */}
       {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
       </>
@@ -113,7 +105,7 @@ const MovieView = (props) => {
   //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
   return (
     <>
-    {showAddToListMenu ? <AddToListMenu x={addToListMenuPosition.x} y={addToListMenuPosition.y} setVisible={setShowAddToListMenu}/> : null}
+    {showAddToListMenu ? <AddToListMenu setVisible={setShowAddToListMenu}/> : null}
     <div className="movieCard">
       <Toast ref={toast}/>
       {/* <NavLink onClick={selectMovie} to="/inspectMovie">
