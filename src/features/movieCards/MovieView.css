@@ -117,19 +117,6 @@
     left: 0;
     backdrop-filter: blur(3px);
     z-index: 9;
-    animation: background-blur 0.2s linear;
-
-  }
-
-  @keyframes background-blur {
-    0% {
-      backdrop-filter: blur(0px);
-
-    }
-    100% {
-      backdrop-filter: blur(3px);
-
-    }
   }
   
   /* .movieCard button {
