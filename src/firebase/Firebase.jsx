@@ -8,10 +8,10 @@ import {
   onChildRemoved,
 } from "firebase/database";
 //Old
-import {
-  addMovieToList,
-  removeMovieFromList,
-} from "/src/features/userLists/userListsSlice";
+// import {
+//   addMovieToList,
+//   removeMovieFromList,
+// } from "/src/features/userLists/userListsSlice";
 import {
   addStreamingService,
   removeStreamingService,
@@ -56,7 +56,7 @@ export default function Firebase() {
 
         const movieListsRef = ref(database, "movieLists/" + userId);
         onChildAdded(movieListsRef, (data) => {
-          dispatch(addNewMovieList(data.val()));
+          dispatch(addNewMovieList({movies: data.val(), name: data.key}));
         });
         onChildRemoved(movieListsRef, (data) => {
           dispatch(deleteMovieList({ name: data.key }));
@@ -73,16 +73,16 @@ export default function Firebase() {
 
 
         //Outdated movieList 
-        onChildAdded(ref(database, "movieList/" + userId), (data) => {
-          dispatch(addMovieToList(data.val()));
-        });
+        // onChildAdded(ref(database, "movieList/" + userId), (data) => {
+        //   dispatch(addMovieToList(data.val()));
+        // });
         onChildAdded(ref(database, "serviceList/" + userId), (data) => {
           dispatch(addStreamingService(data.val()));
         });
         //Outdated movieList 
-        onChildRemoved(ref(database, "movieList/" + userId), (data) => {
-          dispatch(removeMovieFromList(data.val()));
-        });
+        // onChildRemoved(ref(database, "movieList/" + userId), (data) => {
+        //   dispatch(removeMovieFromList(data.val()));
+        // });
         onChildRemoved(ref(database, "serviceList/" + userId), (data) => {
           dispatch(removeStreamingService(data.val()));
         });

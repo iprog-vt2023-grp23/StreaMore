@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 const initialState = {
   status: "idle",
   error: null,
-  movieLists: [{name: "My list", movies: []}],
+  movieLists: [],
 };
 
 /*
@@ -45,6 +45,7 @@ const movieListsSlice = createSlice({
         });
     },
     updateMovieLists(state, action) {
+        console.log("Updating movie lists")
       state.movieLists = action.payload;
     }
   },

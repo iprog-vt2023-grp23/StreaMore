@@ -54,15 +54,16 @@ const MovieView = (props) => {
         setShowAddToListMenu(prevState => !prevState);
       }
     },
-    {
-      label: "Remove",
-      icon: "pi pi-minus",
-      // visible: props.movieList.includes(props.movie),
-      command: () => {
-        removeFromMovieList();
-        toast.current.show({severity:'success', summary: 'Removed from list', detail:'Movie removed from your list', life: 3000});
-      }
-    },
+    // Utkommenterat för nu, behöver nog implementera andra sätt att ta bort filmer från listor
+    // {
+    //   label: "Remove",
+    //   icon: "pi pi-minus",
+    //   // visible: props.movieList.includes(props.movie),
+    //   command: () => {
+    //     removeFromMovieList();
+    //     toast.current.show({severity:'success', summary: 'Removed from list', detail:'Movie removed from your list', life: 3000});
+    //   }
+    // },
     {
       label: "Notify",
       icon: "pi pi-bell",
@@ -89,7 +90,13 @@ const MovieView = (props) => {
   //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
   return (
     <>
-    {showAddToListMenu ? <AddToListMenu setVisible={setShowAddToListMenu} movieLists={props.movieLists}/> : null}
+    {showAddToListMenu ? 
+    <AddToListMenu setVisible={setShowAddToListMenu} 
+                   onAddNewMovieList={props.onAddNewMovieList} 
+                   movieLists={props.movieLists} 
+                   onAddMovieToList={props.onAddMovieToList}
+                   movie={props.movie}
+    /> : null}
     <Toast ref={toast}/>
     <div className="movieCard">
       {movieCard()}

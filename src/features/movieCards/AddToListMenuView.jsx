@@ -1,19 +1,61 @@
-const AddToListMenu = (props) => {
+import "./AddToListMenuView.css";
+import { useState } from "react";
 
+import {ImCross, ImCheckmark} from "react-icons/im";
+
+const AddToListMenuView = (props) => {
+    const [newListName, setNewListName] = useState("");
+    const [showCreateNewList, setShowCreateNewList] = useState(false);
+
+    const onAddMovieToList = (listName) => {
+         props.onAddMovieToList(listName, props.movie);
+         props.setVisible(false);
+    }
+
+
+    const CreateNewList = () => {
+      return (<li className="createNewList">
+        
+        
+        <form>
+          {/* <label htmlFor="newListName">Name of new list:</label> */}
+          <input autoFocus type="text" id="newListName" value={newListName} onChange={(e) => setNewListName(e.target.value)}/>
+          <ImCheckmark className="checkmark" onClick={(e) => {
+            e.preventDefault();
+            props.onAddNewMovieList(newListName);
+            setShowCreateNewList(false);
+            setNewListName("");
+          }}/>
+          <ImCross className="cross" onClick={(e) => {
+            e.preventDefault();
+            setShowCreateNewList(false);
+            setNewListName("");
+          }}/>
+        </form>
+        
+        
+        </li>);
+    };
+
+
+    console.log(props)
     return (
     <div className="addToListMenuBackground">
+      {/* {showCreateNewList ? <CreateNewList/> : null} */}
       <div className="addToListMenu">
-        <span>Add to list:</span>
-        <ul>
+        <span className="addToListHeader">Add to list:</span>
+        <ul className="listList">
+        <li className="setCreateListButton" onClick={() => setShowCreateNewList(prevstate => !prevstate)}>Create list</li>
+
         {props.movieLists.map((list) => (
-            <li onClick={() => props.onAddMovieToList(list.name)} key={list.name}>{list.name}</li>
+            <li onClick={() => onAddMovieToList(list.name)} key={list.name}>{list.name}</li>
         ))}
-        <li>..new list</li>
+        {showCreateNewList ? <CreateNewList/> : null}
         </ul>
-        <button onClick={() => props.setVisible(false)}>Close</button>
+        <button className="close" onClick={() => props.setVisible(false)}>Close</button>
       </div>
     </div>
     )
   }
 
-export default AddToListMenu;
+export default AddToListMenuView;

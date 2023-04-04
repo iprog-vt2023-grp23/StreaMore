@@ -1,37 +1,40 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+//OUTDATED, CHECK MovieListsSlice.jsx for new implementation
 
-const initialState = {
-  status: "idle",
-  error: null,
-  movieList: [],
-};
 
-/*
-Implement a function that fetches movieList from server at login
-*/
+// import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
-const movieListSlice = createSlice({
-  name: "movieList",
-  initialState,
-  reducers: {
-    addMovieToList(state, action) {
-      state.movieList.push(action.payload);
-    },
-    removeMovieFromList(state, action) {
-      state.movieList = state.movieList.filter(
-        (movie) => movie.imdbId != action.payload.imdbId
-      );
-    },
-    updateMovieList(state, action) {
-      state.movieList = action.payload;
-    }
-  },
-});
+// const initialState = {
+//   status: "idle",
+//   error: null,
+//   movieList: [],
+// };
 
-//exports for getting the values in state
-export const getMovieList = (state) => state.movieList.movieList;
+// /*
+// Implement a function that fetches movieList from server at login
+// */
 
-//exports for getting the actions in the slice reducer
-export const { addMovieToList, removeMovieFromList, updateMovieList } = movieListSlice.actions;
+// const movieListSlice = createSlice({
+//   name: "movieList",
+//   initialState,
+//   reducers: {
+//     addMovieToList(state, action) {
+//       state.movieList.push(action.payload);
+//     },
+//     removeMovieFromList(state, action) {
+//       state.movieList = state.movieList.filter(
+//         (movie) => movie.imdbId != action.payload.imdbId
+//       );
+//     },
+//     updateMovieList(state, action) {
+//       state.movieList = action.payload;
+//     }
+//   },
+// });
 
-export default movieListSlice.reducer;
+// //exports for getting the values in state
+// export const getMovieList = (state) => state.movieList.movieList;
+
+// //exports for getting the actions in the slice reducer
+// export const { addMovieToList, removeMovieFromList, updateMovieList } = movieListSlice.actions;
+
+// export default movieListSlice.reducer;
