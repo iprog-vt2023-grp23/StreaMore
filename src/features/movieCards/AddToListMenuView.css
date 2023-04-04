@@ -77,16 +77,6 @@
     font: inherit;
     cursor: pointer;
     background-color: var(--border-focus-color);
-    /* --input-width: 200px;
-    --input-height: 30px;
-    top: calc(50% - (var(--input-height) / 2));
-    left: calc(50% - (var(--input-width) / 2));
-    backdrop-filter: blur(10px);
-    background-color: var(--background-color-secondary);
-    width: var(--input-width);
-    height: var(--input-height);
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px var(--shadow-color); */
 }
 .createNewList form {
     display: flex;
@@ -97,9 +87,4 @@
 
 .checkmark {
     font-size: 1.2rem;
-}
-
-
-.inputAcceptDeny {
-    width: fit-content;
 }

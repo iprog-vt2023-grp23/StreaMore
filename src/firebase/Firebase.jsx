@@ -56,15 +56,18 @@ export default function Firebase() {
 
         const movieListsRef = ref(database, "movieLists/" + userId);
         onChildAdded(movieListsRef, (data) => {
-          dispatch(addNewMovieList({movies: data.val(), name: data.key}));
+          console.log("called onChildAdded")
+          dispatch(addNewMovieList({name: data.key, movies: data.val().movies}));
+          // dispatch(addMovieToMovieList({name: data.key, movies: data.val().movies}));
         });
         onChildRemoved(movieListsRef, (data) => {
           dispatch(deleteMovieList({ name: data.key }));
         });
         onChildChanged(movieListsRef, (data) => {
+          console.log("called onChildChanged")
           const listName = data.key;
           const updatedList = data.val();
-          dispatch(updateMovieLists({ [listName]: updatedList }));
+          dispatch(updateMovieLists({ name: listName, movies: updatedList.movies }));
         });
 
 

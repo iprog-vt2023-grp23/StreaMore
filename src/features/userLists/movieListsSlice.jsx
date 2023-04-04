@@ -6,16 +6,6 @@ const initialState = {
   movieLists: [],
 };
 
-/*
-Implement a function that fetches movieList from server at login
-*/
-
-/*
-
-[{name: "My list", movies: [{imdbId: "tt123", title: "Movie title", poster: "poster url"}]}, ...]
-
-*/
-
 const movieListsSlice = createSlice({
   name: "movieLists",
   initialState,
@@ -31,7 +21,11 @@ const movieListsSlice = createSlice({
     addMovieToMovieList(state, action) { 
         state.movieLists = state.movieLists.map((list) => {
             if(list.name === action.payload.name) {
-                list.movies.push(action.payload.movie);
+                if(list.movies === undefined){
+                    list.movies = [];
+                }
+                console.log(action.payload);
+                list.movies.push(action.payload.movies);
             }
             return list;
         });
@@ -45,14 +39,33 @@ const movieListsSlice = createSlice({
         });
     },
     updateMovieLists(state, action) {
-        console.log("Updating movie lists")
-      state.movieLists = action.payload;
-    }
+        console.log("updateMovieLists", action.payload);
+        const { name, movies } = action.payload;
+        state.movieLists = state.movieLists.map((list) => {
+          if (list.name === name) {
+            list.movies = movies;
+          }
+          return list;
+        });
+      }
+
+    //   updateMovieLists(state, action) {
+    //     console.log("updateMovieLists", action.payload);
+    //     const listName = Object.keys(action.payload)[0];
+    //     const updatedList = action.payload[listName];
+      
+    //     state.movieLists = state.movieLists.map((list) => {
+    //       if (list.name === listName) {
+    //         list.movies = updatedList.movies;
+    //       }
+    //       return list;
+    //     });
+    //   }
   },
 });
 
 //exports for getting the values in state
-export const getMovieLists = (state) => state.movieLists.movieLists;
+export const getMovieLists = (state) =>  state.movieLists.movieLists;
 
 //exports for getting the actions in the slice reducer
 export const { addNewMovieList, deleteMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists} = movieListsSlice.actions;

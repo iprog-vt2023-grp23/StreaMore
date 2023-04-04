@@ -14,11 +14,8 @@ const AddToListMenuView = (props) => {
 
 
     const CreateNewList = () => {
-      return (<li className="createNewList">
-        
-        
+      return (<li className="createNewList">   
         <form>
-          {/* <label htmlFor="newListName">Name of new list:</label> */}
           <input autoFocus type="text" id="newListName" value={newListName} onChange={(e) => setNewListName(e.target.value)}/>
           <ImCheckmark className="checkmark" onClick={(e) => {
             e.preventDefault();

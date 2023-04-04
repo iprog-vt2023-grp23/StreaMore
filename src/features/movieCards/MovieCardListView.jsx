@@ -8,13 +8,10 @@ const MovieCardListView = (props) => {
         <MovieCardView
           key={movie.imdbId}
           onSelectMovie={props.selectMovie}
-          // onAddToMovieList={props.addMovieButton}
-          // onRemoveToMovieList={props.removeMovieButton}
           onAddNewMovieList={props.onAddNewMovieList}
           onAddMovieToList={props.onAddMovieToList}
           id={movie.imdbId}
           movie={movie}
-          // movieList={props.movieList}
           movieLists={props.movieLists}
         />
       ))}

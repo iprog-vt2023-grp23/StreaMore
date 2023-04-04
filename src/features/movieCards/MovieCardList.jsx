@@ -10,18 +10,11 @@ import {
 
 const MovieCardList = (props) => {
   const dispatch = useDispatch();
-  // const movieList = useSelector(getMovieList);
   const movieLists = useSelector(getMovieLists);
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
   };
-  // const addMovieButton = (movie) => {
-  //   dispatch(addMovieFirebase({ movie }));
-  // };
-  // const removeMovieButton = (movie) => {
-  //   dispatch(removeMovieFirebase({ movie }));
-  // };
   const onAddNewMovieList = (listName) => {
     dispatch(createMovieListFirebase( listName ));
   };
@@ -34,11 +27,8 @@ const MovieCardList = (props) => {
     <MovieCardListView
         movies={props.movies}
         selectMovie={selectMovie}
-        // addMovieButton={addMovieButton}
-        // removeMovieButton={removeMovieButton}
         onAddNewMovieList={onAddNewMovieList}
         onAddMovieToList={onAddMovieToList}
-        // movieList={movieList}
         movieLists={movieLists}
     />
   );
