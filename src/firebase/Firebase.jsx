@@ -64,7 +64,6 @@ export default function Firebase() {
           }
           console.log("list", movies)
           dispatch(addNewMovieList({name: data.key, movies: movies}));
-          // dispatch(addMovieToMovieList({name: data.key, movies: data.val().movies}));
         });
         onChildRemoved(movieListsRef, (data) => {
           dispatch(deleteMovieList({ name: data.key }));
