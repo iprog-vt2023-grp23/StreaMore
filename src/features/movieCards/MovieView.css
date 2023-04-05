@@ -1,0 +1,125 @@
+
+.movieCardList {
+  --card-width: 180px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 2fr));
+  grid-gap: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+
+.movieCard {
+  position: relative;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--card-width);
+  --card-height: 340px;
+  --img-height: 270px;
+  height: var(--card-height);
+  padding: 0px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 0px var(--shadow-color);
+  overflow: hidden;
+  background-color: var(--background-color-main);
+}
+  
+
+  @media (min-width: 800px) {
+  .movieCard:hover {
+    transform: scale(1.10);
+    transition: transform .5s;
+    transition-delay: 0.3s;
+    border: 1px solid var(--border-focus-color);
+    z-index: 2;
+  }
+  }
+
+  .titleWrapper {
+    width: calc(var(--card-width) - 10px);
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    height: calc(var(--card-height) - var(--img-height));
+  }
+
+  .movieCard h3 {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .movieCard img {
+    position: absolute;
+    top: 0;
+    /* height: auto; */
+    overflow: hidden;
+    /* max-width: 100%;
+    max-height: var(--img-height); */
+    border-radius: 15px 15px 0px 0px;
+    /* +1 för att dölja nån konstig visuell border bugg */
+    width: calc(var(--card-width)+1);
+    height: var(--img-height);
+    object-fit: cover;
+    z-index: 0;
+  }
+  
+  .imgWrapper {
+    position: absolute;
+    left: 0;
+    width: var(--card-width);
+    top: 0;
+    height: var(--img-height);
+    overflow: hidden;
+    /* Om bild saknas eller är för liten kommer detta fylla tomrummet */
+    background-color: var(--shadow-color);
+  }
+
+
+  /* .movieCard button {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 260px;
+    left: 10px;
+  } */
+  
+  /* .movieCard button:hover {
+    transform: scale(1.1);
+    transition: transform .5s;
+  } */
+  
+  .p-speeddial {
+    position: absolute;
+    top: calc(var(--img-height) - 35px);
+    left: 5px;
+  }
+  
+  .p-speeddial-item{
+    background: none;
+  }
+  
+  .p-speeddial-item > a{
+    height: 30px;
+    width: 30px;
+    background-color: none;
+  }
+  
+  /* .p-speeddial-button {
+    background-color: blue;
+    height: 10px;
+    width: 10px;
+  } */
+  
