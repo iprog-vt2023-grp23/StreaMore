@@ -22,7 +22,6 @@ const MovieCardList = (props) => {
     dispatch(addMovieToMovieListFirebase({ listName, movie }));
   };
 
-
   return (
     <MovieCardListView
         movies={props.movies}
