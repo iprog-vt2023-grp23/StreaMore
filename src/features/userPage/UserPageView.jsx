@@ -17,8 +17,8 @@ const UserPageView = (props) => {
 
     return (
       <button
-        onClick={hasService? props.onRemoveServiceButton : props.onAddServiceButton}
-        className={hasService? "OwnedService" : "NotOwnedService"}
+        onClick={(hasService)? props.onRemoveServiceButton : props.onAddServiceButton}
+        className={(hasService)? "OwnedService" : "NotOwnedService"}
         key={service}
         value={service}
       >
@@ -31,8 +31,8 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <button class="edituser" onClick={() => dispatch(toggleAboutFilmField())}>
-          Edit
+        <button class="edituser" onClick={props.onEdit}>
+          Edit {props.count}
         </button>
         <h2>User Profile</h2>
         <FaUserCircle size="80" />

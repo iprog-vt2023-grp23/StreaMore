@@ -5,6 +5,7 @@ import streamingServices from "./streamingServices";
 const initialState = {
   ownedServices: [],
   services: streamingServices,
+  counter: 0,
 };
 
 // TODO: Implement a function that fetches streamingServices and username from server at login
@@ -43,6 +44,10 @@ const userPageSlice = createSlice({
         (service) => service != action.payload
       );
     },
+    setCounter(state, action) {
+      state.counter = (state.counter+1);
+      console.log("counter changed to: ", state.counter);
+    }
   },
   //Extrareducer for when the services are fetched
   extraReducers(builder) {
@@ -51,10 +56,14 @@ const userPageSlice = createSlice({
     });
   },
 });
+
+//get pointer to state
 export const getStreamingServices = (state) => state.userPage.ownedServices;
 export const getAvailableServices = (state) => state.userPage.services;
 
-export const { addStreamingService, removeStreamingService, updateStreamingServices } =
+export const getCounter = (state) => state.userPage.counter;
+
+export const { addStreamingService, removeStreamingService, updateStreamingServices, setCounter } =
   userPageSlice.actions;
 
 export default userPageSlice.reducer;
