@@ -7,9 +7,7 @@ const initialState = {
   services: streamingServices,
 };
 
-/*
-Implement a function that fetches streamingServices and username from server at login
-*/
+// TODO: Implement a function that fetches streamingServices and username from server at login
 
 /*
  *Fetches all available streaming services that the api can handle.
