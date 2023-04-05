@@ -2,24 +2,14 @@ import Search from "./features/searchPage/SearchView";
 import UserPage from "./features/userPage/UserPage";
 import MovieList from "./features/movieList/MovieList";
 import InspectMoviePresenter from "./features/inspectMovie/InspectMoviePresenter";
-//import { fetchFromFirebase, pushToFirebase } from "./firebase/Firebase";
-import { useEffect } from "react";
-import { FirebaseContext } from './firebase/Firebase';
-import { useContext } from "react";
-import { useSelector } from "react-redux";
+import SignIn from "./features/signIn/SignIn";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./features/sidebar/Sidebar";
 
 function App() {
-  const { app, api } = useContext(FirebaseContext);
-  const movieList = useSelector(state => state.movieList.movieList);
-
-  useEffect(( ) => {
-      api.getMovieList();
-  }, [])
-
+ 
   return (
     <div className="App">
       {/*BrowserRouter is a wrapper class that handles navigation, it enables the use of NavLink*/}
@@ -30,6 +20,7 @@ function App() {
           <Route path="/movieList" element={<MovieList />} />
           <Route path="/userPage" element={<UserPage />} />
           <Route path="/inspectMovie" element={<InspectMoviePresenter />} />
+          <Route path="/signIn" element={<SignIn />} />
         </Routes>
         {/*Sidebar is outside of the Routes since it will always be visible*/}
         <Sidebar />

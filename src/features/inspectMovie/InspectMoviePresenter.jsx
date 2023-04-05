@@ -27,7 +27,6 @@ const InspectMoviePresenter = () => {
   };
 
   //If user has not clicked a movie/reloaded the page only a back button will be shown (untill persistence is done)
-  console.log(selectedMovie);
   if (selectedMovie)
     return (
       <div className="Search">

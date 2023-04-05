@@ -56,7 +56,6 @@ const SearchBar = () => {
   //Function for searching when the enter key is pressed down
   function keyDown(e) {
     if (e.key === "Enter") {
-      console.log("clicked enter button");
       e.preventDefault(); //Dont reload the page
       search();
     }
@@ -68,6 +67,9 @@ const SearchBar = () => {
       {country}
     </option>
   ));
+
+  
+  
 
   return (
     <SearchBarView

@@ -1,11 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { sourceUrl, options } from "../../ApiKey";
+import streamingServices from "./streamingServices";
 
 const initialState = {
-  userName: "Gabriel",
-  getUserTest: null, //added getUser to try and find email data
-  streamingServices: ["netflix"],
-  services: [],
+  ownedServices: [],
+  services: streamingServices,
 };
 
 // TODO: Implement a function that fetches streamingServices and username from server at login
@@ -13,20 +12,18 @@ const initialState = {
 /*
  *Fetches all available streaming services that the api can handle.
  *Might be better to simply have a predetermined list to avoid extra api call.
+ *EDIT Currently not used, instead streamingServices is used
  */
 export const getServices = createAsyncThunk(
   "userPage/getServices",
   async () => {
     const url = sourceUrl.concat("v2/services");
-
-    console.log("url", url);
     const response = await fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
         return json;
       })
       .catch((err) => console.error("error:" + err));
-    console.log("getServices", response);
     return response;
   }
 );
@@ -35,18 +32,14 @@ const userPageSlice = createSlice({
   name: "userPage",
   initialState,
   reducers: {
-    setUserName(state, action) {
-      state.userName = action.payload;
-    },
-    setUserEmailAdress(state, action) {
-      //TODO: I currently have no idea how to obtain any email adress, maybe needs to be added to database first /Michael
-      state.userName = action.payload;
-    },
     addStreamingService(state, action) {
-      state.streamingServices.push(action.payload);
+      state.ownedServices.push(action.payload);
+    },
+    updateStreamingServices(state, action) {
+      state.ownedServices = action.payload;
     },
     removeStreamingService(state, action) {
-      state.streamingServices = state.streamingServices.filter(
+      state.ownedServices = state.ownedServices.filter(
         (service) => service != action.payload
       );
     },
@@ -58,13 +51,10 @@ const userPageSlice = createSlice({
     });
   },
 });
-
-export const getUserName = (state) => state.userPage.userName;
-export const getUserEmailAdress = (state) => state.userPage.userName; //TODO: edit here to something like userPage.email once it exists
-export const getStreamingServices = (state) => state.userPage.streamingServices;
+export const getStreamingServices = (state) => state.userPage.ownedServices;
 export const getAvailableServices = (state) => state.userPage.services;
 
-export const { setUserName, addStreamingService, removeStreamingService } =
+export const { addStreamingService, removeStreamingService, updateStreamingServices } =
   userPageSlice.actions;
 
 export default userPageSlice.reducer;

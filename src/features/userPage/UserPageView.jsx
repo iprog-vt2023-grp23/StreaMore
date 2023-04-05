@@ -30,7 +30,7 @@ const UserPageView = (props) => {
     <div>
         <p>I am a user :)</p>
         <p>profile picture goes here</p>
-        <p>my name is: {props.userName}</p>
+        <p>my name is: {props.username}</p>
         <p>my email is: {props.userEmail}</p>
         <p>I have these services:</p>
         {renderStreamingServices}
