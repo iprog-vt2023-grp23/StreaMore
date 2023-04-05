@@ -70,10 +70,11 @@ export default function Firebase() {
           dispatch(deleteMovieList({ name: data.key }));
         });
         onChildChanged(movieListsRef, (data) => {
-          console.log("called onChildChanged")
+          console.log("called onChildChanged", data.val())
           const listName = data.key;
-          const updatedList = data.val();
-          dispatch(updateMovieLists({ name: listName, movies: updatedList.movies }));
+          const updatedList = data.val().movies;
+          const array = Object.values(updatedList)
+          dispatch(updateMovieLists({ name: listName, movies: array }));
         });
 
 

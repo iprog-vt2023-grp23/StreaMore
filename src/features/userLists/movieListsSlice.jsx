@@ -4,6 +4,7 @@ const initialState = {
   status: "idle",
   error: null,
   movieLists: [],
+  selectedList: null,
 };
 
 const movieListsSlice = createSlice({
@@ -17,6 +18,9 @@ const movieListsSlice = createSlice({
         state.movieLists = state.movieLists.filter(
             (list) => list.name !== action.payload.name
         )
+    },
+    selectMovieList(state, action) {
+      state.selectedList = action.payload;
     },
     addMovieToMovieList(state, action) { 
         state.movieLists = state.movieLists.map((list) => {
@@ -66,8 +70,9 @@ const movieListsSlice = createSlice({
 
 //exports for getting the values in state
 export const getMovieLists = (state) =>  state.movieLists.movieLists;
+export const getSelectedList = (state) => state.movieLists.selectedList;
 
 //exports for getting the actions in the slice reducer
-export const { addNewMovieList, deleteMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists} = movieListsSlice.actions;
+export const { addNewMovieList, deleteMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists, selectMovieList} = movieListsSlice.actions;
 
 export default movieListsSlice.reducer;
