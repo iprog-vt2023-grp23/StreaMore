@@ -73,7 +73,8 @@
     background: none;
     color: inherit;
     border: none;
-    padding: 0;
+    padding: 0px;
+    margin: 0px;
     font: inherit;
     cursor: pointer;
     background-color: var(--border-focus-color);
@@ -83,6 +84,10 @@
     flex-direction: row;
     justify-content: space-between;
 
+}
+
+.createNewList li:hover {
+    background-color: red;
 }
 
 .checkmark {

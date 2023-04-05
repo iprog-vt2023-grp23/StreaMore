@@ -1,10 +1,18 @@
 import "./MyListsPage.css"
 import { useState } from "react";
 import MovieCardList from "../movieCards/MovieCardList";
-
+import {BsThreeDotsVertical} from "react-icons/bs"
 
 const MovieListView = (props) => {
+  console.log("props.movieLists:",props.movieLists)
   const [selectedList, setSelectedList] = useState("");
+  if(props.movieLists) {
+    if(props.movieLists.length > 0) {
+      if(selectedList === "") {
+        setSelectedList(props.movieLists[0])
+      }
+    }
+  }
 
 
   const renderSelectedList = () => {
@@ -18,21 +26,21 @@ const MovieListView = (props) => {
     }
   }
 
-
-
   return (
     <section className="MyListsPageView">
-      <h2>My Lists</h2>
+      <h2>{selectedList.name}</h2>
         <div className="listMenu">
           <ul>
             {props.movieLists.map((list) => (
-              <li key={list.name} onClick={() => setSelectedList(list)}>{list.name}</li>
+              <li key={list.name} className={selectedList.name === list.name ? "selectedListItem" : "listItem"} onClick={() => setSelectedList(list)}>
+                {list.name}
+                {/* <BsThreeDotsVertical className="listMenuIcon" /> */}
+              </li>
             ))}
           </ul>
         </div>
-        <div className="listContent">
-          <h3>{selectedList.name}</h3>
 
+        <div className="listContent">
           {selectedList !== "" && Array.isArray(selectedList.movies) ? (
             <MovieCardList movies={selectedList.movies} />
           ) : (

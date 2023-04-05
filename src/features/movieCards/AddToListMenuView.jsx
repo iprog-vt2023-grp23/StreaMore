@@ -1,9 +1,10 @@
-import "./AddToListMenuView.css";
+import "./AddToListMenu.css";
 import { useState } from "react";
 
 import {ImCross, ImCheckmark} from "react-icons/im";
 
 const AddToListMenuView = (props) => {
+    //UI component state, does not need to be in presenter
     const [newListName, setNewListName] = useState("");
     const [showCreateNewList, setShowCreateNewList] = useState(false);
 
@@ -12,9 +13,9 @@ const AddToListMenuView = (props) => {
          props.setVisible(false);
     }
 
-
-    const CreateNewList = () => {
-      return (<li className="createNewList">   
+    const createNewList = () => {
+      return (
+      <li className="createNewList">   
         <form>
           <input autoFocus type="text" id="newListName" value={newListName} onChange={(e) => setNewListName(e.target.value)}/>
           <ImCheckmark className="checkmark" onClick={(e) => {
@@ -29,16 +30,11 @@ const AddToListMenuView = (props) => {
             setNewListName("");
           }}/>
         </form>
-        
-        
-        </li>);
+      </li>
+      );
     };
-
-
-    console.log(props)
     return (
     <div className="addToListMenuBackground">
-      {/* {showCreateNewList ? <CreateNewList/> : null} */}
       <div className="addToListMenu">
         <span className="addToListHeader">Add to list:</span>
         <ul className="listList">
@@ -47,7 +43,7 @@ const AddToListMenuView = (props) => {
         {props.movieLists.map((list) => (
             <li onClick={() => onAddMovieToList(list.name)} key={list.name}>{list.name}</li>
         ))}
-        {showCreateNewList ? <CreateNewList/> : null}
+        {showCreateNewList ? createNewList() : null}
         </ul>
         <button className="close" onClick={() => props.setVisible(false)}>Close</button>
       </div>
