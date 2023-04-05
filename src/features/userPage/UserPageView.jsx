@@ -11,7 +11,6 @@ const UserPageView = (props) => {
   const renderStreamingServices = props.services.map((service) => {
     //If service is in streamingServices (the users owned services) it will be rendered with the css class OwnedService, giving it a red circle
     //The icons are fetched from StreamingButtons
-
     //console.log("service: ", service);
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
     var editing = false; //TODO: Make some switching mechanism for editing.
