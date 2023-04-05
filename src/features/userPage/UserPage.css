@@ -28,3 +28,34 @@
     border: 2px solid red;
     margin-right: 10px;
   }
+
+.userprofile {
+    text-align: center;
+}
+.edituser {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: -24px;
+}
+.email {
+    color:lightgray;
+    margin-top: -14px;
+    margin-bottom: 50px;
+}
+
+/*
+.NotOwnedService {
+    border-radius: 50%;
+    border: 2px solid gray;
+    padding: 5px;
+    font-size: 20px;
+}
+
+
+.OwnedService {
+    border-radius: 50%;
+    border: 2px solid red;
+    padding: 5px;
+    font-size: 20px;
+}
+*/
