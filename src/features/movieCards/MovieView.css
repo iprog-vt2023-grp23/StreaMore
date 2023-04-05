@@ -1,29 +1,41 @@
 
+.movieCardList {
+  --card-width: 180px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 2fr));
+  grid-gap: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+
 .movieCard {
-    position: relative;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* --card-width inherited from SearchList.css*/
-    width: var(--card-width);
-    --card-height: 340px;
-    --img-height: 270px;
-    height: var(--card-height);
-    padding: 0px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 10px 0px var(--shadow-color);
-    overflow: hidden;
-  }
+  position: relative;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--card-width);
+  --card-height: 340px;
+  --img-height: 270px;
+  height: var(--card-height);
+  padding: 0px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 0px var(--shadow-color);
+  overflow: hidden;
+  background-color: var(--background-color-main);
+}
   
 
   @media (min-width: 800px) {
   .movieCard:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
     transition: transform .5s;
     transition-delay: 0.3s;
-    border: 1px solid rgba(128, 128, 128, 0.5);
+    border: 1px solid var(--border-focus-color);
+    z-index: 2;
   }
   }
 
@@ -74,6 +86,7 @@
     /* Om bild saknas eller är för liten kommer detta fylla tomrummet */
     background-color: var(--shadow-color);
   }
+
   
   .p-speeddial {
     position: absolute;

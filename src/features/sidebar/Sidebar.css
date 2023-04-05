@@ -39,7 +39,7 @@
   /*Dessa variabler gör så att den keyframe jag gjort kommer animeras första gången komponenten renderas*/
   animation-name: rotate90;
   /*Dom flesta animationer behöver inte vara längre än typ 100ms, 50-80 funkar fint*/
-  animation-duration: 80ms;
+  animation-duration: 100ms;
   animation-timing-function: ease-in;
 }
 
@@ -54,7 +54,7 @@
   justify-content: top;
   background-color: var(--background-color-secondary);
   animation-name: fade-in-slide-in;
-  animation-duration: 80ms;
+  animation-duration: 100ms;
   animation-timing-function: ease-in;
 }
 

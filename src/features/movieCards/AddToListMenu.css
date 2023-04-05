@@ -1,0 +1,95 @@
+.addToListMenu {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    --menu-width: 250px;
+    --menu-height: 400px;
+    top: calc(50% - (var(--menu-height) / 2));
+    left: calc(50% - (var(--menu-width) / 2));
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    background-color: var(--background-color-main);
+    width: var(--menu-width);
+    height: var(--menu-height);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px var(--shadow-color);
+}
+
+.addToListHeader {
+    position: absolute;
+    top: 10px;
+    width: 78px;
+    left: calc(50% - (78px / 2));
+}
+
+.close {
+    position: absolute;
+    bottom: 10px;
+    width: 45px;
+    left: calc(50% - (45px / 2));
+    cursor: pointer;
+}
+
+
+.listList {
+    position: absolute;
+    top: 20px;
+    width: var(--menu-width);
+    height: calc(var(--menu-height) - 80px);
+    flex-direction: column;
+    align-items: left;
+    justify-content: top;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.listList li {
+    list-style-type: none;
+    padding: 5px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.listList li:hover {
+    background-color: var(--border-focus-color);
+}
+
+.setCreateListButton {
+    border-bottom: 1px solid var(--border-focus-color);
+}
+
+.addToListMenuBackground {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(3px);
+    z-index: 9;
+}
+
+.createNewList input {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    font: inherit;
+    cursor: pointer;
+    background-color: var(--border-focus-color);
+}
+.createNewList form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.createNewList li:hover {
+    background-color: red;
+}
+
+.checkmark {
+    font-size: 1.2rem;
+}

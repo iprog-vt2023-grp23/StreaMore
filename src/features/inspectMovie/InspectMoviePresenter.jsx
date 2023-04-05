@@ -6,7 +6,7 @@ import {
 } from "./inspectMovieSlice";
 import { useNavigate } from "react-router-dom";
 import InspectMovieView from "./InspectMovieView";
-import RenderMovies from "../movie/RenderMovies";
+import RenderMovies from "../movieCards/MovieCardListView";
 
 const InspectMoviePresenter = () => {
   const dispatch = useDispatch();
