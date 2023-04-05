@@ -1,7 +1,10 @@
 import iconMapping from "../uiComponents/StreamingButtons";
+import { FaUserCircle } from "react-icons/fa";
+import { SplitButton } from 'primereact/splitbutton';
 import "./UserPage.css";
 
 const UserPageView = (props) => {
+  console.log("props ", props);
   /*
    *Renders all services that are retrieved from the api
    */
@@ -9,7 +12,7 @@ const UserPageView = (props) => {
     //If service is in streamingServices (the users owned services) it will be rendered with the css class OwnedService, giving it a red circle
     //The icons are fetched from StreamingButtons
 
-    console.log("service: ", service);
+    //console.log("service: ", service);
     var hasService = props.streamingServices.find((ownedService) => ownedService === service);
 
     return (
@@ -24,18 +27,23 @@ const UserPageView = (props) => {
     );
   });
 
-  console.log("user: ", props.userEmail);
+  //console.log("user: ", props.userEmail);
 
-  return ( <div>
-    <div>
-        <p>I am a user :)</p>
-        <p>profile picture goes here</p>
-        <p>my name is: {props.username}</p>
-        <p>my email is: {props.userEmail}</p>
-        <p>I have these services:</p>
+  return (
+      <section className="userprofile">
+        <button class="edituser" onClick={() => dispatch(toggleAboutFilmField())}>
+          Edit
+        </button>
+        <h2>User Profile</h2>
+        <FaUserCircle size="80" />
+        <h3>{props.username}</h3>
+        <p class="email" >{props.username}@test.com</p>
+        <p> </p>
+        <h3>My services:</h3>
         {renderStreamingServices}
-      </div>
-    </div>)
+        <p></p>
+      </section>
+    )
 };
 
 export default UserPageView;

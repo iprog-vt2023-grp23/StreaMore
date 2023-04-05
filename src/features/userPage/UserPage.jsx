@@ -29,7 +29,6 @@ const UserPage = () => {
       streamingServices={ownedServices}
       services={services}
       username={username}
-      userEmail={userEmail}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
     />
