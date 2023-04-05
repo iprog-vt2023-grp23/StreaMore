@@ -15,14 +15,12 @@ const UserPageView = (props) => {
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
 
     let displayService = () => {
-      if(!props.isEdit) {
-        if(hasService) {
-          return "OwnedService";
-        }
-        else
-        {
-          return "NotOwnedService";
-        }
+      if(props.isEdit) {
+        return "ownedService";
+      }
+      else
+      {
+        return "unOwnedService";
       }
     }
 
@@ -32,6 +30,7 @@ const UserPageView = (props) => {
         className={displayService()}
         key={service}
         value={service}
+        disabled={props.isEdit}
       >
         {iconMapping(service)}
       </button>
@@ -42,12 +41,11 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <Button className="edituser" label="Edit" onClick={props.onToggleEdit} />
+        <Button className="edituser" label="Edit" onClick={props.onEdit} />
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         <h3>{props.username}</h3>
         <p className="email" >{props.username}@test.com</p>
-        <p> </p>
         <h3>My services: {props.isEdit} </h3>
         {renderStreamingServices}
         <p></p>
