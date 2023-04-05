@@ -26,11 +26,10 @@ const iconMapping = (serviceName) => {
     showtime: <SiShowtime size={size} />,
     starz: <SiStarz size={size} />,
   };
-  try {
+  if(serviceName in iconMap)
     return iconMap[serviceName];
-  } catch (err) {
-    return serviceName;
-  }
+  else
+    return false;
 };
 
 export default iconMapping;

@@ -1,1 +1,61 @@
 /*Todo*/
+.userPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .userPage > div {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 100%;
+  }
+
+  .unOwnedService {
+    border-radius: 20%;
+    border: 2px solid transparent;
+    margin-right: 10px;
+  }
+  
+
+  .ownedService {
+    border-radius: 20%;
+    border: 2px solid red;
+    margin-right: 10px;
+  }
+
+.userprofile {
+    text-align: center;
+}
+.edituser {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: -24px;
+}
+.email {
+    color:lightgray;
+    margin-top: -14px;
+    margin-bottom: 50px;
+}
+
+/*
+.NotOwnedService {
+    border-radius: 50%;
+    border: 2px solid gray;
+    padding: 5px;
+    font-size: 20px;
+}
+
+
+.OwnedService {
+    border-radius: 50%;
+    border: 2px solid red;
+    padding: 5px;
+    font-size: 20px;
+}
+*/

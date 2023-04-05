@@ -38,7 +38,7 @@ input[type="reset"] {
   cursor: pointer;
   outline: inherit;
 }
-
+/* kanske inte behövs i app.css? Använder i UserPage atm */
 .OwnedService {
   border-radius: 50%;
   border: 2px solid red;

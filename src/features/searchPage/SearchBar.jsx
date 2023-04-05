@@ -21,10 +21,15 @@ const SearchBar = () => {
   const keywordChanged = (e) => setKeyword(e.target.value);
   const countryChanged = (e) => {
     //Finds the two letter country code from the full country name (looks more wack than it is)
-    const toAdd = Object.keys(country_codes_array)
-      .find((key) => country_codes_array[key] === e.target.value)
-      .toLowerCase();
-    dispatch(setStateCountry(toAdd));
+    if (e.target.value) {
+      const toAdd = Object.keys(country_codes_array)
+        .find((key) => country_codes_array[key] === e.target.value['name'])
+        .toLowerCase();
+      dispatch(setStateCountry(toAdd));
+    }
+    else {
+      dispatch(setStateCountry(""));
+    }
   };
 
   //Function for the search button
