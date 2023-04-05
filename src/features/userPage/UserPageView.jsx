@@ -14,15 +14,16 @@ const UserPageView = (props) => {
 
     //console.log("service: ", service);
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
-    var editing = false; //TODO: Make some switching mechanism for editing.
 
     let displayService = () => {
-      if(hasService) {
-        return "OwnedService";
-      }
-      else
-      {
-        return "NotOwnedService";
+      if(!props.isEdit) {
+        if(hasService) {
+          return "OwnedService";
+        }
+        else
+        {
+          return "NotOwnedService";
+        }
       }
     }
 
@@ -42,13 +43,13 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <Button className="edituser" label="Edit" onClick />
+        <Button className="edituser" label="Edit" onClick={props.onToggleEdit} />
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         <h3>{props.username}</h3>
-        <p class="email" >{props.username}@test.com</p>
+        <p className="email" >{props.username}@test.com</p>
         <p> </p>
-        <h3>My services:</h3>
+        <h3>My services: {props.isEdit} </h3>
         {renderStreamingServices}
         <p></p>
       </section>
