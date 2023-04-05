@@ -1,6 +1,6 @@
 import iconMapping from "../uiComponents/StreamingButtons";
 import { FaUserCircle } from "react-icons/fa";
-import { SplitButton } from 'primereact/splitbutton';
+import { Button } from 'primereact/button';
 import "./UserPage.css";
 
 const UserPageView = (props) => {
@@ -13,12 +13,23 @@ const UserPageView = (props) => {
     //The icons are fetched from StreamingButtons
 
     //console.log("service: ", service);
-    var hasService = props.streamingServices.find((ownedService) => ownedService === service);
+    const hasService = props.streamingServices.find((ownedService) => ownedService === service);
+    var editing = false; //TODO: Make some switching mechanism for editing.
+
+    let displayService = () => {
+      if(hasService) {
+        return "OwnedService";
+      }
+      else
+      {
+        return "NotOwnedService";
+      }
+    }
 
     return (
       <button
         onClick={hasService? props.onRemoveServiceButton : props.onAddServiceButton}
-        className={hasService? "OwnedService" : "NotOwnedService"}
+        className={displayService()}
         key={service}
         value={service}
       >
@@ -31,9 +42,7 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <button class="edituser" onClick={() => dispatch(toggleAboutFilmField())}>
-          Edit
-        </button>
+        <Button className="edituser" label="Edit" onClick />
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         <h3>{props.username}</h3>
