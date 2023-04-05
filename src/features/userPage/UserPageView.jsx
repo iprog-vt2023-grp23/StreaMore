@@ -1,4 +1,5 @@
 import iconMapping from "../uiComponents/StreamingButtons";
+import "./UserPage.css"
 
 const UserPageView = (props) => {
   /*
@@ -8,12 +9,12 @@ const UserPageView = (props) => {
     //If service is in streamingServices (the users owned services) it will be rendered with the css class OwnedService, giving it a red circle
     //The icons are fetched from StreamingButtons
     if (
-      props.streamingServices.find((ownedService) => ownedService === service)
+      props.streamingServices.find((ownedService) => ownedService === service) && iconMapping(service)
     ) {
       return (
         <button
           onClick={props.onRemoveServiceButton}
-          className="OwnedService"
+          className="ownedService"
           key={service}
           value={service}
         >
@@ -24,6 +25,7 @@ const UserPageView = (props) => {
       return (
         <button
           onClick={props.onAddServiceButton}
+          className="unOwnedService"
           key={service}
           value={service}
         >
@@ -33,10 +35,9 @@ const UserPageView = (props) => {
   });
 
   return (
-    <div>
-      I am a user :) and my name is {props.username}
+    <div className="userPage">
+      <h3>Welcome {props.username} select the services that you own</h3>
       <div>
-        I have these services:
         {renderStreamingServices}
       </div>
     </div>
