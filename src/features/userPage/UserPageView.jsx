@@ -30,7 +30,6 @@ const UserPageView = (props) => {
 
     //for changing which services can be edited in edit mode
     let editService = () => {
-      console.log("testclick1");
       if(props.isEdit) {
         if(hasService) {
           return props.onRemoveServiceButton;
