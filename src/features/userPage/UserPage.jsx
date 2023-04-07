@@ -26,7 +26,6 @@ const UserPage = () => {
   };
   const doEdit = (e) => {
     dispatch(toggleEdit(e.currentTarget.value));
-    console.log("toggleEdit: ", editmode);
   }
 
   return (
