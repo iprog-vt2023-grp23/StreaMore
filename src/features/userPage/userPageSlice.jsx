@@ -46,7 +46,6 @@ const userPageSlice = createSlice({
     },
     toggleEdit(state, action) {
       state.editing = !state.editing;
-      console.log("editing toggled", editing);
     },
   },
   //Extrareducer for when the services are fetched
@@ -58,6 +57,7 @@ const userPageSlice = createSlice({
 });
 export const getStreamingServices = (state) => state.userPage.ownedServices;
 export const getAvailableServices = (state) => state.userPage.services;
+export const getEditmode = (state) => state.userPage.editing;
 
 export const { addStreamingService, removeStreamingService, updateStreamingServices, toggleEdit } =
   userPageSlice.actions;

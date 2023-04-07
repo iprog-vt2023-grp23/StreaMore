@@ -14,21 +14,34 @@ const UserPageView = (props) => {
     //console.log("service: ", service);
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
 
+    //for changing how and which services can be seen in edit mode
     let displayService = () => {
-      if(!props.isEdit) {
+      if(props.isEdit) {
         if(hasService) {
-          return "OwnedService";
+          return "ownedService";
         }
-        else
-        {
-          return "NotOwnedService";
+        return "unOwnedService";
+      }
+      if(hasService) {
+        return "unOwnedService";
+      }
+      return "hiddenService";
+    }
+
+    //for changing which services can be edited in edit mode
+    let editService = () => {
+      console.log("testclick1");
+      if(props.isEdit) {
+        if(hasService) {
+          return props.onRemoveServiceButton;
         }
+        return props.onAddServiceButton;
       }
     }
 
     return (
       <button
-        onClick={hasService? props.onRemoveServiceButton : props.onAddServiceButton}
+        onClick={editService()}
         className={displayService()}
         key={service}
         value={service}
@@ -42,12 +55,11 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <Button className="edituser" label="Edit" onClick={props.onToggleEdit} />
+        <Button className="edituser" label={props.isEdit? "Done" : "Edit"} onClick={props.onEdit} size="small" outlined/>
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         <h3>{props.username}</h3>
         <p className="email" >{props.username}@test.com</p>
-        <p> </p>
         <h3>My services: {props.isEdit} </h3>
         {renderStreamingServices}
         <p></p>

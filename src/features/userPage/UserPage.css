@@ -22,10 +22,13 @@
     margin-right: 10px;
   }
   
+  .hiddenService {
+    display: none;
+  }
 
   .ownedService {
     border-radius: 20%;
-    border: 2px solid red;
+    border: 2px solid green;
     margin-right: 10px;
   }
 
