@@ -14,6 +14,7 @@ const UserPageView = (props) => {
     //console.log("service: ", service);
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
 
+    //for changing how and which services can be seen in edit mode
     let displayService = () => {
       if(props.isEdit) {
         if(hasService) {
@@ -27,6 +28,7 @@ const UserPageView = (props) => {
       return "hiddenService";
     }
 
+    //for changing which services can be edited in edit mode
     let editService = () => {
       console.log("testclick1");
       if(props.isEdit) {
