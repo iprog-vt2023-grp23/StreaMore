@@ -5,6 +5,7 @@ import streamingServices from "./streamingServices";
 const initialState = {
   ownedServices: [],
   services: streamingServices,
+  editing: false,
 };
 
 // TODO: Implement a function that fetches streamingServices and username from server at login
@@ -42,7 +43,10 @@ const userPageSlice = createSlice({
       state.ownedServices = state.ownedServices.filter(
         (service) => service != action.payload
       );
-    }
+    },
+    toggleEdit(state, action) {
+      state.editing = !state.editing;
+    },
   },
   //Extrareducer for when the services are fetched
   extraReducers(builder) {
@@ -53,8 +57,9 @@ const userPageSlice = createSlice({
 });
 export const getStreamingServices = (state) => state.userPage.ownedServices;
 export const getAvailableServices = (state) => state.userPage.services;
+export const getEditmode = (state) => state.userPage.editing;
 
-export const { addStreamingService, removeStreamingService, updateStreamingServices } =
+export const { addStreamingService, removeStreamingService, updateStreamingServices, toggleEdit } =
   userPageSlice.actions;
 
 export default userPageSlice.reducer;

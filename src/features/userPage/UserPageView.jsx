@@ -16,21 +16,33 @@ const UserPageView = (props) => {
 
     let displayService = () => {
       if(props.isEdit) {
-        return "ownedService";
-      }
-      else
-      {
+        if(hasService) {
+          return "ownedService";
+        }
         return "unOwnedService";
+      }
+      if(hasService) {
+        return "unOwnedService";
+      }
+      return "hiddenService";
+    }
+
+    let editService = () => {
+      console.log("testclick1");
+      if(props.isEdit) {
+        if(hasService) {
+          return props.onRemoveServiceButton;
+        }
+        return props.onAddServiceButton;
       }
     }
 
     return (
       <button
-        onClick={hasService? props.onRemoveServiceButton : props.onAddServiceButton}
+        onClick={editService()}
         className={displayService()}
         key={service}
         value={service}
-        disabled={props.isEdit}
       >
         {iconMapping(service)}
       </button>
@@ -41,7 +53,7 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <Button className="edituser" label="Edit" onClick={props.onEdit} />
+        <Button className="edituser" label={props.isEdit? "Done" : "Edit"} onClick={props.onEdit} size="small" outlined/>
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         <h3>{props.username}</h3>

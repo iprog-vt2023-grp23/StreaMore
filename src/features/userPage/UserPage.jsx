@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getStreamingServices, getAvailableServices } from "./userPageSlice";
+import { getStreamingServices, getAvailableServices, getEditmode, toggleEdit } from "./userPageSlice";
 import UserPageView from "./UserPageView";
 import {
   getUsername,
@@ -11,6 +11,7 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const username = useSelector(getUsername);
   const ownedServices = useSelector(getStreamingServices);
+  const editmode = useSelector(getEditmode);
 
   const services = useSelector(getAvailableServices);
 
@@ -23,19 +24,17 @@ const UserPage = () => {
   const addService = (e) => {
     dispatch(addServiceFirebase(e.currentTarget.value));
   };
-
-  let isEdit = false;
   const doEdit = (e) => {
-    isEdit = !isEdit;
-    console.log("doTogglEdit triggered", isEdit);
-  };
+    dispatch(toggleEdit(e.currentTarget.value));
+    console.log("toggleEdit: ", editmode);
+  }
 
   return (
     <UserPageView
       streamingServices={ownedServices}
       services={services}
       username={username}
-      isEdit={isEdit}
+      isEdit={editmode}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
       onEdit={doEdit}

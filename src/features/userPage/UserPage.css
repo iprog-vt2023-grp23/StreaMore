@@ -18,14 +18,12 @@
 
   .unOwnedService {
     border-radius: 20%;
-    border: 2px solid red;
+    border: 2px solid transparent;
     margin-right: 10px;
   }
-
-  .test3 {
-    border-radius: 20%;
-    border: 2px solid yellow;
-    margin-right: 10px;
+  
+  .hiddenService {
+    display: none;
   }
 
   .ownedService {
