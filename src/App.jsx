@@ -1,6 +1,6 @@
 import Search from "./features/searchPage/SearchView";
 import UserPage from "./features/userPage/UserPage";
-import MovieList from "./features/movieList/MovieList";
+import MovieList from "./features/userLists/MyListsPage";
 import InspectMoviePresenter from "./features/inspectMovie/InspectMoviePresenter";
 import SignIn from "./features/signIn/SignIn";
 
@@ -17,7 +17,7 @@ function App() {
         {/*Routes contains all Route elements*/}
         <Routes>
           <Route path="/" element={<Search />} />
-          <Route path="/movieList" element={<MovieList />} />
+          <Route path="/myLists" element={<MovieList />} />
           <Route path="/userPage" element={<UserPage />} />
           <Route path="/inspectMovie" element={<InspectMoviePresenter />} />
           <Route path="/signIn" element={<SignIn />} />

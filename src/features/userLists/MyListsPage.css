@@ -1,0 +1,70 @@
+.MyListsPageView {
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.MyListsPageView > h2 {
+    margin-bottom: 0px;
+
+}
+
+.listMenu, .listMenu ul {
+    max-width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.listMenu ul {
+    padding: 0;
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.listMenu ul::-webkit-scrollbar {
+    display: none;
+}
+
+.listMenu li {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin-inline: 5px;
+    cursor: pointer;
+    padding: 10px;
+    /* padding-right: 25px; */
+    position: relative;
+}
+
+.listItem {
+    background-color: var(--background-color-secondary);
+    box-shadow: 0 0 5px 0 var(--shadow-color);
+
+}
+
+.listMenuIcon {
+    position: absolute;
+    font-size: 1.1rem;
+    right: 5px;
+    top: 13px;
+}
+
+.selectedListItem {
+    background-color: var(--border-focus-color);
+    box-shadow: 0 0 10px 0px rgb(42, 42, 42);
+}
+
+.listContent {
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
