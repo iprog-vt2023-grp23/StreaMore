@@ -14,7 +14,7 @@ This project is built using the following API:
 - [Rapid API: Streaming Availability](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)
 
 We will also implement an email API to notify users of new movie releases:
-- [Rapid API: SendGrid API] https://rapidapi.com/sendgrid/api/sendgrid
+- [Rapid API: SendGrid API](https://rapidapi.com/sendgrid/api/sendgrid)
 
 ## Project Status
 We've currently implemented most of the basic functionalities that were planned for the website, though some bugs and bad CSS remain to work on. 
