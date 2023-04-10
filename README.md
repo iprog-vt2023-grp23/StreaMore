@@ -28,7 +28,7 @@ We've currently implemented most of the basic functionalities that were planned 
 ### We plan to:
 - Improve CSS to make everything look better and consistent across the webpage
 - Integrate some third party component relevant to our use case
-- Work on the file structure to reduce complexity, Presenter-View style (Eller är detta helt klart kanske?)
+- Work on the file structure to reduce complexity, Presenter-View style
 - Implement the use of an Email API to notify users when a movie they are tracking is released on their streaming services.
 
 ## File Structure:
@@ -48,8 +48,8 @@ The remaining files within `features/*` follow a similar pattern as above.
 
 We also have files which handle the interaction with Firebase.
 - `firebase/firebaseSlice.jsx` which is the slice for the user state, it also contains extra reducers for a set of functions following the syntax
-```const [name] createAsyncThunk(...)```...
-Vad gör builder och ovan funktioner?
+```const [name] createAsyncThunk(...)```. They are async thunks used to communicate with our firebase database. Each think has a extra reducer for handling the response recieved. 
+
 - `firebase/Firebase.jsx` has the same purpose as `firebaseModel.js` in the labs. It communicates with Firebase to update the realtime database, fetch data from it, and subscribe to these changes.
 
 The data model is located in `model/store.jsx`, which uses the Redux store functionality to essentially store all global data (the model), it combines all reducers discussed above into one model.
