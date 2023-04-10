@@ -13,6 +13,9 @@ Note: we are all working omni-role despite the meaning of the titles.
 This project is built using the following API: 
 - [Rapid API: Streaming Availability](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)
 
+We will also implement an email API to notify users of new movie releases:
+- [Rapid API: SendGrid API] https://rapidapi.com/sendgrid/api/sendgrid
+
 ## Project Status
 We've currently implemented most of the basic functionalities that were planned for the website, though some bugs and bad CSS remain to work on. 
 
@@ -26,6 +29,7 @@ We've currently implemented most of the basic functionalities that were planned 
 - Improve CSS to make everything look better and consistent across the webpage
 - Integrate some third party component relevant to our use case
 - Work on the file structure to reduce complexity, Presenter-View style (Eller är detta helt klart kanske?)
+- Implement the use of an Email API to notify users when a movie they are tracking is released on their streaming services.
 
 ## File Structure:
 The file structure if primarily based on the lab file structure, with some changes due to the use of React Redux. 
