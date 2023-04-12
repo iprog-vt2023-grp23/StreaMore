@@ -1,11 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getStreamingServices, getAvailableServices, getEditmode, toggleEdit } from "./userPageSlice";
+import { getUsername, getStreamingServices, getAvailableServices, getEditmode, toggleEdit, addStreamingService, removeStreamingService } from "./userPageSlice";
 import UserPageView from "./UserPageView";
-import {
-  getUsername,
-  addServiceFirebase,
-  removeServiceFirebase,
-} from "../../firebase/firebaseSlice";
+
 
 const UserPage = () => {
   const dispatch = useDispatch();
@@ -19,10 +15,10 @@ const UserPage = () => {
    *Unselects or selects streaming services by dispatching them to the Slice
    */
   const removeService = (e) => {
-    dispatch(removeServiceFirebase(e.currentTarget.value));
+    dispatch(removeStreamingService(e.currentTarget.value));
   };
   const addService = (e) => {
-    dispatch(addServiceFirebase(e.currentTarget.value));
+    dispatch(addStreamingService(e.currentTarget.value));
   };
   const doEdit = (e) => {
     dispatch(toggleEdit(e.currentTarget.value));

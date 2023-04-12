@@ -12,7 +12,7 @@ const movieListsSlice = createSlice({
   initialState,
   reducers: {
     addNewMovieList(state, action) {
-        state.movieLists.push(action.payload);
+      state.movieLists.push({name: action.payload, movies: []});
     },
     deleteMovieList(state, action) {
         state.movieLists = state.movieLists.filter(
@@ -24,12 +24,11 @@ const movieListsSlice = createSlice({
     },
     addMovieToMovieList(state, action) { 
         state.movieLists = state.movieLists.map((list) => {
-            if(list.name === action.payload.name) {
+            if(list.name === action.payload.listName) {
                 if(list.movies === undefined){
                     list.movies = [];
                 }
-                console.log(action.payload);
-                list.movies.push(action.payload.movies);
+                list.movies.push(action.payload.movie);
             }
             return list;
         });
@@ -43,14 +42,15 @@ const movieListsSlice = createSlice({
         });
     },
     updateMovieLists(state, action) {
-        console.log("updateMovieLists", action.payload);
-        const { name, movies } = action.payload;
-        state.movieLists = state.movieLists.map((list) => {
-          if (list.name === name) {
-            list.movies = movies;
+        const lists = Object.values(action.payload).map((list) => {
+          if(list.movies){
+            return {name: list.name, movies: Object.values(list.movies)}
           }
-          return list;
-        });
+          else
+            return {name:list.name, movies: []}
+          
+        })
+        state.movieLists = lists;
       }
 
     //   updateMovieLists(state, action) {

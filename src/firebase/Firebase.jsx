@@ -2,40 +2,53 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   getDatabase,
-  onChildAdded,
-  onChildChanged,
+  onValue,
   ref,
-  onChildRemoved,
+  set,
 } from "firebase/database";
-//Old
-// import {
-//   addMovieToList,
-//   removeMovieFromList,
-// } from "/src/features/userLists/userListsSlice";
 import {
-  addStreamingService,
-  removeStreamingService,
+  setUsername,
+  setUserId,
+  updateStreamingServiceList
 } from "../features/userPage/userPageSlice";
 //New
 import {
   addNewMovieList,
-  deleteMovieList,
   addMovieToMovieList,
-  removeMovieFromMovieList,
-  updateMovieLists
 } from "/src/features/userLists/movieListsSlice";
-
-
-
-
-import { setUsername, setUserId } from "./firebaseSlice";
 import FirebaseApp from "/src/FirebaseConfig.jsx";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
+
+
+import { listenerMiddleware } from "../model/store";
+import { updateMovieLists } from "../features/userLists/movieListsSlice";
+
+
 
 const auth = getAuth(FirebaseApp);
 const database = getDatabase();
 
 export default function Firebase() {
+
+
+  listenerMiddleware.startListening({
+    actionCreator: addMovieToMovieList,
+    effect: async(action, listenerApi) => {
+      console.log("Movie added", action.payload)
+      const {listName, movie} = action.payload;
+      const state = listenerApi.getState();
+      set(ref(database, "movieLists/" + state.userPage.userId +"/" + listName +"/movies/" + movie.imdbId), movie);
+    },
+  })
+  listenerMiddleware.startListening({
+    actionCreator: addNewMovieList,
+    effect: async(action, listenerApi) => {
+      const state = listenerApi.getState();
+      console.log("Movie list added", action.payload, state.userPage.userId)
+      set(ref(database, "movieLists/" + state.userPage.userId + "/" + action.payload), {name: action.payload, movies: []})
+    }
+  })
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,54 +60,41 @@ export default function Firebase() {
          *Username and userId are set
          *Firebase listeners are added which listens to changes in the database
          */
-        const userId = user.uid;
+        const newuserId = user.uid;
         const username = user.displayName;
-        console.log("auth state", userId);
+        console.log("auth state", newuserId);
         console.log("Username", username);
         if (username) dispatch(setUsername(username));
-        dispatch(setUserId(userId));
+        dispatch(setUserId(newuserId));
 
-        const movieListsRef = ref(database, "movieLists/" + userId);
-        onChildAdded(movieListsRef, (data) => {
-          console.log("called onChildAdded", data.val())
-          const list = data.val();
-          let movies = undefined;
-          if(list.movies){
-            movies = Object.values(list.movies);
-          }
-          console.log("list", movies)
-          dispatch(addNewMovieList({name: data.key, movies: movies}));
+        onValue(ref(database, "movieLists/" + newuserId), (data) => {
+          console.log("Movie list fetched", data.val())
+          const lists = data.val();
+          dispatch(updateMovieLists(lists));
+        }, {
+          onlyOnce: true
         });
-        onChildRemoved(movieListsRef, (data) => {
-          dispatch(deleteMovieList({ name: data.key }));
-        });
-        onChildChanged(movieListsRef, (data) => {
-          console.log("called onChildChanged", data.val())
-          const listName = data.key;
-          const updatedList = data.val().movies;
-          const array = Object.values(updatedList)
-          dispatch(updateMovieLists({ name: listName, movies: array }));
+        
+        onValue(ref(database, "serviceList/" + newuserId), (data) => {
+          console.log("Service list fetched", data.val())
+          const lists = data.val();
+          dispatch(updateStreamingServiceList(lists));
+        }, {
+          onlyOnce: true
         });
 
 
 
 
-
-
-        //Outdated movieList 
-        // onChildAdded(ref(database, "movieList/" + userId), (data) => {
-        //   dispatch(addMovieToList(data.val()));
-        // });
+/*
         onChildAdded(ref(database, "serviceList/" + userId), (data) => {
           dispatch(addStreamingService(data.val()));
         });
-        //Outdated movieList 
-        // onChildRemoved(ref(database, "movieList/" + userId), (data) => {
-        //   dispatch(removeMovieFromList(data.val()));
-        // });
+        
         onChildRemoved(ref(database, "serviceList/" + userId), (data) => {
           dispatch(removeStreamingService(data.val()));
         });
+        */
       } else {
         // User is signed out
         dispatch(setUserId(null));

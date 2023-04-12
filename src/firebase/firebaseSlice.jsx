@@ -49,15 +49,6 @@ export const signOutEvent = createAsyncThunk(
   }
 );
 //New
-export const createMovieListFirebase = createAsyncThunk(
-  "firebase/createMovieList",
-  async (name, { getState }) => {
-    const state = getState();
-    set(ref(database, "movieLists/" + state.firebase.userId + "/" + name), {name: name, movies: []});
-    return name;
-  }
-);
-//New
 export const removeMovieListFirebase = createAsyncThunk(
   "firebase/removeMovieList",
   async (listName, { getState }) => {
@@ -66,27 +57,7 @@ export const removeMovieListFirebase = createAsyncThunk(
     return listName;
   }
 );
-//New
-export const addMovieToMovieListFirebase = createAsyncThunk(
-  "firebase/addMovieToMovieList",
-  async ({ listName, movie }, { getState }) => {
-    const state = getState();
-    set(
-      ref(
-        database,
-        "movieLists/" +
-          state.firebase.userId +
-          "/" +
-          listName +
-          "/movies/" +
-          movie.imdbId
-      ),
-      movie
-    );
-    return { listName, movie };
-  }
-);
-//New
+
 export const removeMovieFromMovieListFirebase = createAsyncThunk(
   "firebase/removeMovieFromMovieList",
   async ({ listName, movie }, { getState }) => {
@@ -107,30 +78,6 @@ export const removeMovieFromMovieListFirebase = createAsyncThunk(
   }
 );
 
-//Outdated
-// export const addMovieFirebase = createAsyncThunk(
-//   "firebase/addMovie",
-//   async ({ movie }, { getState }) => {
-//     const state = getState();
-//     set(
-//       ref(database, "movieList/" + state.firebase.userId + "/" + movie.imdbId),
-//       movie
-//     );
-//     return movie;
-//   }
-// );
-//Outdated
-// export const removeMovieFirebase = createAsyncThunk(
-//   "firebase/removeMovie",
-//   async (movie, { getState }) => {
-//     const state = getState();
-//     set(
-//       ref(database, "movieList/" + state.firebase.userId + "/" + movie.imdbId),
-//       null
-//     );
-//     return movie;
-//   }
-// );
 export const addServiceFirebase = createAsyncThunk(
   "firebase/addService",
   async (service, { getState }) => {
@@ -168,21 +115,8 @@ const firebaseSlice = createSlice({
   //Extrareducers for handeling the responses of the above functions
   extraReducers(builder) {
     //New
-    builder.addCase(createMovieListFirebase.fulfilled, (state, action) => {
-      console.log("Created movie list", action.payload);
-    });
-    //New
     builder.addCase(removeMovieListFirebase.fulfilled, (state, action) => {
       console.log("Removed movie list", action.payload);
-    });
-    //New
-    builder.addCase(addMovieToMovieListFirebase.fulfilled, (state, action) => {
-      console.log(
-        "Added movie",
-        action.payload.movie.title,
-        "to movie list",
-        // action.payload.listName
-      );
     });
     //New
     builder.addCase(removeMovieFromMovieListFirebase.fulfilled, (state, action) => {

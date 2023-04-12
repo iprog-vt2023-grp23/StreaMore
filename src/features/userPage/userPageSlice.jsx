@@ -3,6 +3,8 @@ import { sourceUrl, options } from "../../ApiKey";
 import streamingServices from "./streamingServices";
 
 const initialState = {
+  username: null,
+  userId: null,
   ownedServices: [],
   services: streamingServices,
   editing: false,
@@ -33,6 +35,13 @@ const userPageSlice = createSlice({
   name: "userPage",
   initialState,
   reducers: {
+    setUsername(state, action) {
+      state.username = action.payload;
+    },
+    setUserId(state, action) {
+      state.userId = action.payload;
+      console.log("userID", action.payload)
+    },
     addStreamingService(state, action) {
       state.ownedServices.push(action.payload);
     },
@@ -47,6 +56,10 @@ const userPageSlice = createSlice({
     toggleEdit(state, action) {
       state.editing = !state.editing;
     },
+    updateStreamingServiceList(state, action) {
+      console.log(Object.keys(action.payload))
+      state.services = Object.keys(action.payload)
+    },
   },
   //Extrareducer for when the services are fetched
   extraReducers(builder) {
@@ -58,8 +71,10 @@ const userPageSlice = createSlice({
 export const getStreamingServices = (state) => state.userPage.ownedServices;
 export const getAvailableServices = (state) => state.userPage.services;
 export const getEditmode = (state) => state.userPage.editing;
+export const getUsername = (state) => state.userPage.username;
+export const getUserId = (state) => state.userPage.userId;
 
-export const { addStreamingService, removeStreamingService, updateStreamingServices, toggleEdit } =
+export const { updateStreamingServiceList, setUsername, setUserId, addStreamingService, removeStreamingService, updateStreamingServices, toggleEdit } =
   userPageSlice.actions;
 
 export default userPageSlice.reducer;

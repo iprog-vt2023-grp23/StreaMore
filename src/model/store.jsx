@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
 import searchReducer from "../features/searchPage/searchSlice";
 import sidebarReducer from "../features/sidebar/sidebarSlice";
 import userPageReducer from "../features/userPage/userPageSlice";
@@ -6,6 +6,8 @@ import userPageReducer from "../features/userPage/userPageSlice";
 import movieListsReducer from "../features/userLists/movieListsSlice";
 import selectedMovieReducer from "../features/inspectMovie/inspectMovieSlice";
 import firebaseReducer from "../firebase/firebaseSlice"
+
+export const listenerMiddleware = createListenerMiddleware();
 
 export const store = configureStore({
   reducer: {
@@ -17,4 +19,6 @@ export const store = configureStore({
     selectedMovie: selectedMovieReducer,
     firebase: firebaseReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 });
