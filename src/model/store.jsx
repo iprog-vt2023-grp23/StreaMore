@@ -3,7 +3,7 @@ import searchReducer from "../features/searchPage/searchSlice";
 import sidebarReducer from "../features/sidebar/sidebarSlice";
 import userPageReducer from "../features/userPage/userPageSlice";
 // import userListsReducer from "../features/userLists/userListsSlice";
-import movieListsReducer from "../features/userLists/movieListsSlice";
+import movieListsReducer from "../features/userLists/myListsSlice";
 import selectedMovieReducer from "../features/inspectMovie/inspectMovieSlice";
 import firebaseReducer from "../firebase/firebaseSlice"
 

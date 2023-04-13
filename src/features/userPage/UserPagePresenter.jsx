@@ -3,7 +3,7 @@ import { getUsername, getStreamingServices, getAvailableServices, getEditmode, t
 import UserPageView from "./UserPageView";
 
 
-const UserPage = () => {
+const UserPagePresenter = () => {
   const dispatch = useDispatch();
   const username = useSelector(getUsername);
   const ownedServices = useSelector(getStreamingServices);
@@ -37,4 +37,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default UserPagePresenter;

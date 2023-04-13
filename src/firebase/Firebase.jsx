@@ -11,17 +11,12 @@ import {
   setUserId,
   updateStreamingServiceList
 } from "../features/userPage/userPageSlice";
-//New
-import {
-  addNewMovieList,
-  addMovieToMovieList,
-} from "/src/features/userLists/movieListsSlice";
 import FirebaseApp from "/src/FirebaseConfig.jsx";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
 
 import { listenerMiddleware } from "../model/store";
-import { updateMovieLists } from "../features/userLists/movieListsSlice";
+import { updateMovieLists, addNewMovieList,addMovieToMovieList, } from "../features/userLists/myListsSlice";
 
 
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { sourceUrl, options } from "../../ApiKey";
-import streamingServices from "./streamingServices";
+import streamingServices from "../uiComponents/streamingServices";
 
 const initialState = {
   username: null,

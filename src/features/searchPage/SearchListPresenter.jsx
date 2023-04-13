@@ -13,7 +13,7 @@ import {
 } from "./searchSlice";
 import "./SearchList.css";
 import { BiLoaderCircle } from "react-icons/bi";
-import MovieCardList from "../movieCards/MovieCardList";
+import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
 
 const SearchList = () => {

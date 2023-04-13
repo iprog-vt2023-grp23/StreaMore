@@ -1,12 +1,12 @@
-import Search from "./features/searchPage/SearchView";
-import UserPage from "./features/userPage/UserPage";
-import MovieList from "./features/userLists/MyListsPage";
-import InspectMoviePresenter from "./features/inspectMovie/InspectMoviePresenter";
-import SignIn from "./features/signIn/SignIn";
+import Search from "./features/searchPage/SearchPresenter";
+import UserPage from "./features/userPage/UserPagePresenter";
+import MyLists from "./features/userLists/MyListsPagePresenter";
+import InspectMovie from "./features/inspectMovie/InspectMoviePresenter";
+import SignIn from "./features/signIn/SignInPresenter";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Sidebar from "./features/sidebar/Sidebar";
+import Sidebar from "./features/sidebar/SidebarPresenter";
 
 function App() {
  
@@ -17,9 +17,9 @@ function App() {
         {/*Routes contains all Route elements*/}
         <Routes>
           <Route path="/" element={<Search />} />
-          <Route path="/myLists" element={<MovieList />} />
+          <Route path="/myLists" element={<MyLists />} />
           <Route path="/userPage" element={<UserPage />} />
-          <Route path="/inspectMovie" element={<InspectMoviePresenter />} />
+          <Route path="/inspectMovie" element={<InspectMovie />} />
           <Route path="/signIn" element={<SignIn />} />
         </Routes>
         {/*Sidebar is outside of the Routes since it will always be visible*/}

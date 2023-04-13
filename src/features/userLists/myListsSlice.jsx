@@ -7,7 +7,7 @@ const initialState = {
   selectedList: null,
 };
 
-const movieListsSlice = createSlice({
+const myListsSlice = createSlice({
   name: "movieLists",
   initialState,
   reducers: {
@@ -73,6 +73,6 @@ export const getMovieLists = (state) =>  state.movieLists.movieLists;
 export const getSelectedList = (state) => state.movieLists.selectedList;
 
 //exports for getting the actions in the slice reducer
-export const { addNewMovieList, deleteMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists, selectMovieList} = movieListsSlice.actions;
+export const { addNewMovieList, deleteMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists, selectMovieList} = myListsSlice.actions;
 
-export default movieListsSlice.reducer;
+export default myListsSlice.reducer;
