@@ -4,24 +4,27 @@ import { getSidebarState, toggleSidebar } from "./sidebarSlice";
 import { FiAlignJustify } from "react-icons/fi";
 import SidebarView from "./SidebarView";
 import FirebaseApp from "../../FirebaseConfig";
-import {getAuth} from "firebase/auth"
-import { signOutEvent } from "../../firebase/firebaseSlice";
+import {getAuth, signOut} from "firebase/auth"
 
 import "./Sidebar.css";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const sidebarState = useSelector(getSidebarState);
-  const loggedIn = getAuth(FirebaseApp).currentUser;
+  const auth = getAuth(FirebaseApp);
+  const loggedIn = auth.currentUser;
 
   //Inverts the sidebar state to toggle it
   const sidebarButtonClick = () => {
     dispatch(toggleSidebar());
   };
-  const signOut = () => {
-    console.log("signOutEvent")
-    dispatch(signOutEvent());
-  }
+  const signOutButton = async () => {
+    console.log("signedOut");
+    await signOut(auth)
+    .then(() => {
+      location.reload()
+    })
+  };
 
   //Returns a button if the sidebar is not toggled
   const sidebarButton = () => {
@@ -43,7 +46,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       {sidebarButton() || (
-        <SidebarView onSidebarButtonClick={sidebarButtonClick} onSignOut={signOut} loggedIn={loggedIn}/>
+        <SidebarView onSidebarButtonClick={sidebarButtonClick} onSignOut={signOutButton} loggedIn={loggedIn}/>
       )}
     </div>
   );

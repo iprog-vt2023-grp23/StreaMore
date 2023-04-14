@@ -16,7 +16,7 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
 
 import { listenerMiddleware } from "../model/store";
-import { updateMovieLists, addNewMovieList,addMovieToMovieList,removeMovieFromMovieList } from "../features/userLists/myListsSlice";
+import { updateMovieLists, addNewMovieList,addMovieToMovieList,removeMovieFromMovieList,removeMovieList,addStreamingService,removeStreamingService } from "../features/userLists/myListsSlice";
 
 
 
@@ -41,7 +41,7 @@ export default function Firebase() {
       console.log("Movie removed", action.payload)
       const {listName, movie} = action.payload;
       const state = listenerApi.getState();
-      set(ref(database, "movieLists/" + state.userPage.userId +"/" + listName +"/movies/" + movie.imdbId), movie);
+      set(ref(database,"movieLists/" +state.userPage.userId +"/" +listName +"/movies/" + movie.imdbId),null);
     },
   })
   listenerMiddleware.startListening({
@@ -50,6 +50,22 @@ export default function Firebase() {
       const state = listenerApi.getState();
       console.log("Movie list added", action.payload, state.userPage.userId)
       set(ref(database, "movieLists/" + state.userPage.userId + "/" + action.payload), {name: action.payload, movies: []})
+    }
+  })
+  listenerMiddleware.startListening({
+    actionCreator: removeMovieList,
+    effect: async(action, listenerApi) => {
+      const state = listenerApi.getState();
+      console.log("Movie list removed", action.payload, state.userPage.userId)
+      set(ref(database, "movieLists/" + state.userPage.userId + "/" + action.payload), null)
+    }
+  })
+  listenerMiddleware.startListening({
+    actionCreator: addStreamingService,
+    effect: async(action, listenerApi) => {
+      const state = listenerApi.getState();
+      console.log("Movie list removed", action.payload, state.userPage.userId)
+      set(ref(database, "movieLists/" + state.userPage.userId + "/" + action.payload), null)
     }
   })
 
@@ -74,7 +90,8 @@ export default function Firebase() {
         onValue(ref(database, "movieLists/" + newuserId), (data) => {
           console.log("Movie list fetched", data.val())
           const lists = data.val();
-          dispatch(updateMovieLists(lists));
+          if(lists)
+            dispatch(updateMovieLists(lists));
         }, {
           onlyOnce: true
         });
@@ -82,7 +99,8 @@ export default function Firebase() {
         onValue(ref(database, "serviceList/" + newuserId), (data) => {
           console.log("Service list fetched", data.val())
           const lists = data.val();
-          dispatch(updateStreamingServiceList(lists));
+          if(lists)
+            dispatch(updateStreamingServiceList(lists));
         }, {
           onlyOnce: true
         });

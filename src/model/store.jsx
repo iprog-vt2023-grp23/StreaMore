@@ -5,7 +5,6 @@ import userPageReducer from "../features/userPage/userPageSlice";
 // import userListsReducer from "../features/userLists/userListsSlice";
 import movieListsReducer from "../features/userLists/myListsSlice";
 import selectedMovieReducer from "../features/inspectMovie/inspectMovieSlice";
-import firebaseReducer from "../firebase/firebaseSlice"
 
 export const listenerMiddleware = createListenerMiddleware();
 
@@ -17,7 +16,6 @@ export const store = configureStore({
     movieLists: movieListsReducer,
     userPage: userPageReducer,
     selectedMovie: selectedMovieReducer,
-    firebase: firebaseReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),

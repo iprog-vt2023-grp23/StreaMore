@@ -14,7 +14,7 @@ const myListsSlice = createSlice({
     addNewMovieList(state, action) {
       state.movieLists.push({name: action.payload, movies: []});
     },
-    deleteMovieList(state, action) {
+    removeMovieList(state, action) {
         state.movieLists = state.movieLists.filter(
             (list) => list.name !== action.payload.name
         )
@@ -42,16 +42,16 @@ const myListsSlice = createSlice({
         });
     },
     updateMovieLists(state, action) {
-        const lists = Object.values(action.payload).map((list) => {
-          if(list.movies){
-            return {name: list.name, movies: Object.values(list.movies)}
-          }
-          else
-            return {name:list.name, movies: []}
-          
-        })
-        state.movieLists = lists;
-      }
+      const lists = Object.values(action.payload).map((list) => {
+        if(list.movies){
+          return {name: list.name, movies: Object.values(list.movies)}
+        }
+        else
+          return {name:list.name, movies: []}
+        
+      })
+      state.movieLists = lists;
+    }
 
     //   updateMovieLists(state, action) {
     //     console.log("updateMovieLists", action.payload);
@@ -73,6 +73,6 @@ export const getMovieLists = (state) =>  state.movieLists.movieLists;
 export const getSelectedList = (state) => state.movieLists.selectedList;
 
 //exports for getting the actions in the slice reducer
-export const { addNewMovieList, deleteMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists, selectMovieList} = myListsSlice.actions;
+export const { addNewMovieList, removeMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists, selectMovieList} = myListsSlice.actions;
 
 export default myListsSlice.reducer;

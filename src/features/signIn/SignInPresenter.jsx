@@ -2,18 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import SignInView from "./SignInView";
 import SignOutView from "./SignOutView";
 import FirebaseApp from "../../FirebaseConfig";
-import {getAuth} from "firebase/auth"
+import {getAuth,createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,updateProfile, signOut} from "firebase/auth"
 import { useState } from "react";
-import {
-  signIn,
-  register,
-  signOutEvent,
-} from "../../firebase/firebaseSlice";
 import { useNavigate } from "react-router-dom";
-
-/*
- *Kanske måste kopplas till kontexten i Firebase.jsx med useContext, vi får la se
- */
 
 const SignIn = () => {
   //Values used
@@ -40,33 +32,35 @@ const SignIn = () => {
   }
 
   //Dispatched the signIn action and navigates to search when sign in is complete
-  const signInButton = () => {
+  const signInButton = async () => {
     console.log("signedIn");
-    dispatch(signIn({ email, password }))
-      .unwrap()
-      .then(() => {
-        navigate("/");
-      })
-      .catch((err) => {
-        alert(err.message)
-      })
+    await signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      navigate("/");
+    })
+    .catch((err) => {
+      alert(err.message)
+    })
   };
 
   //Dispatched the register action and navigates to search when sign in is complete
-  const registerButton = () => {
+  const registerButton = async () => {
     console.log("Registered");
-    dispatch(register({ email, password, username }))
-        .unwrap()
-        .then(() => {
-            navigate("/");
-        })
-        .catch((err) => {
-            alert(err.message)
-          })
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(userCredential.user, {displayName: username})
+    .then(() => {
+      navigate("/");
+    })
+    .catch((err) => {
+      alert(err.message)
+    })
   };
-  const signOutButton = () => {
+  const signOutButton = async () => {
     console.log("signedOut");
-    dispatch(signOutEvent())  
+    await signOut(auth)
+    .then(() => {
+      location.reload()
+    })
   };
 
   //checks wether the user is signed in

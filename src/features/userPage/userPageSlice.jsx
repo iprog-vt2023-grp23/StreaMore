@@ -45,9 +45,6 @@ const userPageSlice = createSlice({
     addStreamingService(state, action) {
       state.ownedServices.push(action.payload);
     },
-    updateStreamingServices(state, action) {
-      state.ownedServices = action.payload;
-    },
     removeStreamingService(state, action) {
       state.ownedServices = state.ownedServices.filter(
         (service) => service != action.payload
@@ -57,7 +54,6 @@ const userPageSlice = createSlice({
       state.editing = !state.editing;
     },
     updateStreamingServiceList(state, action) {
-      console.log(Object.keys(action.payload))
       state.services = Object.keys(action.payload)
     },
   },
@@ -74,7 +70,7 @@ export const getEditmode = (state) => state.userPage.editing;
 export const getUsername = (state) => state.userPage.username;
 export const getUserId = (state) => state.userPage.userId;
 
-export const { updateStreamingServiceList, setUsername, setUserId, addStreamingService, removeStreamingService, updateStreamingServices, toggleEdit } =
+export const { updateStreamingServiceList, setUsername, setUserId, addStreamingService, removeStreamingService, toggleEdit } =
   userPageSlice.actions;
 
 export default userPageSlice.reducer;
