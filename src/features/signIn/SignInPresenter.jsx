@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import SignInView from "./SignInView";
 import SignOutView from "./SignOutView";
 import FirebaseApp from "../../FirebaseConfig";
@@ -15,7 +14,6 @@ const SignIn = () => {
   const auth = getAuth(FirebaseApp);
 
   //Imported functions
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //Functions for changing valeus

@@ -9,14 +9,16 @@ import {
 import {
   setUsername,
   setUserId,
-  updateStreamingServiceList
+  updateStreamingServiceList,
+  addStreamingService,
+  removeStreamingService
 } from "../features/userPage/userPageSlice";
 import FirebaseApp from "/src/FirebaseConfig.jsx";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
 
 import { listenerMiddleware } from "../model/store";
-import { updateMovieLists, addNewMovieList,addMovieToMovieList,removeMovieFromMovieList,removeMovieList,addStreamingService,removeStreamingService } from "../features/userLists/myListsSlice";
+import { updateMovieLists, addNewMovieList,addMovieToMovieList,removeMovieFromMovieList,removeMovieList } from "../features/userLists/myListsSlice";
 
 
 
@@ -64,9 +66,15 @@ export default function Firebase() {
     actionCreator: addStreamingService,
     effect: async(action, listenerApi) => {
       const state = listenerApi.getState();
-      console.log("Movie list removed", action.payload, state.userPage.userId)
-      set(ref(database, "movieLists/" + state.userPage.userId + "/" + action.payload), null)
-    }
+      console.log("Service added", action.payload, state.userPage.userId)
+      set(ref(database, "serviceList/" + state.userPage.userId),action.payload);    }
+  })
+  listenerMiddleware.startListening({
+    actionCreator: removeStreamingService,
+    effect: async(action, listenerApi) => {
+      const state = listenerApi.getState();
+      console.log("Service added", action.payload, state.userPage.userId)
+      set(ref(database, "serviceList/" + state.userPage.userId + "/" + action.payload),null);    }
   })
 
   const dispatch = useDispatch();
@@ -104,19 +112,6 @@ export default function Firebase() {
         }, {
           onlyOnce: true
         });
-
-
-
-
-/*
-        onChildAdded(ref(database, "serviceList/" + userId), (data) => {
-          dispatch(addStreamingService(data.val()));
-        });
-        
-        onChildRemoved(ref(database, "serviceList/" + userId), (data) => {
-          dispatch(removeStreamingService(data.val()));
-        });
-        */
       } else {
         // User is signed out
         dispatch(setUserId(null));
