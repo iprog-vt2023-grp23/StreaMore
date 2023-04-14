@@ -16,7 +16,7 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
 
 import { listenerMiddleware } from "../model/store";
-import { updateMovieLists, addNewMovieList,addMovieToMovieList, } from "../features/userLists/myListsSlice";
+import { updateMovieLists, addNewMovieList,addMovieToMovieList,removeMovieFromMovieList } from "../features/userLists/myListsSlice";
 
 
 
@@ -30,6 +30,15 @@ export default function Firebase() {
     actionCreator: addMovieToMovieList,
     effect: async(action, listenerApi) => {
       console.log("Movie added", action.payload)
+      const {listName, movie} = action.payload;
+      const state = listenerApi.getState();
+      set(ref(database, "movieLists/" + state.userPage.userId +"/" + listName +"/movies/" + movie.imdbId), movie);
+    },
+  })
+  listenerMiddleware.startListening({
+    actionCreator: removeMovieFromMovieList,
+    effect: async(action, listenerApi) => {
+      console.log("Movie removed", action.payload)
       const {listName, movie} = action.payload;
       const state = listenerApi.getState();
       set(ref(database, "movieLists/" + state.userPage.userId +"/" + listName +"/movies/" + movie.imdbId), movie);
