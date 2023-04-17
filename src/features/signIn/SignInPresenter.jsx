@@ -5,6 +5,8 @@ import {getAuth,createUserWithEmailAndPassword,
   signInWithEmailAndPassword,updateProfile, signOut} from "firebase/auth"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleSidebar } from "../sidebar/sidebarSlice";
 
 const SignIn = () => {
   //Values used
@@ -15,6 +17,7 @@ const SignIn = () => {
 
   //Imported functions
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //Functions for changing valeus
   const emailChanged = (e) => setEmail(e.target.value);
@@ -34,6 +37,7 @@ const SignIn = () => {
     console.log("signedIn");
     await signInWithEmailAndPassword(auth, email, password)
     .then(() => {
+      dispatch(toggleSidebar());  //Tillfällig fulfix för att toggla sidebar när man loggar in
       navigate("/");
     })
     .catch((err) => {
