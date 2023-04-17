@@ -2,7 +2,6 @@ import MovieCardView from "./MovieCardView";
 import "./MovieView.css"
 
 const MovieCardListView = (props) => {
-  console.log("moviecardlist", props.movies)
   return (
     <div className="movieCardList">
       {props.movies.map((movie) => (

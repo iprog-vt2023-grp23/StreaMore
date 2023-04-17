@@ -1,5 +1,5 @@
 import "./MyListsPage.css"
-import MovieCardList from "../movieCards/MovieCardList";
+import MovieCardList from "../movieCards/MovieCardListPresenter";
 import {BsThreeDotsVertical} from "react-icons/bs"
 
 const MovieListView = (props) => {

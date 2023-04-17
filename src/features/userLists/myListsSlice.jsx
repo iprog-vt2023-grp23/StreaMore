@@ -7,14 +7,14 @@ const initialState = {
   selectedList: null,
 };
 
-const movieListsSlice = createSlice({
+const myListsSlice = createSlice({
   name: "movieLists",
   initialState,
   reducers: {
     addNewMovieList(state, action) {
-        state.movieLists.push(action.payload);
+      state.movieLists.push({name: action.payload, movies: []});
     },
-    deleteMovieList(state, action) {
+    removeMovieList(state, action) {
         state.movieLists = state.movieLists.filter(
             (list) => list.name !== action.payload.name
         )
@@ -24,12 +24,11 @@ const movieListsSlice = createSlice({
     },
     addMovieToMovieList(state, action) { 
         state.movieLists = state.movieLists.map((list) => {
-            if(list.name === action.payload.name) {
+            if(list.name === action.payload.listName) {
                 if(list.movies === undefined){
                     list.movies = [];
                 }
-                console.log(action.payload);
-                list.movies.push(action.payload.movies);
+                list.movies.push(action.payload.movie);
             }
             return list;
         });
@@ -43,15 +42,16 @@ const movieListsSlice = createSlice({
         });
     },
     updateMovieLists(state, action) {
-        console.log("updateMovieLists", action.payload);
-        const { name, movies } = action.payload;
-        state.movieLists = state.movieLists.map((list) => {
-          if (list.name === name) {
-            list.movies = movies;
-          }
-          return list;
-        });
-      }
+      const lists = Object.values(action.payload).map((list) => {
+        if(list.movies){
+          return {name: list.name, movies: Object.values(list.movies)}
+        }
+        else
+          return {name:list.name, movies: []}
+        
+      })
+      state.movieLists = lists;
+    }
 
     //   updateMovieLists(state, action) {
     //     console.log("updateMovieLists", action.payload);
@@ -73,6 +73,6 @@ export const getMovieLists = (state) =>  state.movieLists.movieLists;
 export const getSelectedList = (state) => state.movieLists.selectedList;
 
 //exports for getting the actions in the slice reducer
-export const { addNewMovieList, deleteMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists, selectMovieList} = movieListsSlice.actions;
+export const { addNewMovieList, removeMovieList, addMovieToMovieList, removeMovieFromMovieList, updateMovieLists, selectMovieList} = myListsSlice.actions;
 
-export default movieListsSlice.reducer;
+export default myListsSlice.reducer;

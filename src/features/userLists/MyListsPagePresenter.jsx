@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
-import { getMovieLists, selectMovieList, getSelectedList } from "./movieListsSlice";
+import { getMovieLists, selectMovieList, getSelectedList } from "./myListsSlice";
 import { useEffect } from "react";
 
-const MyListsPage = () => {
+const MyListsPagePresenter = () => {
   const movieLists = useSelector(getMovieLists);
   const selectedList = useSelector(getSelectedList);
   const dispatch = useDispatch();
@@ -20,4 +20,4 @@ const MyListsPage = () => {
   return <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList}/>
 };
 
-export default MyListsPage;
+export default MyListsPagePresenter;

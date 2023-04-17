@@ -1,12 +1,8 @@
 // import { getMovieList } from "../userLists/userListsSlice";
-import { getMovieLists } from "../userLists/movieListsSlice";
+import { addMovieToMovieList, addNewMovieList, getMovieLists, updateMovieLists } from "../userLists/myListsSlice";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MovieCardListView from "./MovieCardListView";
-import {
-  createMovieListFirebase,
-  addMovieToMovieListFirebase,
-} from "../../firebase/firebaseSlice";
 
 const MovieCardList = (props) => {
   const dispatch = useDispatch();
@@ -16,10 +12,10 @@ const MovieCardList = (props) => {
     dispatch(selectMovieToInspect(movie));
   };
   const onAddNewMovieList = (listName) => {
-    dispatch(createMovieListFirebase( listName ));
+    dispatch(addNewMovieList( listName ));
   };
   const onAddMovieToList = (listName, movie) => {
-    dispatch(addMovieToMovieListFirebase({ listName, movie }));
+    dispatch(addMovieToMovieList({ listName, movie }));
   };
 
   return (
