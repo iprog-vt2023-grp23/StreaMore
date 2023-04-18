@@ -32,7 +32,6 @@ const MovieView = (props) => {
   const toast = useRef(null);
 
   const items = [
-
     {
       label: "Add",
       icon: "pi pi-plus",

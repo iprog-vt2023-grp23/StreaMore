@@ -29,7 +29,7 @@ const AddToListMenuView = (props) => {
     const createNewList = () => {
       return (
       <li className="createNewList">   
-        <form>
+        <form onSubmit={addNewMovieList}>
           <input autoFocus type="text" id="newListName" value={newListName} onChange={(e) => setNewListName(e.target.value)}/>
           <ImCheckmark className="checkmark" onClick={addNewMovieList}/>
           <ImCross className="cross" onClick={cancelNewMovieList}/>

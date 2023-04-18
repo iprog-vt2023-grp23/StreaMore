@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
+import { useState } from "react";
 // import {
 //   addMovieToList,
 //   removeMovieFromList,
 //   getMovieList,
 // } from "../userLists/userListsSlice";
+import AddToListMenu from "../movieCards/AddToListMenuView";
 import {
   selectAllResults,
   getResultsStatus,
@@ -17,22 +19,21 @@ import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
 
 const SearchList = () => {
+  const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const dispatch = useDispatch();
   let results = useSelector(selectAllResults);
   let status = useSelector(getResultsStatus);
   const error = useSelector(getResultsError);
   const keyword = useSelector(getKeyword);
-  // const movieList = useSelector(getMovieList);
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
   };
-  // const addMovie = (movie) => {
-  //   dispatch(addMovieToList(movie));
-  // };
-  // const removeMovie = (movie) => {
-  //   dispatch(removeMovieFromList(movie));
-  // };
+
+
+
+
+
 
   // Either render a loading gif, the search result or an error depending on the status
   if (status === "loading") {

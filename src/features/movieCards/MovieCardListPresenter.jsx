@@ -19,26 +19,6 @@ const MovieCardList = (props) => {
     dispatch(addMovieToMovieList({ listName, movie }));
   };
 
-  const renderMovieList = () => {
-    return (
-      <div className="movieCardList">
-        {/*Render all movies*/}
-        {props.movies.map((movie) => (
-          <MovieCardView
-            key={movie.imdbId}
-            onSelectMovie={selectMovie}
-            onAddNewMovieList={onAddNewMovieList}
-            onAddMovieToList={onAddMovieToList}
-            id={movie.imdbId}
-            movie={movie}
-            movieLists={movieLists}
-          />
-        ))}
-      </div>
-    ); 
-  }
-
-
   return (
     <div className="movieCardList">
       {/*Render all movies*/}
@@ -54,7 +34,7 @@ const MovieCardList = (props) => {
         />
       ))}
     </div>
-  );
+  ); 
 };
 
 export default MovieCardList;
