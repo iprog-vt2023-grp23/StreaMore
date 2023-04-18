@@ -13,26 +13,31 @@ const AddToListMenuView = (props) => {
          props.setVisible(false);
     }
 
+    const addNewMovieList = (e) => {
+      e.preventDefault();
+      props.onAddNewMovieList(newListName);
+      setShowCreateNewList(false);
+      setNewListName("");
+    }
+
+    const cancelNewMovieList = (e) => {
+      e.preventDefault();
+      setShowCreateNewList(false);
+      setNewListName("");
+    }
+
     const createNewList = () => {
       return (
       <li className="createNewList">   
         <form>
           <input autoFocus type="text" id="newListName" value={newListName} onChange={(e) => setNewListName(e.target.value)}/>
-          <ImCheckmark className="checkmark" onClick={(e) => {
-            e.preventDefault();
-            props.onAddNewMovieList(newListName);
-            setShowCreateNewList(false);
-            setNewListName("");
-          }}/>
-          <ImCross className="cross" onClick={(e) => {
-            e.preventDefault();
-            setShowCreateNewList(false);
-            setNewListName("");
-          }}/>
+          <ImCheckmark className="checkmark" onClick={addNewMovieList}/>
+          <ImCross className="cross" onClick={cancelNewMovieList}/>
         </form>
       </li>
       );
     };
+
     return (
     <div className="addToListMenuBackground">
       <div className="addToListMenu">

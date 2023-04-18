@@ -27,20 +27,7 @@ const MovieView = (props) => {
   //Selects a clicked movie for inspection
   const selectMovie = () => {
     props.onSelectMovie(props.movie);
-    //dispatch(selectMovieToInspect(result));
   };
-
-  // /*
-  //  *Adds and removes a rendered movie to and from the user movie list
-  //  */
-  // const addToMovieList = () => {
-  //   props.onAddToMovieList(props.movie);
-  //   //dispatch(addMovieToList(result));
-  // };
-  // const removeFromMovieList = () => {
-  //   props.onRemoveToMovieList(props.movie);
-  //   //dispatch(removeMovieFromList(result));
-  // };
 
   const toast = useRef(null);
 
@@ -49,21 +36,10 @@ const MovieView = (props) => {
     {
       label: "Add",
       icon: "pi pi-plus",
-      // visible: !props.movieList.includes(props.movie),
       command: () => {
         setShowAddToListMenu(prevState => !prevState);
       }
     },
-    // Utkommenterat för nu, behöver nog implementera andra sätt att ta bort filmer från listor
-    // {
-    //   label: "Remove",
-    //   icon: "pi pi-minus",
-    //   // visible: props.movieList.includes(props.movie),
-    //   command: () => {
-    //     removeFromMovieList();
-    //     toast.current.show({severity:'success', summary: 'Removed from list', detail:'Movie removed from your list', life: 3000});
-    //   }
-    // },
     {
       label: "Notify",
       icon: "pi pi-bell",

@@ -2,7 +2,8 @@
 import { addMovieToMovieList, addNewMovieList, getMovieLists, updateMovieLists } from "../userLists/myListsSlice";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
-import MovieCardListView from "./MovieCardListView";
+import MovieCardView from "./MovieCardView";
+import "./MovieView.css"
 
 const MovieCardList = (props) => {
   const dispatch = useDispatch();
@@ -18,14 +19,41 @@ const MovieCardList = (props) => {
     dispatch(addMovieToMovieList({ listName, movie }));
   };
 
+  const renderMovieList = () => {
+    return (
+      <div className="movieCardList">
+        {/*Render all movies*/}
+        {props.movies.map((movie) => (
+          <MovieCardView
+            key={movie.imdbId}
+            onSelectMovie={selectMovie}
+            onAddNewMovieList={onAddNewMovieList}
+            onAddMovieToList={onAddMovieToList}
+            id={movie.imdbId}
+            movie={movie}
+            movieLists={movieLists}
+          />
+        ))}
+      </div>
+    ); 
+  }
+
+
   return (
-    <MovieCardListView
-        movies={props.movies}
-        selectMovie={selectMovie}
-        onAddNewMovieList={onAddNewMovieList}
-        onAddMovieToList={onAddMovieToList}
-        movieLists={movieLists}
-    />
+    <div className="movieCardList">
+      {/*Render all movies*/}
+      {props.movies.map((movie) => (
+        <MovieCardView
+          key={movie.imdbId}
+          onSelectMovie={selectMovie}
+          onAddNewMovieList={onAddNewMovieList}
+          onAddMovieToList={onAddMovieToList}
+          id={movie.imdbId}
+          movie={movie}
+          movieLists={movieLists}
+        />
+      ))}
+    </div>
   );
 };
 
