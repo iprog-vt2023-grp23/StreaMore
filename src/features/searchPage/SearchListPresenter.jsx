@@ -1,12 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useState } from "react";
+
 // import {
-//   addMovieToList,
-//   removeMovieFromList,
 //   getMovieList,
-// } from "../userLists/userListsSlice";
-import AddToListMenu from "../movieCards/AddToListMenuView";
+// } from "../userLists/myListsSlice";
 import {
   selectAllResults,
   getResultsStatus,
@@ -19,21 +17,36 @@ import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
 
 const SearchList = () => {
-  const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const dispatch = useDispatch();
   let results = useSelector(selectAllResults);
   let status = useSelector(getResultsStatus);
+  // const movieList = useSelector(getMovieList);
   const error = useSelector(getResultsError);
   const keyword = useSelector(getKeyword);
+  const [showAddToListMenu, setShowAddToListMenu] = useState(false);
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
   };
 
-
-
-
-
+  const getItems = (movie) => {
+    return [
+      {
+        label: "Add",
+        icon: "pi pi-plus",
+        command: () => {
+          setShowAddToListMenu(prevState => !prevState);
+        }
+      },
+      {
+        label: "Notify",
+        icon: "pi pi-bell",
+        command: () => {
+          console.log("Notify user plis");
+        }
+      }
+    ] 
+  }
 
   // Either render a loading gif, the search result or an error depending on the status
   if (status === "loading") {
@@ -41,10 +54,14 @@ const SearchList = () => {
   } else if (status === "succeeded") {
     //Spreads the results array and sorts it by imdb rating
 
+
+
+
+
     /*
     * Detta är en presenter, vet inte om vi borde använda den som ett ui element!
     */
-    const content = <MovieCardList movies={results} />;
+    const content = <MovieCardList movies={results} getItems={getItems}/>;
     /*
      * 
      */

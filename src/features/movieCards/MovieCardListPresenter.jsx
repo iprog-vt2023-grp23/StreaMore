@@ -2,8 +2,8 @@
 import { addMovieToMovieList, addNewMovieList, getMovieLists, updateMovieLists } from "../userLists/myListsSlice";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
-import MovieCardView from "./MovieCardView";
-import "./MovieView.css"
+import MovieCardListView from "./MovieCardListView";
+import "./MovieCardList.css"
 
 const MovieCardList = (props) => {
   const dispatch = useDispatch();
@@ -20,21 +20,15 @@ const MovieCardList = (props) => {
   };
 
   return (
-    <div className="movieCardList">
-      {/*Render all movies*/}
-      {props.movies.map((movie) => (
-        <MovieCardView
-          key={movie.imdbId}
-          onSelectMovie={selectMovie}
-          onAddNewMovieList={onAddNewMovieList}
-          onAddMovieToList={onAddMovieToList}
-          id={movie.imdbId}
-          movie={movie}
-          movieLists={movieLists}
-        />
-      ))}
-    </div>
-  ); 
+    <MovieCardListView
+        getItems={props.getItems}
+        movies={props.movies}
+        selectMovie={selectMovie}
+        onAddNewMovieList={onAddNewMovieList}
+        onAddMovieToList={onAddMovieToList}
+        movieLists={movieLists}
+    />
+  );
 };
 
 export default MovieCardList;

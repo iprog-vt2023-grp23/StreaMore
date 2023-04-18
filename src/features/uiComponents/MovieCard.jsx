@@ -5,7 +5,7 @@ import { SpeedDial } from 'primereact/speeddial';
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import "./MovieView.css";
+import "./MovieCard.css";
 
 PrimeReact.appendTo = 'self';
 //theme
@@ -16,12 +16,12 @@ import "primereact/resources/primereact.min.css";
 
 //icons
 import "primeicons/primeicons.css";
-import AddToListMenu from "./AddToListMenuView";
+import AddToListMenu from "./AddToListMenu";
 
 /*
  *A reusable function used for rendering a movie, is used in the movie list as well as the searchList and InspectMovie
  */
-const MovieView = (props) => {
+const MovieCard = (props) => {
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
 
   //Selects a clicked movie for inspection
@@ -30,7 +30,7 @@ const MovieView = (props) => {
   };
 
   const toast = useRef(null);
-
+  
   const items = [
     {
       label: "Add",
@@ -56,7 +56,7 @@ const MovieView = (props) => {
       <div>{props.movie.body}</div>
       <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
     </NavLink> 
-      <SpeedDial model={items} direction="right" buttonStyle={{'background':'none', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> 
+      <SpeedDial model={props.getItems(props.movie)} direction="right" buttonStyle={{'background':'none', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> 
       {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
       </>
     ) 
@@ -80,5 +80,5 @@ const MovieView = (props) => {
   );
 };
 
-export default MovieView;
+export default MovieCard;
 

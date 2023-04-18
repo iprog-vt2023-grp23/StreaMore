@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import {ImCross, ImCheckmark} from "react-icons/im";
 
-const AddToListMenuView = (props) => {
+const AddToListMenu = (props) => {
     //UI component state, does not need to be in presenter
     const [newListName, setNewListName] = useState("");
     const [showCreateNewList, setShowCreateNewList] = useState(false);
@@ -56,4 +56,4 @@ const AddToListMenuView = (props) => {
     )
   }
 
-export default AddToListMenuView;
+export default AddToListMenu;

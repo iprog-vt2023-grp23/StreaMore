@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { getResultsStatus } from "./searchSlice";
 import SearchList from "./SearchListPresenter";
-import SearchBar from "./SearchBarPresenter";
+import SearchBar from "../searchbar/SearchBarPresenter";
 import "./Search.css";
 
 const SearchPresenter = () => {
