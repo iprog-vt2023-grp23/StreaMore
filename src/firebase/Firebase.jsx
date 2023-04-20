@@ -45,7 +45,7 @@ export default function Firebase() {
       console.log("Movie ID: ", movie.imdbId);
       console.log("List name: ", name);
       const state = listenerApi.getState();
-      set(ref(database,"movieLists/" +state.userPage.userId +"/" + name +"/movies/" + movie.imdbId + "/advisedMinimumAudienceAge/"),null);
+      set(ref(database,"movieLists/" +state.userPage.userId +"/" + name +"/movies/" + movie.imdbId),null);
     },
   })
   listenerMiddleware.startListening({

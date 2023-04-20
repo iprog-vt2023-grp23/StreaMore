@@ -9,25 +9,39 @@ import {
   selectAllResults,
   getResultsStatus,
   getResultsError,
-  getKeyword,
+  getKeyword
 } from "./searchSlice";
 import "./SearchList.css";
+import { getSelectedMovie } from "../inspectMovie/inspectMovieSlice";
 import { BiLoaderCircle } from "react-icons/bi";
 import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
+import AddToListMenu from "../uiComponents/AddToListMenu";
+import { addMovieToMovieList, addNewMovieList, getMovieLists } from "../userLists/myListsSlice";
 
 const SearchList = () => {
   const dispatch = useDispatch();
   let results = useSelector(selectAllResults);
+  console.log("results is ", results)
   let status = useSelector(getResultsStatus);
   // const movieList = useSelector(getMovieList);
   const error = useSelector(getResultsError);
   const keyword = useSelector(getKeyword);
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
-
+  const selectedMovie = useSelector(getSelectedMovie);
+  const movieList = useSelector(getMovieLists);
+  
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
   };
+
+  const onAddNewMovieList = (listName) => {
+    dispatch(addNewMovieList( listName ));
+  };
+  const onAddMovieToList = (listName, movie) => {
+    dispatch(addMovieToMovieList({ listName, movie }));
+  };
+
 
   const getItems = (movie) => {
     return [
@@ -35,7 +49,9 @@ const SearchList = () => {
         label: "Add",
         icon: "pi pi-plus",
         command: () => {
+          console.log("Add movie to listen")
           setShowAddToListMenu(prevState => !prevState);
+          selectMovie(movie);
         }
       },
       {
@@ -51,6 +67,14 @@ const SearchList = () => {
   // Either render a loading gif, the search result or an error depending on the status
   if (status === "loading") {
     return <BiLoaderCircle className="loadingCircle" />;
+  
+  } else if (showAddToListMenu) {
+    return <AddToListMenu setVisible={setShowAddToListMenu} 
+    onAddNewMovieList={onAddNewMovieList} 
+    movieLists={movieList} 
+    onAddMovieToList={onAddMovieToList}
+    movie={selectedMovie}
+/>
   } else if (status === "succeeded") {
     //Spreads the results array and sorts it by imdb rating
 
