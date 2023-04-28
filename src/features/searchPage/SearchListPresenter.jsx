@@ -13,7 +13,7 @@ import {
 } from "./searchSlice";
 import "./SearchList.css";
 import { BiLoaderCircle } from "react-icons/bi";
-import MovieCardList from "../movieCards/MovieCardList";
+import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
 
 const SearchList = () => {
@@ -39,7 +39,14 @@ const SearchList = () => {
     return <BiLoaderCircle className="loadingCircle" />;
   } else if (status === "succeeded") {
     //Spreads the results array and sorts it by imdb rating
+
+    /*
+    * Detta är en presenter, vet inte om vi borde använda den som ett ui element!
+    */
     const content = <MovieCardList movies={results} />;
+    /*
+     * 
+     */
     return <SearchListView content={content} keyword={keyword} />;
     //Render all movies in sortedResults using map and the rendermovie function and with imdbId as key for each rendered object
   } else if (status === "failed") {

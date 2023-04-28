@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { getResultsStatus } from "./searchSlice";
-import SearchList from "./SearchList";
-import SearchBar from "./SearchBar";
+import SearchList from "./SearchListPresenter";
+import SearchBar from "./SearchBarPresenter";
 import "./Search.css";
 
-const Search = () => {
+const SearchPresenter = () => {
   let status = useSelector(getResultsStatus);
   const SearchCentered = () => {
     return (
@@ -30,4 +30,4 @@ const Search = () => {
   return <>{status === "idle" ? <SearchCentered /> : <SearchAndResults />}</>;
 };
 
-export default Search;
+export default SearchPresenter;
