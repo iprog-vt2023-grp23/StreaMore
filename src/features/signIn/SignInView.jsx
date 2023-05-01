@@ -35,7 +35,7 @@ const SignInView = (props) => {
           <label htmlFor="e-mail">E-mail</label>
         </span>
         <span className="p-float-label">
-          <InputText id="password" value={props.password} onChange={passwordChanged} onKeyDown={keyDown}/>
+          <InputText id="password" type="password" value={props.password} onChange={passwordChanged} onKeyDown={keyDown}/>
           <label htmlFor="password">Password</label>
         </span>
       </form>
