@@ -54,11 +54,11 @@ const userPageSlice = createSlice({
       state.editing = !state.editing;
     },
     updateStreamingServiceList(state, action) {
-      console.log("updating streaming service1", state.services, state.ownedServices);
+      //console.log("updating streaming service1", state.services, state.ownedServices);
       state.ownedServices = Object.keys(action.payload);
-      console.log("updating streaming service2", state.services, state.ownedServices);
+      //console.log("updating streaming service2", state.services, state.ownedServices);
       state.services = streamingServices;
-      console.log("updating streaming service3", state.services, state.ownedServices);
+      //console.log("updating streaming service3", state.services, state.ownedServices);
     },
   },
   //Extrareducer for when the services are fetched
