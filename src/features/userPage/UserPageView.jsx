@@ -13,6 +13,7 @@ const UserPageView = (props) => {
     //The icons are fetched from StreamingButtons
     //console.log("service: ", service);
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
+    
 
     //for changing how and which services can be seen in edit mode
     let displayService = () => {
@@ -30,7 +31,6 @@ const UserPageView = (props) => {
 
     //for changing which services can be edited in edit mode
     let editService = () => {
-      console.log("testclick1");
       if(props.isEdit) {
         if(hasService) {
           return props.onRemoveServiceButton;
