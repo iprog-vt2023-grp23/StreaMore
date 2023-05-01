@@ -16,7 +16,7 @@ import { getSelectedMovie } from "../inspectMovie/inspectMovieSlice";
 import { BiLoaderCircle } from "react-icons/bi";
 import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
-import AddToListMenu from "../uiComponents/AddToListMenu";
+import AddToListMenu from "./AddToListMenuView";
 import { addMovieToMovieList, addNewMovieList, getMovieLists } from "../userLists/myListsSlice";
 
 const SearchList = () => {
@@ -68,14 +68,7 @@ const SearchList = () => {
   if (status === "loading") {
     return <BiLoaderCircle className="loadingCircle" />;
   
-  } else if (showAddToListMenu) {
-    return <AddToListMenu setVisible={setShowAddToListMenu} 
-    onAddNewMovieList={onAddNewMovieList} 
-    movieLists={movieList} 
-    onAddMovieToList={onAddMovieToList}
-    movie={selectedMovie}
-/>
-  } else if (status === "succeeded") {
+  }  else if (status === "succeeded") {
     //Spreads the results array and sorts it by imdb rating
 
 
@@ -89,7 +82,15 @@ const SearchList = () => {
     /*
      * 
      */
-    return <SearchListView content={content} keyword={keyword} />;
+    return (
+    <>
+    {showAddToListMenu ? <AddToListMenu setVisible={setShowAddToListMenu} 
+      onAddNewMovieList={onAddNewMovieList} 
+      movieLists={movieList} 
+      onAddMovieToList={onAddMovieToList}
+      movie={selectedMovie}/> : null}
+    <SearchListView content={content} keyword={keyword} />
+    </>);
     //Render all movies in sortedResults using map and the rendermovie function and with imdbId as key for each rendered object
   } else if (status === "failed") {
     return <div>{error}</div>;

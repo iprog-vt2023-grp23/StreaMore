@@ -1,11 +1,11 @@
-import MovieCard from "../uiComponents/MovieCard";
+import MovieCardView from "./MovieCardView";
 import "./MovieCardList.css"
 
 const MovieCardListView = (props) => {
   return (
     <div className="movieCardList">
       {props.movies.map((movie) => (
-        <MovieCard
+        <MovieCardView
           getItems={props.getItems}
           key={movie.imdbId}
           onSelectMovie={props.selectMovie}

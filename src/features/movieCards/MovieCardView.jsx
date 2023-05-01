@@ -16,37 +16,17 @@ import "primereact/resources/primereact.min.css";
 
 //icons
 import "primeicons/primeicons.css";
-import AddToListMenu from "./AddToListMenu";
 
 /*
  *A reusable function used for rendering a movie, is used in the movie list as well as the searchList and InspectMovie
  */
-const MovieCard = (props) => {
-  const [showAddToListMenu, setShowAddToListMenu] = useState(false);
-
+const MovieCardView = (props) => {
   //Selects a clicked movie for inspection
   const selectMovie = () => {
     props.onSelectMovie(props.movie);
   };
 
   const toast = useRef(null);
-  
-  const items = [
-    {
-      label: "Add",
-      icon: "pi pi-plus",
-      command: () => {
-        setShowAddToListMenu(prevState => !prevState);
-      }
-    },
-    {
-      label: "Notify",
-      icon: "pi pi-bell",
-      command: () => {
-        console.log("Notify user plis");
-      }
-    }
-  ]
 
   const movieCard = () => {
     return (
@@ -65,13 +45,6 @@ const MovieCard = (props) => {
   //Renders a clickable movie, the onclick will navigate to inspectMovie where the clicked movie will be displayed
   return (
     <>
-    {showAddToListMenu ? 
-    <AddToListMenu setVisible={setShowAddToListMenu} 
-                   onAddNewMovieList={props.onAddNewMovieList} 
-                   movieLists={props.movieLists} 
-                   onAddMovieToList={props.onAddMovieToList}
-                   movie={props.movie}
-    /> : null}
     <Toast ref={toast}/>
     <div className="movieCard">
       {movieCard()}
@@ -80,5 +53,5 @@ const MovieCard = (props) => {
   );
 };
 
-export default MovieCard;
+export default MovieCardView;
 
