@@ -6,7 +6,7 @@ import {
 } from "./inspectMovieSlice";
 import { useNavigate } from "react-router-dom";
 import InspectMovieView from "./InspectMovieView";
-import RenderMovies from "../movieCards/MovieCardListView";
+// import MovieCardListView from "../movieCards/MovieCardListView";
 
 const InspectMoviePresenter = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const InspectMoviePresenter = () => {
     return (
       <div className="Search">
         {/*RenderMovie will render the selected movie*/}
-        <RenderMovies movies={[selectedMovie]} />
+        {/* <MovieCardListView movies={[selectedMovie]} /> */}
         {/*Either render the about film button or the about film field depending on if the about button has been pressed*/}
         {aboutFilmButton() || (
           <InspectMovieView

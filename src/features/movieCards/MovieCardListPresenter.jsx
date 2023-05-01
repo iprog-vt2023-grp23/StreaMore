@@ -3,6 +3,7 @@ import { addMovieToMovieList, addNewMovieList, getMovieLists, updateMovieLists }
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MovieCardListView from "./MovieCardListView";
+import "./MovieCardList.css"
 
 const MovieCardList = (props) => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const MovieCardList = (props) => {
 
   return (
     <MovieCardListView
+        getItems={props.getItems}
         movies={props.movies}
         selectMovie={selectMovie}
         onAddNewMovieList={onAddNewMovieList}

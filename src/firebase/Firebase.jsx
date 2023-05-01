@@ -41,9 +41,11 @@ export default function Firebase() {
     actionCreator: removeMovieFromMovieList,
     effect: async(action, listenerApi) => {
       console.log("Movie removed", action.payload)
-      const {listName, movie} = action.payload;
+      const {name, movie} = action.payload;
+      console.log("Movie ID: ", movie.imdbId);
+      console.log("List name: ", name);
       const state = listenerApi.getState();
-      set(ref(database,"movieLists/" +state.userPage.userId +"/" +listName +"/movies/" + movie.imdbId),null);
+      set(ref(database,"movieLists/" +state.userPage.userId +"/" + name +"/movies/" + movie.imdbId),null);
     },
   })
   listenerMiddleware.startListening({

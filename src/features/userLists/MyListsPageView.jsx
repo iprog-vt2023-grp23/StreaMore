@@ -25,7 +25,8 @@ const MovieListView = (props) => {
 
         <div className="listContent">
           {props.selectedList !== null ? (
-            <MovieCardList movies={props.movieLists.find(list => list.name === props.selectedList).movies} />
+            <MovieCardList movies={props.movieLists.find(list => list.name === props.selectedList).movies} getItems={props.getItems}
+            />
           ) : (
             <p>No movies in this list</p>
           )}
