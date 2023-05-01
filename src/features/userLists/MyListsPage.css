@@ -37,7 +37,6 @@
     padding: 5px;
     border-radius: 5px;
     margin-inline: 5px;
-    cursor: pointer;
     padding: 10px;
     /* padding-right: 25px; */
     position: relative;
@@ -46,6 +45,8 @@
 .listItem {
     background-color: var(--background-color-secondary);
     box-shadow: 0 0 5px 0 var(--shadow-color);
+    cursor: pointer;
+
 
 }
 
@@ -68,3 +69,26 @@
     align-items: center;
     justify-content: center;
 }
+
+.editIcons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-top: 8px;
+}
+
+.deleteListIcon, .editListIcon {
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+/*Hover effekter bara för datorer, aka breda skärmar*/
+@media (min-width: 800px) {
+    .deleteListIcon:hover,
+    .editListIcon:hover {
+        color: grey;
+        transition: color 50ms linear;
+    }
+  }
