@@ -1,7 +1,8 @@
 import { FiAlignJustify } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
+import { forwardRef } from "react";
 
-const SidebarView = (props) => {
+const SidebarView = forwardRef((props,ref) => {
   const sidebarButton = () => {
     props.onSidebarButtonClick();
   }
@@ -41,7 +42,7 @@ const SidebarView = (props) => {
   }
 
   return (
-    <div className="sidebarLinks">
+    <div className="sidebarLinks" ref={ref}>
       <FiAlignJustify
         className="sidebarButtonRotated"
         onClick={sidebarButton}
@@ -53,6 +54,6 @@ const SidebarView = (props) => {
       {signInButton()}
     </div>
   );
-};
+});
 
 export default SidebarView;
