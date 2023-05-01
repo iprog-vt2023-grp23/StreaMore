@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { updateStreamingServiceList, getUsername, getStreamingServices, getAvailableServices, getEditmode, toggleEdit, addStreamingService, removeStreamingService } from "./userPageSlice";
 import UserPageView from "./UserPageView";
+import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
 
 const UserPagePresenter = () => {
@@ -28,6 +29,8 @@ console.log("ownedServices: ", ownedServices);
   //updateStreamingServiceList();
 
   return (
+    <>
+    <BacknHomeButton />
     <UserPageView
       streamingServices={ownedServices}
       services={services}
@@ -37,6 +40,7 @@ console.log("ownedServices: ", ownedServices);
       onAddServiceButton={addService}
       onEdit={doEdit}
     />
+    </>
   );
 };
 

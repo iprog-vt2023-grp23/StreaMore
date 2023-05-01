@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
 import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList } from "./myListsSlice";
 import { useEffect } from "react";
+import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
 const MyListsPagePresenter = () => {
   const movieLists = useSelector(getMovieLists);
@@ -67,7 +68,11 @@ const MyListsPagePresenter = () => {
     }
   }, [movieLists])
 
-  return <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList}/>
+  return <>
+  <BacknHomeButton/>
+  <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList}/>
+  </>
+
 };
 
 export default MyListsPagePresenter;

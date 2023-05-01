@@ -1,0 +1,34 @@
+.backButton { 
+    --width: 30px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: var(--width);
+    height: var(--width);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.homeButton { 
+    --width: 30px;
+    position: absolute;
+    top: 15px;
+    left: 55px;
+    width: var(--width);
+    height: var(--width);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/*Hover effekter bara för datorer, aka breda skärmar*/
+@media (min-width: 800px) {
+    .backButton:hover,
+    .homeButton:hover {
+        color: var(--imdb-gold);
+        transition: color 50ms linear;
+    }
+  }
