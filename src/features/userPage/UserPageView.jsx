@@ -1,9 +1,18 @@
 import iconMapping from "../uiComponents/StreamingButtons";
 import { FaUserCircle } from "react-icons/fa";
+import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import "./UserPage.css";
 
 const UserPageView = (props) => {
+  const keyDown = (e) => {
+    //props.onKeyDown(e);
+  };
+  const usernameEditChanged = (e) => {
+    //props.onUsernameChanged(e);
+  }
+
+
   console.log("props ", props);
   /*
    *Renders all services that are retrieved from the api
@@ -51,6 +60,21 @@ const UserPageView = (props) => {
     );
   });
 
+  const editUsername = () => {
+    if(props.isEdit) {
+      
+      return (<div>
+        <h3>Edit Username:</h3>
+        <InputText id="username" value={props.username} onChange={usernameEditChanged} onKeyDown={keyDown}/>
+      </div>
+      );
+    }
+    return (<div>
+        <h3>{props.username}</h3>
+        <p className="email" >{props.username}@test.com</p>
+      </div>);
+  }
+
   //console.log("user: ", props.userEmail);
 
   return (
@@ -58,8 +82,7 @@ const UserPageView = (props) => {
         <Button className="edituser" label={props.isEdit? "Done" : "Edit"} onClick={props.onEdit} size="small" outlined/>
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
-        <h3>{props.username}</h3>
-        <p className="email" >{props.username}@test.com</p>
+        {editUsername()}
         <h3>My services: {props.isEdit} </h3>
         {renderStreamingServices}
         <p></p>
