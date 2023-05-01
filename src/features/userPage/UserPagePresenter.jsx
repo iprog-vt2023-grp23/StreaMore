@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getUsername, getStreamingServices, getAvailableServices, getEditmode, toggleEdit, addStreamingService, removeStreamingService } from "./userPageSlice";
+import { updateStreamingServiceList, getUsername, getStreamingServices, getAvailableServices, getEditmode, toggleEdit, addStreamingService, removeStreamingService } from "./userPageSlice";
 import UserPageView from "./UserPageView";
 
 
@@ -7,9 +7,10 @@ const UserPagePresenter = () => {
   const dispatch = useDispatch();
   const username = useSelector(getUsername);
   const ownedServices = useSelector(getStreamingServices);
+  const services      = useSelector(getAvailableServices);
   const editmode = useSelector(getEditmode);
 
-  const services = useSelector(getAvailableServices);
+console.log("ownedServices: ", ownedServices);
 
   /*
    *Unselects or selects streaming services by dispatching them to the Slice
@@ -23,6 +24,8 @@ const UserPagePresenter = () => {
   const doEdit = (e) => {
     dispatch(toggleEdit(e.currentTarget.value));
   }
+
+  //updateStreamingServiceList();
 
   return (
     <UserPageView
