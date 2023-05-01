@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
-import { getMovieLists, selectMovieList, getSelectedList } from "./myListsSlice";
+import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList } from "./myListsSlice";
 import { useEffect } from "react";
 
 const MyListsPagePresenter = () => {
@@ -11,13 +11,59 @@ const MyListsPagePresenter = () => {
     dispatch(selectMovieList(list.name))
   }
 
+  // const [showAddToListMenu, setShowAddToListMenu] = useState(false);
+
+  const removeMovieFromList = (movie) => {
+    console.log("selectedList is ", selectedList)
+    dispatch(removeMovieFromMovieList({name: selectedList, movie: movie}))
+  }
+
+
+
+  const getItems = (movie) => {
+    return [
+      {
+        label: "Minus",
+        icon: "pi pi-minus",
+        command: () => {
+          removeMovieFromList(movie);
+        }
+      },
+      {
+        label: "Notify",
+        icon: "pi pi-bell",
+        command: () => {
+          console.log("Notify user plis");
+        }
+      }
+    ]
+  }
+
+
+  const items = [
+    {
+      label: "Minus",
+      icon: "pi pi-minus",
+      command: (movie) => {
+        removeMovieFromList(movie);
+      }
+    },
+    {
+      label: "Notify",
+      icon: "pi pi-bell",
+      command: () => {
+        console.log("Notify user plis");
+      }
+    }
+  ]
+
   useEffect(() => {
     if(movieLists.length > 0){
       dispatch(selectMovieList(movieLists[0].name))
     }
   }, [movieLists])
 
-  return <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList}/>
+  return <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems}/>
 };
 
 export default MyListsPagePresenter;

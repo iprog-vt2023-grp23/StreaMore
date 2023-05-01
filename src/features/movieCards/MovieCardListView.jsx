@@ -1,11 +1,12 @@
 import MovieCardView from "./MovieCardView";
-import "./MovieView.css"
+import "./MovieCardList.css"
 
 const MovieCardListView = (props) => {
   return (
     <div className="movieCardList">
       {props.movies.map((movie) => (
         <MovieCardView
+          getItems={props.getItems}
           key={movie.imdbId}
           onSelectMovie={props.selectMovie}
           onAddNewMovieList={props.onAddNewMovieList}
@@ -19,4 +20,4 @@ const MovieCardListView = (props) => {
   );
 };
 
-export default MovieCardListView;
+ export default MovieCardListView;

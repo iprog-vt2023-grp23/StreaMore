@@ -5,8 +5,8 @@ import {
   setStateCountry,
   getCountry,
   setStateKeyword,
-} from "./searchSlice";
-import country_codes_array from "./CountryCodes";
+} from "../searchPage/searchSlice";
+import country_codes_array from "../searchPage/CountryCodes";
 import SearchBarView from "./SearchBarView";
 import { BsSearch } from "react-icons/bs";
 import "./SearchBar.css";
