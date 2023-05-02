@@ -1,5 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateStreamingServiceList, getUsername, getStreamingServices, getAvailableServices, getEditmode, toggleEdit, addStreamingService, removeStreamingService } from "./userPageSlice";
+import { 
+  updateStreamingServiceList, 
+  getUsername, 
+  getStreamingServices, 
+  getAvailableServices, 
+  getEditmode, 
+  toggleEdit, 
+  addStreamingService, 
+  removeStreamingService } from "./userPageSlice";
 import UserPageView from "./UserPageView";
 
 
@@ -23,7 +31,7 @@ console.log("ownedServices: ", ownedServices);
   };
   const doEdit = (e) => {
     dispatch(toggleEdit(e.currentTarget.value));
-  }
+  };
 
   //updateStreamingServiceList();
 
