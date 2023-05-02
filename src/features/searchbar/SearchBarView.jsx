@@ -23,8 +23,9 @@ const SearchBarView = (props) => {
 
   const items = [
     {
-      label: "Filter",
+      label: "Filter Country",
       icon: "pi pi-filter",
+      visible: false, // om inte tryckt på
     },
   ];
 
@@ -39,17 +40,22 @@ const SearchBarView = (props) => {
       {/* <h2>Search</h2> */}
       <form>
         <div>
+        <div>
           <span className="p-float-label">
             <InputText id="search" className="searchinput" value={props.keyword} onChange={keywordChanged} onKeyDown={keyDown}/>
             <label htmlFor="search">Search for a film</label>
           </span>
         </div>
         <div>
-           <SplitButton text raised menuButtonClassName="jaj" buttonClassName="jaj" disabled={/*!props.keyword*/false} icon="pi pi-search" onClick={props.onSearch} model={items}></SplitButton>
-          <span className="p-float-label">
+        <span className="p-float-label" style={{'margin-top':`40px`}}>
             <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />
             <label htmlFor="dd-country">Select country</label>
           </span>
+           
+        </div>
+        </div>
+        <div>
+        <SplitButton text raised menuButtonClassName="jaj" buttonClassName="jaj" disabled={/*!props.keyword*/false} icon="pi pi-search" onClick={props.onSearch} model={items}></SplitButton>
         </div>
       </form>
     </section>
