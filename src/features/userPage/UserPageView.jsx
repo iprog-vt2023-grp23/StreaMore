@@ -7,9 +7,11 @@ import "./UserPage.css";
 const UserPageView = (props) => {
   const keyDown = (e) => {
     //props.onKeyDown(e);
+    console.log("Key down", e);
   };
   const usernameEditChanged = (e) => {
     //props.onUsernameChanged(e);
+    console.log("Username Changed to", e);
   }
 
 
