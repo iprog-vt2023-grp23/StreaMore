@@ -8,6 +8,7 @@ body {
   --white: #ffffff;
   --shadow-color: rgba(0, 0, 0, 0.75);
   --border-focus-color: rgba(128, 128, 128, 0.5);
+  --input-hover-color: rgba(44, 44, 44, 0.616);
   /* Se till att kalla på dessa ^ när ni stylar. Ni kan också ändra/lägga till nya variabler här */
 
   color-scheme: light dark;

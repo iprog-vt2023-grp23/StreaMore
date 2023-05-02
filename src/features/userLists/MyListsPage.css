@@ -8,6 +8,7 @@
 
 .MyListsPageView > h2 {
     margin-bottom: 0px;
+    
 
 }
 
@@ -17,6 +18,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    /* margin-block: 8px; */
 }
 
 .listMenu ul {
@@ -76,7 +78,10 @@
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
-    margin-top: 8px;
+    margin-top: 3px;
+    padding: 5px;
+    border-bottom: 1px solid var(--white);
+
 }
 
 .deleteListIcon, .editListIcon {
@@ -92,3 +97,26 @@
         transition: color 50ms linear;
     }
   }
+
+  .h2 input {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 1.4rem;
+    margin: 0px;
+    font: inherit;
+    cursor: pointer;
+    background-color: var(--border-focus-color);
+}
+.h2 form {
+    display: flex;
+    padding: 1.4rem;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.checkmark {
+    font-size: 1.2rem;
+}

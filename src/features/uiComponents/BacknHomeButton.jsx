@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BacknHomeButton.css';
 import {IoMdArrowRoundBack} from 'react-icons/io';
-import { AiFillHome } from 'react-icons/ai';
 import { TiHome } from 'react-icons/ti';
 
 const BacknHomeButton = () => {

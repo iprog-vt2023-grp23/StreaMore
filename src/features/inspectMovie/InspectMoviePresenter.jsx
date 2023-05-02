@@ -31,7 +31,7 @@ const InspectMoviePresenter = () => {
   if (selectedMovie)
     return (
       <>
-      <BackButton />
+      <BacknHomeButton />
       <div className="Search">
         {/*RenderMovie will render the selected movie*/}
         {/* <MovieCardListView movies={[selectedMovie]} /> */}
