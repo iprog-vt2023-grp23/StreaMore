@@ -1,6 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateStreamingServiceList, getUsername, getStreamingServices, getAvailableServices, getEditmode, toggleEdit, addStreamingService, removeStreamingService } from "./userPageSlice";
-import UserPageView from "./UserPageView";
+import { 
+  updateStreamingServiceList, 
+  getUsername, 
+  getStreamingServices, 
+  getAvailableServices, 
+  getEditmode, 
+  toggleEdit, 
+  addStreamingService, 
+  removeStreamingService } from "./userPageSlice";
+  import UserPageView from "./UserPageView";
 
 
 const UserPagePresenter = () => {

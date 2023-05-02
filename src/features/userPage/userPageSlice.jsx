@@ -16,6 +16,9 @@ const initialState = {
  *Fetches all available streaming services that the api can handle.
  *Might be better to simply have a predetermined list to avoid extra api call.
  *EDIT Currently not used, instead streamingServices is used
+
+ StreamingServices = User's selection
+ Services = list of all possible services that can be selected
  */
 export const getServices = createAsyncThunk(
   "userPage/getServices",
@@ -54,7 +57,7 @@ const userPageSlice = createSlice({
       state.editing = !state.editing;
     },
     updateStreamingServiceList(state, action) {
-      state.services = streamingServices;
+      //state.services = streamingServices;
       state.ownedServices = action.payload;
       console.log("fetching onwed services", state.ownedServices, "should equal", action.payload);
     },
@@ -63,7 +66,7 @@ const userPageSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(getServices.fulfilled, (state, action) => {
       state.services = Object.keys(action.payload.result);
-      //state.ownedServices = Object.keys(action.payload.result);
+      state.ownedServices = Object.keys(action.payload.result);
     });
   },
 });

@@ -68,8 +68,10 @@ export default function Firebase() {
     actionCreator: addStreamingService,
     effect: async(action, listenerApi) => {
       const state = listenerApi.getState();
+      const usersServices = state.userPage.ownedServices.reduce((val,i)=> (val[i]=''+i,val),{}); //convert array->obj
+      console.log("rez: ",usersServices)
       console.log("Service added", action.payload, state.userPage.userId)
-      set(ref(database, "serviceList/" + state.userPage.userId),action.payload);    }
+      set(ref(database, "serviceList/" + state.userPage.userId),usersServices);    }
   })
   listenerMiddleware.startListening({
     actionCreator: removeStreamingService,
@@ -107,7 +109,7 @@ export default function Firebase() {
         });
         
         onValue(ref(database, "serviceList/" + newuserId), (data) => {
-          const lists = [data.val()];
+          const lists = Object.keys(data.val()); //convert obj->array
           console.log("Service list fetched", lists)
           if(lists)
             dispatch(updateStreamingServiceList(lists));
