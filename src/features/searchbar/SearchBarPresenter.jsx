@@ -66,6 +66,44 @@ const SearchBar = () => {
     }
   }
 
+  const [countryVisible, setCountryVisible] = useState(false);
+  const [genreVisible, setGenreVisible] = useState(false);
+
+  const filter_items = [
+    {
+      label: "Filter Country",
+      icon: "pi pi-filter",
+      visible: !countryVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setCountryVisible(true);
+      }
+    },
+    {
+      label: "Filter Country",
+      icon: "pi pi-minus",
+      visible: countryVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setCountryVisible(false);
+      }
+    },
+    {
+      label: "Filter Genre",
+      icon: "pi pi-filter",
+      visible: !genreVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setGenreVisible(true);
+      }
+    },
+    {
+      label: "Filter Genre",
+      icon: "pi pi-minus",
+      visible: genreVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setGenreVisible(false);
+      }
+    },
+  ];
+
   //Function that gets all possible country names from CountryCodes
   const countryOptions = Object.values(country_codes_array).map((country) => (
     <option key={country} value={country}>
