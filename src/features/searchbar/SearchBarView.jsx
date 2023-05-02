@@ -4,6 +4,8 @@ import "./SearchBar.css";
 import { InputText } from 'primereact/inputtext';
 import { SplitButton } from 'primereact/splitbutton';
 import { Dropdown } from 'primereact/dropdown';
+
+import { useState } from "react";
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
     
@@ -21,12 +23,25 @@ const SearchBarView = (props) => {
     props.onKeywordChanged(e);
   };
 
+  const [countryVisible, setCountryVisible] = useState(false);
+
   const items = [
     {
       label: "Filter Country",
       icon: "pi pi-filter",
-      visible: false, // om inte tryckt på
+      visible: !countryVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setCountryVisible(true);
+      }
     },
+    {
+      label: "Filter Country",
+      icon: "pi pi-minus",
+      visible: countryVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setCountryVisible(false);
+      }
+    }
   ];
 
   const country_codes = Object.keys(props.country_codes_array).map((key) => {
@@ -48,8 +63,7 @@ const SearchBarView = (props) => {
         </div>
         <div>
         <span className="p-float-label" style={{'margin-top':`40px`}}>
-            <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />
-            <label htmlFor="dd-country">Select country</label>
+            {countryVisible ? <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />: null}
           </span>
            
         </div>
