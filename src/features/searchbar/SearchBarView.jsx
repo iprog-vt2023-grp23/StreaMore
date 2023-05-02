@@ -39,7 +39,7 @@ const SearchBarView = (props) => {
       {/* <h2>Search</h2> */}
       <form>
         <span className="p-float-label">
-          <InputText id="search" className="searchinput" value={props.keyword} onChange={keywordChanged}/>
+          <InputText id="search" className="searchinput" value={props.keyword} onChange={keywordChanged} onKeyDown={keyDown}/>
           <label htmlFor="search">Search for a film</label>
         </span>
         <div>
