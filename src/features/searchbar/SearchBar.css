@@ -3,16 +3,19 @@
   flex-direction: column;
   align-items: center;
   padding: 15px;
+  /* border: 1px solid brown; */
+  width: 1000px;
 }
 
 .searchBar > form {
   padding: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 300px;
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 500px;
   height: 100%;
+  /* border: 1px solid brown; */
 }
 
 .searchBar > form > div {
@@ -22,11 +25,11 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  margin: 30px;
+  /* margin: 30px; */
 }
 
 /* Targeta den/de button(s) som är ett direkt child till div som är ett direkt child till form som är ett direkt child till .searchBar */
-.searchBar > form > div > button {
+/* .searchBar > form > div > button {
   margin-top: 10px;
   background-color: var(--light-grey);
   margin-left: 10px;
@@ -34,9 +37,9 @@
   padding-block: 0.4rem;
   border-radius: 30px;
   font-size: 1rem;
-}
+} */
 
-.searchBar > form > div > select {
+/* .searchBar > form > div > select {
   margin-top: 10px;
   padding-inline: 0px;
   padding-block: 10px;
@@ -58,7 +61,7 @@
   appearance: none;
   border: none;
   font-size: 1rem;
-}
+} */
 
 
 /* CSS for Search field */
@@ -71,6 +74,7 @@
   0px 4px 8px rgba(0,0,0,0.1), 
   0px 8px 16px rgba(0,0,0,0.1);
   border:none;
+  width: 350px;
 }
 
 .searchinput:hover {
@@ -120,7 +124,8 @@
 
 /* CSS for Search Button */
 .p-splitbutton {
-  width: 200px;
+  width: 100px;
+  height: 44px;
   margin-bottom: 40px;
 }
 
