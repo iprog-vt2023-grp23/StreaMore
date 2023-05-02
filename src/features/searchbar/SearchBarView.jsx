@@ -24,6 +24,7 @@ const SearchBarView = (props) => {
   };
 
   const [countryVisible, setCountryVisible] = useState(false);
+  const [genreVisible, setGenreVisible] = useState(false);
 
   const items = [
     {
@@ -41,15 +42,35 @@ const SearchBarView = (props) => {
       command: () => {
         setCountryVisible(false);
       }
-    }
+    },
+    {
+      label: "Filter Genre",
+      icon: "pi pi-filter",
+      visible: !genreVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setGenreVisible(true);
+      }
+    },
+    {
+      label: "Filter Genre",
+      icon: "pi pi-minus",
+      visible: genreVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      command: () => {
+        setGenreVisible(false);
+      }
+    },
   ];
 
   const country_codes = Object.keys(props.country_codes_array).map((key) => {
     return {name: props.country_codes_array[key], code: key}
   })
 
+  // const genre_codes = [{genre: "genre", code: "code", genre: "genre2", code: "code2", genre: "genre3", code: "code3"}]
+  const genre_codes = [{genre: "genre", code: "code"}, {genre: "genre2", code: "code2"}, {genre: "genre3", code: "code3"}]
   const current = country_codes.find((element) => element.code === props.country.toUpperCase())
-  console.log(current)
+  const cyrrent = {genre: "genre", code: "code"};
+  console.log(country_codes)
+  console.log(genre_codes)
   return (
     <section className="searchBar">
       {/* <h2>Search</h2> */}
@@ -62,10 +83,12 @@ const SearchBarView = (props) => {
           </span>
         </div>
         <div>
-        <span className="p-float-label" style={{'margin-top':`40px`}}>
+        <span className="p-float-label" style={{'marginTop':`40px`}}>
             {countryVisible ? <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />: null}
           </span>
-           
+          <span className="p-float-label" style={{'marginTop':`40px`}}>
+            {genreVisible ? <Dropdown inputId="dd-genre" showClear value={cyrrent} options={genre_codes} optionLabel="genre" className="w-full md:w-14rem" />: null}
+          </span>
         </div>
         </div>
         <div>
