@@ -37,7 +37,7 @@ const MovieListView = (props) => {
     setNewListName(props.selectedList);
     setUpdateName(prevState => !prevState);
   }
-
+  console.log(props.selectedList, "hsd")
   return (
     <section className="MyListsPageView">
       {updateName ? 

@@ -18,10 +18,8 @@ const MyListsPagePresenter = () => {
   }
 
   const removeList = (list) => {
-    dispatch(removeMovieList(list))
-    if (movieLists.length > 0){
-     dispatch(selectMovieList(movieLists[0].name))} else { dispatch(selectMovieList(null))}
-      }
+   dispatch(removeMovieList(list))
+  }
 
 
 

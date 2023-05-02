@@ -16,8 +16,14 @@ const myListsSlice = createSlice({
     },
     removeMovieList(state, action) {
         state.movieLists = state.movieLists.filter(
-            (list) => list.name !== action.payload.name
+            (list) => list.name !== action.payload
         )
+        if (state.movieLists.length > 0){
+          state.selectedList = state.movieLists[0].name;
+        }
+        else{
+          state.selectedList = null;
+        }
     },
     selectMovieList(state, action) {
       state.selectedList = action.payload;
