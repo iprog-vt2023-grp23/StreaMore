@@ -25,6 +25,7 @@ const SignInView = (props) => {
   return (
     <div className="signIn">
       <h1>Sign In Or Register</h1>
+      <font color="#ff0000">{props.authError}</font>
       <form>
         <span className="p-float-label">
           <InputText id="username" value={props.username} onChange={usernameChanged} onKeyDown={keyDown}/>
