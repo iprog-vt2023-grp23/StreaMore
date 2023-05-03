@@ -10,9 +10,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     width: 300px;
-    height: 100%;
+    height: 230px;
   }
   
   /* Targeta den/de button(s) som är ett direkt child till div som är ett direkt child till form som är ett direkt child till .searchBar */
