@@ -8,6 +8,7 @@ import {
 } from "firebase/database";
 import {
   setUsername,
+  setUserEmail,
   setUserId,
   updateStreamingServiceList,
   addStreamingService,
@@ -69,7 +70,6 @@ export default function Firebase() {
     effect: async(action, listenerApi) => {
       const state = listenerApi.getState();
       const usersServices = state.userPage.ownedServices.reduce((val,i)=> (val[i]=''+i,val),{}); //convert array->obj
-      console.log("rez: ",usersServices)
       console.log("Service added", action.payload, state.userPage.userId)
       set(ref(database, "serviceList/" + state.userPage.userId),usersServices);    }
   })
@@ -93,11 +93,12 @@ export default function Firebase() {
          *Firebase listeners are added which listens to changes in the database
          */
         const newuserId = user.uid;
+        const useremail = user.email;
         const username = user.displayName;
-        console.log("auth state", newuserId);
-        console.log("Username", username);
+        console.log("Auth state:", newuserId, "\n username\t", username, "\n useremail\t", useremail);
         if (username) dispatch(setUsername(username));
         dispatch(setUserId(newuserId));
+        dispatch(setUserEmail(useremail));
 
         onValue(ref(database, "movieLists/" + newuserId), (data) => {
           console.log("Movie list fetched", data.val())

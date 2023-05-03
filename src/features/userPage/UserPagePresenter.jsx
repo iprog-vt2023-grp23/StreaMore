@@ -2,18 +2,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { 
   updateStreamingServiceList, 
   getUsername, 
+  setUsername,
   getStreamingServices, 
   getAvailableServices, 
   getEditmode, 
   toggleEdit, 
   addStreamingService, 
-  removeStreamingService } from "./userPageSlice";
+  removeStreamingService, 
+  getUserEmail } from "./userPageSlice";
   import UserPageView from "./UserPageView";
 
 
 const UserPagePresenter = () => {
   const dispatch = useDispatch();
   const username = useSelector(getUsername);
+  const useremail = useSelector(getUserEmail);
   const ownedServices = useSelector(getStreamingServices);
   const services      = useSelector(getAvailableServices);
   const editmode = useSelector(getEditmode);
@@ -32,6 +35,9 @@ console.log("ownedServices: ", ownedServices);
   const doEdit = (e) => {
     dispatch(toggleEdit(e.currentTarget.value));
   }
+  const editUsername = (e) => {
+    dispatch(setUsername(e));
+  }
 
   //updateStreamingServiceList();
 
@@ -40,10 +46,12 @@ console.log("ownedServices: ", ownedServices);
       streamingServices={ownedServices}
       services={services}
       username={username}
+      useremail={useremail}
       isEdit={editmode}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
       onEdit={doEdit}
+      changeUsername={editUsername}
     />
   );
 };

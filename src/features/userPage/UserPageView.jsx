@@ -11,6 +11,7 @@ const UserPageView = (props) => {
   };
   const usernameEditChanged = (e) => {
     //props.onUsernameChanged(e);
+    props.changeUsername(e);
     console.log("Username Changed to", e);
   }
 
@@ -73,7 +74,7 @@ const UserPageView = (props) => {
     }
     return (<div>
         <h3>{props.username}</h3>
-        <p className="email" >{props.username}@test.com</p>
+        <p className="email" >{props.useremail}</p>
       </div>);
   }
 
