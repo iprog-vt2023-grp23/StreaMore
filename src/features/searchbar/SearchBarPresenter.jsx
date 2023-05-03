@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   searchFilms,
@@ -9,6 +9,7 @@ import {
 import country_codes_array from "../searchPage/CountryCodes";
 import SearchBarView from "./SearchBarView";
 import { BsSearch } from "react-icons/bs";
+import { Toast } from 'primereact/toast';
 import "./SearchBar.css";
 
 const SearchBar = () => {
@@ -16,7 +17,7 @@ const SearchBar = () => {
   const [keyword, setKeyword] = useState("");
   const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const country = useSelector(getCountry);
-
+  const toast = useRef(null);
   //Functions for changing the current sate as well as setting the store state
   const keywordChanged = (e) => setKeyword(e.target.value);
   const countryChanged = (e) => {
@@ -35,7 +36,7 @@ const SearchBar = () => {
   //Function for the search button
   const search = () => {
     //Don't allow user to spam search button faster than a response can be received
-    if (searchRequestStatus === "idle") {
+    if (searchRequestStatus === "idle" && keyword && country) {
       try {
         setSearchRequestStatus("pending");
         /* 
@@ -55,6 +56,15 @@ const SearchBar = () => {
       } finally {
         setSearchRequestStatus("idle");
       }
+    }
+    else if (!keyword && country) {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field', life: 3000 });
+    }
+    else if (keyword && !country) {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please select a country', life: 3000 });
+    }
+    else {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field and select a country', life: 3000 });
     }
   };
 
@@ -100,6 +110,8 @@ const SearchBar = () => {
       visible: genreVisible, 
       command: () => {
         setGenreVisible(false);
+        console.log("toast", toast.current)
+    toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
       }
     },
   ];
@@ -115,6 +127,8 @@ const SearchBar = () => {
   
 
   return (
+    <div>
+    <Toast ref={toast} position="top-left"/>
     <SearchBarView
       country_codes_array={country_codes_array}
       country={country}
@@ -128,6 +142,7 @@ const SearchBar = () => {
       onSearch={search}
       onCountryChanged={countryChanged}
     />
+    </div>
   );
 };
 
