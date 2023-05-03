@@ -73,7 +73,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-filter",
-      visible: !countryVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      visible: !countryVisible, 
       command: () => {
         setCountryVisible(true);
       }
@@ -81,7 +81,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-minus",
-      visible: countryVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      visible: countryVisible, 
       command: () => {
         setCountryVisible(false);
       }
@@ -89,7 +89,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-filter",
-      visible: !genreVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      visible: !genreVisible, 
       command: () => {
         setGenreVisible(true);
       }
@@ -97,7 +97,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-minus",
-      visible: genreVisible, // om inte tryckt på FLYTTA UT TILL PRESENTER
+      visible: genreVisible, 
       command: () => {
         setGenreVisible(false);
       }
@@ -120,6 +120,9 @@ const SearchBar = () => {
       country={country}
       keyword={keyword}
       countryOptions={countryOptions}
+      filter_items={filter_items}
+      countryVisible={countryVisible}
+      genreVisible={genreVisible}
       onKeywordChanged={keywordChanged}
       onKeyDown={keyDown}
       onSearch={search}
