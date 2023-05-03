@@ -6,14 +6,12 @@ import "./UserPage.css";
 
 const UserPageView = (props) => {
   const keyDown = (e) => {
-    //props.onKeyDown(e);
-    console.log("Key down", e);
+    props.onKeyDown(e);
   };
-  const usernameEditChanged = (e) => {
-    //props.onUsernameChanged(e);
-    props.changeUsername(e);
-    console.log("Username Changed to", e);
-  }
+  const usernameChanged = (e) => {
+    console.log("usernameChanged triggered!\n action-object:", e);
+    props.onUsernameChanged(e);
+  };
 
 
   console.log("props ", props);
@@ -68,7 +66,7 @@ const UserPageView = (props) => {
       
       return (<div>
         <h3>Edit Username:</h3>
-        <InputText id="username" value={props.username} onChange={usernameEditChanged} onKeyDown={keyDown}/>
+        <InputText id="username" value={props.username} onChange={usernameChanged} onKeyDown={keyDown}/>
       </div>
       );
     }

@@ -34,9 +34,15 @@ console.log("ownedServices: ", ownedServices);
   };
   const doEdit = (e) => {
     dispatch(toggleEdit(e.currentTarget.value));
-  }
-  const editUsername = (e) => {
-    dispatch(setUsername(e));
+  };
+  const usernameChanged = (e) => setUsername(e.target.value);
+
+  //Done Editing Username when enter key is pressed
+  function keyDown(e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); //Dont reload the page
+      console.log("clicked enter");
+    }
   }
 
   //updateStreamingServiceList();
@@ -51,7 +57,8 @@ console.log("ownedServices: ", ownedServices);
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
       onEdit={doEdit}
-      changeUsername={editUsername}
+      onUsernameChanged={usernameChanged}
+      onKeyDown={keyDown}
     />
   );
 };
