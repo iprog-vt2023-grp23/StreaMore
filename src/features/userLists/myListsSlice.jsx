@@ -44,6 +44,9 @@ const myListsSlice = createSlice({
                 if(list.movies === undefined){
                     list.movies = [];
                 }
+                if(list.movies.find((movie) => movie.imdbId === action.payload.movie.imdbId)){
+                    return list;
+                }
                 list.movies.push(action.payload.movie);
             }
             return list;

@@ -34,11 +34,12 @@
 
 .userprofile {
     text-align: center;
+    width: 100%;
 }
 .edituser {
-    display: block;
-    margin-top: 5px;
-    margin-bottom: -24px;
+    position: absolute;
+    top: 242px;
+    right: calc(50% - 30px);
 }
 .email {
     color:lightgray;

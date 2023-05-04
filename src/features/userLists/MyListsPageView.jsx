@@ -10,14 +10,17 @@ const MovieListView = (props) => {
   //const [selectedList, setSelectedList] = useState("");
   const [updateName, setUpdateName] = useState(false);
   const [newListName, setNewListName] = useState(props.selectedList);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const setSelectedList = (list) => {
+    setNewListName("");
+    setUpdateName(false);
     props.onSelectList(list);
   }
 
-  const updateListname = (e) => {
+  const updateListName = (e) => {
     e.preventDefault();
-    // props.onupdateListname(newListName);
+    props.updateListName(newListName);
     setUpdateName(false);
     setNewListName("");
   }
@@ -38,33 +41,48 @@ const MovieListView = (props) => {
     setUpdateName(prevState => !prevState);
   }
 
+  const newNameForm = () => {
+    return (
+      <form onSubmit={(e) => updateListName(e)} className="updateListNameForm">
+              <input autoFocus type="text" id="newListName" className="newListName" value={newListName} onChange={editListName}/>
+              <div>
+              <ImCheckmark className="checkmark" onClick={(e) => updateListName(e)}/>
+              <ImCross className="cross" onClick={cancelUpdateListName}/>
+              </div>
+            </form>
+    )
+  }
+
+  const editListButtons = () => {
+    return (
+      <div className="editIcons">
+      <RiDeleteBin6Line className="deleteListIcon" onClick={() => props.removeMovieList(props.selectedList)}/>
+      <RiEdit2Line className="editListIcon" onClick={toggleEditListName}/>
+      </div>
+    )
+  }
+
+  const listMenu = () => {
+    return (
+    <div className="listMenu">
+      <ul>
+        {props.movieLists.map((list) => (
+          <li key={list.name} className={props.selectedList === list.name ? "selectedListItem" : "listItem"} onClick={() => setSelectedList(list)}>
+            {list.name}
+          </li>
+        ))}
+      </ul>
+    </div> 
+    )
+  }
+
+
 
   return (
     <section className="MyListsPageView">
-      {updateName ? 
-              <h2><form onSubmit={updateListname} className="updateListNameForm">
-              <input autoFocus type="text" id="newListName" className="newListName" value={newListName} onChange={editListName}/>
-              <div>
-              <ImCheckmark className="checkmark" onClick={updateListname}/>
-              <ImCross className="cross" onClick={cancelUpdateListName}/>
-              </div>
-            </form></h2>
-      : <h2>{props.selectedList}</h2>}
-      {props.selectedList && <div className="editIcons">
-      <RiDeleteBin6Line className="deleteListIcon" onClick={() => props.removeMovieList(props.selectedList)}/>
-      <RiEdit2Line className="editListIcon" onClick={toggleEditListName}/>
-      </div>}
-        <div className="listMenu">
-          <ul>
-            {props.movieLists.map((list) => (
-              <li key={list.name} className={props.selectedList === list.name ? "selectedListItem" : "listItem"} onClick={() => setSelectedList(list)}>
-                {list.name}
-                {/* <BsThreeDotsVertical className="listMenuIcon" /> */}
-              </li>
-            ))}
-          </ul>
-        </div>
-
+      {updateName ? <h2>{newNameForm()}</h2> : <h2 className="listTitle" onClick={toggleEditListName}>{props.selectedList}</h2>}
+      {props.selectedList && editListButtons()}
+      {listMenu()}
         <div className="listContent">
           {props.selectedList !== null ? (
             <MovieCardList movies={props.movieLists.find(list => list.name === props.selectedList).movies} getItems={props.getItems}

@@ -8,12 +8,14 @@ const MyListsPagePresenter = () => {
   const movieLists = useSelector(getMovieLists);
   const selectedList = useSelector(getSelectedList);
   const dispatch = useDispatch();
+
+
+
   const selectList = (list) => {
     dispatch(selectMovieList(list.name))
   }
 
   const removeMovieFromList = (movie) => {
-    console.log("selectedList is ", selectedList)
     dispatch(removeMovieFromMovieList({name: selectedList, movie: movie}))
   }
 
@@ -21,12 +23,18 @@ const MyListsPagePresenter = () => {
    dispatch(removeMovieList(list))
   }
 
-  const updateListname = (newListName) => {
-    oldList = selectedList;
+  const updateListName = (newListName) => {
+    if(newListName === "" || newListName === selectedList){
+      return;
+    }
+    const oldList = movieLists.find(list => list.name === selectedList).movies;
     dispatch(addNewMovieList(newListName));
     oldList.forEach(movie => { 
-      
-    })}
+      dispatch(addMovieToMovieList({listName: newListName, movie: movie}))
+    })
+    dispatch(removeMovieList(selectedList))
+    dispatch(selectMovieList(newListName))
+  }
 
 
 
@@ -57,7 +65,7 @@ const MyListsPagePresenter = () => {
 
   return <>
   <BacknHomeButton/>
-  <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList}/>
+  <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList} updateListName={updateListName}/>
   </>
 
 };

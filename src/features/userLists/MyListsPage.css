@@ -6,9 +6,9 @@
     justify-content: center;
 }
 
-.MyListsPageView > h2 {
+.listTitle {
+    cursor: pointer;
     margin-bottom: 0px;
-    
 
 }
 
@@ -104,7 +104,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5px;
+    margin:0;
 }
 
 .updateListNameForm input {
@@ -121,5 +121,39 @@
 
 
 .checkmark {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
+    margin-inline: 5px;
+}
+
+@media (max-width: 800px) {
+    .updateListNameForm {
+        position: absolute;
+        --width: 100vw;
+        --height: 100vh;
+        height: 100vh;
+        width: var(--width);
+        z-index: 1000000;
+        backdrop-filter: blur(3px);
+        left: 0;
+        top: 0;
+    }
+
+    .updateListNameForm input {
+        position: absolute;
+        bottom: 90%;
+    }
+
+    .checkmark {
+        position: absolute;
+        bottom: 85%;
+        right: 50%;
+    }
+
+    .cross {
+        position: absolute;
+        bottom: 85%;
+        left: 50%
+    }
+  
+    
 }

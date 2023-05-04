@@ -15,7 +15,9 @@ const AddToListMenuView = (props) => {
 
     const addNewMovieList = (e) => {
       e.preventDefault();
-      props.onAddNewMovieList(newListName);
+      if(newListName !== ""){
+        props.onAddNewMovieList(newListName);
+      }
       setShowCreateNewList(false);
       setNewListName("");
     }
