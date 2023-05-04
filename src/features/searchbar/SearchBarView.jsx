@@ -31,6 +31,9 @@ const SearchBarView = (props) => {
   const current = country_codes.find((element) => element.code === props.country.toUpperCase())
   // const cyrrent = {genre: "genre", code: "code"};
   console.log(country_codes)
+  console.log("myServices", props.services)
+
+  
   // console.log(genre_codes)
   return (
     <section className="searchBar">
@@ -45,11 +48,11 @@ const SearchBarView = (props) => {
         </div>
         <div>
         <span className="p-float-label" style={{'marginTop':`40px`}}>
+            {props.servicesVisible ? <Dropdown inputId="dd-service" showClear value={{name: "All Services", code: -1}} onChange={props.onServiceChanged} options={props.services} optionLabel="name" className="w-full md:w-14rem" />: null}
+        </span>
+        <span className="p-float-label" style={{'marginTop':`40px`}}>
             {props.countryVisible ? <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />: null}
-          </span>
-          {/* <span className="p-float-label" style={{'marginTop':`40px`}}>
-            {props.genreVisible ? <Dropdown inputId="dd-genre" showClear value={cyrrent} options={genre_codes} optionLabel="genre" className="w-full md:w-14rem" />: null}
-          </span> */}
+        </span>
         </div>
         </div>
         <div>

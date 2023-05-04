@@ -30,6 +30,21 @@ export const searchFilms = createAsyncThunk(
   }
 );
 
+export const searchFilmsServiceGenre = createAsyncThunk(
+  "searchBar/searchFilms",
+  async (params) => {
+    const url = sourceUrl.concat("v2/search/basic?", params.join("&"));
+    console.log("url", url);
+    const response = await fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        return json;
+      })
+      .catch((err) => console.error("error:" + err));
+    return response;
+  }
+);
+
 const searchSlice = createSlice({
   name: "searchResulst",
   initialState,

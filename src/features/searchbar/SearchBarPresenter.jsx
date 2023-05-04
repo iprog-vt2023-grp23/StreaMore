@@ -6,6 +6,7 @@ import {
   getCountry,
   setStateKeyword,
 } from "../searchPage/searchSlice";
+import { getStreamingServices } from "../userPage/userPageSlice"
 import country_codes_array from "../searchPage/CountryCodes";
 import SearchBarView from "./SearchBarView";
 import { BsSearch } from "react-icons/bs";
@@ -15,6 +16,8 @@ import "./SearchBar.css";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
+  const [genre, setGenre] = useState("");
+  const [services, setServices] = useState([]);
   const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const country = useSelector(getCountry);
   const toast = useRef(null);
@@ -30,6 +33,15 @@ const SearchBar = () => {
     }
     else {
       dispatch(setStateCountry(""));
+    }
+  };
+
+  const genreChanged = (e) => setGenre(e.target.value);
+  
+  const servicesChanged = (e) => {
+    if (e.target.value) {
+      setServices([...services, e.target.value]);
+      console.log("Updated selected services: ", services);
     }
   };
 
@@ -75,11 +87,35 @@ const SearchBar = () => {
       search();
     }
   }
-
+  const streamingServices = useSelector(getStreamingServices);
+  // myServices = [{name: streaminServices[key], code: key]}]
+  const myServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
+  // Add name: All Services code: -1 to myServices
+  myServices.unshift({name: "All Services", code: -1});
+  myServices.unshift({name: "All My Services", code: -2});
+  // Capitalise first letter in each service name
+  console.log("streams", streamingServices);
   const [countryVisible, setCountryVisible] = useState(false);
+  const [servicesVisible, setServicesVisible] = useState(false);
   const [genreVisible, setGenreVisible] = useState(false);
 
   const filter_items = [
+    {
+      label: "Filter Services",
+      icon: "pi pi-filter",
+      visible: !servicesVisible,
+      command: () => {
+        setServicesVisible(true);
+      }
+    },
+    {
+      label: "Filter Services",
+      icon: "pi pi-minus",
+      visible: servicesVisible,
+      command: () => {
+        setServicesVisible(false);
+      }
+    },
     {
       label: "Filter Country",
       icon: "pi pi-filter",
@@ -131,16 +167,20 @@ const SearchBar = () => {
     <Toast ref={toast} position="top-left"/>
     <SearchBarView
       country_codes_array={country_codes_array}
+      services={myServices}
       country={country}
       keyword={keyword}
       countryOptions={countryOptions}
       filter_items={filter_items}
       countryVisible={countryVisible}
+      servicesVisible={servicesVisible}
       genreVisible={genreVisible}
       onKeywordChanged={keywordChanged}
       onKeyDown={keyDown}
       onSearch={search}
       onCountryChanged={countryChanged}
+      onGenreChanged={genreChanged}
+      onServiceChanged={servicesChanged}
     />
     </div>
   );
