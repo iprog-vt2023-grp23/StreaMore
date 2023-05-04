@@ -5,15 +5,12 @@ import { Button } from 'primereact/button';
 import "./UserPage.css";
 
 const UserPageView = (props) => {
-  const keyDown = (e) => {
-    //props.onKeyDown(e);
-    console.log("Key down", e);
+  const keyDown = (e) => props.onKeyDown(e);
+  const onToggleEditmode = (e) => props.onEdit();
+  const usernameChanged = (e) => {
+    console.log("usernameChanged triggered!\n action-object:", e);
+    props.onUsernameChanged(e);
   };
-  const usernameEditChanged = (e) => {
-    //props.onUsernameChanged(e);
-    props.changeUsername(e);
-    console.log("Username Changed to", e);
-  }
 
 
   console.log("props ", props);
@@ -30,15 +27,9 @@ const UserPageView = (props) => {
     //for changing how and which services can be seen in edit mode
     let displayService = () => {
       if(props.isEdit) {
-        if(hasService) {
-          return "ownedService";
-        }
-        return "unOwnedService";
+        return hasService? "ownedService" : "unOwnedService";
       }
-      if(hasService) {
-        return "unOwnedService";
-      }
-      return "hiddenService";
+      return hasService? "unOwnedService" : "hiddenService";
     }
 
     //for changing which services can be edited in edit mode
@@ -68,7 +59,7 @@ const UserPageView = (props) => {
       
       return (<div>
         <h3>Edit Username:</h3>
-        <InputText id="username" value={props.username} onChange={usernameEditChanged} onKeyDown={keyDown}/>
+        <InputText id="username" value={props.username} onChange={usernameChanged} onKeyDown={keyDown}/>
       </div>
       );
     }
@@ -82,7 +73,7 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <Button className="edituser" label={props.isEdit? "Done" : "Edit"} onClick={props.onEdit} size="small" outlined/>
+        <Button className="edituser" label={props.isEdit? "Done" : "Edit"} onClick={onToggleEditmode} size="small" outlined/>
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         {editUsername()}

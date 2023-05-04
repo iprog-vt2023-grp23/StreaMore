@@ -3,24 +3,12 @@ import { InputText } from 'primereact/inputtext';
 import "./SignIn.css"
 
 const SignInView = (props) => {
-  const keyDown = (e) => {
-    props.onKeyDown(e);
-  };
-  const emailChanged = (e) => {
-    props.onEmailChanged(e);
-  };
-  const passwordChanged = (e) => {
-    props.onPasswordChanged(e);
-  };
-  const login = () => {
-    props.onLogin();
-  }
-  const register = () => {
-    props.onRegister();
-  }
-  const usernameChanged = (e) => {
-    props.onUsernameChanged(e);
-  }
+  const keyDown =          e => props.onKeyDown(e);
+  const emailChanged =     e => props.onEmailChanged(e);
+  const passwordChanged =  e => props.onPasswordChanged(e);
+  const login =           () => props.onLogin();
+  const register =        () => props.onRegister();
+  const usernameChanged =  e => props.onUsernameChanged(e);
 
   return (
     <div className="signIn">

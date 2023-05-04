@@ -26,17 +26,20 @@ console.log("ownedServices: ", ownedServices);
   /*
    *Unselects or selects streaming services by dispatching them to the Slice
    */
-  const removeService = (e) => {
-    dispatch(removeStreamingService(e.currentTarget.value));
-  };
-  const addService = (e) => {
-    dispatch(addStreamingService(e.currentTarget.value));
-  };
-  const doEdit = (e) => {
-    dispatch(toggleEdit(e.currentTarget.value));
+  const removeService = (e) => dispatch(removeStreamingService(e.currentTarget.value));
+  const addService = (e) => dispatch(addStreamingService(e.currentTarget.value));
+  const onEditmode = (e) => dispatch(toggleEdit());
+  const usernameChanged = (e) => {
+    dispatch(setUsername(e.target.value));
   }
-  const editUsername = (e) => {
-    dispatch(setUsername(e));
+
+  //Done Editing Username when enter key is pressed
+  function keyDown(e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); //Dont reload the page
+      console.log("clicked enter");
+      dispatch(toggleEdit());
+    }
   }
 
   //updateStreamingServiceList();
@@ -50,8 +53,9 @@ console.log("ownedServices: ", ownedServices);
       isEdit={editmode}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
-      onEdit={doEdit}
-      changeUsername={editUsername}
+      onEdit={onEditmode}
+      onUsernameChanged={usernameChanged}
+      onKeyDown={keyDown}
     />
   );
 };

@@ -40,6 +40,7 @@ const userPageSlice = createSlice({
   initialState,
   reducers: {
     setUsername(state, action) {
+      console.log("setting username:", action.payload);
       state.username = action.payload;
     },
     setUserEmail(state, action) {
@@ -62,10 +63,8 @@ const userPageSlice = createSlice({
       state.editing = !state.editing;
     },
     updateStreamingServiceList(state, action) {
-      //state.services = streamingServices;
       state.ownedServices = action.payload;
-      //state.ownedServices = state.ownedServices.filter()
-      console.log("fetching onwed services", state.ownedServices, "should equal", action.payload);
+      //console.log("fetching onwed services", state.ownedServices, "should equal", action.payload);
     },
   },
   //Extrareducer for when the services are fetched
