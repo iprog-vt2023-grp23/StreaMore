@@ -149,14 +149,14 @@ const SearchBar = () => {
   ];
 
   //Function that gets all possible country names from CountryCodes
-  const countryOptions = Object.values(country_codes_array).map((country) => (
-    <option key={country} value={country}>
-      {country}
-    </option>
-  ));
-
+  // const countryOptions = Object.values(country_codes_array).map((country) => (
+  //   <option key={country} value={country}>
+  //     {country}
+  //   </option>
+  // ));
+  
   const genreOptions = Object.keys(genre_codes_array).map((key) => ({name: genre_codes_array[key], code: key}));
-
+  const countryOptions = Object.keys(country_codes_array).map((key) => ({name: country_codes_array[key], code: key}));
   
   
 
