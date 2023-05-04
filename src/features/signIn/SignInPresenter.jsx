@@ -13,6 +13,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [authError, setAuthError] = useState("");
   const auth = getAuth(FirebaseApp);
 
   //Imported functions
@@ -32,6 +33,8 @@ const SignIn = () => {
     }
   }
 
+  const fielsFilled = () => email != "" && password != "" && username != "";
+
   //Dispatched the signIn action and navigates to search when sign in is complete
   const signInButton = async () => {
     console.log("signedIn");
@@ -41,21 +44,37 @@ const SignIn = () => {
       navigate("/");
     })
     .catch((err) => {
-      alert(err.message)
+      console.error("Sign in error", err.message)
+      setAuthError("Incorrect email or password")
     })
   };
 
   //Dispatched the register action and navigates to search when sign in is complete
   const registerButton = async () => {
-    console.log("Registered");
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(userCredential.user, {displayName: username})
-    .then(() => {
-      navigate("/");
-    })
-    .catch((err) => {
-      alert(err.message)
-    })
+    console.log(fielsFilled())
+    if(fielsFilled())
+      await createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        await updateProfile(userCredential.user, {displayName: username})
+        .then(() => {
+          navigate("/");
+        })
+        .catch((err) => {
+          console.error("Register error", err.message)
+          setAuthError("Please enter a username")
+        })
+      })
+      .catch((err) => {
+        console.error("Register error", err.message)
+        if(err.message.includes("auth/weak-password"))
+          setAuthError("Password needs to be at least 6 characters")
+        else if(err.message.include("auth/email-already-in-use"))
+          setAuthError("E-mail already registered")
+        else
+          setAuthError("Invalid e-mail")
+      })
+    else
+      setAuthError("Please fill out all fields")
   };
   const signOutButton = async () => {
     console.log("signedOut");
@@ -77,6 +96,7 @@ const SignIn = () => {
         email={email}
         password={password}
         username={username}
+        authError={authError}
         onEmailChanged={emailChanged}
         onPasswordChanged={passwordChanged}
         onKeyDown={keyDown}
