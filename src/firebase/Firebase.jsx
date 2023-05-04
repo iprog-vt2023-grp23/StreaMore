@@ -110,10 +110,11 @@ export default function Firebase() {
         });
         
         onValue(ref(database, "serviceList/" + newuserId), (data) => {
-          const lists = Object.keys(data.val()); //convert obj->array
-          console.log("Service list fetched", lists)
-          if(lists)
+          if(data.val()){
+            const lists = Object.keys(data.val()); //convert obj->array
+            console.log("Service list fetched", lists)
             dispatch(updateStreamingServiceList(lists));
+          }
         }, {
           onlyOnce: true
         });
