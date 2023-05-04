@@ -10,7 +10,6 @@ const UserPageView = (props) => {
   const usernameChanged = e => props.onUsernameChanged(e);
 
   let renderButtonIfNoServices = () => {
-    //console.log("t1",(!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0));
     if ((!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0)) {
       console.log("No services")
       return (<Button 
@@ -23,13 +22,10 @@ const UserPageView = (props) => {
     return renderStreamingServices;
   }
 
-  /*
-   *Renders all services that are retrieved from the api
-   */
+  //Renders all services that are retrieved from the api
   const renderStreamingServices = props.services.map((service) => {
-    //If service is in streamingServices (the users owned services) it will be rendered with the css class OwnedService, giving it a red circle
-    //The icons are fetched from StreamingButtons
-
+    //If service is in streamingServices (the users owned services):
+    //  it will be rendered with the css class OwnedService, giving it a red circle.
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
 
     //changes display of services
@@ -53,9 +49,10 @@ const UserPageView = (props) => {
         key={service}
         value={service}
       >
-        {iconMapping(service)}
+        {iconMapping(service)} 
       </button>
     );
+    //Icons are fetched from StreamingButtons: iconMapping() function
   });
 
   //for editing username
