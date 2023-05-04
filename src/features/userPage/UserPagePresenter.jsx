@@ -26,16 +26,12 @@ console.log("ownedServices: ", ownedServices);
   /*
    *Unselects or selects streaming services by dispatching them to the Slice
    */
-  const removeService = (e) => {
-    dispatch(removeStreamingService(e.currentTarget.value));
-  };
-  const addService = (e) => {
-    dispatch(addStreamingService(e.currentTarget.value));
-  };
-  const onEditmode = (e) => {
-    dispatch(toggleEdit());
-  };
-  const usernameChanged = (e) => setUsername(e.target.value);
+  const removeService = (e) => dispatch(removeStreamingService(e.currentTarget.value));
+  const addService = (e) => dispatch(addStreamingService(e.currentTarget.value));
+  const onEditmode = (e) => dispatch(toggleEdit());
+  const usernameChanged = (e) => {
+    dispatch(setUsername(e.target.value));
+  }
 
   //Done Editing Username when enter key is pressed
   function keyDown(e) {

@@ -40,6 +40,7 @@ const userPageSlice = createSlice({
   initialState,
   reducers: {
     setUsername(state, action) {
+      console.log("setting username:", action.payload);
       state.username = action.payload;
     },
     setUserEmail(state, action) {
