@@ -9,17 +9,26 @@ const UserPageView = (props) => {
   const onToggleEditmode = e => props.onEdit();
   const usernameChanged = e => props.onUsernameChanged(e);
 
-  //console.log("props ", props);
-  /*
-   *Renders all services that are retrieved from the api
-   */
-  const renderStreamingServices = props.services.map((service) => {
-    //If service is in streamingServices (the users owned services) it will be rendered with the css class OwnedService, giving it a red circle
-    //The icons are fetched from StreamingButtons
+  let renderButtonIfNoServices = () => {
+    if ((!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0)) {
+      console.log("No services")
+      return (<Button 
+        label={"Add services"} 
+        onClick={onToggleEditmode} 
+        size="small" 
+        outlined
+      />)
+    }
+    return renderStreamingServices;
+  }
 
+  //Renders all services that are retrieved from the api
+  const renderStreamingServices = props.services.map((service) => {
+    //If service is in streamingServices (the users owned services):
+    //  it will be rendered with the css class OwnedService, giving it a red circle.
     const hasService = props.streamingServices.find((ownedService) => ownedService === service);
 
-    //for changing how and which services can be seen in edit mode
+    //changes display of services
     let displayService = () => {
       if(props.isEdit) {
         return hasService? "ownedService" : "unOwnedService";
@@ -27,7 +36,7 @@ const UserPageView = (props) => {
       return hasService? "unOwnedService" : "hiddenService";
     }
 
-    //for changing which services can be edited in edit mode
+    //makes it possible to add/remove services
     let editService = () => {
       if(props.isEdit)
         return hasService? props.onRemoveServiceButton : props.onAddServiceButton;
@@ -40,11 +49,13 @@ const UserPageView = (props) => {
         key={service}
         value={service}
       >
-        {iconMapping(service)}
+        {iconMapping(service)} 
       </button>
     );
+    //Icons are fetched from StreamingButtons: iconMapping() function
   });
 
+  //for editing username
   const editUsername = () => {
     if(props.isEdit) {
       return (
@@ -63,10 +74,9 @@ const UserPageView = (props) => {
       <div>
         <h3>{props.username}</h3>
         <p className="email" >{props.useremail}</p>
-      </div>);
+      </div>
+    );
   }
-
-  //console.log("user: ", props.userEmail);
 
   return (
       <section className="userprofile">
@@ -81,7 +91,7 @@ const UserPageView = (props) => {
         <FaUserCircle size="80" />
         {editUsername()}
         <h3>My services: {props.isEdit} </h3>
-        {renderStreamingServices}
+        {renderButtonIfNoServices()}
         <p></p>
       </section>
     )

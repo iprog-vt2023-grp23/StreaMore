@@ -12,7 +12,6 @@ import {
   getUserEmail } from "./userPageSlice";
   import UserPageView from "./UserPageView";
 
-
 const UserPagePresenter = () => {
   const dispatch = useDispatch();
   const username = useSelector(getUsername);
@@ -20,8 +19,6 @@ const UserPagePresenter = () => {
   const ownedServices = useSelector(getStreamingServices);
   const services      = useSelector(getAvailableServices);
   const editmode = useSelector(getEditmode);
-
-console.log("ownedServices: ", ownedServices);
 
   /*
    *Unselects or selects streaming services by dispatching them to the Slice
@@ -41,8 +38,6 @@ console.log("ownedServices: ", ownedServices);
       dispatch(toggleEdit());
     }
   }
-
-  //updateStreamingServiceList();
 
   return (
     <UserPageView
