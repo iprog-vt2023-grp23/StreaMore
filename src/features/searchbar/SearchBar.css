@@ -1,32 +1,24 @@
 .searchBar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
   padding: 15px;
+  width: 1000px;
 }
 
 .searchBar > form {
   padding: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 300px;
+  flex-direction: row;
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 500px;
   height: 100%;
-}
-
-.searchBar > form > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  margin: 30px;
+  /* border: 1px solid brown; */
 }
 
 /* Targeta den/de button(s) som är ett direkt child till div som är ett direkt child till form som är ett direkt child till .searchBar */
-.searchBar > form > div > button {
+/* .searchBar > form > div > button {
   margin-top: 10px;
   background-color: var(--light-grey);
   margin-left: 10px;
@@ -34,9 +26,9 @@
   padding-block: 0.4rem;
   border-radius: 30px;
   font-size: 1rem;
-}
+} */
 
-.searchBar > form > div > select {
+/* .searchBar > form > div > select {
   margin-top: 10px;
   padding-inline: 0px;
   padding-block: 10px;
@@ -58,7 +50,7 @@
   appearance: none;
   border: none;
   font-size: 1rem;
-}
+} */
 
 
 /* CSS for Search field */
@@ -71,14 +63,13 @@
   0px 4px 8px rgba(0,0,0,0.1), 
   0px 8px 16px rgba(0,0,0,0.1);
   border:none;
+  width: 350px;
 }
 
-.searchinput:hover {
-  background-color: rgba(34, 32, 51, 0.616);
-}
 /* ------------------------- */
 
 /* CSS for Dropdown */
+
 .p-dropdown {
   background-color: rgb(44, 43, 43);
   -webkit-text-fill-color: white;
@@ -86,10 +77,9 @@
   box-shadow: 0px 1px 2px rgba(0,0,0,0.1), 
   0px 2px 4px rgba(0,0,0,0.5), 
   0px 4px 8px rgba(0,0,0,0.1), 
-  0px 8px 16px rgba(0,0,0,0.1);
-  border:none;
+  0px 8px 16px rgba(0,0,0,0.1);;
   width: 200px;
-  /* margin-top: 20px; */
+  /* margin-top: 30px; */
 }
 
 .p-dropdown:hover {
@@ -105,23 +95,46 @@
 }
 
 .p-dropdown-items-wrapper {
-  background-color: rgb(146, 143, 143);
+  background-color: rgb(43, 40, 40);
   border: black;
   width: 200px;
   
 }
 
-.p-dropdown-item {
-  background-color: rgb(44, 43, 43);
+.p-dropdown-items {
+  background-color: red(44, 43, 43);
   border: black;
+}
+/* .p-dropdown-filter {
+  background-color: red;
+  border: black;
+} */
+
+.p-dropdown-item:hover {
+  -webkit-text-fill-color: black;
 }
 
 /* ------------------------- */
 
 /* CSS for Search Button */
 .p-splitbutton {
-  width: 200px;
+  width: 100px;
+  height: 44px;
+  margin-left: 50px;
   margin-bottom: 40px;
+  background-color: rgb(43, 43, 43);
+}
+
+.p-splitbutton:hover {
+  background-color: rgba(34, 32, 51, 0.616);
+}
+
+.p-splitbutton-defaultbutton:hover {
+  transform: scale3d(1.2, 1.2, 1.2);
+}
+
+.p-splitbutton-menubutton:hover {
+  transform: scale3d(1.2, 1.2, 1.2);
 }
 
 .p-button-label {
@@ -139,6 +152,21 @@
 /* ------------------------- */
 
 
+@media (max-width: 800px) {
+  .searchBar > form {
+    width: 300px;
+  }
+  .searchinput {
+    width: 200px;
+  }
+  .p-splitbutton {
+    width: 70px;
+    margin-left: 10px;
+  }
+}
 
+.searchinput:hover {
+  background-color: rgba(34, 32, 51, 0.616);
+}
 
 

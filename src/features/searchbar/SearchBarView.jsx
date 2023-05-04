@@ -4,6 +4,8 @@ import "./SearchBar.css";
 import { InputText } from 'primereact/inputtext';
 import { SplitButton } from 'primereact/splitbutton';
 import { Dropdown } from 'primereact/dropdown';
+
+import { useState } from "react";
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
     
@@ -21,33 +23,37 @@ const SearchBarView = (props) => {
     props.onKeywordChanged(e);
   };
 
-  const items = [
-    {
-      label: "Filter",
-      icon: "pi pi-filter",
-    },
-  ];
-
   const country_codes = Object.keys(props.country_codes_array).map((key) => {
     return {name: props.country_codes_array[key], code: key}
   })
 
+  // const genre_codes = [{genre: "genre", code: "code"}, {genre: "genre2", code: "code2"}, {genre: "genre3", code: "code3"}]
   const current = country_codes.find((element) => element.code === props.country.toUpperCase())
-  console.log(current)
+  // const cyrrent = {genre: "genre", code: "code"};
+  console.log(country_codes)
+  // console.log(genre_codes)
   return (
     <section className="searchBar">
       {/* <h2>Search</h2> */}
       <form>
-        <span className="p-float-label">
-          <InputText id="search" className="searchinput" value={props.keyword} onChange={keywordChanged} onKeyDown={keyDown}/>
-          <label htmlFor="search">Search for a film</label>
-        </span>
         <div>
-           <SplitButton text raised menuButtonClassName="jaj" buttonClassName="jaj" label="Search" disabled={!props.keyword} icon="pi pi-search" onClick={props.onSearch} model={items}></SplitButton>
+        <div>
           <span className="p-float-label">
-            <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />
-            <label htmlFor="dd-country">Select country</label>
+            <InputText id="search" className="searchinput" value={props.keyword} onChange={keywordChanged} onKeyDown={keyDown}/>
+            <label htmlFor="search">Search for a film</label>
           </span>
+        </div>
+        <div>
+        <span className="p-float-label" style={{'marginTop':`40px`}}>
+            {props.countryVisible ? <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />: null}
+          </span>
+          {/* <span className="p-float-label" style={{'marginTop':`40px`}}>
+            {props.genreVisible ? <Dropdown inputId="dd-genre" showClear value={cyrrent} options={genre_codes} optionLabel="genre" className="w-full md:w-14rem" />: null}
+          </span> */}
+        </div>
+        </div>
+        <div>
+        <SplitButton text raised menuButtonClassName="jaj" buttonClassName="jaj" disabled={/*!props.keyword*/false} icon="pi pi-search" onClick={props.onSearch} model={props.filter_items}></SplitButton>
         </div>
       </form>
     </section>
