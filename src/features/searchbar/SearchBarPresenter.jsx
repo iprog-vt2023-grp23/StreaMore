@@ -8,6 +8,7 @@ import {
 } from "../searchPage/searchSlice";
 import { getStreamingServices } from "../userPage/userPageSlice"
 import country_codes_array from "../searchPage/CountryCodes";
+import genre_codes_array from "../searchPage/GenreCodes";
 import SearchBarView from "./SearchBarView";
 import { BsSearch } from "react-icons/bs";
 import { Toast } from 'primereact/toast';
@@ -16,7 +17,7 @@ import "./SearchBar.css";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
-  const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState();
   const [services, setServices] = useState([]);
   const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const country = useSelector(getCountry);
@@ -159,6 +160,8 @@ const SearchBar = () => {
     </option>
   ));
 
+  const genreOptions = Object.keys(genre_codes_array).map((key) => ({name: genre_codes_array[key], code: key}));
+
   
   
 
@@ -169,8 +172,10 @@ const SearchBar = () => {
       country_codes_array={country_codes_array}
       services={myServices}
       country={country}
+      genre={genre}
       keyword={keyword}
       countryOptions={countryOptions}
+      genreOptions={genreOptions}
       filter_items={filter_items}
       countryVisible={countryVisible}
       servicesVisible={servicesVisible}
