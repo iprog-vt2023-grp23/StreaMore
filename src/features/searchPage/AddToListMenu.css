@@ -18,8 +18,8 @@
 .addToListHeader {
     position: absolute;
     top: 10px;
-    width: 78px;
-    left: calc(50% - (78px / 2));
+    width: 90px;
+    left: calc(50% - (90px / 2));
 }
 
 .close {

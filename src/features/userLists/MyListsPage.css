@@ -98,24 +98,27 @@
     }
   }
 
-  .h2 input {
+
+.updateListNameForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.updateListNameForm input {
     background: none;
     color: inherit;
     border: none;
-    padding: 1.4rem;
+    padding: 0px;
     margin: 0px;
     font: inherit;
+    text-align: center;
     cursor: pointer;
     background-color: var(--border-focus-color);
 }
-.h2 form {
-    display: flex;
-    padding: 1.4rem;
 
-    flex-direction: row;
-    justify-content: space-between;
-
-}
 
 .checkmark {
     font-size: 1.2rem;

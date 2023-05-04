@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
-import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList } from "./myListsSlice";
+import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList, addNewMovieList, addMovieToMovieList} from "./myListsSlice";
 import { useEffect, useState } from "react";
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
@@ -20,6 +20,13 @@ const MyListsPagePresenter = () => {
   const removeList = (list) => {
    dispatch(removeMovieList(list))
   }
+
+  const updateListname = (newListName) => {
+    oldList = selectedList;
+    dispatch(addNewMovieList(newListName));
+    oldList.forEach(movie => { 
+      
+    })}
 
 
 

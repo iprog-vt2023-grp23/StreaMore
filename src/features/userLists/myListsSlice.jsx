@@ -12,7 +12,17 @@ const myListsSlice = createSlice({
   initialState,
   reducers: {
     addNewMovieList(state, action) {
-      state.movieLists.push({name: action.payload, movies: []});
+      let newName;
+      if (state.movieLists.find((list) => list.name === action.payload)) {
+        let number = 1;
+        newName = action.payload + " (" + number + ")";
+        while (state.movieLists.find((list) => list.name === newName)) {
+          number++;
+          newName = action.payload + " (" + number + ")";
+          
+        }
+      }
+      state.movieLists.push({name: newName || action.payload, movies: []});
     },
     removeMovieList(state, action) {
         state.movieLists = state.movieLists.filter(

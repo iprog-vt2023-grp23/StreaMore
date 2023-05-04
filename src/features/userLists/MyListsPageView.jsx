@@ -37,12 +37,13 @@ const MovieListView = (props) => {
     setNewListName(props.selectedList);
     setUpdateName(prevState => !prevState);
   }
-  console.log(props.selectedList, "hsd")
+
+
   return (
     <section className="MyListsPageView">
       {updateName ? 
-              <h2><form onSubmit={updateListname}>
-              <input autoFocus type="text" id="newListName" value={newListName} onChange={editListName}/>
+              <h2><form onSubmit={updateListname} className="updateListNameForm">
+              <input autoFocus type="text" id="newListName" className="newListName" value={newListName} onChange={editListName}/>
               <div>
               <ImCheckmark className="checkmark" onClick={updateListname}/>
               <ImCross className="cross" onClick={cancelUpdateListName}/>
