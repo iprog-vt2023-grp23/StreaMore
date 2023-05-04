@@ -18,7 +18,7 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
   const [genre, setGenre] = useState();
-  const [services, setServices] = useState([]);
+  const [service, setService] = useState();
   const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const country = useSelector(getCountry);
   const toast = useRef(null);
@@ -39,12 +39,7 @@ const SearchBar = () => {
 
   const genreChanged = (e) => setGenre(e.target.value);
   
-  const servicesChanged = (e) => {
-    if (e.target.value) {
-      setServices([...services, e.target.value]);
-      console.log("Updated selected services: ", services);
-    }
-  };
+  const servicesChanged = (e) => setService(e.target.value);
 
   //Function for the search button
   const search = () => {
@@ -173,6 +168,7 @@ const SearchBar = () => {
       services={myServices}
       country={country}
       genre={genre}
+      service={service}
       keyword={keyword}
       countryOptions={countryOptions}
       genreOptions={genreOptions}

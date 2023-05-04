@@ -48,13 +48,13 @@ const SearchBarView = (props) => {
         </div>
         <div>
         <span className="p-float-label" style={{'marginTop':`40px`}}>
-            {props.servicesVisible ? <Dropdown inputId="dd-service" showClear value={{name: "All Services", code: -1}} onChange={props.onServiceChanged} options={props.services} optionLabel="name" className="w-full md:w-14rem" />: null}
+            {props.servicesVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-service" showClear value={props.service} onChange={props.onServiceChanged} options={props.services} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-service">Service</label>  </div>: null}
         </span>
         <span className="p-float-label" style={{'marginTop':`40px`}}>
-            {props.countryVisible ? <Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" />: null}
+            {props.countryVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-country" showClear value={current} onChange={props.onCountryChanged} options={country_codes} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-country">Country</label> </div>: null}
         </span>
         <span className="p-float-label" style={{'marginTop':`40px`}}>
-            {props.genreVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-genre" showClear value={props.genre} onChange={props.onGenreChanged} options={props.genreOptions} optionLabel="name" className="w-full md:w-14rem" /> <label htmlFor="dd-city">Select a City</label> </div>: null}
+            {props.genreVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-genre" showClear value={props.genre} onChange={props.onGenreChanged} options={props.genreOptions} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-genrey">Genre</label> </div>: null}
         </span>
         </div>
         </div>
