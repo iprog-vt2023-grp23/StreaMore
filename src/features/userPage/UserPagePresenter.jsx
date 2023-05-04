@@ -32,8 +32,8 @@ console.log("ownedServices: ", ownedServices);
   const addService = (e) => {
     dispatch(addStreamingService(e.currentTarget.value));
   };
-  const doEdit = (e) => {
-    dispatch(toggleEdit(e.currentTarget.value));
+  const onEditmode = (e) => {
+    dispatch(toggleEdit());
   };
   const usernameChanged = (e) => setUsername(e.target.value);
 
@@ -42,6 +42,7 @@ console.log("ownedServices: ", ownedServices);
     if (e.key === "Enter") {
       e.preventDefault(); //Dont reload the page
       console.log("clicked enter");
+      dispatch(toggleEdit());
     }
   }
 
@@ -56,7 +57,7 @@ console.log("ownedServices: ", ownedServices);
       isEdit={editmode}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
-      onEdit={doEdit}
+      onEdit={onEditmode}
       onUsernameChanged={usernameChanged}
       onKeyDown={keyDown}
     />
