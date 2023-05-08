@@ -51,13 +51,26 @@ const SearchBar = () => {
 
   //Function for the search button
   const search = () => {
-    // SPLIT OUT INTO THIS MAIN WHICH CALLS TWO OTHER DEPENDING ON FILTER
-    if (genre || service) {
+    if (!keyword && country) {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field', life: 3000 });
+    }
+    else if (keyword && !country) {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please select a country', life: 3000 });
+    }
+    else if (!keyword && !country){
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field and select a country', life: 3000 });
+    }
+    else if (genre || service) {
       searchByServiceGenre();
-      return;
     } 
-    //Don't allow user to spam search button faster than a response can be received
-    if (searchRequestStatus === "idle" && keyword && country) {
+    else {
+      searchByTitle();
+    }
+
+  };
+
+  const searchByTitle = () => {
+    if (searchRequestStatus === "idle") {
       try {
         setSearchRequestStatus("pending");
         /* 
@@ -78,20 +91,12 @@ const SearchBar = () => {
         setSearchRequestStatus("idle");
       }
     }
-    else if (!keyword && country) {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field', life: 3000 });
-    }
-    else if (keyword && !country) {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please select a country', life: 3000 });
-    }
-    else {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field and select a country', life: 3000 });
-    }
-  };
+  }
+
 
   const searchByServiceGenre = () => {
     //Don't allow user to spam search button faster than a response can be received
-    if (searchRequestStatus === "idle" && keyword && country) {
+    if (searchRequestStatus === "idle") {
       try {
         setSearchRequestStatus("pending");
         let serviceFilter = "";
@@ -100,8 +105,8 @@ const SearchBar = () => {
                     Change parameters for the search here! Parameters can be found on https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability 
                 */
         if (service) {
-          if (service['code'] == -1) { // All services
-            serviceFilter = allServices.join("%2C")
+          if (service['code'] == -2) { // All services
+            serviceFilter = myServices.join("%2C") //MAXIMUM 4 SERVICES
             console.log("searching by genre")
           }
           else {
@@ -134,15 +139,6 @@ const SearchBar = () => {
       } finally {
         setSearchRequestStatus("idle");
       }
-    }
-    else if (!keyword && country) {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field', life: 3000 });
-    }
-    else if (keyword && !country) {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please select a country', life: 3000 });
-    }
-    else {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field and select a country', life: 3000 });
     }
   };
 
@@ -224,18 +220,9 @@ const SearchBar = () => {
       visible: genreVisible && (auth.currentUser != null), 
       command: () => {
         setGenreVisible(false);
-        console.log("toast", toast.current)
-    toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
       }
     },
   ];
-
-  //Function that gets all possible country names from CountryCodes
-  // const countryOptions = Object.values(country_codes_array).map((country) => (
-  //   <option key={country} value={country}>
-  //     {country}
-  //   </option>
-  // ));
   
   const genreOptions = Object.keys(genre_codes_array).map((key) => ({name: genre_codes_array[key], code: key}));
   const countryOptions = Object.keys(country_codes_array).map((key) => ({name: country_codes_array[key], code: key}));
