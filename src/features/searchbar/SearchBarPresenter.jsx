@@ -2,11 +2,12 @@ import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   searchFilms,
+  searchFilmsServiceGenre,
   setStateCountry,
   getCountry,
   setStateKeyword,
 } from "../searchPage/searchSlice";
-import { getStreamingServices } from "../userPage/userPageSlice"
+import { getAvailableServices, getStreamingServices } from "../userPage/userPageSlice"
 import country_codes_array from "../searchPage/CountryCodes";
 import genre_codes_array from "../searchPage/GenreCodes";
 import SearchBarView from "./SearchBarView";
@@ -24,6 +25,8 @@ const SearchBar = () => {
   const [service, setService] = useState();
   const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const country = useSelector(getCountry);
+  const streamingServices = useSelector(getAvailableServices);
+  const myServices = useSelector(getStreamingServices);
   const toast = useRef(null);
   const auth = getAuth(FirebaseApp);
   const navigate = useNavigate();
@@ -48,6 +51,11 @@ const SearchBar = () => {
 
   //Function for the search button
   const search = () => {
+    // SPLIT OUT INTO THIS MAIN WHICH CALLS TWO OTHER DEPENDING ON FILTER
+    if (genre || service) {
+      searchByServiceGenre();
+      return;
+    } 
     //Don't allow user to spam search button faster than a response can be received
     if (searchRequestStatus === "idle" && keyword && country) {
       try {
@@ -81,6 +89,65 @@ const SearchBar = () => {
     }
   };
 
+  const searchByServiceGenre = () => {
+    //Don't allow user to spam search button faster than a response can be received
+    if (searchRequestStatus === "idle" && keyword && country) {
+      try {
+        setSearchRequestStatus("pending");
+        let serviceFilter = "";
+        let genreFilter = "";
+        /*
+                    Change parameters for the search here! Parameters can be found on https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability 
+                */
+        if (service) {
+          if (service['code'] == -1) { // All services
+            serviceFilter = allServices.join("%2C")
+            console.log("searching by genre")
+          }
+          else {
+            serviceFilter = service['name'] + ".subscription"
+            console.log("searching by service")
+          }
+        }
+
+        if (genre) {
+          genreFilter = genre['name']
+        }
+        console.log("searching by service and genre")
+        console.log("genre", genreFilter)
+        console.log("service", serviceFilter)
+        console.log("keyword", keyword)
+        console.log("country", country)
+        
+        dispatch(
+          searchFilmsServiceGenre([
+            "keyword=" + keyword,
+            "services=" + serviceFilter, //MAXIMUM 4 SERVICES
+            "country=" + country,
+            "genres=" + genreFilter,
+          ])
+        ).unwrap();
+        dispatch(setStateKeyword(keyword));
+        setKeyword("");
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setSearchRequestStatus("idle");
+      }
+    }
+    else if (!keyword && country) {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field', life: 3000 });
+    }
+    else if (keyword && !country) {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please select a country', life: 3000 });
+    }
+    else {
+      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field and select a country', life: 3000 });
+    }
+  };
+
+
+
   //Function for searching when the enter key is pressed down
   function keyDown(e) {
     if (e.key === "Enter") {
@@ -88,12 +155,14 @@ const SearchBar = () => {
       search();
     }
   }
-  const streamingServices = useSelector(getStreamingServices);
+  
   // myServices = [{name: streaminServices[key], code: key]}]
-  const myServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
+  const allServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
   // Add name: All Services code: -1 to myServices
-  myServices.unshift({name: "All Services", code: -1});
-  myServices.unshift({name: "All My Services", code: -2});
+  console.log("All Services", allServices)
+  allServices.unshift({name: "All Services", code: -1});
+  allServices.unshift({name: "All My Services", code: -2});
+  
   // Capitalise first letter in each service name
   console.log("streams", streamingServices);
   const [countryVisible, setCountryVisible] = useState(false);
@@ -178,7 +247,7 @@ const SearchBar = () => {
     <Toast ref={toast} position="top-left"/>
     <SearchBarView
       country_codes_array={country_codes_array}
-      services={myServices}
+      services={allServices}
       country={country}
       genre={genre}
       service={service}
