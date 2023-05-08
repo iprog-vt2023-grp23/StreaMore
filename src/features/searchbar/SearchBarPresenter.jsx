@@ -121,11 +121,6 @@ const SearchBar = () => {
         if (genre) {
           genreFilter = genre['name']
         }
-        console.log("searching by service and genre")
-        console.log("genre", genreFilter)
-        console.log("service", serviceFilter)
-        console.log("keyword", keyword)
-        console.log("country", country)
         
         dispatch(
           searchFilmsServiceGenre([
@@ -157,13 +152,10 @@ const SearchBar = () => {
   
   // myServices = [{name: streaminServices[key], code: key]}]
   const allServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
-  // Add name: All Services code: -1 to myServices
-  console.log("All Services", allServices)
+
   allServices.unshift({name: "All Services", code: -1});
   allServices.unshift({name: "All My Services", code: -2});
   
-  // Capitalise first letter in each service name
-  console.log("streams", streamingServices);
   const [countryVisible, setCountryVisible] = useState(false);
   const [servicesVisible, setServicesVisible] = useState(false);
   const [genreVisible, setGenreVisible] = useState(false);

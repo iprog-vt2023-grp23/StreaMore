@@ -23,17 +23,6 @@ const SearchBarView = (props) => {
     props.onKeywordChanged(e);
   };
 
-  // const country_codes = Object.keys(props.country_codes_array).map((key) => {
-  //   return {name: props.country_codes_array[key], code: key}
-  // })
-
-  // const genre_codes = [{genre: "genre", code: "code"}, {genre: "genre2", code: "code2"}, {genre: "genre3", code: "code3"}]
-  // const current = country_codes.find((element) => element.code === props.country.toUpperCase())
-  // const cyrrent = {genre: "genre", code: "code"};
-  // console.log(country_codes)
-  // console.log("myServices", props.services)
-
-  
   const country = props.countryOptions.find((element) => element.code === props.country.toUpperCase())
   
   return (
