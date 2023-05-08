@@ -5,13 +5,11 @@ import { Button } from 'primereact/button';
 import "./UserPage.css";
 
 const UserPageView = (props) => {
-  const keyDown = e => props.onKeyDown(e);
   const onToggleEditmode = e => props.onEdit();
-  const usernameChanged = e => props.onUsernameChanged(e);
+  const servicesListIsEmpty = (!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0);
 
   let renderButtonIfNoServices = () => {
-    if ((!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0)) {
-      console.log("No services")
+    if (servicesListIsEmpty) {
       return (<Button 
         label={"Add services"} 
         onClick={onToggleEditmode} 
@@ -23,10 +21,8 @@ const UserPageView = (props) => {
   }
 
   let renderEditButton = () => {
-    if ((!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0))
-      return;
-    
-    return <Button 
+    if (!servicesListIsEmpty)
+      return <Button 
             className="edituser" 
             label={props.isEdit? "Done" : "Edit"} 
             onClick={onToggleEditmode} 
@@ -64,8 +60,7 @@ const UserPageView = (props) => {
       >
         {iconMapping(service)} 
       </button>
-    );
-    //Icons are fetched from StreamingButtons: iconMapping() function
+    ); //Icons are fetched from StreamingButtons: iconMapping() function
   });
 
   //for editing username (removed feature due to scope constraints)
