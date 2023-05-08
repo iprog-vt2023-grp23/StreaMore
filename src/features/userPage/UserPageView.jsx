@@ -22,6 +22,19 @@ const UserPageView = (props) => {
     return renderStreamingServices;
   }
 
+  let renderEditButton = () => {
+    if ((!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0))
+      return;
+    
+    return <Button 
+            className="edituser" 
+            label={props.isEdit? "Done" : "Edit"} 
+            onClick={onToggleEditmode} 
+            size="small" 
+            outlined
+          />
+  }
+
   //Renders all services that are retrieved from the api
   const renderStreamingServices = props.services.map((service) => {
     //If service is in streamingServices (the users owned services):
@@ -55,21 +68,8 @@ const UserPageView = (props) => {
     //Icons are fetched from StreamingButtons: iconMapping() function
   });
 
-  //for editing username
+  //for editing username (removed feature due to scope constraints)
   const editUsername = () => {
-    if(props.isEdit) {
-      return (
-        <div>
-          <h3>Edit Username:</h3>
-          <InputText 
-            id="username" 
-            value={props.username} 
-            onChange={usernameChanged} 
-            onKeyDown={keyDown}
-          />
-        </div>
-      );
-    }
     return (
       <div>
         <h3>{props.username}</h3>
@@ -80,19 +80,13 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <Button 
-          className="edituser" 
-          label={props.isEdit? "Done" : "Edit"} 
-          onClick={onToggleEditmode} 
-          size="small" 
-          outlined
-        />
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         {editUsername()}
         <h3>My services: {props.isEdit} </h3>
         {renderButtonIfNoServices()}
         <p></p>
+        {renderEditButton()}
       </section>
     )
 };
