@@ -114,6 +114,9 @@ const SearchBar = () => {
             console.log("searching by service")
           }
         }
+        else {
+          serviceFilter = "all4"
+        }
 
         if (genre) {
           genreFilter = genre['name']
