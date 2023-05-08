@@ -13,6 +13,9 @@ import SearchBarView from "./SearchBarView";
 import { BsSearch } from "react-icons/bs";
 import { Toast } from 'primereact/toast';
 import "./SearchBar.css";
+import FirebaseApp from "../../FirebaseConfig";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -22,6 +25,8 @@ const SearchBar = () => {
   const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const country = useSelector(getCountry);
   const toast = useRef(null);
+  const auth = getAuth(FirebaseApp);
+  const navigate = useNavigate();
   //Functions for changing the current sate as well as setting the store state
   const keywordChanged = (e) => setKeyword(e.target.value);
   const countryChanged = (e) => {
@@ -97,9 +102,17 @@ const SearchBar = () => {
 
   const filter_items = [
     {
+      label: "Sign in to filter",
+      icon: "pi pi-sign-in",
+      visible: (auth.currentUser == null),
+      command: () => {
+        navigate("/signIn");
+      }
+    },
+    {
       label: "Filter Services",
       icon: "pi pi-filter",
-      visible: !servicesVisible,
+      visible: !servicesVisible && (auth.currentUser != null),
       command: () => {
         setServicesVisible(true);
       }
@@ -107,7 +120,7 @@ const SearchBar = () => {
     {
       label: "Filter Services",
       icon: "pi pi-minus",
-      visible: servicesVisible,
+      visible: servicesVisible && (auth.currentUser != null),
       command: () => {
         setServicesVisible(false);
       }
@@ -115,7 +128,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-filter",
-      visible: !countryVisible, 
+      visible: !countryVisible && (auth.currentUser != null), 
       command: () => {
         setCountryVisible(true);
       }
@@ -123,7 +136,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-minus",
-      visible: countryVisible, 
+      visible: countryVisible && (auth.currentUser != null), 
       command: () => {
         setCountryVisible(false);
       }
@@ -131,7 +144,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-filter",
-      visible: !genreVisible, 
+      visible: !genreVisible && (auth.currentUser != null), 
       command: () => {
         setGenreVisible(true);
       }
@@ -139,7 +152,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-minus",
-      visible: genreVisible, 
+      visible: genreVisible && (auth.currentUser != null), 
       command: () => {
         setGenreVisible(false);
         console.log("toast", toast.current)
