@@ -5,13 +5,11 @@ import { Button } from 'primereact/button';
 import "./UserPage.css";
 
 const UserPageView = (props) => {
-  const keyDown = e => props.onKeyDown(e);
   const onToggleEditmode = e => props.onEdit();
-  const usernameChanged = e => props.onUsernameChanged(e);
+  const servicesListIsEmpty = (!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0);
 
   let renderButtonIfNoServices = () => {
-    if ((!props.isEdit) && (props.streamingServices === undefined || props.streamingServices == 0)) {
-      console.log("No services")
+    if (servicesListIsEmpty) {
       return (<Button 
         label={"Add services"} 
         onClick={onToggleEditmode} 
@@ -20,6 +18,17 @@ const UserPageView = (props) => {
       />)
     }
     return renderStreamingServices;
+  }
+
+  let renderEditButton = () => {
+    if (!servicesListIsEmpty)
+      return <Button 
+            className="edituser" 
+            label={props.isEdit? "Done" : "Edit"} 
+            onClick={onToggleEditmode} 
+            size="small" 
+            outlined
+          />
   }
 
   //Renders all services that are retrieved from the api
@@ -51,25 +60,11 @@ const UserPageView = (props) => {
       >
         {iconMapping(service)} 
       </button>
-    );
-    //Icons are fetched from StreamingButtons: iconMapping() function
+    ); //Icons are fetched from StreamingButtons: iconMapping() function
   });
 
-  //for editing username
+  //for editing username (removed feature due to scope constraints)
   const editUsername = () => {
-    if(props.isEdit) {
-      return (
-        <div>
-          <h3>Edit Username:</h3>
-          <InputText 
-            id="username" 
-            value={props.username} 
-            onChange={usernameChanged} 
-            onKeyDown={keyDown}
-          />
-        </div>
-      );
-    }
     return (
       <div>
         <h3>{props.username}</h3>
@@ -80,19 +75,13 @@ const UserPageView = (props) => {
 
   return (
       <section className="userprofile">
-        <Button 
-          className="edituser" 
-          label={props.isEdit? "Done" : "Edit"} 
-          onClick={onToggleEditmode} 
-          size="small" 
-          outlined
-        />
         <h2>User Profile</h2>
         <FaUserCircle size="80" />
         {editUsername()}
         <h3>My services: {props.isEdit} </h3>
         {renderButtonIfNoServices()}
         <p></p>
+        {renderEditButton()}
       </section>
     )
 };
