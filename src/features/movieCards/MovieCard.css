@@ -1,5 +1,14 @@
-
-
+.inspectMovieCard .imgWrapper{
+  position: absolute;
+  max-width: 50%;
+  left: unset;
+  width: unset;
+  top: unset;
+  height: auto;
+    overflow: hidden;
+    /* Om bild saknas eller är för liten kommer detta fylla tomrummet */
+    background-color: var(--shadow-color);
+}
 
 .movieCard {
   position: relative;
