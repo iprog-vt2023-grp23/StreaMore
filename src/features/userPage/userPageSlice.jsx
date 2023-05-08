@@ -64,7 +64,6 @@ const userPageSlice = createSlice({
     },
     updateStreamingServiceList(state, action) {
       state.ownedServices = action.payload;
-      //console.log("fetching onwed services", state.ownedServices, "should equal", action.payload);
     },
   },
   //Extrareducer for when the services are fetched
