@@ -83,23 +83,28 @@
 }
 
 .p-dropdown:hover {
-  background-color: rgba(34, 32, 51, 0.616);
+  /* background-color: rgba(34, 32, 51, 0.616); */
+  background-color: var(--input-hover-color);
 }
 
 .p-dropdown-trigger:hover {
-  background-color: rgba(34, 32, 51, 0.829);
+  /* background-color: rgba(34, 32, 51, 0.829); */
+  /* background-color: var(--input-hover-color); */
+  background-color: none;
 }
 
 .p-clickable:hover {
   transform: scale3d(1.2, 1.2, 1.2);
 }
 
+
 .p-dropdown-items-wrapper {
+
   background-color: rgb(43, 40, 40);
   border: black;
-  width: 200px;
-  
+  width: 200px;  
 }
+
 
 .p-dropdown-items {
   background-color: red(44, 43, 43);
@@ -114,6 +119,20 @@
   -webkit-text-fill-color: black;
 }
 
+.p-dropdown-item:hover {
+  background-color: var(--input-hover-color);
+}
+
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover  {
+  color: #495057;
+  background: var(--input-hover-color);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #495057;
+  background: var(--input-hover-color);
+}
 /* ------------------------- */
 
 /* CSS for Search Button */

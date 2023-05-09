@@ -6,7 +6,8 @@
     justify-content: center;
 }
 
-.MyListsPageView > h2 {
+.listTitle {
+    cursor: pointer;
     margin-bottom: 0px;
 
 }
@@ -17,6 +18,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    /* margin-block: 8px; */
 }
 
 .listMenu ul {
@@ -37,7 +39,6 @@
     padding: 5px;
     border-radius: 5px;
     margin-inline: 5px;
-    cursor: pointer;
     padding: 10px;
     /* padding-right: 25px; */
     position: relative;
@@ -46,6 +47,8 @@
 .listItem {
     background-color: var(--background-color-secondary);
     box-shadow: 0 0 5px 0 var(--shadow-color);
+    cursor: pointer;
+
 
 }
 
@@ -67,4 +70,103 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.editIcons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-top: 3px;
+    padding: 5px;
+    border-bottom: 1px solid var(--white);
+
+}
+
+.deleteListIcon, .editListIcon {
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.createFirstList {
+    /* border: 1px solid var(--background-color-secondary); */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 0px 5px 0px var(--shadow-color);
+
+}
+
+.createFirstList:hover {
+    border: 1px solid var(--border-focus-color);
+    transition: background-color 50ms linear;
+}
+
+/*Hover effekter bara för datorer, aka breda skärmar*/
+@media (min-width: 800px) {
+    .deleteListIcon:hover,
+    .editListIcon:hover {
+        color: grey;
+        transition: color 50ms linear;
+    }
+  }
+
+
+.updateListNameForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin:0;
+}
+
+.updateListNameForm input {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    font: inherit;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--border-focus-color);
+}
+
+
+.updateListNameForm .checkmark {
+    font-size: 1.8rem;
+    margin-inline: 5px;
+}
+
+@media (max-width: 800px) {
+    .updateListNameForm {
+        position: absolute;
+        --width: 100vw;
+        --height: 100vh;
+        height: 100vh;
+        width: var(--width);
+        z-index: 1000000;
+        backdrop-filter: blur(3px);
+        left: 0;
+        top: 0;
+    }
+
+    .updateListNameForm input {
+        position: absolute;
+        bottom: 90%;
+    }
+
+    .updateListNameForm .checkmark {
+        position: absolute;
+        bottom: 85%;
+        right: 50%;
+    }
+
+    .updateListNameForm .cross {
+        position: absolute;
+        bottom: 85%;
+        left: 50%
+    }
+  
+    
 }

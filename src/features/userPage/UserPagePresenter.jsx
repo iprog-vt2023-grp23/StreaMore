@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import { 
   getUsername, 
   getStreamingServices, 
@@ -34,6 +35,8 @@ const UserPagePresenter = () => {
   }
 
   return (
+    <>
+    <BacknHomeButton />
     <UserPageView
       streamingServices={ownedServices}
       services={services}
@@ -45,6 +48,7 @@ const UserPagePresenter = () => {
       onEdit={onEditmode}
       onKeyDown={keyDown}
     />
+    </>
   );
 };
 

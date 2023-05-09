@@ -7,6 +7,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import InspectMovieView from "./InspectMovieView";
 // import MovieCardListView from "../movieCards/MovieCardListView";
+import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
 const InspectMoviePresenter = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const InspectMoviePresenter = () => {
   //If user has not clicked a movie/reloaded the page only a back button will be shown (untill persistence is done)
   if (selectedMovie)
     return (
+      <>
+      <BacknHomeButton />
       <div className="Search">
         {/*RenderMovie will render the selected movie*/}
         {/* <MovieCardListView movies={[selectedMovie]} /> */}
@@ -39,10 +42,11 @@ const InspectMoviePresenter = () => {
             selectedMovie={selectedMovie}
           />
         )}
-        <button onClick={() => navigate(-1)}>Back</button>
+        
       </div>
+      </>
     );
-  else return <button onClick={() => navigate(-1)}>Back</button>;
+  else return <BacknHomeButton />;
 };
 
 export default InspectMoviePresenter;
