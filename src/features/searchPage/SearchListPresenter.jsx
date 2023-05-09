@@ -18,6 +18,10 @@ import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
 import AddToListMenuView from "./AddToListMenuView";
 import { addMovieToMovieList, addNewMovieList, getMovieLists } from "../userLists/myListsSlice";
+import {getAuth} from "firebase/auth"
+import FirebaseApp from "../../FirebaseConfig";
+
+
 
 const SearchList = () => {
   const dispatch = useDispatch();
@@ -30,6 +34,8 @@ const SearchList = () => {
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const selectedMovie = useSelector(getSelectedMovie);
   const movieList = useSelector(getMovieLists);
+  
+  const loggedIn = getAuth(FirebaseApp).currentUser;
   
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
@@ -44,7 +50,7 @@ const SearchList = () => {
 
 
   const getItems = (movie) => {
-    return [
+    return loggedIn ? [
       {
         label: "Add",
         icon: "pi pi-plus",
@@ -61,7 +67,7 @@ const SearchList = () => {
           console.log("Notify user plis");
         }
       }
-    ] 
+    ] : [];
   }
 
   // Either render a loading gif, the search result or an error depending on the status

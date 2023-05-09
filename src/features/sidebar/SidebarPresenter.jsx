@@ -5,14 +5,32 @@ import { FiAlignJustify } from "react-icons/fi";
 import SidebarView from "./SidebarView";
 import FirebaseApp from "../../FirebaseConfig";
 import {getAuth, signOut} from "firebase/auth"
+import { useEffect, useRef } from "react";
 
 import "./Sidebar.css";
 
 const Sidebar = () => {
+  const ref = useRef();
   const dispatch = useDispatch();
   const sidebarState = useSelector(getSidebarState);
   const auth = getAuth(FirebaseApp);
   const loggedIn = auth.currentUser;
+
+  useEffect(() => {
+    window.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("touchstart", handleClickOutside);
+    }
+  }, [])
+
+  const handleClickOutside = event => {
+    const { current: wrap } = ref;
+    if (wrap && !wrap.contains(event.target)) {
+      dispatch(toggleSidebar());
+    }
+  }
 
   //Inverts the sidebar state to toggle it
   const sidebarButtonClick = () => {
@@ -46,7 +64,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       {sidebarButton() || (
-        <SidebarView onSidebarButtonClick={sidebarButtonClick} onSignOut={signOutButton} loggedIn={loggedIn}/>
+        <SidebarView onSidebarButtonClick={sidebarButtonClick} onSignOut={signOutButton} loggedIn={loggedIn} ref={ref}/>
       )}
     </div>
   );

@@ -10,48 +10,17 @@
   padding: 10px;
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
-  /* justify-content: center; */
-  width: 500px;
-  height: 100%;
-  /* border: 1px solid brown; */
+  justify-content: center;
+  width: fit-content;
 }
 
-/* Targeta den/de button(s) som är ett direkt child till div som är ett direkt child till form som är ett direkt child till .searchBar */
-/* .searchBar > form > div > button {
-  margin-top: 10px;
-  background-color: var(--light-grey);
-  margin-left: 10px;
-  padding-inline: 30px;
-  padding-block: 0.4rem;
-  border-radius: 30px;
-  font-size: 1rem;
-} */
-
-/* .searchBar > form > div > select {
-  margin-top: 10px;
-  padding-inline: 0px;
-  padding-block: 10px;
-  font-size: 0.8rem;
-  border: none;
-  background-color: var(--light-grey);
-  text-indent: 10px;
-  text-overflow: "";
+.searchButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 60px;
+  /* background-color: red; */
 }
-
-.searchBarInput {
-  background-color: var(--light-grey);
-  padding-inline: 15px;
-  padding-block: 10px;
-  border-radius: 30px;
-  width: 100%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  font-size: 1rem;
-} */
-
 
 /* CSS for Search field */
 .searchinput {
@@ -83,23 +52,28 @@
 }
 
 .p-dropdown:hover {
-  background-color: rgba(34, 32, 51, 0.616);
+  /* background-color: rgba(34, 32, 51, 0.616); */
+  background-color: var(--input-hover-color);
 }
 
 .p-dropdown-trigger:hover {
-  background-color: rgba(34, 32, 51, 0.829);
+  /* background-color: rgba(34, 32, 51, 0.829); */
+  /* background-color: var(--input-hover-color); */
+  background-color: none;
 }
 
 .p-clickable:hover {
   transform: scale3d(1.2, 1.2, 1.2);
 }
 
+
 .p-dropdown-items-wrapper {
+
   background-color: rgb(43, 40, 40);
   border: black;
-  width: 200px;
-  
+  width: 200px;  
 }
+
 
 .p-dropdown-items {
   background-color: red(44, 43, 43);
@@ -114,6 +88,20 @@
   -webkit-text-fill-color: black;
 }
 
+.p-dropdown-item:hover {
+  background-color: var(--input-hover-color);
+}
+
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover  {
+  color: #495057;
+  background: var(--input-hover-color);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #495057;
+  background: var(--input-hover-color);
+}
 /* ------------------------- */
 
 /* CSS for Search Button */

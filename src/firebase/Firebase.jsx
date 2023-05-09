@@ -77,20 +77,9 @@ export default function Firebase() {
     actionCreator: removeStreamingService,
     effect: async(action, listenerApi) => {
       const state = listenerApi.getState();
-      console.log("Service added", action.payload, state.userPage.userId)
+      console.log("Service removed", action.payload, state.userPage.userId)
       set(ref(database, "serviceList/" + state.userPage.userId + "/" + action.payload),null);    }
   })
-  //to update username:
-  /*
-  listenerMiddleware.startListening({
-    actionCreator: setUsername,
-    effect: async(action, listenerApi) => {
-      const state = listenerApi.getState();
-      console.log("Attempting usename update", action.payload, state.userPage.userId);
-      console.log("serviceList/" + state.userPage.userId + "/" + action.payload);
-      set(ref(database, "serviceList/" + state.userPage.userId + "/" + action.payload),null);    
-    }
-  })*/
 
   const dispatch = useDispatch();
 

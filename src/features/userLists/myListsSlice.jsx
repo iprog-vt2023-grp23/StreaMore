@@ -12,12 +12,29 @@ const myListsSlice = createSlice({
   initialState,
   reducers: {
     addNewMovieList(state, action) {
-      state.movieLists.push({name: action.payload, movies: []});
+      let newName;
+      if (state.movieLists.find((list) => list.name === action.payload)) {
+        let number = 1;
+        newName = action.payload + " (" + number + ")";
+        while (state.movieLists.find((list) => list.name === newName)) {
+          number++;
+          newName = action.payload + " (" + number + ")";
+          
+        }
+      }
+      state.movieLists.push({name: newName || action.payload, movies: []});
+      // state.movieLists = [...state.movieLists].sort((a, b) => a.name.localeCompare(b.name));
     },
     removeMovieList(state, action) {
         state.movieLists = state.movieLists.filter(
-            (list) => list.name !== action.payload.name
+            (list) => list.name !== action.payload
         )
+        if (state.movieLists.length > 0){
+          state.selectedList = state.movieLists[0].name;
+        }
+        else{
+          state.selectedList = null;
+        }
     },
     selectMovieList(state, action) {
       state.selectedList = action.payload;
@@ -27,6 +44,9 @@ const myListsSlice = createSlice({
             if(list.name === action.payload.listName) {
                 if(list.movies === undefined){
                     list.movies = [];
+                }
+                if(list.movies.find((movie) => movie.imdbId === action.payload.movie.imdbId)){
+                    return list;
                 }
                 list.movies.push(action.payload.movie);
             }

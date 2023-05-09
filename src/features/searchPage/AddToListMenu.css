@@ -18,8 +18,8 @@
 .addToListHeader {
     position: absolute;
     top: 10px;
-    width: 78px;
-    left: calc(50% - (78px / 2));
+    width: 90px;
+    left: calc(50% - (90px / 2));
 }
 
 .close {
@@ -51,8 +51,10 @@
     cursor: pointer;
 }
 
-.listList li:hover {
-    background-color: var(--border-focus-color);
+@media (min-width: 800px) {
+    .listList li:hover {
+        background-color: var(--border-focus-color);
+    }
 }
 
 .setCreateListButton {
@@ -69,6 +71,11 @@
     z-index: 9;
 }
 
+.createNewList {
+    margin: 0px;
+    padding: 0px;
+}
+
 .createNewList input {
     background: none;
     color: inherit;
@@ -78,6 +85,7 @@
     font: inherit;
     cursor: pointer;
     background-color: var(--border-focus-color);
+    width: 180px;
 }
 .createNewList form {
     display: flex;
@@ -86,10 +94,12 @@
 
 }
 
-.createNewList li:hover {
-    background-color: red;
+.createNewList .checkmark, .createNewList .cross {
+    margin-top: 2px;
+    margin-left: 3px;
 }
 
-.checkmark {
-    font-size: 1.2rem;
-}
+.createNewList .checkmark {
+    font-size: 1.05rem;
+} 
+

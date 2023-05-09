@@ -10,6 +10,8 @@ import { addMovieToMovieList, addNewMovieList } from "../userLists/myListsSlice"
 import { useNavigate } from "react-router-dom";
 import InspectMovieView from "./InspectMovieView";
 import MovieCardView from "../movieCards/MovieCardView";
+// import MovieCardListView from "../movieCards/MovieCardListView";
+import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
 const InspectMoviePresenter = () => {
   const dispatch = useDispatch();
@@ -78,6 +80,10 @@ const InspectMoviePresenter = () => {
           movie={selectedMovie}
           cssClass={"inspectMovieCard"}
         />}
+      <BacknHomeButton />
+      <div className="Search">
+        {/*RenderMovie will render the selected movie*/}
+        {/* <MovieCardListView movies={[selectedMovie]} /> */}
         {/*Either render the about film button or the about film field depending on if the about button has been pressed*/}
         {aboutFilmButton() || (
           <InspectMovieView
@@ -85,10 +91,11 @@ const InspectMoviePresenter = () => {
             selectedMovie={selectedMovie}
           />
         )}
-        <button onClick={() => navigate(-1)}>Back</button>
+        
+      </div>
       </>
     );
-  else return <button onClick={() => navigate(-1)}>Back</button>;
+  else return <BacknHomeButton />;
 };
 
 export default InspectMoviePresenter;

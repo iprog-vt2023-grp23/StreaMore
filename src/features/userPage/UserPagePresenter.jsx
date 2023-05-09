@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import { 
-  updateStreamingServiceList, 
   getUsername, 
-  setUsername,
   getStreamingServices, 
   getAvailableServices, 
   getEditmode, 
@@ -11,6 +10,7 @@ import {
   removeStreamingService, 
   getUserEmail } from "./userPageSlice";
   import UserPageView from "./UserPageView";
+  import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
 const UserPagePresenter = () => {
   const dispatch = useDispatch();
@@ -26,20 +26,18 @@ const UserPagePresenter = () => {
   const removeService = (e) => dispatch(removeStreamingService(e.currentTarget.value));
   const addService = (e) => dispatch(addStreamingService(e.currentTarget.value));
   const onEditmode = (e) => dispatch(toggleEdit());
-  const usernameChanged = (e) => {
-    dispatch(setUsername(e.target.value));
-  }
 
   //Done Editing Username when enter key is pressed
   function keyDown(e) {
     if (e.key === "Enter") {
       e.preventDefault(); //Dont reload the page
-      console.log("clicked enter");
       dispatch(toggleEdit());
     }
   }
 
   return (
+    <>
+    <BacknHomeButton />
     <UserPageView
       streamingServices={ownedServices}
       services={services}
@@ -49,9 +47,9 @@ const UserPagePresenter = () => {
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
       onEdit={onEditmode}
-      onUsernameChanged={usernameChanged}
       onKeyDown={keyDown}
     />
+    </>
   );
 };
 

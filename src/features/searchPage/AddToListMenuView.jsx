@@ -15,7 +15,9 @@ const AddToListMenuView = (props) => {
 
     const addNewMovieList = (e) => {
       e.preventDefault();
-      props.onAddNewMovieList(newListName);
+      if(newListName !== ""){
+        props.onAddNewMovieList(newListName);
+      }
       setShowCreateNewList(false);
       setNewListName("");
     }
@@ -26,11 +28,16 @@ const AddToListMenuView = (props) => {
       setNewListName("");
     }
 
+    const editListName = (e) => {
+      if(e.target.value.length > 20) return;
+      setNewListName(e.target.value)
+    }
+
     const createNewList = () => {
       return (
       <li className="createNewList">   
         <form onSubmit={addNewMovieList}>
-          <input autoFocus type="text" id="newListName" value={newListName} onChange={(e) => setNewListName(e.target.value)}/>
+          <input autoFocus type="text" id="newListName" value={newListName} onChange={editListName}/>
           <ImCheckmark className="checkmark" onClick={addNewMovieList}/>
           <ImCross className="cross" onClick={cancelNewMovieList}/>
         </form>
