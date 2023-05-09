@@ -68,8 +68,10 @@ const searchSlice = createSlice({
       //When the promise is fullfilled, add the films to state.results and sort them
       .addCase(searchFilms.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.results = action.payload.result;
-        state.results.sort();
+        if(action.payload.result){
+          state.results = action.payload.result;
+          state.results.sort();
+        }
       })
       .addCase(searchFilms.rejected, (state, action) => {
         state.status = "failed";

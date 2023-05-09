@@ -16,7 +16,7 @@ import { getSelectedMovie } from "../inspectMovie/inspectMovieSlice";
 import { BiLoaderCircle } from "react-icons/bi";
 import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
-import AddToListMenu from "./AddToListMenuView";
+import AddToListMenuView from "./AddToListMenuView";
 import { addMovieToMovieList, addNewMovieList, getMovieLists } from "../userLists/myListsSlice";
 import {getAuth} from "firebase/auth"
 import FirebaseApp from "../../FirebaseConfig";
@@ -90,7 +90,7 @@ const SearchList = () => {
      */
     return (
     <>
-    {showAddToListMenu ? <AddToListMenu setVisible={setShowAddToListMenu} 
+    {showAddToListMenu ? <AddToListMenuView setVisible={setShowAddToListMenu} 
       onAddNewMovieList={onAddNewMovieList} 
       movieLists={movieList} 
       onAddMovieToList={onAddMovieToList}
