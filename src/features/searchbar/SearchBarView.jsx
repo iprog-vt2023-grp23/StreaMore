@@ -28,7 +28,7 @@ const SearchBarView = (props) => {
   return (
     <section className="searchBar">
       {/* <h2>Search</h2> */}
-      <form>
+      <form className="searchBar__form">
         <div>
         <div>
           <span className="p-float-label">
@@ -48,7 +48,7 @@ const SearchBarView = (props) => {
         </span>
         </div>
         </div>
-        <div>
+        <div className="searchButton">
         <SplitButton text raised menuButtonClassName="jaj" buttonClassName="jaj" disabled={/*!props.keyword*/false} icon="pi pi-search" onClick={props.onSearch} model={props.filter_items}></SplitButton>
         </div>
       </form>

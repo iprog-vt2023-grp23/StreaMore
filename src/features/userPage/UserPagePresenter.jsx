@@ -10,6 +10,7 @@ import {
   removeStreamingService, 
   getUserEmail } from "./userPageSlice";
   import UserPageView from "./UserPageView";
+  import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
 const UserPagePresenter = () => {
   const dispatch = useDispatch();
