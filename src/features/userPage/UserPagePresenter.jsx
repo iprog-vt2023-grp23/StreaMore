@@ -1,32 +1,38 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateStreamingServiceList, getUsername, getStreamingServices, getAvailableServices, getEditmode, toggleEdit, addStreamingService, removeStreamingService } from "./userPageSlice";
-import UserPageView from "./UserPageView";
-import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
+import { 
+  getUsername, 
+  getStreamingServices, 
+  getAvailableServices, 
+  getEditmode, 
+  toggleEdit, 
+  addStreamingService, 
+  removeStreamingService, 
+  getUserEmail } from "./userPageSlice";
+  import UserPageView from "./UserPageView";
 
 const UserPagePresenter = () => {
   const dispatch = useDispatch();
   const username = useSelector(getUsername);
+  const useremail = useSelector(getUserEmail);
   const ownedServices = useSelector(getStreamingServices);
   const services      = useSelector(getAvailableServices);
   const editmode = useSelector(getEditmode);
 
-console.log("ownedServices: ", ownedServices);
-
   /*
    *Unselects or selects streaming services by dispatching them to the Slice
    */
-  const removeService = (e) => {
-    dispatch(removeStreamingService(e.currentTarget.value));
-  };
-  const addService = (e) => {
-    dispatch(addStreamingService(e.currentTarget.value));
-  };
-  const doEdit = (e) => {
-    dispatch(toggleEdit(e.currentTarget.value));
-  }
+  const removeService = (e) => dispatch(removeStreamingService(e.currentTarget.value));
+  const addService = (e) => dispatch(addStreamingService(e.currentTarget.value));
+  const onEditmode = (e) => dispatch(toggleEdit());
 
-  //updateStreamingServiceList();
+  //Done Editing Username when enter key is pressed
+  function keyDown(e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); //Dont reload the page
+      dispatch(toggleEdit());
+    }
+  }
 
   return (
     <>
@@ -35,10 +41,12 @@ console.log("ownedServices: ", ownedServices);
       streamingServices={ownedServices}
       services={services}
       username={username}
+      useremail={useremail}
       isEdit={editmode}
       onRemoveServiceButton={removeService}
       onAddServiceButton={addService}
-      onEdit={doEdit}
+      onEdit={onEditmode}
+      onKeyDown={keyDown}
     />
     </>
   );

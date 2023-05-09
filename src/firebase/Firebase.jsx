@@ -8,6 +8,7 @@ import {
 } from "firebase/database";
 import {
   setUsername,
+  setUserEmail,
   setUserId,
   updateStreamingServiceList,
   addStreamingService,
@@ -68,14 +69,15 @@ export default function Firebase() {
     actionCreator: addStreamingService,
     effect: async(action, listenerApi) => {
       const state = listenerApi.getState();
+      const usersServices = state.userPage.ownedServices.reduce((val,i)=> (val[i]=''+i,val),{}); //convert array->obj
       console.log("Service added", action.payload, state.userPage.userId)
-      set(ref(database, "serviceList/" + state.userPage.userId),action.payload);    }
+      set(ref(database, "serviceList/" + state.userPage.userId),usersServices);    }
   })
   listenerMiddleware.startListening({
     actionCreator: removeStreamingService,
     effect: async(action, listenerApi) => {
       const state = listenerApi.getState();
-      console.log("Service added", action.payload, state.userPage.userId)
+      console.log("Service removed", action.payload, state.userPage.userId)
       set(ref(database, "serviceList/" + state.userPage.userId + "/" + action.payload),null);    }
   })
 
@@ -91,11 +93,12 @@ export default function Firebase() {
          *Firebase listeners are added which listens to changes in the database
          */
         const newuserId = user.uid;
+        const useremail = user.email;
         const username = user.displayName;
-        console.log("auth state", newuserId);
-        console.log("Username", username);
+        console.log("Auth state:", newuserId, "\n username\t", username, "\n useremail\t", useremail);
         if (username) dispatch(setUsername(username));
         dispatch(setUserId(newuserId));
+        dispatch(setUserEmail(useremail));
 
         onValue(ref(database, "movieLists/" + newuserId), (data) => {
           console.log("Movie list fetched", data.val())
@@ -107,10 +110,11 @@ export default function Firebase() {
         });
         
         onValue(ref(database, "serviceList/" + newuserId), (data) => {
-          console.log("Service list fetched", data.val())
-          const lists = data.val();
-          if(lists)
+          if(data.val()){
+            const lists = Object.keys(data.val()); //convert obj->array
+            console.log("Service list fetched", lists)
             dispatch(updateStreamingServiceList(lists));
+          }
         }, {
           onlyOnce: true
         });
