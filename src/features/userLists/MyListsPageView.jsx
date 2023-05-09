@@ -63,6 +63,8 @@ const MovieListView = (props) => {
   }
 
   const listMenu = () => {
+    console.log(props.movieLists)
+    // const sortedList = props.movieLists.sort((a, b) => a.name.localeCompare(b.name))
     return (
     <div className="listMenu">
       <ul>
@@ -88,7 +90,8 @@ const MovieListView = (props) => {
             <MovieCardList movies={props.movieLists.find(list => list.name === props.selectedList).movies} getItems={props.getItems}
             />
           ) : (
-            <p>{"No movie lists added, find a movie you'd like to add first :)"}</p>
+            // <p>{"No movie lists added, find a movie you'd like to add first :)"}</p>
+            <button className="createFirstList" onClick={() => {props.addNewMovieList("My list")}}>No lists yet, create one</button>
           )}
         </div>
     </section>

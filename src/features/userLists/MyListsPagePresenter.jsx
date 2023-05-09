@@ -36,6 +36,12 @@ const MyListsPagePresenter = () => {
     dispatch(selectMovieList(newListName))
   }
 
+  const addMovieList = (listName) => {
+    if(listName === ""){
+      return;
+    }
+    dispatch(addNewMovieList(listName));
+  }
 
 
   const getItems = (movie) => {
@@ -65,7 +71,7 @@ const MyListsPagePresenter = () => {
 
   return <>
   <BacknHomeButton/>
-  <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList} updateListName={updateListName}/>
+  <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList} updateListName={updateListName} addNewMovieList={addMovieList}/>
   </>
 
 };

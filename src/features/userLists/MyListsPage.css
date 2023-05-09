@@ -89,6 +89,19 @@
     cursor: pointer;
 }
 
+.createFirstList {
+    /* border: 1px solid var(--background-color-secondary); */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 0px 5px 0px var(--shadow-color);
+
+}
+
+.createFirstList:hover {
+    border: 1px solid var(--border-focus-color);
+    transition: background-color 50ms linear;
+}
+
 /*Hover effekter bara för datorer, aka breda skärmar*/
 @media (min-width: 800px) {
     .deleteListIcon:hover,
@@ -120,7 +133,7 @@
 }
 
 
-.checkmark {
+.updateListNameForm .checkmark {
     font-size: 1.8rem;
     margin-inline: 5px;
 }
@@ -143,13 +156,13 @@
         bottom: 90%;
     }
 
-    .checkmark {
+    .updateListNameForm .checkmark {
         position: absolute;
         bottom: 85%;
         right: 50%;
     }
 
-    .cross {
+    .updateListNameForm .cross {
         position: absolute;
         bottom: 85%;
         left: 50%

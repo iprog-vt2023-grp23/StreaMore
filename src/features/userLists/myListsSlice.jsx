@@ -23,6 +23,7 @@ const myListsSlice = createSlice({
         }
       }
       state.movieLists.push({name: newName || action.payload, movies: []});
+      // state.movieLists = [...state.movieLists].sort((a, b) => a.name.localeCompare(b.name));
     },
     removeMovieList(state, action) {
         state.movieLists = state.movieLists.filter(
