@@ -11,7 +11,6 @@ import { getAvailableServices, getStreamingServices } from "../userPage/userPage
 import country_codes_array from "../searchPage/CountryCodes";
 import genre_codes_array from "../searchPage/GenreCodes";
 import SearchBarView from "./SearchBarView";
-import { BsSearch } from "react-icons/bs";
 import { Toast } from 'primereact/toast';
 import "./SearchBar.css";
 import FirebaseApp from "../../FirebaseConfig";
@@ -60,7 +59,7 @@ const SearchBar = () => {
     else if (!keyword && !country){
       toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field and select a country', life: 3000 });
     }
-    else if (genre || service) {
+    else if (service && service['code'] != "-1") { // All services use standard search
       searchByServiceGenre();
     } 
     else {
@@ -70,6 +69,7 @@ const SearchBar = () => {
   };
 
   const searchByTitle = () => {
+    console.log("searching by title");
     if (searchRequestStatus === "idle") {
       try {
         setSearchRequestStatus("pending");
@@ -105,17 +105,12 @@ const SearchBar = () => {
                     Change parameters for the search here! Parameters can be found on https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability 
                 */
         if (service) {
-          if (service['code'] == -2) { // All services
-            serviceFilter = myServices.join("%2C") //MAXIMUM 4 SERVICES
-            console.log("searching by genre")
+          if (service['code'] == -2) { // All my services
+            serviceFilter = myServices.filter((service) => isNaN(service)).join(".subscription%2C") + ".subscription"
           }
           else {
             serviceFilter = service['name'] + ".subscription"
-            console.log("searching by service")
           }
-        }
-        else {
-          serviceFilter = "all4"
         }
 
         if (genre) {
@@ -124,9 +119,9 @@ const SearchBar = () => {
         
         dispatch(
           searchFilmsServiceGenre([
-            "keyword=" + keyword,
-            "services=" + serviceFilter, //MAXIMUM 4 SERVICES
             "country=" + country,
+            "services=" + serviceFilter, 
+            "keyword=" + keyword,
             "genres=" + genreFilter,
           ])
         ).unwrap();
@@ -152,7 +147,7 @@ const SearchBar = () => {
   
   // myServices = [{name: streaminServices[key], code: key]}]
   const allServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
-
+  console.log(allServices)
   allServices.unshift({name: "All Services", code: -1});
   allServices.unshift({name: "All My Services", code: -2});
   
