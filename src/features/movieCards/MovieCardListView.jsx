@@ -11,6 +11,7 @@ const MovieCardListView = (props) => {
           onSelectMovie={props.selectMovie}
           onAddNewMovieList={props.onAddNewMovieList}
           onAddMovieToList={props.onAddMovieToList}
+          onPlusButtonClick={props.onPlusButtonClick}
           id={movie.imdbId}
           movie={movie}
           movieLists={props.movieLists}

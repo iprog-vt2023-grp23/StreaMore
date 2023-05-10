@@ -102,11 +102,11 @@
     transition: transform .5s;
   } */
   
-  .p-speeddial {
+  /* .p-speeddial {
     position: absolute;
     top: calc(var(--img-height) - 35px);
     left: 5px;
-  }
+  } */
   
   .p-speeddial-item{
     background: none;
@@ -118,6 +118,19 @@
     background-color: none;
   }
   
+  .movieActionContainer {
+    position: absolute;
+    top: calc(var(--img-height) + -260px);
+    left: 5px;
+    /* width: 100%; */
+    /* border: 1px solid red; */
+    z-index: 1;
+  }
+
+  .addButton {
+    height: 24px;
+    width: 24px !important;
+  }
   /* .p-speeddial-button {
     background-color: blue;
     height: 10px;

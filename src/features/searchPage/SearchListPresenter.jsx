@@ -48,6 +48,12 @@ const SearchList = () => {
     dispatch(addMovieToMovieList({ listName, movie }));
   };
 
+  const onPlusButtonClick = (movie) => {
+    console.log("Add movie to listen")
+    console.log("movie is ", movie)
+    setShowAddToListMenu(prevState => !prevState);
+    selectMovie(movie);
+  }
 
   const getItems = (movie) => {
     return loggedIn ? [
@@ -56,6 +62,7 @@ const SearchList = () => {
         icon: "pi pi-plus",
         command: () => {
           console.log("Add movie to listen")
+          console.log("movie is ", movie)
           setShowAddToListMenu(prevState => !prevState);
           selectMovie(movie);
         }
@@ -84,7 +91,7 @@ const SearchList = () => {
     /*
     * Detta är en presenter, vet inte om vi borde använda den som ett ui element!
     */
-    const content = <MovieCardList movies={results} getItems={getItems}/>;
+    const content = <MovieCardList movies={results} getItems={getItems} onPlusButtonClick={onPlusButtonClick}/>;
     /*
      * 
      */
