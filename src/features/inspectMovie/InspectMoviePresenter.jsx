@@ -12,6 +12,7 @@ import InspectMovieView from "./InspectMovieView";
 import MovieCardView from "../movieCards/MovieCardView";
 // import MovieCardListView from "../movieCards/MovieCardListView";
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
+import "./InspectMovie.css";
 
 const InspectMoviePresenter = () => {
   const dispatch = useDispatch();
@@ -71,17 +72,17 @@ const InspectMoviePresenter = () => {
         movieLists={movieList} 
         onAddMovieToList={onAddMovieToList}
         movie={selectedMovie}/> : null}
-        {<MovieCardView 
+
+      <BacknHomeButton />
+      <div className="inspectMovie">
+      <MovieCardView 
           getItems={getItems}
           onSelectMovie={selectMovie}
           onAddNewMovieList={onAddNewMovieList}
           onAddMovieToList={onAddMovieToList}
           id={selectedMovie.imdbId}
           movie={selectedMovie}
-          cssClass={"inspectMovieCard"}
-        />}
-      <BacknHomeButton />
-      <div className="Search">
+        />
         {/*RenderMovie will render the selected movie*/}
         {/* <MovieCardListView movies={[selectedMovie]} /> */}
         {/*Either render the about film button or the about film field depending on if the about button has been pressed*/}
@@ -91,7 +92,6 @@ const InspectMoviePresenter = () => {
             selectedMovie={selectedMovie}
           />
         )}
-        
       </div>
       </>
     );

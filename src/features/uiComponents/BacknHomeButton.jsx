@@ -7,14 +7,21 @@ import { TiHome } from 'react-icons/ti';
 const BacknHomeButton = () => {
   const navigate = useNavigate();
 
-  function handleClick() {
+  function handleBackButtonClick() {
     navigate(-1);
   }
 
+  function handleHomeButtonClick() {
+    navigate("/");
+  }
+
+
+
+
   return (
     <>
-    <IoMdArrowRoundBack className="backButton" onClick={handleClick}/>
-    <TiHome className="homeButton" onClick={() => navigate("/")} />
+    <IoMdArrowRoundBack className="backButton" onClick={handleBackButtonClick}/>
+    <TiHome className="homeButton" onClick={handleHomeButtonClick} />
     </>
   );
 }
