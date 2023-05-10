@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import {
   searchFilms,
   searchFilmsServiceGenre,
@@ -7,28 +9,42 @@ import {
   getCountry,
   setStateKeyword,
 } from "../searchPage/searchSlice";
-import { getAvailableServices, getStreamingServices } from "../userPage/userPageSlice"
+import {
+  getAvailableServices, 
+  getStreamingServices } from "../userPage/userPageSlice"
+
 import country_codes_array from "../searchPage/CountryCodes";
 import genre_codes_array from "../searchPage/GenreCodes";
+
 import SearchBarView from "./SearchBarView";
-import { Toast } from 'primereact/toast';
 import "./SearchBar.css";
+
+import { Toast } from 'primereact/toast';
+
 import FirebaseApp from "../../FirebaseConfig";
 import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+
   const [keyword, setKeyword] = useState("");
   const [genre, setGenre] = useState();
   const [service, setService] = useState();
-  const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const country = useSelector(getCountry);
   const streamingServices = useSelector(getAvailableServices);
   const myServices = useSelector(getStreamingServices);
+  const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
+  const [countryVisible, setCountryVisible] = useState(false);
+  const [servicesVisible, setServicesVisible] = useState(false);
+  const [genreVisible, setGenreVisible] = useState(false);
+  const genreOptions = Object.keys(genre_codes_array).map((key) => ({name: genre_codes_array[key], code: key}));
+  const countryOptions = Object.keys(country_codes_array).map((key) => ({name: country_codes_array[key], code: key}));
+ 
   const toast = useRef(null);
   const auth = getAuth(FirebaseApp);
   const navigate = useNavigate();
+
   //Functions for changing the current sate as well as setting the store state
   const keywordChanged = (e) => setKeyword(e.target.value);
   const countryChanged = (e) => {
@@ -147,13 +163,8 @@ const SearchBar = () => {
   
   // myServices = [{name: streaminServices[key], code: key]}]
   const allServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
-  console.log(allServices)
   allServices.unshift({name: "All Services", code: -1});
   allServices.unshift({name: "All My Services", code: -2});
-  
-  const [countryVisible, setCountryVisible] = useState(false);
-  const [servicesVisible, setServicesVisible] = useState(false);
-  const [genreVisible, setGenreVisible] = useState(false);
 
   const filter_items = [
     {
@@ -213,11 +224,7 @@ const SearchBar = () => {
       }
     },
   ];
-  
-  const genreOptions = Object.keys(genre_codes_array).map((key) => ({name: genre_codes_array[key], code: key}));
-  const countryOptions = Object.keys(country_codes_array).map((key) => ({name: country_codes_array[key], code: key}));
-  
-  
+    
 
   return (
     <div>
