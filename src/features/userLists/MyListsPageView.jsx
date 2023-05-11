@@ -72,14 +72,12 @@ const MovieListView = (props) => {
   const listMenu = () => {
     return (
     <div className="listMenu">
-      <ul>
         {props.movieLists.map((list) => (
-          <li key={list.name} className={props.selectedList === list.name ? "selectedListItem" : "listItem"} onClick={() => setSelectedList(list)}>
+          <div key={list.name} className={props.selectedList === list.name ? "selectedListItem" : "listItem"} onClick={() => setSelectedList(list)}>
             {list.name}
-          </li>
+          </div>
         ))}
         {props.movieLists.length > 0 && <li className="listItem" onClick={() => props.createNewList()}><AiOutlinePlus/></li>}
-      </ul>
     </div> 
     )
   }
