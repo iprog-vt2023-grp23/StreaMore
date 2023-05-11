@@ -4,10 +4,11 @@ import {BsThreeDotsVertical} from "react-icons/bs"
 import {RiDeleteBin6Line, RiEdit2Line} from "react-icons/ri"
 import { useState } from "react";
 import {ImCross, ImCheckmark} from "react-icons/im";
+import ConfirmDelete from "./ConfirmDelete";
+import {AiOutlinePlus} from "react-icons/ai";
 
 
 const MovieListView = (props) => {
-  //const [selectedList, setSelectedList] = useState("");
   const [updateName, setUpdateName] = useState(false);
   const [newListName, setNewListName] = useState(props.selectedList);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -41,6 +42,11 @@ const MovieListView = (props) => {
     setUpdateName(prevState => !prevState);
   }
 
+  const handleDelete = () => {
+    props.removeMovieList(props.selectedList);
+    setShowConfirmDelete(false);
+  }
+
   const newNameForm = () => {
     return (
       <form onSubmit={(e) => updateListName(e)} className="updateListNameForm">
@@ -56,15 +62,14 @@ const MovieListView = (props) => {
   const editListButtons = () => {
     return (
       <div className="editIcons">
-      <RiDeleteBin6Line className="deleteListIcon" onClick={() => props.removeMovieList(props.selectedList)}/>
+      <RiDeleteBin6Line className="deleteListIcon" onClick={() => setShowConfirmDelete(prev => !prev)}/>
       <RiEdit2Line className="editListIcon" onClick={toggleEditListName}/>
       </div>
     )
   }
+  
 
   const listMenu = () => {
-    console.log(props.movieLists)
-    // const sortedList = props.movieLists.sort((a, b) => a.name.localeCompare(b.name))
     return (
     <div className="listMenu">
       <ul>
@@ -73,6 +78,7 @@ const MovieListView = (props) => {
             {list.name}
           </li>
         ))}
+        {props.movieLists.length > 0 && <li className="listItem" onClick={() => props.createNewList()}><AiOutlinePlus/></li>}
       </ul>
     </div> 
     )
@@ -81,7 +87,9 @@ const MovieListView = (props) => {
 
 
   return (
+    <>
     <section className="MyListsPageView">
+    {showConfirmDelete && <ConfirmDelete listname={props.selectedList} handleDelete={handleDelete} setConfirmDelete={setShowConfirmDelete}/>}
       {updateName ? <h2>{newNameForm()}</h2> : <h2 className="listTitle" onClick={toggleEditListName}>{props.selectedList}</h2>}
       {props.selectedList && editListButtons()}
       {listMenu()}
@@ -95,6 +103,7 @@ const MovieListView = (props) => {
           )}
         </div>
     </section>
+    </>
   )
 };
 
