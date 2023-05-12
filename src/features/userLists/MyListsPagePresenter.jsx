@@ -23,17 +23,28 @@ const MyListsPagePresenter = () => {
    dispatch(removeMovieList(list))
   }
 
+  const findUniqueListName = (listName) => {
+    let i = 1;
+    let newListName = listName;
+    while(movieLists.find(list => list.name === newListName)){
+      newListName = listName + " (" + i + ")";
+      i++;
+    }
+    return newListName;
+  }
+
   const updateListName = (newListName) => {
     if(newListName === "" || newListName === selectedList){
       return;
     }
+    const listName = findUniqueListName(newListName);
     const oldList = movieLists.find(list => list.name === selectedList).movies;
-    dispatch(addNewMovieList(newListName));
+    dispatch(addNewMovieList(listName));
     oldList.forEach(movie => { 
-      dispatch(addMovieToMovieList({listName: newListName, movie: movie}))
+      dispatch(addMovieToMovieList({listName: listName, movie: movie}))
     })
     dispatch(removeMovieList(selectedList))
-    dispatch(selectMovieList(newListName))
+    dispatch(selectMovieList(listName))
   }
 
   const addMovieList = (listName) => {
@@ -69,9 +80,15 @@ const MyListsPagePresenter = () => {
     }
   }, [movieLists])
 
+  const createNewList = () => {
+    const newListName = findUniqueListName("New List");
+    dispatch(addNewMovieList(newListName));
+    dispatch(selectMovieList(newListName));
+  }
+
   return <>
   <BacknHomeButton/>
-  <MyListsPageView movieLists={movieLists} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList} updateListName={updateListName} addNewMovieList={addMovieList}/>
+  <MyListsPageView movieLists={movieLists} createNewList={createNewList} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList} updateListName={updateListName} addNewMovieList={addMovieList}/>
   </>
 
 };
