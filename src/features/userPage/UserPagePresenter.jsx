@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 
+import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import FirebaseApp from "../../FirebaseConfig";
+
 import { 
   getUsername, 
   getStreamingServices, 
@@ -11,6 +15,7 @@ import {
   getUserEmail } from "./userPageSlice";
   import UserPageView from "./UserPageView";
   import BacknHomeButton from "../uiComponents/BacknHomeButton";
+import { useEffect } from "react";
 
 const UserPagePresenter = () => {
   const dispatch = useDispatch();
@@ -19,6 +24,17 @@ const UserPagePresenter = () => {
   const ownedServices = useSelector(getStreamingServices);
   const services      = useSelector(getAvailableServices);
   const editmode = useSelector(getEditmode);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth(FirebaseApp);
+    const user = auth.currentUser;
+
+    if (!user) {
+      navigate('/signIn');
+    }
+  }, [navigate]);
 
   /*
    *Unselects or selects streaming services by dispatching them to the Slice
