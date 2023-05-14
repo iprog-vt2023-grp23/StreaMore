@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
+import AddToListMenuView from "../searchPage/AddToListMenuView";
 import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList, addNewMovieList, addMovieToMovieList} from "./myListsSlice";
+import { getSelectedMovie, selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useEffect, useState } from "react";
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
@@ -8,8 +10,13 @@ const MyListsPagePresenter = () => {
   const movieLists = useSelector(getMovieLists);
   const selectedList = useSelector(getSelectedList);
   const dispatch = useDispatch();
+  const [showAddToListMenu, setShowAddToListMenu] = useState(false);
+  const selectedMovie = useSelector(getSelectedMovie);
 
 
+  const selectMovie = (movie) => {
+    dispatch(selectMovieToInspect(movie));
+  };
 
   const selectList = (list) => {
     dispatch(selectMovieList(list.name))
@@ -54,6 +61,10 @@ const MyListsPagePresenter = () => {
     dispatch(addNewMovieList(listName));
   }
 
+  const onAddMovieToList = (listName, movie) => {
+    dispatch(addMovieToMovieList({ listName, movie }));
+  };
+
 
   const getItems = (movie) => {
     return [
@@ -65,10 +76,13 @@ const MyListsPagePresenter = () => {
         }
       },
       {
-        label: "Notify",
-        icon: "pi pi-bell",
+        label: "Plus",
+        icon: "pi pi-plus",
         command: () => {
-          console.log("Notify user plis");
+          console.log("Add movie to listen")
+          console.log(movie)
+          setShowAddToListMenu(prevState => !prevState);
+          selectMovie(movie);
         }
       }
     ]
@@ -88,6 +102,11 @@ const MyListsPagePresenter = () => {
 
   return <>
   <BacknHomeButton/>
+  {showAddToListMenu ? <AddToListMenuView setVisible={setShowAddToListMenu} 
+      onAddNewMovieList={addMovieList} 
+      movieLists={movieLists} 
+      onAddMovieToList={onAddMovieToList}
+      movie={selectedMovie}/> : null}
   <MyListsPageView movieLists={movieLists} createNewList={createNewList} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList} updateListName={updateListName} addNewMovieList={addMovieList}/>
   </>
 

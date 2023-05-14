@@ -102,22 +102,8 @@
     transition: transform .5s;
   } */
   
-  /* .p-speeddial {
-    position: absolute;
-    top: calc(var(--img-height) - 35px);
-    left: 5px;
-  } */
-  
-  .p-speeddial-item{
-    background: none;
-  }
-  
-  .p-speeddial-item > a{
-    height: 30px;
-    width: 30px;
-    background-color: none;
-  }
-  
+ 
+
   .movieActionContainer {
     position: absolute;
     top: calc(var(--img-height) - 31px);
