@@ -82,6 +82,8 @@ const InspectMoviePresenter = () => {
           onAddMovieToList={onAddMovieToList}
           id={selectedMovie.imdbId}
           movie={selectedMovie}
+          search={false}
+          list={false}
         />
         {/*RenderMovie will render the selected movie*/}
         {/* <MovieCardListView movies={[selectedMovie]} /> */}

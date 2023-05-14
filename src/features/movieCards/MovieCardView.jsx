@@ -37,8 +37,8 @@ const MovieCardView = (props) => {
       <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
     </NavLink> 
       <div className="movieActionContainer">
-      {/* <SpeedDial model={props.getItems(props.movie)} direction="right" buttonStyle={{'background':'grey', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/>  */}
-      <Button className="addButton" icon="pi pi-plus" onClick={() => props.onPlusButtonClick(props.movie)}/>
+      {props.list? <SpeedDial model={props.getItems(props.movie)} direction="right" buttonStyle={{'background':'grey', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> : null}
+      {props.search? <Button className="addButton" icon="pi pi-plus" onClick={() => props.onPlusButtonClick(props.movie)}/> : null}
       </div>
       {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
       </>

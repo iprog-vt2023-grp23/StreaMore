@@ -91,7 +91,7 @@ const SearchList = () => {
     /*
     * Detta är en presenter, vet inte om vi borde använda den som ett ui element!
     */
-    const content = <MovieCardList movies={results} getItems={getItems} onPlusButtonClick={onPlusButtonClick}/>;
+    const content = <MovieCardList movies={results} getItems={getItems} onPlusButtonClick={onPlusButtonClick} search={true}/>;
     /*
      * 
      */

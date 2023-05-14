@@ -15,6 +15,8 @@ const MovieCardListView = (props) => {
           id={movie.imdbId}
           movie={movie}
           movieLists={props.movieLists}
+          search={props.search}
+          list={props.list}
         />
       ))}
     </div>
