@@ -120,7 +120,7 @@
   
   .movieActionContainer {
     position: absolute;
-    top: calc(var(--img-height) + -260px);
+    top: calc(var(--img-height) - 31px);
     left: 5px;
     /* width: 100%; */
     /* border: 1px solid red; */
@@ -128,12 +128,13 @@
   }
 
   .addButton {
-    height: 24px;
-    width: 24px !important;
+    height: 26px;
+    width: 26px !important;
+    background-color: black !important;
+    border: none !important;
   }
-  /* .p-speeddial-button {
-    background-color: blue;
-    height: 10px;
-    width: 10px;
-  } */
+
+  .addButton:hover {
+    background-color: var(--border-focus-color) !important;
+  }
   
