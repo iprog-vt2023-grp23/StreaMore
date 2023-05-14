@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // import {
 //   getMovieList,
@@ -19,6 +19,7 @@ import SearchListView from "./SearchListView";
 import AddToListMenuView from "./AddToListMenuView";
 import { addMovieToMovieList, addNewMovieList, getMovieLists } from "../userLists/myListsSlice";
 import {getAuth} from "firebase/auth"
+import { Toast } from 'primereact/toast';
 import FirebaseApp from "../../FirebaseConfig";
 
 
@@ -34,6 +35,7 @@ const SearchList = () => {
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const selectedMovie = useSelector(getSelectedMovie);
   const movieList = useSelector(getMovieLists);
+  const toast = useRef(null);
   
   const loggedIn = getAuth(FirebaseApp).currentUser;
   
@@ -45,6 +47,8 @@ const SearchList = () => {
     dispatch(addNewMovieList( listName ));
   };
   const onAddMovieToList = (listName, movie) => {
+    const detailString = 'Added "' + movie.originalTitle + '" to list "' + listName + '".';
+    toast.current.show({ severity: 'success', summary: 'Info Message', detail: detailString, life: 3000 });
     dispatch(addMovieToMovieList({ listName, movie }));
   };
 
@@ -97,6 +101,7 @@ const SearchList = () => {
      */
     return (
     <>
+    <Toast ref={toast} position="top-left"/>
     {showAddToListMenu ? <AddToListMenuView setVisible={setShowAddToListMenu} 
       onAddNewMovieList={onAddNewMovieList} 
       movieLists={movieList} 

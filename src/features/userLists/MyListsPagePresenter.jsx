@@ -3,7 +3,8 @@ import MyListsPageView from "./MyListsPageView";
 import AddToListMenuView from "../searchPage/AddToListMenuView";
 import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList, addNewMovieList, addMovieToMovieList} from "./myListsSlice";
 import { getSelectedMovie, selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { Toast } from 'primereact/toast';
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
 
 const MyListsPagePresenter = () => {
@@ -12,7 +13,7 @@ const MyListsPagePresenter = () => {
   const dispatch = useDispatch();
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const selectedMovie = useSelector(getSelectedMovie);
-
+  const toast = useRef(null);
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
@@ -62,6 +63,8 @@ const MyListsPagePresenter = () => {
   }
 
   const onAddMovieToList = (listName, movie) => {
+    const detailString = 'Added "' + movie.originalTitle + '" to list "' + listName + '".';
+    toast.current.show({ severity: 'success', summary: 'Info Message', detail: detailString, life: 3000 });
     dispatch(addMovieToMovieList({ listName, movie }));
   };
 
@@ -102,6 +105,7 @@ const MyListsPagePresenter = () => {
 
   return <>
   <BacknHomeButton/>
+  <Toast ref={toast} position="top-left"/>
   {showAddToListMenu ? <AddToListMenuView setVisible={setShowAddToListMenu} 
       onAddNewMovieList={addMovieList} 
       movieLists={movieLists} 
