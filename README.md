@@ -22,7 +22,7 @@ This project is built using the following API:
 
 ## Features
 - Search for movies, TV-series and more
-- Filter by streaming service, country and genre
+- Filter by streaming service and country
 - See information about search results, such as movie description
 - Create an account and set your current streaming services
 - Create personalized lists and populate them with your favourite movies and TV-series

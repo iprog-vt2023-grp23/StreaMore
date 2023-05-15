@@ -16,7 +16,7 @@ const SearchPresenter = () => {
         <SearchBar />
       
         <div className="searchCenteredText"><h4>
-          <i>Search for any Movie or TV Series by filtering for streaming services, genres or countries</i>
+          <i>Search for any Movie or TV Series by filtering for streaming services or countries</i>
         </h4>
         <h4>
           <i>Create Personalized lists however you like</i>
