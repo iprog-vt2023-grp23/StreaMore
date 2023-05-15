@@ -3,6 +3,7 @@ import UserPage from "./features/userPage/UserPagePresenter";
 import MyLists from "./features/userLists/MyListsPagePresenter";
 import InspectMovie from "./features/inspectMovie/InspectMoviePresenter";
 import SignIn from "./features/signIn/SignInPresenter";
+import Firebase from "./firebase/Firebase";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
@@ -24,6 +25,7 @@ function App() {
         </Routes>
         {/*Sidebar is outside of the Routes since it will always be visible*/}
         <Sidebar />
+        <Firebase />
       </BrowserRouter>
     </div>
   );
