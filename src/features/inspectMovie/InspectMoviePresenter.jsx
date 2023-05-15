@@ -9,19 +9,23 @@ import {
 import {
   addMovieToMovieList,
   addNewMovieList,
+  getMovieLists
 } from "../userLists/myListsSlice";
 import { useNavigate } from "react-router-dom";
 import InspectMovieView from "./InspectMovieView";
 import MovieCardView from "../movieCards/MovieCardView";
 // import MovieCardListView from "../movieCards/MovieCardListView";
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
+import iconMapping from "../uiComponents/StreamingButtons";
 import "./InspectMovie.css";
+import AddToListMenuPresenter from "../searchPage/AddToListMenuPresenter";
 
 const InspectMoviePresenter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selectedMovie = useSelector(getSelectedMovie);
   const aboutFilmField = useSelector(getAboutFilmField);
+  const movieList = useSelector(getMovieLists)
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
 
   const onAddNewMovieList = (listName) => {
@@ -34,68 +38,50 @@ const InspectMoviePresenter = () => {
     dispatch(selectMovieToInspect(movie));
   };
 
-  //Button which will toggle the about the film field
-  const aboutFilmButton = () => {
-    if (!aboutFilmField) {
-      return (
-        <button onClick={() => dispatch(toggleAboutFilmField())}>
-          About the film
-        </button>
-      );
-    }
-    return false;
+  const onPlusButtonClick = (movie) => {
+    setShowAddToListMenu((prevState) => !prevState);
+    selectMovie(movie);
   };
 
-  const getItems = (movie) => {
-    return [
-      {
-        label: "Add",
-        icon: "pi pi-plus",
-        command: () => {
-          setShowAddToListMenu((prevState) => !prevState);
-        },
-      },
-      {
-        label: "Notify",
-        icon: "pi pi-bell",
-        command: () => {
-          console.log("Notify user plis");
-        },
-      },
-    ];
-  };
+  const streamingButtons = () => 
+  {
+    const services = Object.entries(Object.values(selectedMovie.streamingInfo)[0]);
+    return services.map((service) => {
+    return <a href={service[1][0].link} key={service[0]}>{iconMapping(service[0])}</a>
+  })
+}
 
   //If user has not clicked a movie/reloaded the page only a back button will be shown (untill persistence is done)
   if (selectedMovie)
     return (
       <>
         {showAddToListMenu ? (
-          <AddToListMenuView
-            setVisible={setShowAddToListMenu}
-            onAddNewMovieList={onAddNewMovieList}
-            movieLists={movieList}
-            onAddMovieToList={onAddMovieToList}
-            movie={selectedMovie}
+          <AddToListMenuPresenter
+          setVisible={setShowAddToListMenu}
+          onAddNewMovieList={onAddNewMovieList}
+          movieLists={movieList}
+          onAddMovieToList={onAddMovieToList}
+          movie={selectedMovie}
           />
         ) : null}
 
         <BacknHomeButton />
         <div className="inspectMovie">
           <MovieCardView
-            getItems={getItems}
             onSelectMovie={selectMovie}
             onAddNewMovieList={onAddNewMovieList}
             onAddMovieToList={onAddMovieToList}
+            onPlusButtonClick={onPlusButtonClick}
             id={selectedMovie.imdbId}
             movie={selectedMovie}
-            search={false}
+            search={true}
             list={false}
           />
           {/*RenderMovie will render the selected movie*/}
           {/* <MovieCardListView movies={[selectedMovie]} /> */}
           {/*Either render the about film button or the about film field depending on if the about button has been pressed*/}
 
-          <InspectMovieView selectedMovie={selectedMovie} />
+          <InspectMovieView selectedMovie={selectedMovie} serviceLinks={streamingButtons()} />
         </div>
       </>
     );

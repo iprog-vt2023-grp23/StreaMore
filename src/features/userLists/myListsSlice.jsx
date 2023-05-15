@@ -38,6 +38,7 @@ const myListsSlice = createSlice({
       state.selectedList = action.payload;
     },
     addMovieToMovieList(state, action) {
+      
       state.movieLists = state.movieLists.map((list) => {
         if (list.name === action.payload.listName) {
           if (list.movies === undefined) {

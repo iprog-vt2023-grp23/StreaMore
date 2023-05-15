@@ -1,11 +1,15 @@
+import "./InspectMovie.css";
+
 const InspectMovieView = (props) => {
   return (
-    <div>
-      <ul>
-        <li>Rating: {props.selectedMovie.imdbRating}</li>
-        <li>Year: {props.selectedMovie.year}</li>
-        <li>Cast: {props.selectedMovie.cast[0]}</li>
-      </ul>
+    <div className="aboutText">
+        <p>Rating: {props.selectedMovie.imdbRating}</p>
+        <p>Year: {props.selectedMovie.year}</p>
+        <p>Cast: {props.selectedMovie.cast[0]}</p>
+        <p>Director: {props.selectedMovie.directors}</p>
+        <p>Overview: {props.selectedMovie.overview}</p>
+        Available on:
+        {props.serviceLinks}
     </div>
   );
 };
