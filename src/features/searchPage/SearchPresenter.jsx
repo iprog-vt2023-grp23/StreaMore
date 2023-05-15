@@ -30,7 +30,7 @@ const SearchPresenter = () => {
               <a
                 href="https://github.com/iprog-vt2023-grp23/StreaMore"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer" 
               >
                 Github
               </a>{" "}
