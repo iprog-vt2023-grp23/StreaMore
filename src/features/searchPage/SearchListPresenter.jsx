@@ -39,7 +39,6 @@ const SearchList = () => {
   const toast = useRef(null);
 
   const loggedIn = getAuth(FirebaseApp).currentUser;
-  console.log("logged in", loggedIn);
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
