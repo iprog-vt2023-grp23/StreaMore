@@ -116,7 +116,7 @@ const SearchBar = () => {
         dispatch(setStateKeyword(keyword));
         setKeyword("");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       } finally {
         setSearchRequestStatus("idle");
       }
@@ -154,7 +154,7 @@ const SearchBar = () => {
         dispatch(setStateKeyword(keyword));
         setKeyword("");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       } finally {
         setSearchRequestStatus("idle");
       }

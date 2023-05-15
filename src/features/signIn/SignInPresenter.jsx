@@ -42,7 +42,6 @@ const SignIn = () => {
 
   //Dispatched the signIn action and navigates to search when sign in is complete
   const signInButton = async () => {
-    console.log("signedIn");
     await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         dispatch(toggleSidebar()); //Tillfällig fulfix för att toggla sidebar när man loggar in
@@ -79,7 +78,6 @@ const SignIn = () => {
     else setAuthError("Please fill out all fields");
   };
   const signOutButton = async () => {
-    console.log("signedOut");
     await signOut(auth).then(() => {
       location.reload();
     });

@@ -13,7 +13,6 @@ const renderStreamingServices = (result) => {
   try {
     serviceKeys = Object.keys(result.streamingInfo[country]);
   } catch (err) {
-    //console.log("Movie not availablel", err)
   }
 
   const streamingInfo = serviceKeys.map((service) => {
