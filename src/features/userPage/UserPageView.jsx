@@ -12,6 +12,8 @@ const UserPageView = (props) => {
 
   let renderButtonIfNoServices = () => {
     if (servicesListIsEmpty) {
+      if (!props.username && !props.useremail)
+        return;
       return (
         <Button
           label={"Add services"}
@@ -74,7 +76,7 @@ const UserPageView = (props) => {
   });
 
   //for editing username (removed feature due to scope constraints)
-  const editUsername = () => {
+  const renderUserinfo = () => {
     return (
       <div>
         <h3>{props.username}</h3>
@@ -87,7 +89,7 @@ const UserPageView = (props) => {
     <section className="userprofile">
       <h2>User Profile</h2>
       <FaUserCircle size="80" />
-      {editUsername()}
+      {renderUserinfo()}
       <h3>My services: {props.isEdit} </h3>
       {renderButtonIfNoServices()}
       <p></p>
