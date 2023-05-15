@@ -1,46 +1,44 @@
 .signIn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
-  }
-  
-  .signIn > form {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 300px;
-    height: 230px;
-  }
-  
-  /* Targeta den/de button(s) som är ett direkt child till div som är ett direkt child till form som är ett direkt child till .searchBar */
-  .signIn  > button {
-    margin-top: 15px;
-    background-color: rgb(44, 43, 43);
-    border: none;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
 
-  .inputBoxes > span{
-    margin-top: 30px;
-  }
+.signIn > form {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+  height: 230px;
+}
 
-  .p-button {
-    width: 150px;
-  }
-  .userInput {
-    background-color: rgb(44, 43, 43);
-    -webkit-text-fill-color: white;
-    /*shadow that make it look like its raised*/
-    box-shadow: 0px 1px 2px rgba(0,0,0,0.1), 
-    0px 2px 4px rgba(0,0,0,0.5), 
-    0px 4px 8px rgba(0,0,0,0.1), 
-    0px 8px 16px rgba(0,0,0,0.1);
-    border:none;
-    width: 250px;
-  }
+/* Targeta den/de button(s) som är ett direkt child till div som är ett direkt child till form som är ett direkt child till .searchBar */
+.signIn > button {
+  margin-top: 15px;
+  background-color: rgb(44, 43, 43);
+  border: none;
+}
 
-  .userInput:hover {
-    background-color: rgba(34, 32, 51, 0.616);
-  }
+.inputBoxes > span {
+  margin-top: 30px;
+}
+
+.p-button {
+  width: 150px;
+}
+.userInput {
+  background-color: rgb(44, 43, 43);
+  -webkit-text-fill-color: white;
+  /*shadow that make it look like its raised*/
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.5),
+    0px 4px 8px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1);
+  border: none;
+  width: 250px;
+}
+
+.userInput:hover {
+  background-color: rgba(34, 32, 51, 0.616);
+}

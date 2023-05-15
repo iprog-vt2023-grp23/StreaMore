@@ -26,10 +26,8 @@ const iconMapping = (serviceName) => {
     showtime: <SiShowtime size={size} />,
     starz: <SiStarz size={size} />,
   };
-  if(serviceName in iconMap)
-    return iconMap[serviceName];
-  else
-    return false;
+  if (serviceName in iconMap) return iconMap[serviceName];
+  else return false;
 };
 
 export default iconMapping;

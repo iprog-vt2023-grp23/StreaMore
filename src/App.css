@@ -1,4 +1,3 @@
-
 body {
   /* Här håller vi våra globala CSS variabler! Body är mainparent till allt som renderas så alla komponenter kommer kunna nå dessa */
   --background-color-main: #191a1b;

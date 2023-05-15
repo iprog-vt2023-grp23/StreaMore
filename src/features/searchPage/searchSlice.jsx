@@ -19,7 +19,6 @@ export const searchFilms = createAsyncThunk(
   async (params) => {
     const url = sourceUrl.concat("v2/search/title?", params.join("&"));
 
-    console.log("url", url);
     const response = await fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
@@ -34,7 +33,6 @@ export const searchFilmsServiceGenre = createAsyncThunk(
   "searchBar/searchFilms",
   async (params) => {
     const url = sourceUrl.concat("v2/search/basic?", params.join("&"));
-    console.log("url", url);
     const response = await fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
@@ -68,7 +66,7 @@ const searchSlice = createSlice({
       //When the promise is fullfilled, add the films to state.results and sort them
       .addCase(searchFilms.fulfilled, (state, action) => {
         state.status = "succeeded";
-        if(action.payload.result){
+        if (action.payload.result) {
           state.results = action.payload.result;
           state.results.sort();
         }
