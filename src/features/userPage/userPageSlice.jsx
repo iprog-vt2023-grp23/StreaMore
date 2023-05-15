@@ -32,7 +32,7 @@ export const getServices = createAsyncThunk(
       })
       .catch((err) => console.error("error:" + err));
     return response;
-  }   
+  }
 );
 
 const userPageSlice = createSlice({
@@ -40,16 +40,13 @@ const userPageSlice = createSlice({
   initialState,
   reducers: {
     setUsername(state, action) {
-      console.log("setting username:", action.payload);
       state.username = action.payload;
     },
     setUserEmail(state, action) {
-      console.log("setting userEmail to:", action.payload);
       state.useremail = action.payload;
     },
     setUserId(state, action) {
       state.userId = action.payload;
-      console.log("userID", action.payload)
     },
     addStreamingService(state, action) {
       state.ownedServices.push(action.payload);
@@ -81,7 +78,14 @@ export const getUsername = (state) => state.userPage.username;
 export const getUserId = (state) => state.userPage.userId;
 export const getUserEmail = (state) => state.userPage.useremail;
 
-export const { updateStreamingServiceList, setUsername, setUserEmail, setUserId, addStreamingService, removeStreamingService, toggleEdit } =
-  userPageSlice.actions;
+export const {
+  updateStreamingServiceList,
+  setUsername,
+  setUserEmail,
+  setUserId,
+  addStreamingService,
+  removeStreamingService,
+  toggleEdit,
+} = userPageSlice.actions;
 
 export default userPageSlice.reducer;
