@@ -1,9 +1,14 @@
 // import { getMovieList } from "../userLists/userListsSlice";
-import { addMovieToMovieList, addNewMovieList, getMovieLists, updateMovieLists } from "../userLists/myListsSlice";
+import {
+  addMovieToMovieList,
+  addNewMovieList,
+  getMovieLists,
+  updateMovieLists,
+} from "../userLists/myListsSlice";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MovieCardListView from "./MovieCardListView";
-import "./MovieCardList.css"
+import "./MovieCardList.css";
 
 const MovieCardList = (props) => {
   const dispatch = useDispatch();
@@ -13,7 +18,7 @@ const MovieCardList = (props) => {
     dispatch(selectMovieToInspect(movie));
   };
   const onAddNewMovieList = (listName) => {
-    dispatch(addNewMovieList( listName ));
+    dispatch(addNewMovieList(listName));
   };
   const onAddMovieToList = (listName, movie) => {
     dispatch(addMovieToMovieList({ listName, movie }));
@@ -21,15 +26,16 @@ const MovieCardList = (props) => {
 
   return (
     <MovieCardListView
-        getItems={props.getItems}
-        movies={props.movies}
-        selectMovie={selectMovie}
-        onAddNewMovieList={onAddNewMovieList}
-        onAddMovieToList={onAddMovieToList}
-        onPlusButtonClick={props.onPlusButtonClick}
-        movieLists={movieLists}
-        search={props.search}
-        list={props.list}
+      getItems={props.getItems}
+      loggedIn={props.loggedIn}
+      movies={props.movies}
+      selectMovie={selectMovie}
+      onAddNewMovieList={onAddNewMovieList}
+      onAddMovieToList={onAddMovieToList}
+      onPlusButtonClick={props.onPlusButtonClick}
+      movieLists={movieLists}
+      search={props.search}
+      list={props.list}
     />
   );
 };

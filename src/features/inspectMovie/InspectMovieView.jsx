@@ -1,18 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import "./InspectMovie.css";
 
 const InspectMovieView = (props) => {
-  const navigate = useNavigate();
-
   return (
-    <div>
-      <button onClick={() => props.onToggleAboutField()}>Hide</button>
-      <ul>
-        <li>Rating: {props.selectedMovie.imdbRating}</li>
-        <li>Year: {props.selectedMovie.year}</li>
-        <li>Cast: {props.selectedMovie.cast[0]}</li>
-      </ul>
-      {/*navigate(-1) navigated back to previous page*/}
-      <button onClick={() => navigate(-1)}>Back</button>
+    <div className="aboutText">
+        <p>Rating: {props.selectedMovie.imdbRating}</p>
+        <p>Year: {props.selectedMovie.year}</p>
+        <p>Cast: {props.selectedMovie.cast[0]}</p>
+        <p>Director: {props.selectedMovie.directors}</p>
+        <p>Overview: {props.selectedMovie.overview}</p>
+        Available on:
+        {props.serviceLinks}
     </div>
   );
 };

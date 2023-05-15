@@ -1,199 +1,191 @@
 .MyListsPageView {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .listTitle {
-    cursor: pointer;
-    margin-bottom: 0px;
-
+  cursor: pointer;
+  margin-bottom: 0px;
 }
 
 .confirmDelete {
-    position: absolute;
-    box-sizing: border-box;
-    --width: 150px;
-    --height: 200px;
-    top: calc(50% - var(--height) / 2);
-    min-width: var(--width);
-    padding-inline: 20px;
-    height: var(--height);
-    background-color: var(--background-color-secondary);
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 0px var(--shadow-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000000;
-    /* backdrop-filter: blur(15999px); */
+  position: absolute;
+  box-sizing: border-box;
+  --width: 150px;
+  --height: 200px;
+  top: calc(50% - var(--height) / 2);
+  min-width: var(--width);
+  padding-inline: 20px;
+  height: var(--height);
+  background-color: var(--background-color-secondary);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000000;
+  /* backdrop-filter: blur(15999px); */
 }
 
 .yesno button {
-    margin: 10px;
+  margin: 10px;
 }
 
 @media (min-width: 800px) {
-    .yesno button:hover {
-        color: grey;
-        transition: color 50ms linear;
-    }
-    
+  .yesno button:hover {
+    color: grey;
+    transition: color 50ms linear;
+  }
 }
 
- .listMenu{ 
-    max-width: 95vw;
-    display: grid;
-    height: fit-content;
-    grid-auto-flow: column;
-    overflow-x: scroll;
-    gap: 10px;
-    margin-inline: 10px;
-    -ms-overflow-style: none; 
-    scrollbar-width: none;  
-    margin-top: 10px;
-    margin-bottom: 20px;
-} 
-
+.listMenu {
+  max-width: 95vw;
+  display: grid;
+  height: fit-content;
+  grid-auto-flow: column;
+  overflow-x: scroll;
+  gap: 10px;
+  margin-inline: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
 
 .listMenu::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-.listItem, .selectedListItem {
-    display: inline-block;
-    background-color: var(--background-color-secondary);
-    box-shadow: 0 0 5px 0 var(--shadow-color);
-    cursor: pointer;
-    flex: none;
-    list-style-type: none;
-    border-radius: 5px;
-    padding: 10px;
-    /* position: relative; */
-    white-space: nowrap;
-    max-width: fit-content;
-
+.listItem,
+.selectedListItem {
+  display: inline-block;
+  background-color: var(--background-color-secondary);
+  box-shadow: 0 0 5px 0 var(--shadow-color);
+  cursor: pointer;
+  flex: none;
+  list-style-type: none;
+  border-radius: 5px;
+  padding: 10px;
+  /* position: relative; */
+  white-space: nowrap;
+  max-width: fit-content;
 }
 
 .listMenuIcon {
-    position: absolute;
-    font-size: 1.1rem;
-    right: 5px;
-    top: 13px;
+  position: absolute;
+  font-size: 1.1rem;
+  right: 5px;
+  top: 13px;
 }
 
 .selectedListItem {
-    background-color: var(--border-focus-color);
-    box-shadow: 0 0 10px 0px rgb(42, 42, 42);
+  background-color: var(--border-focus-color);
+  box-shadow: 0 0 10px 0px rgb(42, 42, 42);
 }
 
 .listContent {
-    width: 95vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .editIcons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    margin-top: 3px;
-    padding: 5px;
-    border-bottom: 1px solid var(--white);
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-top: 3px;
+  padding: 5px;
+  border-bottom: 1px solid var(--white);
 }
 
-.deleteListIcon, .editListIcon {
-    margin: 0 2px;
-    cursor: pointer;
+.deleteListIcon,
+.editListIcon {
+  margin: 0 2px;
+  cursor: pointer;
 }
 
 .createFirstList {
-    /* border: 1px solid var(--background-color-secondary); */
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0px 0px 5px 0px var(--shadow-color);
-
+  /* border: 1px solid var(--background-color-secondary); */
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 0px 5px 0px var(--shadow-color);
 }
 
 .createFirstList:hover {
-    border: 1px solid var(--border-focus-color);
-    transition: background-color 50ms linear;
+  border: 1px solid var(--border-focus-color);
+  transition: background-color 50ms linear;
 }
 
 /*Hover effekter bara för datorer, aka breda skärmar*/
 @media (min-width: 800px) {
-    .deleteListIcon:hover,
-    .editListIcon:hover {
-        color: grey;
-        transition: color 50ms linear;
-    }
+  .deleteListIcon:hover,
+  .editListIcon:hover {
+    color: grey;
+    transition: color 50ms linear;
   }
-
+}
 
 .updateListNameForm {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin:0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 .updateListNameForm input {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0px;
-    margin: 0px;
-    font: inherit;
-    text-align: center;
-    cursor: pointer;
-    background-color: var(--border-focus-color);
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--border-focus-color);
 }
 
-
 .updateListNameForm .checkmark {
-    font-size: 1.8rem;
-    margin-inline: 5px;
+  font-size: 1.8rem;
+  margin-inline: 5px;
 }
 
 @media (max-width: 800px) {
-    .updateListNameForm {
-        position: absolute;
-        --width: 100vw;
-        --height: 100vh;
-        height: 100vh;
-        width: var(--width);
-        z-index: 1000000;
-        backdrop-filter: blur(3px);
-        left: 0;
-        top: 0;
-    }
+  .updateListNameForm {
+    position: absolute;
+    --width: 100vw;
+    --height: 100vh;
+    height: 100vh;
+    width: var(--width);
+    z-index: 1000000;
+    backdrop-filter: blur(3px);
+    left: 0;
+    top: 0;
+  }
 
-    .updateListNameForm input {
-        position: absolute;
-        bottom: 90%;
-    }
+  .updateListNameForm input {
+    position: absolute;
+    bottom: 90%;
+  }
 
-    .updateListNameForm .checkmark {
-        position: absolute;
-        bottom: 85%;
-        right: 50%;
-    }
+  .updateListNameForm .checkmark {
+    position: absolute;
+    bottom: 85%;
+    right: 50%;
+  }
 
-    .updateListNameForm .cross {
-        position: absolute;
-        bottom: 85%;
-        left: 50%
-    }
-  
-    
+  .updateListNameForm .cross {
+    position: absolute;
+    bottom: 85%;
+    left: 50%;
+  }
 }
 
 /* .p-speeddial {
@@ -201,17 +193,17 @@
     top: calc(var(--img-height) - 35px);
     left: 5px;
 }  */
-  
-  .p-speeddial-item{
-    /* background: white; */
-  }
-  
-  .p-speeddial-action {
-    background: black;
-  }
 
-  .p-speeddial-item > a{
-    height: 20px;
-    width: 20px;
-    background-color: none;
-  }
+.p-speeddial-item {
+  /* background: white; */
+}
+
+.p-speeddial-action {
+  background: black;
+}
+
+.p-speeddial-item > a {
+  height: 20px;
+  width: 20px;
+  background-color: none;
+}
