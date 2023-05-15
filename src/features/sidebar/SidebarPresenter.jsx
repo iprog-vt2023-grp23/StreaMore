@@ -4,7 +4,7 @@ import { getSidebarState, toggleSidebar } from "./sidebarSlice";
 import { FiAlignJustify } from "react-icons/fi";
 import SidebarView from "./SidebarView";
 import FirebaseApp from "../../FirebaseConfig";
-import {getAuth, signOut} from "firebase/auth"
+import { getAuth, signOut } from "firebase/auth";
 import { useEffect, useRef } from "react";
 
 import "./Sidebar.css";
@@ -22,15 +22,15 @@ const Sidebar = () => {
     return () => {
       window.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("touchstart", handleClickOutside);
-    }
-  }, [])
+    };
+  }, []);
 
-  const handleClickOutside = event => {
+  const handleClickOutside = (event) => {
     const { current: wrap } = ref;
     if (wrap && !wrap.contains(event.target)) {
       dispatch(toggleSidebar());
     }
-  }
+  };
 
   //Inverts the sidebar state to toggle it
   const sidebarButtonClick = () => {
@@ -38,10 +38,9 @@ const Sidebar = () => {
   };
   const signOutButton = async () => {
     console.log("signedOut");
-    await signOut(auth)
-    .then(() => {
-      location.reload()
-    })
+    await signOut(auth).then(() => {
+      location.reload();
+    });
   };
 
   //Returns a button if the sidebar is not toggled
@@ -64,7 +63,12 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       {sidebarButton() || (
-        <SidebarView onSidebarButtonClick={sidebarButtonClick} onSignOut={signOutButton} loggedIn={loggedIn} ref={ref}/>
+        <SidebarView
+          onSidebarButtonClick={sidebarButtonClick}
+          onSignOut={signOutButton}
+          loggedIn={loggedIn}
+          ref={ref}
+        />
       )}
     </div>
   );

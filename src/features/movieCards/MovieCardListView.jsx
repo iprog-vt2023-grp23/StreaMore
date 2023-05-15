@@ -1,5 +1,5 @@
 import MovieCardView from "./MovieCardView";
-import "./MovieCardList.css"
+import "./MovieCardList.css";
 
 const MovieCardListView = (props) => {
   return (
@@ -23,4 +23,4 @@ const MovieCardListView = (props) => {
   );
 };
 
- export default MovieCardListView;
+export default MovieCardListView;

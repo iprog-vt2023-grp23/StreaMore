@@ -1,9 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
-import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList, addNewMovieList, addMovieToMovieList} from "./myListsSlice";
-import { getSelectedMovie, selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
+import {
+  getMovieLists,
+  selectMovieList,
+  getSelectedList,
+  removeMovieFromMovieList,
+  removeMovieList,
+  addNewMovieList,
+  addMovieToMovieList,
+} from "./myListsSlice";
+import {
+  getSelectedMovie,
+  selectMovieToInspect,
+} from "../inspectMovie/inspectMovieSlice";
 import { useEffect, useState, useRef } from "react";
-import { Toast } from 'primereact/toast';
+import { Toast } from "primereact/toast";
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
 import AddToListMenuPresenter from "../searchPage/AddToListMenuPresenter";
 
@@ -23,54 +34,61 @@ const MyListsPagePresenter = () => {
   };
 
   const selectList = (list) => {
-    dispatch(selectMovieList(list.name))
-  }
+    dispatch(selectMovieList(list.name));
+  };
 
   const removeMovieFromList = (movie) => {
-    dispatch(removeMovieFromMovieList({name: selectedList, movie: movie}))
-  }
+    dispatch(removeMovieFromMovieList({ name: selectedList, movie: movie }));
+  };
 
   const removeList = (list) => {
-   dispatch(removeMovieList(list))
-  }
+    dispatch(removeMovieList(list));
+  };
 
   const findUniqueListName = (listName) => {
     let i = 1;
     let newListName = listName;
-    while(movieLists.find(list => list.name === newListName)){
+    while (movieLists.find((list) => list.name === newListName)) {
       newListName = listName + " (" + i + ")";
       i++;
     }
     return newListName;
-  }
+  };
 
   const updateListName = (newListName) => {
-    if(newListName === "" || newListName === selectedList){
+    if (newListName === "" || newListName === selectedList) {
       return;
     }
     const listName = findUniqueListName(newListName);
-    const oldList = movieLists.find(list => list.name === selectedList).movies;
+    const oldList = movieLists.find(
+      (list) => list.name === selectedList
+    ).movies;
     dispatch(addNewMovieList(listName));
-    oldList.forEach(movie => { 
-      dispatch(addMovieToMovieList({listName: listName, movie: movie}))
-    })
-    dispatch(removeMovieList(selectedList))
-    dispatch(selectMovieList(listName))
-  }
+    oldList.forEach((movie) => {
+      dispatch(addMovieToMovieList({ listName: listName, movie: movie }));
+    });
+    dispatch(removeMovieList(selectedList));
+    dispatch(selectMovieList(listName));
+  };
 
   const addMovieList = (listName) => {
-    if(listName === ""){
+    if (listName === "") {
       return;
     }
     dispatch(addNewMovieList(listName));
-  }
-
-  const onAddMovieToList = (listName, movie) => {
-    const detailString = 'Added "' + movie.originalTitle + '" to list "' + listName + '".';
-    toast.current.show({ severity: 'success', summary: 'Info Message', detail: detailString, life: 3000 });
-    dispatch(addMovieToMovieList({ listName, movie }));
   };
 
+  const onAddMovieToList = (listName, movie) => {
+    const detailString =
+      'Added "' + movie.originalTitle + '" to list "' + listName + '".';
+    toast.current.show({
+      severity: "success",
+      summary: "Info Message",
+      detail: detailString,
+      life: 3000,
+    });
+    dispatch(addMovieToMovieList({ listName, movie }));
+  };
 
   const getItems = (movie) => {
     return [
@@ -79,99 +97,100 @@ const MyListsPagePresenter = () => {
         icon: "pi pi-minus",
         command: () => {
           removeMovieFromList(movie);
-        }
+        },
       },
       {
         label: "Plus",
         icon: "pi pi-plus",
         command: () => {
-          console.log("Add movie to listen")
-          console.log(movie)
-          setShowAddToListMenu(prevState => !prevState);
+          setShowAddToListMenu((prevState) => !prevState);
           selectMovie(movie);
-        }
-      }
-    ]
-  }
+        },
+      },
+    ];
+  };
 
   useEffect(() => {
-    if(movieLists.length > 0 && !selectedList){
-      dispatch(selectMovieList(movieLists[0].name))
+    if (movieLists.length > 0 && !selectedList) {
+      dispatch(selectMovieList(movieLists[0].name));
     }
-  }, [movieLists])
+  }, [movieLists]);
 
   const createNewList = () => {
     const newListName = findUniqueListName("New List");
     dispatch(addNewMovieList(newListName));
     dispatch(selectMovieList(newListName));
-  }
+  };
 
-
-
-    const setSelectedList = (list) => {
+  const setSelectedList = (list) => {
     setNewListName("");
     setUpdateName(false);
     selectList(list);
-  }
+  };
 
   const confirmedUpdateName = (e) => {
     e.preventDefault();
     updateListName(newListName);
     setUpdateName(false);
     setNewListName("");
-  }
+  };
 
   const cancelUpdateListName = (e) => {
     e.preventDefault();
     setUpdateName(false);
     setNewListName("");
-  }
+  };
 
   const editListName = (e) => {
-    if(e.target.value.length > 20) return;
-    setNewListName(e.target.value)
-  }
+    if (e.target.value.length > 20) return;
+    setNewListName(e.target.value);
+  };
 
   const toggleEditListName = () => {
     setNewListName(selectedList);
-    setUpdateName(prevState => !prevState);
-  }
+    setUpdateName((prevState) => !prevState);
+  };
 
   const handleDelete = () => {
     removeList(selectedList);
     setShowConfirmDelete(false);
-  }
+  };
 
-  return <>
-    <BacknHomeButton />
-    <Toast ref={toast} position="top-left"/>
-  {showAddToListMenu ? <AddToListMenuPresenter setVisible={setShowAddToListMenu} 
-      onAddNewMovieList={addMovieList} 
-      movieLists={movieLists} 
-      onAddMovieToList={onAddMovieToList}
-      movie={selectedMovie}/> : null}
-    <MyListsPageView
-      movieLists={movieLists}
-      createNewList={createNewList}
-      selectedList={selectedList}
-      onSelectList={selectList}
-      getItems={getItems}
-      updateListName={confirmedUpdateName}
-      addNewMovieList={addMovieList} 
-      updateName={updateName}
-      setUpdateName={setUpdateName}
-      newListName={newListName}
-      setNewListName={setNewListName}
-      showConfirmDelete={showConfirmDelete}
-      setShowConfirmDelete={setShowConfirmDelete} 
-      setSelectedList={setSelectedList}
-      handleDelete={handleDelete}
-      cancelUpdateListName={cancelUpdateListName}
-      editListName={editListName}
-      toggleEditListName={toggleEditListName}
+  return (
+    <>
+      <BacknHomeButton />
+      <Toast ref={toast} position="top-left" />
+      {showAddToListMenu ? (
+        <AddToListMenuPresenter
+          setVisible={setShowAddToListMenu}
+          onAddNewMovieList={addMovieList}
+          movieLists={movieLists}
+          onAddMovieToList={onAddMovieToList}
+          movie={selectedMovie}
+        />
+      ) : null}
+      <MyListsPageView
+        movieLists={movieLists}
+        createNewList={createNewList}
+        selectedList={selectedList}
+        onSelectList={selectList}
+        getItems={getItems}
+        updateListName={confirmedUpdateName}
+        addNewMovieList={addMovieList}
+        updateName={updateName}
+        setUpdateName={setUpdateName}
+        newListName={newListName}
+        setNewListName={setNewListName}
+        showConfirmDelete={showConfirmDelete}
+        setShowConfirmDelete={setShowConfirmDelete}
+        setSelectedList={setSelectedList}
+        handleDelete={handleDelete}
+        cancelUpdateListName={cancelUpdateListName}
+        editListName={editListName}
+        toggleEditListName={toggleEditListName}
       />
-  </>
-
+    </>
+  );
 };
 
 export default MyListsPagePresenter;
