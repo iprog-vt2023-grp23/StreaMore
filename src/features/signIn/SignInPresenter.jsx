@@ -60,7 +60,7 @@ const SignIn = () => {
         .then(async (userCredential) => {
           await updateProfile(userCredential.user, { displayName: username })
             .then(() => {
-              navigate("/");
+              navigate("/userPage");
             })
             .catch((err) => {
               console.error("Register error", err.message);
