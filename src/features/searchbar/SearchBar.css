@@ -2,25 +2,18 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 15px;
+  align-items: center;
+}
+
+.searchbarandbutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
   width: 100%;
+
 }
 
-.searchBar > form {
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: fit-content;
-}
-
-.searchButton {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 60px;
-  /* background-color: red; */
-}
 
 /* CSS for Search field */
 .searchinput {
@@ -32,8 +25,9 @@
   0px 4px 8px rgba(0,0,0,0.1), 
   0px 8px 16px rgba(0,0,0,0.1);
   border:none;
-  width: 350px;
+  min-width: clamp(200px, 400px, 60vw);
 }
+
 
 /* ------------------------- */
 
@@ -48,17 +42,13 @@
   0px 4px 8px rgba(0,0,0,0.1), 
   0px 8px 16px rgba(0,0,0,0.1);;
   width: 200px;
-  /* margin-top: 30px; */
 }
 
 .p-dropdown:hover {
-  /* background-color: rgba(34, 32, 51, 0.616); */
   background-color: var(--input-hover-color);
 }
 
 .p-dropdown-trigger:hover {
-  /* background-color: rgba(34, 32, 51, 0.829); */
-  /* background-color: var(--input-hover-color); */
   background-color: none;
 }
 
@@ -79,10 +69,7 @@
   background-color: red(44, 43, 43);
   border: black;
 }
-/* .p-dropdown-filter {
-  background-color: red;
-  border: black;
-} */
+
 
 .p-dropdown-item:hover {
   -webkit-text-fill-color: black;
@@ -106,10 +93,8 @@
 
 /* CSS for Search Button */
 .p-splitbutton {
-  width: 100px;
   height: 44px;
-  margin-left: 50px;
-  margin-bottom: 40px;
+  margin-left: 10px;
   background-color: rgb(43, 43, 43);
 }
 
@@ -135,23 +120,9 @@
 
 .p-button {
   background-color: rgb(43, 43, 43);
-  /* border: white; */
 }
 /* ------------------------- */
 
-
-@media (max-width: 800px) {
-  .searchBar > form {
-    width: 300px;
-  }
-  .searchinput {
-    width: 200px;
-  }
-  .p-splitbutton {
-    width: 70px;
-    margin-left: 10px;
-  }
-}
 
 .searchinput:hover {
   background-color: rgba(34, 32, 51, 0.616);
