@@ -8,3 +8,10 @@
     align-items: center;
     justify-items: center;
   }
+
+  
+  @media (max-width: 390px) {
+    .movieCardList {
+      --card-width: 173px;
+    }
+  }
