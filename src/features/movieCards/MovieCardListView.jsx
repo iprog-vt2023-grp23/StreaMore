@@ -7,6 +7,7 @@ const MovieCardListView = (props) => {
       {props.movies.map((movie) => (
         <MovieCardView
           getItems={props.getItems}
+          loggedIn={props.loggedIn}
           key={movie.imdbId}
           onSelectMovie={props.selectMovie}
           onAddNewMovieList={props.onAddNewMovieList}

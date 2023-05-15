@@ -53,7 +53,7 @@ const MovieCardView = (props) => {
               }}
             />
           ) : null}
-          {props.search ? (
+          {(props.search && props.loggedIn) ? (
             <Button
               className="addButton"
               icon="pi pi-plus"

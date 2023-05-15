@@ -39,6 +39,7 @@ const SearchList = () => {
   const toast = useRef(null);
 
   const loggedIn = getAuth(FirebaseApp).currentUser;
+  console.log("logged in", loggedIn);
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));
@@ -64,28 +65,6 @@ const SearchList = () => {
     selectMovie(movie);
   };
 
-  const getItems = (movie) => {
-    return loggedIn
-      ? [
-          {
-            label: "Add",
-            icon: "pi pi-plus",
-            command: () => {
-              setShowAddToListMenu((prevState) => !prevState);
-              selectMovie(movie);
-            },
-          },
-          {
-            label: "Notify",
-            icon: "pi pi-bell",
-            command: () => {
-              console.log("Notify user plis");
-            },
-          },
-        ]
-      : [];
-  };
-
   // Either render a loading gif, the search result or an error depending on the status
   if (status === "loading") {
     return <BiLoaderCircle className="loadingCircle" />;
@@ -98,8 +77,8 @@ const SearchList = () => {
     const content = (
       <MovieCardList
         movies={results}
-        getItems={getItems}
         onPlusButtonClick={onPlusButtonClick}
+        loggedIn={loggedIn}
         search={true}
       />
     );

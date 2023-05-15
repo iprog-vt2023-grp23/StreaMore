@@ -27,6 +27,7 @@ const MovieCardList = (props) => {
   return (
     <MovieCardListView
       getItems={props.getItems}
+      loggedIn={props.loggedIn}
       movies={props.movies}
       selectMovie={selectMovie}
       onAddNewMovieList={onAddNewMovieList}
