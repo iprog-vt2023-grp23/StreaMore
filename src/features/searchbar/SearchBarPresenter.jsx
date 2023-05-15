@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {
   searchFilms,
-  searchFilmsServiceGenre,
+  searchFilmsService,
   setStateCountry,
   getCountry,
   setStateKeyword,
@@ -15,7 +15,6 @@ import {
 } from "../userPage/userPageSlice";
 
 import country_codes_array from "../searchPage/CountryCodes";
-import genre_codes_array from "../searchPage/GenreCodes";
 
 import SearchBarView from "./SearchBarView";
 import "./SearchBar.css";
@@ -29,7 +28,6 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   const [keyword, setKeyword] = useState("");
-  const [genre, setGenre] = useState();
   const [service, setService] = useState();
   const country = useSelector(getCountry);
   const streamingServices = useSelector(getAvailableServices);
@@ -37,11 +35,7 @@ const SearchBar = () => {
   const [searchRequestStatus, setSearchRequestStatus] = useState("idle");
   const [countryVisible, setCountryVisible] = useState(false);
   const [servicesVisible, setServicesVisible] = useState(false);
-  const [genreVisible, setGenreVisible] = useState(false);
-  const genreOptions = Object.keys(genre_codes_array).map((key) => ({
-    name: genre_codes_array[key],
-    code: key,
-  }));
+
   const countryOptions = Object.keys(country_codes_array).map((key) => ({
     name: country_codes_array[key],
     code: key,
@@ -71,7 +65,6 @@ const SearchBar = () => {
     }
   };
 
-  const genreChanged = (e) => setGenre(e.target.value);
 
   const servicesChanged = (e) => setService(e.target.value);
 
@@ -100,14 +93,13 @@ const SearchBar = () => {
       });
     } else if (service && service["code"] != "-1") {
       // All services use standard search
-      searchByServiceGenre();
+      searchByService();
     } else {
       searchByTitle();
     }
   };
 
   const searchByTitle = () => {
-    console.log("searching by title");
     if (searchRequestStatus === "idle") {
       try {
         setSearchRequestStatus("pending");
@@ -131,13 +123,12 @@ const SearchBar = () => {
     }
   };
 
-  const searchByServiceGenre = () => {
+  const searchByService = () => {
     //Don't allow user to spam search button faster than a response can be received
     if (searchRequestStatus === "idle") {
       try {
         setSearchRequestStatus("pending");
         let serviceFilter = "";
-        let genreFilter = "";
         /*
                     Change parameters for the search here! Parameters can be found on https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability 
                 */
@@ -153,16 +144,11 @@ const SearchBar = () => {
           }
         }
 
-        if (genre) {
-          genreFilter = genre["name"];
-        }
-
         dispatch(
-          searchFilmsServiceGenre([
+          searchFilmsService([
             "country=" + country,
             "services=" + serviceFilter,
             "keyword=" + keyword,
-            "genres=" + genreFilter,
           ])
         ).unwrap();
         dispatch(setStateKeyword(keyword));
@@ -229,22 +215,6 @@ const SearchBar = () => {
         setCountryVisible(false);
       },
     },
-    {
-      label: "Filter Genre",
-      icon: "pi pi-filter",
-      visible: !genreVisible,
-      command: () => {
-        setGenreVisible(true);
-      },
-    },
-    {
-      label: "Filter Genre",
-      icon: "pi pi-minus",
-      visible: genreVisible,
-      command: () => {
-        setGenreVisible(false);
-      },
-    },
   ];
 
   return (
@@ -254,20 +224,16 @@ const SearchBar = () => {
         country_codes_array={country_codes_array}
         services={allServices}
         country={country}
-        genre={genre}
         service={service}
         keyword={keyword}
         countryOptions={countryOptions}
-        genreOptions={genreOptions}
         filter_items={filter_items}
         countryVisible={countryVisible}
         servicesVisible={servicesVisible}
-        genreVisible={genreVisible}
         onKeywordChanged={keywordChanged}
         onKeyDown={keyDown}
         onSearch={search}
         onCountryChanged={countryChanged}
-        onGenreChanged={genreChanged}
         onServiceChanged={servicesChanged}
       />
     </div>

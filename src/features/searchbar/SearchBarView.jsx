@@ -46,9 +46,6 @@ const SearchBarView = (props) => {
         <span className="p-float-label" style={{'marginTop':`40px`}}>
             {props.countryVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-country" showClear value={country} onChange={props.onCountryChanged} options={props.countryOptions} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-country">Country</label> </div>: null}
         </span>
-        <span className="p-float-label" style={{'marginTop':`40px`}}>
-            {props.genreVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-genre" showClear value={props.genre} onChange={props.onGenreChanged} options={props.genreOptions} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-genrey">Genre</label> </div>: null}
-        </span>
         </div>
       </form>
     </section>
