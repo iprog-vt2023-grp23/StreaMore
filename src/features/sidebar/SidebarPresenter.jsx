@@ -37,7 +37,6 @@ const Sidebar = () => {
     dispatch(toggleSidebar());
   };
   const signOutButton = async () => {
-    console.log("signedOut");
     await signOut(auth).then(() => {
       location.reload();
     });

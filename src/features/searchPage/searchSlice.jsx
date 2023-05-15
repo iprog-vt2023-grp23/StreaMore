@@ -74,7 +74,6 @@ const searchSlice = createSlice({
       .addCase(searchFilms.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log("error", state.error);
       });
   },
 });

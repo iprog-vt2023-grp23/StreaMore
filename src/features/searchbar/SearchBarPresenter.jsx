@@ -107,7 +107,6 @@ const SearchBar = () => {
   };
 
   const searchByTitle = () => {
-    console.log("searching by title");
     if (searchRequestStatus === "idle") {
       try {
         setSearchRequestStatus("pending");
@@ -124,7 +123,7 @@ const SearchBar = () => {
         dispatch(setStateKeyword(keyword));
         setKeyword("");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       } finally {
         setSearchRequestStatus("idle");
       }
@@ -168,7 +167,7 @@ const SearchBar = () => {
         dispatch(setStateKeyword(keyword));
         setKeyword("");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       } finally {
         setSearchRequestStatus("idle");
       }
