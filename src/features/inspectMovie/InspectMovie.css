@@ -1,4 +1,5 @@
 .inspectMovie {
+    margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,13 +9,49 @@
 }
 
 .aboutText {
+    margin-top: 15px;
+
   display: flex;
   justify-content: center;
   flex-direction: column;
-  text-align: center;
   max-width: 500px;
+  margin-inline: 10px;
+  text-align: center;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }
 
 .aboutText li ul{
-  list-style: none;
+    list-style: none;
+
+}
+
+
+.generalMovieInfo {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    font-style: italic;
+    /* border: 1px solid var(--background-color-secondary); */
+    text-indent: 15px;
+}
+
+.movieOverview {
+    /* background-color: rgba(44, 44, 44, 0.419); */
+    padding: 10px;
+    /* border: 1px solid var(--background-color-secondary); */
+    box-shadow: 0px 0px 5px 0px var(--shadow-color);
+    border-radius: 10px;
+    margin-block: 10px;
+
+
+}
+
+.availableStreamingServices {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
