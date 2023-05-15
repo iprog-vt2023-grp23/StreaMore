@@ -36,7 +36,6 @@ const MovieCardView = (props) => {
       <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
     </NavLink> 
 {  props.getItems().length > 0 ? <SpeedDial model={props.getItems(props.movie)} direction="right" buttonStyle={{'background':'grey', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> : null }      
-{/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
       </>
     ) 
     }
