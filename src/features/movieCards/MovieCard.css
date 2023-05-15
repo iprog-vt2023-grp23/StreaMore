@@ -28,99 +28,94 @@
   overflow: hidden;
   background-color: var(--background-color-main);
 }
-  
 
-  @media (min-width: 800px) {
+@media (min-width: 800px) {
   .movieCard:hover {
-    transform: scale(1.10);
-    transition: transform .5s;
+    transform: scale(1.1);
+    transition: transform 0.5s;
     transition-delay: 0.3s;
     border: 1px solid var(--border-focus-color);
     z-index: 2;
   }
-  }
+}
 
-  .titleWrapper {
-    width: calc(var(--card-width) - 10px);
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    height: calc(var(--card-height) - var(--img-height));
-  }
+.titleWrapper {
+  width: calc(var(--card-width) - 10px);
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  height: calc(var(--card-height) - var(--img-height));
+}
 
-  .movieCard h3 {
-    font-size: 0.8rem;
-    font-weight: 400;
-  }
+.movieCard h3 {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
 
-  .movieCard img {
-    position: absolute;
-    top: 0;
-    /* height: auto; */
-    overflow: hidden;
-    /* max-width: 100%;
+.movieCard img {
+  position: absolute;
+  top: 0;
+  /* height: auto; */
+  overflow: hidden;
+  /* max-width: 100%;
     max-height: var(--img-height); */
-    border-radius: 15px 15px 0px 0px;
-    /* +1 för att dölja nån konstig visuell border bugg */
-    width: calc(var(--card-width)+1);
-    height: var(--img-height);
-    object-fit: cover;
-    z-index: 0;
-  }
-  
-  .imgWrapper {
-    position: absolute;
-    left: 0;
-    width: var(--card-width);
-    top: 0;
-    height: var(--img-height);
-    overflow: hidden;
-    /* Om bild saknas eller är för liten kommer detta fylla tomrummet */
-    background-color: var(--shadow-color);
-  }
+  border-radius: 15px 15px 0px 0px;
+  /* +1 för att dölja nån konstig visuell border bugg */
+  width: calc(var(--card-width)+1);
+  height: var(--img-height);
+  object-fit: cover;
+  z-index: 0;
+}
 
+.imgWrapper {
+  position: absolute;
+  left: 0;
+  width: var(--card-width);
+  top: 0;
+  height: var(--img-height);
+  overflow: hidden;
+  /* Om bild saknas eller är för liten kommer detta fylla tomrummet */
+  background-color: var(--shadow-color);
+}
 
-  /* .movieCard button {
+/* .movieCard button {
     position: absolute;
     margin-left: auto;
     margin-right: auto;
     top: 260px;
     left: 10px;
   } */
-  
-  /* .movieCard button:hover {
+
+/* .movieCard button:hover {
     transform: scale(1.1);
     transition: transform .5s;
   } */
-  
- 
 
-  .movieActionContainer {
-    position: absolute;
-    top: calc(var(--img-height) - 31px);
-    left: 5px;
-    /* width: 100%; */
-    /* border: 1px solid red; */
-    z-index: 1;
-  }
+.movieActionContainer {
+  position: absolute;
+  top: calc(var(--img-height) - 31px);
+  left: 5px;
+  /* width: 100%; */
+  /* border: 1px solid red; */
+  z-index: 1;
+}
 
-  .addButton {
-    height: 26px;
-    width: 26px !important;
-    background-color: black !important;
-    border: none !important;
-  }
+.addButton {
+  height: 26px;
+  width: 26px !important;
+  background-color: black !important;
+  border: none !important;
+}
 
-  .addButton:hover {
-    background-color: var(--border-focus-color) !important;
-  }
-  
+.addButton:hover {
+  background-color: var(--border-focus-color) !important;
+}

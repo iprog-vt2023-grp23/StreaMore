@@ -9,7 +9,6 @@ import "./App.css";
 import Sidebar from "./features/sidebar/SidebarPresenter";
 
 function App() {
- 
   return (
     <div className="App">
       {/*BrowserRouter is a wrapper class that handles navigation, it enables the use of NavLink*/}

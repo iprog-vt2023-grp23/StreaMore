@@ -10,8 +10,9 @@ import {
   setStateKeyword,
 } from "../searchPage/searchSlice";
 import {
-  getAvailableServices, 
-  getStreamingServices } from "../userPage/userPageSlice"
+  getAvailableServices,
+  getStreamingServices,
+} from "../userPage/userPageSlice";
 
 import country_codes_array from "../searchPage/CountryCodes";
 import genre_codes_array from "../searchPage/GenreCodes";
@@ -19,11 +20,10 @@ import genre_codes_array from "../searchPage/GenreCodes";
 import SearchBarView from "./SearchBarView";
 import "./SearchBar.css";
 
-import { Toast } from 'primereact/toast';
+import { Toast } from "primereact/toast";
 
 import FirebaseApp from "../../FirebaseConfig";
 import { getAuth } from "firebase/auth";
-
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -38,22 +38,24 @@ const SearchBar = () => {
   const [countryVisible, setCountryVisible] = useState(false);
   const [servicesVisible, setServicesVisible] = useState(false);
   const [genreVisible, setGenreVisible] = useState(false);
-  const genreOptions = Object.keys(genre_codes_array).map((key) => ({name: genre_codes_array[key], code: key}));
-  const countryOptions = Object.keys(country_codes_array).map((key) => ({name: country_codes_array[key], code: key}));
- 
+  const genreOptions = Object.keys(genre_codes_array).map((key) => ({
+    name: genre_codes_array[key],
+    code: key,
+  }));
+  const countryOptions = Object.keys(country_codes_array).map((key) => ({
+    name: country_codes_array[key],
+    code: key,
+  }));
+
   const toast = useRef(null);
   const auth = getAuth(FirebaseApp);
   const [authState, setAuthState] = useState(auth.currentUser);
-  console.log("authstate", authState)
 
   useEffect(() => {
     setAuthState(auth.currentUser);
-    console.log("Running useEffect ", authState)
-
   }, [auth.currentUser]);
 
   const navigate = useNavigate();
-
 
   //Functions for changing the current sate as well as setting the store state
   const keywordChanged = (e) => setKeyword(e.target.value);
@@ -61,37 +63,47 @@ const SearchBar = () => {
     //Finds the two letter country code from the full country name (looks more wack than it is)
     if (e.target.value) {
       const toAdd = Object.keys(country_codes_array)
-        .find((key) => country_codes_array[key] === e.target.value['name'])
+        .find((key) => country_codes_array[key] === e.target.value["name"])
         .toLowerCase();
       dispatch(setStateCountry(toAdd));
-    }
-    else {
+    } else {
       dispatch(setStateCountry(""));
     }
   };
 
   const genreChanged = (e) => setGenre(e.target.value);
-  
+
   const servicesChanged = (e) => setService(e.target.value);
 
   //Function for the search button
   const search = () => {
     if (!keyword && country) {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field', life: 3000 });
-    }
-    else if (keyword && !country) {
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please select a country', life: 3000 });
-    }
-    else if (!keyword && !country){
-      toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Please enter a movie in the search field and select a country', life: 3000 });
-    }
-    else if (service && service['code'] != "-1") { // All services use standard search
+      toast.current.show({
+        severity: "info",
+        summary: "Info Message",
+        detail: "Please enter a movie in the search field",
+        life: 3000,
+      });
+    } else if (keyword && !country) {
+      toast.current.show({
+        severity: "info",
+        summary: "Info Message",
+        detail: "Please select a country",
+        life: 3000,
+      });
+    } else if (!keyword && !country) {
+      toast.current.show({
+        severity: "info",
+        summary: "Info Message",
+        detail: "Please enter a movie in the search field and select a country",
+        life: 3000,
+      });
+    } else if (service && service["code"] != "-1") {
+      // All services use standard search
       searchByServiceGenre();
-    } 
-    else {
+    } else {
       searchByTitle();
     }
-
   };
 
   const searchByTitle = () => {
@@ -117,8 +129,7 @@ const SearchBar = () => {
         setSearchRequestStatus("idle");
       }
     }
-  }
-
+  };
 
   const searchByServiceGenre = () => {
     //Don't allow user to spam search button faster than a response can be received
@@ -131,22 +142,25 @@ const SearchBar = () => {
                     Change parameters for the search here! Parameters can be found on https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability 
                 */
         if (service) {
-          if (service['code'] == -2) { // All my services
-            serviceFilter = myServices.filter((service) => isNaN(service)).join(".subscription%2C") + ".subscription"
-          }
-          else {
-            serviceFilter = service['name'] + ".subscription"
+          if (service["code"] == -2) {
+            // All my services
+            serviceFilter =
+              myServices
+                .filter((service) => isNaN(service))
+                .join(".subscription%2C") + ".subscription";
+          } else {
+            serviceFilter = service["name"] + ".subscription";
           }
         }
 
         if (genre) {
-          genreFilter = genre['name']
+          genreFilter = genre["name"];
         }
-        
+
         dispatch(
           searchFilmsServiceGenre([
             "country=" + country,
-            "services=" + serviceFilter, 
+            "services=" + serviceFilter,
             "keyword=" + keyword,
             "genres=" + genreFilter,
           ])
@@ -161,8 +175,6 @@ const SearchBar = () => {
     }
   };
 
-
-
   //Function for searching when the enter key is pressed down
   function keyDown(e) {
     if (e.key === "Enter") {
@@ -170,95 +182,99 @@ const SearchBar = () => {
       search();
     }
   }
-  
+
   // myServices = [{name: streaminServices[key], code: key]}]
-  const allServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
-  allServices.unshift({name: "All Services", code: -1});
-  allServices.unshift({name: "All My Services", code: -2});
+  const allServices = Object.keys(streamingServices).map((key) => ({
+    name:
+      streamingServices[key].charAt(0).toUpperCase() +
+      streamingServices[key].slice(1),
+    code: key,
+  }));
+  allServices.unshift({ name: "All Services", code: -1 });
+  allServices.unshift({ name: "All My Services", code: -2 });
 
   const filter_items = [
     {
       label: "Sign in to filter",
       icon: "pi pi-sign-in",
-      visible: (authState == null),
+      visible: authState == null,
       command: () => {
         navigate("/signIn");
-      }
+      },
     },
     {
       label: "Filter Services",
       icon: "pi pi-filter",
-      visible: !servicesVisible && (authState != null),
+      visible: !servicesVisible && authState != null,
       command: () => {
         setServicesVisible(true);
-      }
+      },
     },
     {
       label: "Filter Services",
       icon: "pi pi-minus",
-      visible: servicesVisible && (authState != null),
+      visible: servicesVisible && authState != null,
       command: () => {
         setServicesVisible(false);
-      }
+      },
     },
     {
       label: "Filter Country",
       icon: "pi pi-filter",
-      visible: !countryVisible && (authState != null), 
+      visible: !countryVisible && authState != null,
       command: () => {
         setCountryVisible(true);
-      }
+      },
     },
     {
       label: "Filter Country",
       icon: "pi pi-minus",
-      visible: countryVisible && (authState != null), 
+      visible: countryVisible && authState != null,
       command: () => {
         setCountryVisible(false);
-      }
+      },
     },
     {
       label: "Filter Genre",
       icon: "pi pi-filter",
-      visible: !genreVisible && (authState != null), 
+      visible: !genreVisible && authState != null,
       command: () => {
         setGenreVisible(true);
-      }
+      },
     },
     {
       label: "Filter Genre",
       icon: "pi pi-minus",
-      visible: genreVisible && (authState != null), 
+      visible: genreVisible && authState != null,
       command: () => {
         setGenreVisible(false);
-      }
+      },
     },
   ];
-    
 
   return (
     <div>
-    <Toast ref={toast} position="top-left"/>
-    <SearchBarView
-      country_codes_array={country_codes_array}
-      services={allServices}
-      country={country}
-      genre={genre}
-      service={service}
-      keyword={keyword}
-      countryOptions={countryOptions}
-      genreOptions={genreOptions}
-      filter_items={filter_items}
-      countryVisible={countryVisible}
-      servicesVisible={servicesVisible}
-      genreVisible={genreVisible}
-      onKeywordChanged={keywordChanged}
-      onKeyDown={keyDown}
-      onSearch={search}
-      onCountryChanged={countryChanged}
-      onGenreChanged={genreChanged}
-      onServiceChanged={servicesChanged}
-    />
+      <Toast ref={toast} position="top-left" />
+      <SearchBarView
+        country_codes_array={country_codes_array}
+        services={allServices}
+        country={country}
+        genre={genre}
+        service={service}
+        keyword={keyword}
+        countryOptions={countryOptions}
+        genreOptions={genreOptions}
+        filter_items={filter_items}
+        countryVisible={countryVisible}
+        servicesVisible={servicesVisible}
+        genreVisible={genreVisible}
+        onKeywordChanged={keywordChanged}
+        onKeyDown={keyDown}
+        onSearch={search}
+        onCountryChanged={countryChanged}
+        onGenreChanged={genreChanged}
+        onServiceChanged={servicesChanged}
+      />
     </div>
   );
 };

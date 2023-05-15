@@ -1,8 +1,13 @@
 import SignInView from "./SignInView";
 import SignOutView from "./SignOutView";
 import FirebaseApp from "../../FirebaseConfig";
-import {getAuth,createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,updateProfile, signOut} from "firebase/auth"
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  signOut,
+} from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -39,49 +44,45 @@ const SignIn = () => {
   const signInButton = async () => {
     console.log("signedIn");
     await signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      dispatch(toggleSidebar());  //Tillfällig fulfix för att toggla sidebar när man loggar in
-      navigate("/");
-    })
-    .catch((err) => {
-      console.error("Sign in error", err.message)
-      setAuthError("Incorrect email or password")
-    })
+      .then(() => {
+        dispatch(toggleSidebar()); //Tillfällig fulfix för att toggla sidebar när man loggar in
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Sign in error", err.message);
+        setAuthError("Incorrect email or password");
+      });
   };
 
   //Dispatched the register action and navigates to search when sign in is complete
   const registerButton = async () => {
-    console.log(fielsFilled())
-    if(fielsFilled())
+    if (fielsFilled())
       await createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        await updateProfile(userCredential.user, {displayName: username})
-        .then(() => {
-          navigate("/");
+        .then(async (userCredential) => {
+          await updateProfile(userCredential.user, { displayName: username })
+            .then(() => {
+              navigate("/");
+            })
+            .catch((err) => {
+              console.error("Register error", err.message);
+              setAuthError("Please enter a username");
+            });
         })
         .catch((err) => {
-          console.error("Register error", err.message)
-          setAuthError("Please enter a username")
-        })
-      })
-      .catch((err) => {
-        console.error("Register error", err.message)
-        if(err.message.includes("auth/weak-password"))
-          setAuthError("Password needs to be at least 6 characters")
-        else if(err.message.include("auth/email-already-in-use"))
-          setAuthError("E-mail already registered")
-        else
-          setAuthError("Invalid e-mail")
-      })
-    else
-      setAuthError("Please fill out all fields")
+          console.error("Register error", err.message);
+          if (err.message.includes("auth/weak-password"))
+            setAuthError("Password needs to be at least 6 characters");
+          else if (err.message.include("auth/email-already-in-use"))
+            setAuthError("E-mail already registered");
+          else setAuthError("Invalid e-mail");
+        });
+    else setAuthError("Please fill out all fields");
   };
   const signOutButton = async () => {
     console.log("signedOut");
-    await signOut(auth)
-    .then(() => {
-      location.reload()
-    })
+    await signOut(auth).then(() => {
+      location.reload();
+    });
   };
 
   //checks wether the user is signed in
