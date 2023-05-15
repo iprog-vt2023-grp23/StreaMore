@@ -173,22 +173,17 @@ const SearchBar = () => {
   
   // myServices = [{name: streaminServices[key], code: key]}]
   const allServices = Object.keys(streamingServices).map((key) => ({name: streamingServices[key].charAt(0).toUpperCase() + streamingServices[key].slice(1), code: key}));
+  
   allServices.unshift({name: "All Services", code: -1});
-  allServices.unshift({name: "All My Services", code: -2});
+  if (authState != null) {
+    allServices.unshift({name: "All My Services", code: -2});
+  }
 
   const filter_items = [
     {
-      label: "Sign in to filter",
-      icon: "pi pi-sign-in",
-      visible: (authState == null),
-      command: () => {
-        navigate("/signIn");
-      }
-    },
-    {
       label: "Filter Services",
       icon: "pi pi-filter",
-      visible: !servicesVisible && (authState != null),
+      visible: !servicesVisible,
       command: () => {
         setServicesVisible(true);
       }
@@ -196,7 +191,7 @@ const SearchBar = () => {
     {
       label: "Filter Services",
       icon: "pi pi-minus",
-      visible: servicesVisible && (authState != null),
+      visible: servicesVisible,
       command: () => {
         setServicesVisible(false);
       }
@@ -204,7 +199,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-filter",
-      visible: !countryVisible && (authState != null), 
+      visible: !countryVisible, 
       command: () => {
         setCountryVisible(true);
       }
@@ -212,7 +207,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-minus",
-      visible: countryVisible && (authState != null), 
+      visible: countryVisible, 
       command: () => {
         setCountryVisible(false);
       }
@@ -220,7 +215,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-filter",
-      visible: !genreVisible && (authState != null), 
+      visible: !genreVisible, 
       command: () => {
         setGenreVisible(true);
       }
@@ -228,7 +223,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-minus",
-      visible: genreVisible && (authState != null), 
+      visible: genreVisible, 
       command: () => {
         setGenreVisible(false);
       }
