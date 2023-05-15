@@ -48,7 +48,7 @@ const InspectMoviePresenter = () => {
 
   const streamingButtons = () => 
   {
-    if (selectedMovie.streamingInfo[0]) {
+    if (Object.keys(selectedMovie.streamingInfo).length > 0) {
     const services = Object.entries(Object.values(selectedMovie.streamingInfo)[0]);
     return services.map((service) => {
     return <a href={service[1][0].link} key={service[0]} target="_blank" rel="noopener noreferrer">{iconMapping(service[0])}</a>
