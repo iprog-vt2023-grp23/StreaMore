@@ -19,10 +19,13 @@ import BacknHomeButton from "../uiComponents/BacknHomeButton";
 import iconMapping from "../uiComponents/StreamingButtons";
 import "./InspectMovie.css";
 import AddToListMenuPresenter from "../searchPage/AddToListMenuPresenter";
+import { getAuth } from "firebase/auth";
+import FirebaseApp from "../../FirebaseConfig";
 
 const InspectMoviePresenter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loggedIn = getAuth(FirebaseApp).currentUser;
   const selectedMovie = useSelector(getSelectedMovie);
   const aboutFilmField = useSelector(getAboutFilmField);
   const movieList = useSelector(getMovieLists)
@@ -47,7 +50,7 @@ const InspectMoviePresenter = () => {
   {
     const services = Object.entries(Object.values(selectedMovie.streamingInfo)[0]);
     return services.map((service) => {
-    return <a href={service[1][0].link} key={service[0]}>{iconMapping(service[0])}</a>
+    return <a href={service[1][0].link} key={service[0]} target="_blank" rel="noopener noreferrer">{iconMapping(service[0])}</a>
   })
 }
 
@@ -68,6 +71,7 @@ const InspectMoviePresenter = () => {
         <BacknHomeButton />
         <div className="inspectMovie">
           <MovieCardView
+            loggedIn={loggedIn}
             onSelectMovie={selectMovie}
             onAddNewMovieList={onAddNewMovieList}
             onAddMovieToList={onAddMovieToList}

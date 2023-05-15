@@ -14,6 +14,7 @@ const SearchPresenter = () => {
           <i>Stream more, search less</i>
         </h4>
         <SearchBar />
+      
         <div className="searchCenteredText"><h4>
           <i>Search for any Movie or TV Series by filtering for streaming services, genres or countries</i>
         </h4>
