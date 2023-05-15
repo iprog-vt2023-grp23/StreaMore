@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // import {
 //   getMovieList,
@@ -18,6 +18,7 @@ import MovieCardList from "../movieCards/MovieCardListPresenter";
 import SearchListView from "./SearchListView";
 import { addMovieToMovieList, addNewMovieList, getMovieLists } from "../userLists/myListsSlice";
 import {getAuth} from "firebase/auth"
+import { Toast } from 'primereact/toast';
 import FirebaseApp from "../../FirebaseConfig";
 import AddToListMenuPresenter from "./AddToListMenuPresenter";
 
@@ -34,6 +35,7 @@ const SearchList = () => {
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const selectedMovie = useSelector(getSelectedMovie);
   const movieList = useSelector(getMovieLists);
+  const toast = useRef(null);
   
   const loggedIn = getAuth(FirebaseApp).currentUser;
   
@@ -45,9 +47,17 @@ const SearchList = () => {
     dispatch(addNewMovieList( listName ));
   };
   const onAddMovieToList = (listName, movie) => {
+    const detailString = 'Added "' + movie.originalTitle + '" to list "' + listName + '".';
+    toast.current.show({ severity: 'success', summary: 'Info Message', detail: detailString, life: 3000 });
     dispatch(addMovieToMovieList({ listName, movie }));
   };
 
+  const onPlusButtonClick = (movie) => {
+    console.log("Add movie to listen")
+    console.log("movie is ", movie)
+    setShowAddToListMenu(prevState => !prevState);
+    selectMovie(movie);
+  }
 
   const getItems = (movie) => {
     return loggedIn ? [
@@ -56,6 +66,7 @@ const SearchList = () => {
         icon: "pi pi-plus",
         command: () => {
           console.log("Add movie to listen")
+          console.log("movie is ", movie)
           setShowAddToListMenu(prevState => !prevState);
           selectMovie(movie);
         }
@@ -84,12 +95,13 @@ const SearchList = () => {
     /*
     * Detta är en presenter, vet inte om vi borde använda den som ett ui element!
     */
-    const content = <MovieCardList movies={results} getItems={getItems}/>;
+    const content = <MovieCardList movies={results} getItems={getItems} onPlusButtonClick={onPlusButtonClick} search={true}/>;
     /*
      * 
      */
     return (
     <>
+    <Toast ref={toast} position="top-left"/>
     {showAddToListMenu ? <AddToListMenuPresenter setVisible={setShowAddToListMenu} 
       onAddNewMovieList={onAddNewMovieList} 
       movieLists={movieList} 

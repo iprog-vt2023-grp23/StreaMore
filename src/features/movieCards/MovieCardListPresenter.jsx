@@ -26,7 +26,10 @@ const MovieCardList = (props) => {
         selectMovie={selectMovie}
         onAddNewMovieList={onAddNewMovieList}
         onAddMovieToList={onAddMovieToList}
+        onPlusButtonClick={props.onPlusButtonClick}
         movieLists={movieLists}
+        search={props.search}
+        list={props.list}
     />
   );
 };

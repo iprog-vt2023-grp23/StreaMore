@@ -51,7 +51,7 @@ const MovieListView = (props) => {
       {listMenu()}
         <div className="listContent">
           {props.selectedList !== null ? (
-            <MovieCardList movies={props.movieLists.find(list => list.name === props.selectedList).movies} getItems={props.getItems}
+            <MovieCardList movies={props.movieLists.find(list => list.name === props.selectedList).movies} getItems={props.getItems} list={true}
             />
           ) : (
             <button className="createFirstList" onClick={() => {props.addNewMovieList("My list")}}>No lists yet, create one</button>

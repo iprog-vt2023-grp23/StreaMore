@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
+import AddToListMenuView from "../searchPage/AddToListMenuView";
 import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList, addNewMovieList, addMovieToMovieList} from "./myListsSlice";
-import { useEffect, useState } from "react";
+import { getSelectedMovie, selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
+import { useEffect, useState, useRef } from "react";
+import { Toast } from 'primereact/toast';
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
+import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import FirebaseApp from "../../FirebaseConfig";
 
 const MyListsPagePresenter = () => {
   const movieLists = useSelector(getMovieLists);
@@ -11,8 +17,24 @@ const MyListsPagePresenter = () => {
   const [updateName, setUpdateName] = useState(false);
   const [newListName, setNewListName] = useState(selectedList);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [showAddToListMenu, setShowAddToListMenu] = useState(false);
+  const selectedMovie = useSelector(getSelectedMovie);
+  const toast = useRef(null);
 
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const auth = getAuth(FirebaseApp);
+    const user = auth.currentUser;
+
+    if (!user) {
+      navigate('/signIn');
+    }
+  }, [navigate]);
+
+  const selectMovie = (movie) => {
+    dispatch(selectMovieToInspect(movie));
+  };
 
   const selectList = (list) => {
     dispatch(selectMovieList(list.name))
@@ -57,6 +79,12 @@ const MyListsPagePresenter = () => {
     dispatch(addNewMovieList(listName));
   }
 
+  const onAddMovieToList = (listName, movie) => {
+    const detailString = 'Added "' + movie.originalTitle + '" to list "' + listName + '".';
+    toast.current.show({ severity: 'success', summary: 'Info Message', detail: detailString, life: 3000 });
+    dispatch(addMovieToMovieList({ listName, movie }));
+  };
+
 
   const getItems = (movie) => {
     return [
@@ -68,10 +96,13 @@ const MyListsPagePresenter = () => {
         }
       },
       {
-        label: "Notify",
-        icon: "pi pi-bell",
+        label: "Plus",
+        icon: "pi pi-plus",
         command: () => {
-          console.log("Notify user plis");
+          console.log("Add movie to listen")
+          console.log(movie)
+          setShowAddToListMenu(prevState => !prevState);
+          selectMovie(movie);
         }
       }
     ]
@@ -127,6 +158,12 @@ const MyListsPagePresenter = () => {
 
   return <>
     <BacknHomeButton />
+    <Toast ref={toast} position="top-left"/>
+  {showAddToListMenu ? <AddToListMenuView setVisible={setShowAddToListMenu} 
+      onAddNewMovieList={addMovieList} 
+      movieLists={movieLists} 
+      onAddMovieToList={onAddMovieToList}
+      movie={selectedMovie}/> : null}
     <MyListsPageView
       movieLists={movieLists}
       createNewList={createNewList}

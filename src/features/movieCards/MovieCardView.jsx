@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import { SpeedDial } from 'primereact/speeddial';
+import { Button } from 'primereact/button';
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
@@ -35,7 +36,11 @@ const MovieCardView = (props) => {
       <div>{props.movie.body}</div>
       <div className="imgWrapper"><img src={props.movie.posterURLs[500]}></img></div>
     </NavLink> 
-{  props.getItems().length > 0 ? <SpeedDial model={props.getItems(props.movie)} direction="right" buttonStyle={{'background':'grey', 'border': 'none', 'opacity':'80%', 'width': '25px', 'height': '10px'}}/> : null }      
+      <div className="movieActionContainer">
+      {props.list? <SpeedDial model={props.getItems(props.movie)} direction="right" buttonStyle={{'background':'black', 'border': 'none', 'width': '25px', 'height': '10px'}}/> : null}
+      {props.search? <Button className="addButton" icon="pi pi-plus" onClick={() => props.onPlusButtonClick(props.movie)}/> : null}
+      </div>
+      {/* temp borttagna, TODO ska få plats med dom i korten {renderStreamingServices(result)} */}
       </>
     ) 
     }
