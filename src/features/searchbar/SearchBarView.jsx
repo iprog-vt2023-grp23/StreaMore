@@ -30,87 +30,25 @@ const SearchBarView = (props) => {
     <section className="searchBar">
       {/* <h2>Search</h2> */}
       <form className="searchBar__form">
-        <div>
-          <div>
-            <span className="p-float-label">
-              <InputText
-                id="search"
-                className="searchinput"
-                value={props.keyword}
-                onChange={keywordChanged}
-                onKeyDown={keyDown}
-              />
-              <label htmlFor="search">Search for a film</label>
-            </span>
-          </div>
-          <div>
-            <span className="p-float-label" style={{ marginTop: `40px` }}>
-              {props.servicesVisible ? (
-                <div style={{ display: "flex" }}>
-                  <Dropdown
-                    inputId="dd-service"
-                    showClear
-                    value={props.service}
-                    onChange={props.onServiceChanged}
-                    options={props.services}
-                    optionLabel="name"
-                    className="w-full md:w-14rem"
-                  />{" "}
-                  <label style={{ paddingLeft: "10px" }} htmlFor="dd-service">
-                    Service
-                  </label>{" "}
-                </div>
-              ) : null}
-            </span>
-            <span className="p-float-label" style={{ marginTop: `40px` }}>
-              {props.countryVisible ? (
-                <div style={{ display: "flex" }}>
-                  <Dropdown
-                    inputId="dd-country"
-                    showClear
-                    value={country}
-                    onChange={props.onCountryChanged}
-                    options={props.countryOptions}
-                    optionLabel="name"
-                    className="w-full md:w-14rem"
-                  />{" "}
-                  <label style={{ paddingLeft: "10px" }} htmlFor="dd-country">
-                    Country
-                  </label>{" "}
-                </div>
-              ) : null}
-            </span>
-            <span className="p-float-label" style={{ marginTop: `40px` }}>
-              {props.genreVisible ? (
-                <div style={{ display: "flex" }}>
-                  <Dropdown
-                    inputId="dd-genre"
-                    showClear
-                    value={props.genre}
-                    onChange={props.onGenreChanged}
-                    options={props.genreOptions}
-                    optionLabel="name"
-                    className="w-full md:w-14rem"
-                  />{" "}
-                  <label style={{ paddingLeft: "10px" }} htmlFor="dd-genrey">
-                    Genre
-                  </label>{" "}
-                </div>
-              ) : null}
-            </span>
-          </div>
+       <div className="searchbarandbutton"> 
+        {/* <div className="searchInputWrapper"> */}
+          <span className="p-float-label">
+            <InputText id="search" className="searchinput" value={props.keyword} onChange={keywordChanged} onKeyDown={keyDown}/>
+            <label htmlFor="search">Search for a film</label>
+          </span>
+        {/* </div> */}
+        <SplitButton text raised menuButtonClassName="jaj" buttonClassName="jaj" disabled={/*!props.keyword*/false} icon="pi pi-search" onClick={props.onSearch} model={props.filter_items}></SplitButton>
         </div>
-        <div className="searchButton">
-          <SplitButton
-            text
-            raised
-            menuButtonClassName="jaj"
-            buttonClassName="jaj"
-            disabled={/*!props.keyword*/ false}
-            icon="pi pi-search"
-            onClick={props.onSearch}
-            model={props.filter_items}
-          ></SplitButton>
+        <div className="searchFilters">
+        <span className="p-float-label" style={{'marginTop':`40px`}}>
+            {props.servicesVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-service" showClear value={props.service} onChange={props.onServiceChanged} options={props.services} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-service">Service</label>  </div>: null}
+        </span>
+        <span className="p-float-label" style={{'marginTop':`40px`}}>
+            {props.countryVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-country" showClear value={country} onChange={props.onCountryChanged} options={props.countryOptions} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-country">Country</label> </div>: null}
+        </span>
+        <span className="p-float-label" style={{'marginTop':`40px`}}>
+            {props.genreVisible ? <div style={{"display":"flex"}}><Dropdown inputId="dd-genre" showClear value={props.genre} onChange={props.onGenreChanged} options={props.genreOptions} optionLabel="name" className="w-full md:w-14rem" /> <label style={{"paddingLeft":"10px"}} htmlFor="dd-genrey">Genre</label> </div>: null}
+        </span>
         </div>
       </form>
     </section>

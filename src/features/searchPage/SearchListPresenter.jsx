@@ -45,7 +45,8 @@ const SearchList = () => {
   };
 
   const onAddNewMovieList = (listName) => {
-    dispatch(addNewMovieList(listName));
+    if(listName === ""){ return; }
+    dispatch(addNewMovieList( listName ));
   };
   const onAddMovieToList = (listName, movie) => {
     const detailString =
