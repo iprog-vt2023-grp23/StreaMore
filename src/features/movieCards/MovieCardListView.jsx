@@ -1,5 +1,5 @@
 import MovieCardView from "./MovieCardView";
-import "./MovieCardList.css"
+import "./MovieCardList.css";
 
 const MovieCardListView = (props) => {
   return (
@@ -7,6 +7,7 @@ const MovieCardListView = (props) => {
       {props.movies.map((movie) => (
         <MovieCardView
           getItems={props.getItems}
+          loggedIn={props.loggedIn}
           key={movie.imdbId}
           onSelectMovie={props.selectMovie}
           onAddNewMovieList={props.onAddNewMovieList}
@@ -23,4 +24,4 @@ const MovieCardListView = (props) => {
   );
 };
 
- export default MovieCardListView;
+export default MovieCardListView;

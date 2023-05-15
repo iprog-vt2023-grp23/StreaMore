@@ -1,14 +1,13 @@
 import "./SearchBar.css";
 
-
-import { InputText } from 'primereact/inputtext';
-import { SplitButton } from 'primereact/splitbutton';
-import { Dropdown } from 'primereact/dropdown';
+import { InputText } from "primereact/inputtext";
+import { SplitButton } from "primereact/splitbutton";
+import { Dropdown } from "primereact/dropdown";
 
 import { useState } from "react";
 //theme
-import "primereact/resources/themes/lara-light-indigo/theme.css";     
-    
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+
 //core
 import "primereact/resources/primereact.min.css";
 
@@ -23,8 +22,10 @@ const SearchBarView = (props) => {
     props.onKeywordChanged(e);
   };
 
-  const country = props.countryOptions.find((element) => element.code === props.country.toUpperCase())
-  
+  const country = props.countryOptions.find(
+    (element) => element.code === props.country.toUpperCase()
+  );
+
   return (
     <section className="searchBar">
       {/* <h2>Search</h2> */}
