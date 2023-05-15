@@ -29,7 +29,7 @@ export const searchFilms = createAsyncThunk(
   }
 );
 
-export const searchFilmsServiceGenre = createAsyncThunk(
+export const searchFilmsService = createAsyncThunk(
   "searchBar/searchFilms",
   async (params) => {
     const url = sourceUrl.concat("v2/search/basic?", params.join("&"));
