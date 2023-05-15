@@ -1,15 +1,36 @@
 import "./InspectMovie.css";
 
 const InspectMovieView = (props) => {
+  const renderCast = (selectedMovie) => {
+    if(!selectedMovie){
+      return;
+    }
+    if(!selectedMovie.cast){
+      return;
+    }
+    const cast = selectedMovie.cast.slice(0, 5);
+    return cast.map((actor) => {
+      return <div key={actor}>{actor}</div>;
+    });
+  };
+
+
   return (
     <div className="aboutText">
-        <p>Rating: {props.selectedMovie.imdbRating}</p>
-        <p>Year: {props.selectedMovie.year}</p>
-        <p>Cast: {props.selectedMovie.cast[0]}</p>
-        <p>Director: {props.selectedMovie.directors}</p>
-        <p>Overview: {props.selectedMovie.overview}</p>
+      {props.selectedMovie && <>
         Available on:
-        {props.serviceLinks}
+        <div className="availableStreamingServices">
+        {props.serviceLinks}</div>
+        <div className="generalMovieInfo">
+          {props.selectedMovie.imdbRating && <div>Rating: {props.selectedMovie.imdbRating}</div>}
+          {props.selectedMovie.year && <div>Year: {props.selectedMovie.year}</div>}
+          {props.selectedMovie.cast && <div>Top Cast: {renderCast(props.selectedMovie)}</div>}
+          {props.selectedMovie.directors && <div>Director: {props.selectedMovie.directors}</div>}
+        </div>
+        <div className="movieOverview">Overview: {props.selectedMovie.overview}</div>
+
+      </>
+      }
     </div>
   );
 };
