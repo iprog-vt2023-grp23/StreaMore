@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   getSelectedMovie,
   toggleAboutFilmField,
@@ -20,6 +20,7 @@ import iconMapping from "../uiComponents/StreamingButtons";
 import "./InspectMovie.css";
 import AddToListMenuPresenter from "../searchPage/AddToListMenuPresenter";
 import { getAuth } from "firebase/auth";
+import { Toast } from "primereact/toast";
 import FirebaseApp from "../../FirebaseConfig";
 
 const InspectMoviePresenter = () => {
@@ -30,11 +31,19 @@ const InspectMoviePresenter = () => {
   const aboutFilmField = useSelector(getAboutFilmField);
   const movieList = useSelector(getMovieLists)
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
+  const toast = useRef(null);
 
   const onAddNewMovieList = (listName) => {
     dispatch(addNewMovieList(listName));
   };
   const onAddMovieToList = (listName, movie) => {
+    const detailString = 'Added "' + movie.originalTitle + '" to list "' + listName + '".';
+    toast.current.show({
+      severity: "success",
+      summary: "Info Message",
+      detail: detailString,
+      life: 3000,
+    });
     dispatch(addMovieToMovieList({ listName, movie }));
   };
   const selectMovie = (movie) => {
@@ -72,6 +81,7 @@ const InspectMoviePresenter = () => {
         ) : null}
 
         <BacknHomeButton />
+        <Toast ref={toast} position="top-left" />
         <div className="inspectMovie">
           <MovieCardView
             loggedIn={loggedIn}
