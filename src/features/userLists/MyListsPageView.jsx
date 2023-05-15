@@ -5,7 +5,7 @@ import {ImCross, ImCheckmark} from "react-icons/im";
 import ConfirmDelete from "./ConfirmDeleteView";
 import {AiOutlinePlus} from "react-icons/ai";
 
-const MovieListView = (props) => {
+const MyListsPageView = (props) => {
 
   const newNameForm = () => {
     return (
@@ -62,4 +62,4 @@ const MovieListView = (props) => {
   )
 };
 
-export default MovieListView;
+export default MyListsPageView;

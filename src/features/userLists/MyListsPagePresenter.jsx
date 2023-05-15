@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import MyListsPageView from "./MyListsPageView";
-import AddToListMenuView from "../searchPage/AddToListMenuView";
 import { getMovieLists, selectMovieList, getSelectedList, removeMovieFromMovieList, removeMovieList, addNewMovieList, addMovieToMovieList} from "./myListsSlice";
 import { getSelectedMovie, selectMovieToInspect } from "../inspectMovie/inspectMovieSlice";
 import { useEffect, useState, useRef } from "react";
@@ -9,6 +8,7 @@ import BacknHomeButton from "../uiComponents/BacknHomeButton";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import FirebaseApp from "../../FirebaseConfig";
+import AddToListMenuPresenter from "../searchPage/AddToListMenuPresenter";
 
 const MyListsPagePresenter = () => {
   const movieLists = useSelector(getMovieLists);
@@ -159,7 +159,7 @@ const MyListsPagePresenter = () => {
   return <>
     <BacknHomeButton />
     <Toast ref={toast} position="top-left"/>
-  {showAddToListMenu ? <AddToListMenuView setVisible={setShowAddToListMenu} 
+  {showAddToListMenu ? <AddToListMenuPresenter setVisible={setShowAddToListMenu} 
       onAddNewMovieList={addMovieList} 
       movieLists={movieLists} 
       onAddMovieToList={onAddMovieToList}
