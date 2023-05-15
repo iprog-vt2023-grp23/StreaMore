@@ -11,9 +11,9 @@ const UserPageView = (props) => {
     (props.streamingServices === undefined || props.streamingServices == 0);
 
   let renderButtonIfNoServices = () => {
-    if (servicesListIsEmpty) {
-      if (!props.username && !props.useremail)
+    if (!props.username && !props.useremail)
         return;
+    if (servicesListIsEmpty) {
       return (
         <Button
           label={"Add services"}
