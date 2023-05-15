@@ -55,24 +55,13 @@
     -ms-overflow-style: none; 
     scrollbar-width: none;  
     margin-top: 10px;
+    margin-bottom: 20px;
 } 
 
-.listMenu ul {
-
-}
 
 .listMenu::-webkit-scrollbar {
     display: none;
 }
-
-.listMenu li {
-    /* display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center; */
-
-}
-
 .listItem, .selectedListItem {
     display: inline-block;
     background-color: var(--background-color-secondary);

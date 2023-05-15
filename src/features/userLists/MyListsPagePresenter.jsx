@@ -14,6 +14,9 @@ const MyListsPagePresenter = () => {
   const movieLists = useSelector(getMovieLists);
   const selectedList = useSelector(getSelectedList);
   const dispatch = useDispatch();
+  const [updateName, setUpdateName] = useState(false);
+  const [newListName, setNewListName] = useState(selectedList);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const selectedMovie = useSelector(getSelectedMovie);
   const toast = useRef(null);
@@ -117,15 +120,70 @@ const MyListsPagePresenter = () => {
     dispatch(selectMovieList(newListName));
   }
 
+
+
+    const setSelectedList = (list) => {
+    setNewListName("");
+    setUpdateName(false);
+    selectList(list);
+  }
+
+  const confirmedUpdateName = (e) => {
+    e.preventDefault();
+    updateListName(newListName);
+    setUpdateName(false);
+    setNewListName("");
+  }
+
+  const cancelUpdateListName = (e) => {
+    e.preventDefault();
+    setUpdateName(false);
+    setNewListName("");
+  }
+
+  const editListName = (e) => {
+    if(e.target.value.length > 20) return;
+    setNewListName(e.target.value)
+  }
+
+  const toggleEditListName = () => {
+    setNewListName(selectedList);
+    setUpdateName(prevState => !prevState);
+  }
+
+  const handleDelete = () => {
+    removeList(selectedList);
+    setShowConfirmDelete(false);
+  }
+
   return <>
-  <BacknHomeButton/>
-  <Toast ref={toast} position="top-left"/>
+    <BacknHomeButton />
+    <Toast ref={toast} position="top-left"/>
   {showAddToListMenu ? <AddToListMenuView setVisible={setShowAddToListMenu} 
       onAddNewMovieList={addMovieList} 
       movieLists={movieLists} 
       onAddMovieToList={onAddMovieToList}
       movie={selectedMovie}/> : null}
-  <MyListsPageView movieLists={movieLists} createNewList={createNewList} selectedList={selectedList} onSelectList={selectList} getItems={getItems} removeMovieList={removeList} updateListName={updateListName} addNewMovieList={addMovieList}/>
+    <MyListsPageView
+      movieLists={movieLists}
+      createNewList={createNewList}
+      selectedList={selectedList}
+      onSelectList={selectList}
+      getItems={getItems}
+      updateListName={confirmedUpdateName}
+      addNewMovieList={addMovieList} 
+      updateName={updateName}
+      setUpdateName={setUpdateName}
+      newListName={newListName}
+      setNewListName={setNewListName}
+      showConfirmDelete={showConfirmDelete}
+      setShowConfirmDelete={setShowConfirmDelete} 
+      setSelectedList={setSelectedList}
+      handleDelete={handleDelete}
+      cancelUpdateListName={cancelUpdateListName}
+      editListName={editListName}
+      toggleEditListName={toggleEditListName}
+      />
   </>
 
 };

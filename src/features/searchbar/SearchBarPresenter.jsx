@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +43,17 @@ const SearchBar = () => {
  
   const toast = useRef(null);
   const auth = getAuth(FirebaseApp);
+  const [authState, setAuthState] = useState(auth.currentUser);
+  console.log("authstate", authState)
+
+  useEffect(() => {
+    setAuthState(auth.currentUser);
+    console.log("Running useEffect ", authState)
+
+  }, [auth.currentUser]);
+
   const navigate = useNavigate();
+
 
   //Functions for changing the current sate as well as setting the store state
   const keywordChanged = (e) => setKeyword(e.target.value);
@@ -170,7 +180,7 @@ const SearchBar = () => {
     {
       label: "Sign in to filter",
       icon: "pi pi-sign-in",
-      visible: (auth.currentUser == null),
+      visible: (authState == null),
       command: () => {
         navigate("/signIn");
       }
@@ -178,7 +188,7 @@ const SearchBar = () => {
     {
       label: "Filter Services",
       icon: "pi pi-filter",
-      visible: !servicesVisible && (auth.currentUser != null),
+      visible: !servicesVisible && (authState != null),
       command: () => {
         setServicesVisible(true);
       }
@@ -186,7 +196,7 @@ const SearchBar = () => {
     {
       label: "Filter Services",
       icon: "pi pi-minus",
-      visible: servicesVisible && (auth.currentUser != null),
+      visible: servicesVisible && (authState != null),
       command: () => {
         setServicesVisible(false);
       }
@@ -194,7 +204,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-filter",
-      visible: !countryVisible && (auth.currentUser != null), 
+      visible: !countryVisible && (authState != null), 
       command: () => {
         setCountryVisible(true);
       }
@@ -202,7 +212,7 @@ const SearchBar = () => {
     {
       label: "Filter Country",
       icon: "pi pi-minus",
-      visible: countryVisible && (auth.currentUser != null), 
+      visible: countryVisible && (authState != null), 
       command: () => {
         setCountryVisible(false);
       }
@@ -210,7 +220,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-filter",
-      visible: !genreVisible && (auth.currentUser != null), 
+      visible: !genreVisible && (authState != null), 
       command: () => {
         setGenreVisible(true);
       }
@@ -218,7 +228,7 @@ const SearchBar = () => {
     {
       label: "Filter Genre",
       icon: "pi pi-minus",
-      visible: genreVisible && (auth.currentUser != null), 
+      visible: genreVisible && (authState != null), 
       command: () => {
         setGenreVisible(false);
       }
