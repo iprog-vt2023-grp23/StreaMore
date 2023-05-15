@@ -48,10 +48,13 @@ const InspectMoviePresenter = () => {
 
   const streamingButtons = () => 
   {
+    if (selectedMovie.streamingInfo[0]) {
     const services = Object.entries(Object.values(selectedMovie.streamingInfo)[0]);
     return services.map((service) => {
     return <a href={service[1][0].link} key={service[0]} target="_blank" rel="noopener noreferrer">{iconMapping(service[0])}</a>
   })
+  }
+  else return <><br/>No streaming services</>;
 }
 
   //If user has not clicked a movie/reloaded the page only a back button will be shown (untill persistence is done)
