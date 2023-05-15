@@ -16,6 +16,7 @@ import {
 } from "../features/userPage/userPageSlice";
 import FirebaseApp from "/src/FirebaseConfig.jsx";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 import { listenerMiddleware } from "../model/store";
@@ -27,6 +28,8 @@ const auth = getAuth(FirebaseApp);
 const database = getDatabase();
 
 export default function Firebase() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
 
   listenerMiddleware.startListening({
@@ -86,6 +89,7 @@ export default function Firebase() {
   useEffect(() => {
     //Checks wether the authentication state has changed and executes code
     onAuthStateChanged(auth, (user) => {
+      console.log(user, "loggedinuser")
       if (user) {
         /*
          *User is signed in and actions should be taken
@@ -121,6 +125,8 @@ export default function Firebase() {
       } else {
         // User is signed out
         dispatch(setUserId(null));
+        if(location.pathname != '/')
+          navigate('/signIn');
       }
     });
   }, []);

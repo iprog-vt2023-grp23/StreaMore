@@ -67,8 +67,8 @@ const SignIn = () => {
       .catch((err) => {
         console.error("Register error", err.message)
         if(err.message.includes("auth/weak-password"))
-          setAuthError("Password needs to be at least 6 characters")
-        else if(err.message.include("auth/email-already-in-use"))
+          setAuthError("Password needs to be longer")
+        else if(err.message.includes("auth/email-already-in-use"))
           setAuthError("E-mail already registered")
         else
           setAuthError("Invalid e-mail")

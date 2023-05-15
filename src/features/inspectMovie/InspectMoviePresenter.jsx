@@ -88,12 +88,11 @@ const InspectMoviePresenter = () => {
         {/*RenderMovie will render the selected movie*/}
         {/* <MovieCardListView movies={[selectedMovie]} /> */}
         {/*Either render the about film button or the about film field depending on if the about button has been pressed*/}
-        {aboutFilmButton() || (
+        
           <InspectMovieView
-            onToggleAboutField={dispatch(toggleAboutFilmField())}
             selectedMovie={selectedMovie}
           />
-        )}
+        
       </div>
       </>
     );

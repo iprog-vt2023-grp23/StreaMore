@@ -5,9 +5,6 @@ import { getSelectedMovie, selectMovieToInspect } from "../inspectMovie/inspectM
 import { useEffect, useState, useRef } from "react";
 import { Toast } from 'primereact/toast';
 import BacknHomeButton from "../uiComponents/BacknHomeButton";
-import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import FirebaseApp from "../../FirebaseConfig";
 import AddToListMenuPresenter from "../searchPage/AddToListMenuPresenter";
 
 const MyListsPagePresenter = () => {
@@ -20,17 +17,6 @@ const MyListsPagePresenter = () => {
   const [showAddToListMenu, setShowAddToListMenu] = useState(false);
   const selectedMovie = useSelector(getSelectedMovie);
   const toast = useRef(null);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const auth = getAuth(FirebaseApp);
-    const user = auth.currentUser;
-
-    if (!user) {
-      navigate('/signIn');
-    }
-  }, [navigate]);
 
   const selectMovie = (movie) => {
     dispatch(selectMovieToInspect(movie));

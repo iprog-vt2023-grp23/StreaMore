@@ -48,7 +48,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     setAuthState(auth.currentUser);
-    console.log("Running useEffect ", authState)
+    console.log("Running useEffect ", auth.currentUser)
 
   }, [auth.currentUser]);
 
